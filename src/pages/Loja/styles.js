@@ -44,8 +44,8 @@ export const StatusIndicator = styled.span`
 export const ToggleSwitch = styled.label`
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: 40px; /* Diminuído */
+  height: 20px; /* Diminuído */
 
   input {
     opacity: 0;
@@ -63,15 +63,15 @@ export const Slider = styled.span`
   bottom: 0;
   background-color: #ccc;
   transition: 0.4s;
-  border-radius: 34px;
+  border-radius: 20px; /* Ajustado proporcionalmente ao novo tamanho */
 
   &::before {
     position: absolute;
     content: '';
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
+    height: 16px; /* Diminuído proporcionalmente */
+    width: 16px; /* Diminuído proporcionalmente */
+    left: 2px; /* Ajuste para centralizar corretamente dentro do toggle */
+    bottom: 2px; /* Ajuste para centralizar corretamente dentro do toggle */
     background-color: white;
     transition: 0.4s;
     border-radius: 50%;
@@ -82,7 +82,7 @@ export const Slider = styled.span`
   }
 
   input:checked + &::before {
-    transform: translateX(26px);
+    transform: translateX(20px); /* Ajustado para o novo tamanho */
   }
 `;
 
@@ -113,4 +113,29 @@ export const EditButton = styled.button`
   &:hover {
     color: #1769aa;
   }
+`;
+
+
+export const ImagePreview = styled.div`
+  position: relative; /* Necessário para posicionar o botão */
+  width: 50px; /* Largura das imagens */
+  height: 50px; /* Altura das imagens */
+  overflow: hidden; /* Para esconder partes excedentes da imagem */
+  border-radius: 50%; /* Bordas bolinha */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para a imagem */
+
+  img {
+    width: 100%; /* Ajusta a imagem para ocupar o container */
+    height: 100%; /* Ajusta a altura para ocupar o container */
+    object-fit: cover; /* Garante que a imagem seja recortada proporcionalmente */
+  }
+`;
+
+
+export const ImageGallery = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Espaçamento entre as imagens */
+  margin-top: 20px; /* Espaçamento entre o botão de salvar e as imagens */
+ justify-content: center;
 `;
