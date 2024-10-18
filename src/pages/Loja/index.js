@@ -4,25 +4,26 @@ import Navbar from "../../components/Navbar/Navbar";
 import LojaApi from "../../services/lojaApi";
 import EditLojaModal from "../../components/ModalEditarLoja/EditarLojaModal";
 import CriarFotosLojaModal from "../../components/ModalCriarFotoLoja/CriarFotosLojaModal";
+import EditLojaConfigModal from "../../components/ModalEditarLojaConfig/EditarLojaConfigModal";
 
-import { FaEdit ,FaImages} from 'react-icons/fa'; // Importa o ícone de lápis
+import { FaEdit ,FaImages,FaCog} from 'react-icons/fa'; // Importa o ícone de lápis
 import LojaImageApi from "../../services/lojaImageApi";
 
 
 const Loja = () => {
   const [stores, setStores] = useState([]);
-  const [storesPhotos, setStoresPhotos] = useState([]);
   const [imageStoreUrls, setImageStoreUrls] = useState([]);
   const [isCriarFotosLojaModalOpen,setIsCriarFotosLojaModalOpen] = useState(false);
 
 
   const [isEditarLojaModalOpen, setIsEditarLojaModalOpen] = useState(false);
-  const [selectedLojaId, setSelectedLojaId] = useState(null);
+ 
   const [selectedLoja, setSelectedLoja] = useState(null);
+  const [isEditarLojaConfigModalOpen, setIsEditarLojaConfigModalOpen] = useState(false);
 
   // Inicializa a API fora das funções internas
   const { getStores, changeStatus } = LojaApi();
-  const { getFotoStoreDownload, getFotoByStoreId, getFotoByUserId } = LojaImageApi();
+  const { getFotoStoreDownload, getFotoByUserId } = LojaImageApi();
 
   // Use effect para buscar as lojas
   useEffect(() => {
@@ -30,7 +31,6 @@ const Loja = () => {
       try {
         const data = await getStores();
         setStores(data.data);
-        console.log("voltou da api lojas:", data.data)
         loadStoreImages();
       } catch (error) {
         console.error("Erro ao carregar stores:", error);
@@ -45,7 +45,7 @@ const Loja = () => {
     if (stores) {
       try {
         const fotos = await getFotoByUserId(); // Busca todas as fotos do usuario
-        console.log("fotos por usuario: ", fotos)
+        
         // Gera URLs para cada imagem junto com o ID
         const fotosUrls = await Promise.all(
           fotos.map(async (foto) => {
@@ -84,15 +84,16 @@ const Loja = () => {
     }
   };
 
-  const handleEdit = (store) => {
-    // Lógica para editar a loja, como abrir um modal ou redirecionar para a página de edição
-    console.log("Editando loja:", store);
-  };
 
 
   const handleEditarLojaModalClose = () => {
     setIsEditarLojaModalOpen(false);
-    setSelectedLojaId(null);
+    
+  };
+
+  const handleEditarLojaConfigModalClose = () => {
+    setIsEditarLojaConfigModalOpen(false);
+    
   };
 
   const handleLojaUpdated = async () => {
@@ -100,6 +101,13 @@ const Loja = () => {
     setStores(data.data);
     loadStoreImages();
     handleEditarLojaModalClose();
+  };
+
+  const handleLojaConfigUpdated = async () => {
+    const data = await getStores();
+    setStores(data.data);
+    loadStoreImages();
+    handleEditarLojaConfigModalClose();
   };
 
   const handleCriarFotosLojaModalClose = async () => {
@@ -114,6 +122,10 @@ const Loja = () => {
     setIsEditarLojaModalOpen(true);
   };
 
+  const openEditarLojaConfigModal = (store) => {
+    setSelectedLoja(store);
+    setIsEditarLojaConfigModalOpen(true);
+  };
   const openCriarFotoLojaModal = (store) => {
     setSelectedLoja(store);
     setIsCriarFotosLojaModalOpen(true);
@@ -152,6 +164,9 @@ const Loja = () => {
             <C.EditButton onClick={() => openEditarLojaModal(store)}>
               <FaEdit />
             </C.EditButton>
+            <C.EditButton onClick={() => openEditarLojaConfigModal(store)}>
+              <FaCog />
+            </C.EditButton>
             <C.ToggleSwitch>
               <input
                 type="checkbox"
@@ -179,6 +194,12 @@ const Loja = () => {
         onCreate={handleNewFotoLojaCreated}
       />
 
+  <EditLojaConfigModal
+        isOpen={isEditarLojaConfigModalOpen}
+        onClose={handleEditarLojaConfigModalClose}
+        loja={selectedLoja}
+        onEdit={handleLojaConfigUpdated}
+      />
     </C.Container>
 
   );
