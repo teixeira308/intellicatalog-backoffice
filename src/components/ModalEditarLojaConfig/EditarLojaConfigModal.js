@@ -13,7 +13,9 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
     facebook: "",
     usa_Status: "",
     chave_pix: "",
-    usa_estoque: ""
+    usa_estoque: "",
+    cor_botao_primaria:"",
+    cor_botao_secundaria:""
   });
 
   const filterFormData = (data) => {
@@ -21,6 +23,8 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
     const allowedFields = [
       'cor_primaria',
       'cor_secundaria',
+      'cor_botao_primaria',
+      'cor_botao_secundaria',
       'taxa_entrega',
       'numero_whatsapp',
       'instagram',
@@ -93,9 +97,10 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
           <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
+          Cores: <br/><br/>
           <C.FormRow>
             <C.FormColumn style={{ flex: 1 }}>
-              <C.Label htmlFor="cor_primaria">Cor primária</C.Label>
+              <C.Label htmlFor="cor_primaria">Primária</C.Label>
               <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_primaria, border: '1px solid #000', marginTop: '5px' }} />
               <C.Input
                 type="color"
@@ -108,7 +113,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
               />
             </C.FormColumn>
             <C.FormColumn>
-              <C.Label htmlFor="cor_secundaria">Cor secundária</C.Label>
+              <C.Label htmlFor="cor_secundaria">Secundária</C.Label>
               <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_secundaria, border: '1px solid #000', marginTop: '5px' }} />
               <C.Input
                 type="color"
@@ -119,6 +124,40 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
                 style={{ marginRight: '10px' }} // Espaço entre o input e o div
               />
             </C.FormColumn>
+            <C.FormColumn>
+              <C.Label htmlFor="cor_secundaria">Botão primária</C.Label>
+              <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_botao_primaria, border: '1px solid #000', marginTop: '5px' }} />
+              <C.Input
+                type="color"
+                name="cor_botao_primaria"
+                id="cor_botao_primaria"
+                value={formData.cor_botao_primaria}
+                onChange={handleChange}
+                style={{ marginRight: '10px' }} // Espaço entre o input e o div
+              />
+            </C.FormColumn>
+            <C.FormColumn>
+              <C.Label htmlFor="cor_botao_secundaria">Botão secundária</C.Label>
+              <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_botao_secundaria, border: '1px solid #000', marginTop: '5px' }} />
+              <C.Input
+                type="color"
+                name="cor_botao_secundaria"
+                id="cor_botao_secundaria"
+                value={formData.cor_botao_secundaria}
+                onChange={handleChange}
+                style={{ marginRight: '10px' }} // Espaço entre o input e o div
+              />
+            </C.FormColumn>
+          
+            
+          </C.FormRow>
+          <C.FormRow>
+              <button   style={{ backgroundColor: formData.cor_botao_primaria, borderColor: formData.cor_botao_primaria, color: 'black' }}>
+                Ver Carrinho
+              </button>
+              &nbsp;
+              <button  style={{ backgroundColor: formData.cor_botao_secundaria, borderColor: formData.cor_botao_secundaria, color: 'black' }}>
+                Finalizar Pedido</button>
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
