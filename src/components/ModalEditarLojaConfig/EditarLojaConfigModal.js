@@ -14,8 +14,9 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
     usa_Status: "",
     chave_pix: "",
     usa_estoque: "",
-    cor_botao_primaria:"",
-    cor_botao_secundaria:""
+    cor_botao_primaria: "",
+    cor_botao_secundaria: "",
+    usa_logo_fundo: ""
   });
 
   const filterFormData = (data) => {
@@ -31,7 +32,8 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
       'facebook',
       'usa_Status',
       'chave_pix',
-      'usa_estoque'
+      'usa_estoque',
+      'usa_logo_fundo'
     ];
 
     // Filtra os dados mantendo apenas os campos permitidos
@@ -97,10 +99,10 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
           <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
-          Cores: <br/><br/>
+          Cores: <br /><br />
           <C.FormRow>
             <C.FormColumn style={{ flex: 1 }}>
-              <C.Label htmlFor="cor_primaria">Primária</C.Label>
+              <C.Label htmlFor="cor_primaria">Tela</C.Label>
               <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_primaria, border: '1px solid #000', marginTop: '5px' }} />
               <C.Input
                 type="color"
@@ -113,7 +115,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
               />
             </C.FormColumn>
             <C.FormColumn>
-              <C.Label htmlFor="cor_secundaria">Secundária</C.Label>
+              <C.Label htmlFor="cor_secundaria">Fonte</C.Label>
               <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_secundaria, border: '1px solid #000', marginTop: '5px' }} />
               <C.Input
                 type="color"
@@ -148,16 +150,35 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
                 style={{ marginRight: '10px' }} // Espaço entre o input e o div
               />
             </C.FormColumn>
-          
-            
+
+ 
+            <C.FormColumn>
+              <C.Label htmlFor="usa_Status">Usa logo como fundo da pagina</C.Label>
+              <C.Input
+                type="checkbox"
+                name="usa_logo_fundo"
+                id="usa_logo_fundo"
+                value={formData.usa_logo_fundo}
+                onChange={handleChange}
+              />
+            </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
-              <button   style={{ backgroundColor: formData.cor_botao_primaria, borderColor: formData.cor_botao_primaria, color: 'black' }}>
-                Ver Carrinho
-              </button>
-              &nbsp;
-              <button  style={{ backgroundColor: formData.cor_botao_secundaria, borderColor: formData.cor_botao_secundaria, color: 'black' }}>
+            <div style={{
+             height: '30px',
+             backgroundColor: formData.cor_primaria, 
+             borderColor: formData.cor_botao_primaria, 
+             color: formData.cor_secundaria,
+             display: 'flex',                // Adiciona o display flex
+             justifyContent: 'center',       // Centraliza os botões horizontalmente
+             alignItems: 'center'            // Centraliza os botões verticalmente
+            }}>
+              <button style={{ backgroundColor: formData.cor_botao_primaria, borderColor: formData.cor_botao_primaria, color: formData.cor_secundaria , marginRight: '10px'  }}>
                 Finalizar Pedido</button>
+
+              <button style={{ backgroundColor: formData.cor_botao_secundaria, borderColor: formData.cor_botao_secundaria, color: formData.cor_secundaria }}>
+                Finalizar Pedido</button>
+            </div>
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
@@ -227,11 +248,12 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
             </C.FormColumn>
 
           </C.FormRow>
-          <C.FormRow>
+         
+         {/* <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="usa_Status">Usa status da loja</C.Label>
               <C.Input
-                type="text"
+                type="checkbox"
                 name="usa_Status"
                 id="usa_Status"
                 value={formData.usa_Status}
@@ -239,19 +261,21 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
               />
             </C.FormColumn>
 
-           
+          
+
+
             <C.FormColumn>
               <C.Label htmlFor="usa_estoque">Usa estoque</C.Label>
               <C.Input
-                type="text"
+                type="checkbox"
                 name="usa_estoque"
                 id="usa_estoque"
                 value={formData.usa_estoque}
                 onChange={handleChange}
               />
             </C.FormColumn>
-
-          </C.FormRow>
+     
+          </C.FormRow> */}
 
 
           <C.Button type="submit">Salvar</C.Button>
