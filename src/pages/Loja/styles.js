@@ -101,7 +101,8 @@ export const StatusWrapper = styled.div`
 export const ActionsWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 15px; /* Espaçamento entre o botão de edição e o toggle */
+  gap: 20px; /* Espaçamento entre o botão de edição e o toggle */
+  margin-top: 20px; /* Espaço entre o nome da loja e os botões */
 `;
 
 export const EditButton = styled.button`
@@ -140,3 +141,10 @@ export const ImageGallery = styled.div`
   margin-top: 20px; /* Espaçamento entre o botão de salvar e as imagens */
  justify-content: center;
 `;
+
+export const StoreInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column; /* Alinha os elementos em coluna */
+  margin-top: 10px; /* Espaço entre as imagens e o nome + botões */
+`;
+ 

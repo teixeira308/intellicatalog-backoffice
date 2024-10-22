@@ -6,24 +6,26 @@ import EditLojaModal from "../../components/ModalEditarLoja/EditarLojaModal";
 import CriarFotosLojaModal from "../../components/ModalCriarFotoLoja/CriarFotosLojaModal";
 import EditLojaConfigModal from "../../components/ModalEditarLojaConfig/EditarLojaConfigModal";
 
-import { FaEdit ,FaImages,FaCog} from 'react-icons/fa'; // Importa o ícone de lápis
+import { FaEdit, FaImages, FaCog, FaRegWindowRestore } from 'react-icons/fa'; // Importa o ícone de lápis
 import LojaImageApi from "../../services/lojaImageApi";
 
 
 const Loja = () => {
   const [stores, setStores] = useState([]);
   const [imageStoreUrls, setImageStoreUrls] = useState([]);
-  const [isCriarFotosLojaModalOpen,setIsCriarFotosLojaModalOpen] = useState(false);
+  const [isCriarFotosLojaModalOpen, setIsCriarFotosLojaModalOpen] = useState(false);
 
 
   const [isEditarLojaModalOpen, setIsEditarLojaModalOpen] = useState(false);
- 
+
   const [selectedLoja, setSelectedLoja] = useState(null);
   const [isEditarLojaConfigModalOpen, setIsEditarLojaConfigModalOpen] = useState(false);
 
   // Inicializa a API fora das funções internas
   const { getStores, changeStatus } = LojaApi();
   const { getFotoStoreDownload, getFotoByUserId } = LojaImageApi();
+
+  const store_site = process.env.REACT_APP_STORE_SITE;
 
   // Use effect para buscar as lojas
   useEffect(() => {
@@ -45,7 +47,7 @@ const Loja = () => {
     if (stores) {
       try {
         const fotos = await getFotoByUserId(); // Busca todas as fotos do usuario
-        
+
         // Gera URLs para cada imagem junto com o ID
         const fotosUrls = await Promise.all(
           fotos.map(async (foto) => {
@@ -88,12 +90,12 @@ const Loja = () => {
 
   const handleEditarLojaModalClose = () => {
     setIsEditarLojaModalOpen(false);
-    
+
   };
 
   const handleEditarLojaConfigModalClose = () => {
     setIsEditarLojaConfigModalOpen(false);
-    
+
   };
 
   const handleLojaUpdated = async () => {
@@ -137,6 +139,13 @@ const Loja = () => {
     setStores(data.data);
   };
 
+
+  const openStoreSite = (store) =>{
+
+    window.open(store_site+store.identificadorexterno, '_blank')
+  }
+
+
   return (
     <C.Container>
       <Navbar />
@@ -153,33 +162,43 @@ const Loja = () => {
                 <img src={item.url} alt={`Foto da store ${store.namestore}`} />
               </C.ImagePreview>
             ))}
-            
-          <C.StatusWrapper>
-            <C.StatusIndicator isOpen={store.status === "Aberta"} />
-            {store.namestore}
-          </C.StatusWrapper>
-          <C.ActionsWrapper>
-          <C.EditButton onClick={() => openCriarFotoLojaModal(store)}>
-                    <FaImages />
-                  </C.EditButton>
-            <C.EditButton onClick={() => openEditarLojaModal(store)}>
-              <FaEdit />
-            </C.EditButton>
-            <C.EditButton onClick={() => openEditarLojaConfigModal(store)}>
-              <FaCog />
-            </C.EditButton>
-            <C.ToggleSwitch>
-              <input
-                type="checkbox"
-                checked={store.status === "Aberta"}
-                onChange={() => toggleStoreStatus(store.id)}
-              />
-              <C.Slider />
-            </C.ToggleSwitch>
-          </C.ActionsWrapper>
-        </C.Card>
+          <C.StatusIndicator isOpen={store.status === "Aberta"} />
+          {/* Agrupando nome da loja e botões em wrappers */}
+          <C.StoreInfoWrapper>
+            <C.StatusWrapper>
 
+              {store.namestore}
+            </C.StatusWrapper>
+
+            <C.ActionsWrapper>
+              <C.EditButton onClick={() => openCriarFotoLojaModal(store)}>
+                <FaImages />
+              </C.EditButton>
+              <C.EditButton onClick={() => openEditarLojaModal(store)}>
+                <FaEdit />
+              </C.EditButton>
+              <C.EditButton onClick={() => openEditarLojaConfigModal(store)}>
+                <FaCog />
+              </C.EditButton>
+              <C.EditButton onClick={() => openStoreSite(store)}>
+                <FaRegWindowRestore />
+              </C.EditButton>
+
+
+            </C.ActionsWrapper>
+
+          </C.StoreInfoWrapper>
+          <C.ToggleSwitch>
+            <input
+              type="checkbox"
+              checked={store.status === "Aberta"}
+              onChange={() => toggleStoreStatus(store.id)}
+            />
+            <C.Slider />
+          </C.ToggleSwitch>
+        </C.Card>
       ))}
+
 
       <EditLojaModal
         isOpen={isEditarLojaModalOpen}
@@ -195,7 +214,7 @@ const Loja = () => {
         onCreate={handleNewFotoLojaCreated}
       />
 
-  <EditLojaConfigModal
+      <EditLojaConfigModal
         isOpen={isEditarLojaConfigModalOpen}
         onClose={handleEditarLojaConfigModalClose}
         loja={selectedLoja}
