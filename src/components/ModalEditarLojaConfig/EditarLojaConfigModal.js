@@ -57,15 +57,25 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
     const fetchStoreConfigs = async () => {
       if (loja) {
         const storeConfigs = await loadStoreConfigs(loja);
+  
+        // Converte as strings "true" e "false" em booleanos
+        const transformedConfigs = {
+          ...storeConfigs,
+          usa_logo_fundo: storeConfigs.usa_logo_fundo === "true", // Converte "true" para true e "false" para false
+          usa_Status: storeConfigs.usa_Status === "true", // Se você tiver essa propriedade
+          usa_estoque: storeConfigs.usa_estoque === "true" // Se você tiver essa propriedade
+        };
+  
         setFormData((prev) => ({
           ...prev,
-          ...storeConfigs // Atualiza com dados da loja, mantendo os campos existentes
+          ...transformedConfigs // Atualiza com dados da loja, mantendo os campos existentes
         }));
       }
     };
-
+  
     fetchStoreConfigs();
   }, [loja]);
+  
 
   const handleChange = (e) => {
     setFormData({
@@ -74,12 +84,27 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
     });
   };
 
+  
+
+  const handleChangeCheckBox = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.checked,
+    });
+  };
+
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const filteredData = filterFormData(formData);
+      const transformedData = {
+        ...formData,
+        usa_logo_fundo: formData.usa_logo_fundo ? "true" : "false", // Se usa_logo_fundo for true, transforma em "1", caso contrário, "0"
+      };
+  
+      // Filtra os dados que serão enviados
+      const filteredData = filterFormData(transformedData);
       await updateLojaConfig(loja.id, filteredData);
       onEdit();
     } catch (error) {
@@ -152,17 +177,19 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
             </C.FormColumn>
 
  
-            <C.FormColumn>
-              <C.Label htmlFor="usa_Status">Usa logo como fundo da pagina</C.Label>
+          </C.FormRow>
+
+          <C.FormColumn>
+              <C.Label htmlFor="usa_Status">Usa logo como fundo da pagina &nbsp; &nbsp; &nbsp;
               <C.Input
                 type="checkbox"
                 name="usa_logo_fundo"
                 id="usa_logo_fundo"
-                value={formData.usa_logo_fundo}
-                onChange={handleChange}
-              />
+                checked={formData.usa_logo_fundo}
+                onChange={handleChangeCheckBox}
+              /></C.Label>
             </C.FormColumn>
-          </C.FormRow>
+            <br/>
           <C.FormRow>
             <div style={{
              height: '30px',
@@ -173,10 +200,10 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
              justifyContent: 'center',       // Centraliza os botões horizontalmente
              alignItems: 'center'            // Centraliza os botões verticalmente
             }}>
-              <button style={{ backgroundColor: formData.cor_botao_primaria, borderColor: formData.cor_botao_primaria, color: formData.cor_secundaria , marginRight: '10px'  }}>
-                Finalizar Pedido</button>
+              <button onClick={(e) =>  e.preventDefault()} style={{ backgroundColor: formData.cor_botao_primaria, borderColor: formData.cor_botao_primaria, color: formData.cor_secundaria , marginRight: '10px'  }}>
+                Meu carrinho</button>
 
-              <button style={{ backgroundColor: formData.cor_botao_secundaria, borderColor: formData.cor_botao_secundaria, color: formData.cor_secundaria }}>
+              <button onClick={(e) =>  e.preventDefault()} style={{ backgroundColor: formData.cor_botao_secundaria, borderColor: formData.cor_botao_secundaria, color: formData.cor_secundaria }}>
                 Finalizar Pedido</button>
             </div>
           </C.FormRow>

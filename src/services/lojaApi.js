@@ -95,6 +95,7 @@ const LojaApi = () => {
       }
 
       const updateLojaConfig = async (id, loja) => {
+        console.log(loja);
         
         const response = await fetch(`http://localhost:3000/intellicatalog/v1/stores/${id}/config`, {
           method: "PUT",
