@@ -10,21 +10,22 @@ import DeleteProdutoModal from "../../components/ModalDeleteProduto/DeleteProdut
 import CriarProdutoModal from "../../components/ModalCriarProduto/CriarProdutoModal";
 import EditarProdutoModal from "../../components/ModalEditarProduto/EditarProdutoModal";
 import CriarFotosProdutoModal from "../../components/ModalCriarFotosProduto/CriarFotosProdutoModal";
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit } from 'react-icons/fa'; // Ícone de lápis
 
-import { FaEdit, FaTrashAlt,FaImages } from 'react-icons/fa'; // Ícone de lápis
 
 const Catalogo = () => {
   const [categorias, setCategorias] = useState([]);
   const [produtos, setProdutos] = useState([]);
-  const { getCategorias, changeStatus, deleteCategoria } = categoriaApi();
-  const { getProducts, deleteProduto } = productApi();
+  const { getCategorias, changeStatus, deleteCategoria, updateCategoriaOrder } = categoriaApi();
+  const { getProducts, deleteProduto, changeProductStatus } = productApi();
   const [selectedCategoria, setSelectedCategoria] = useState(null);
   const [expandedCategorias, setExpandedCategorias] = useState([]); // Para controlar categorias expandidas
   const [isEditarCategoriaModalOpen, setIsEditarCategoriaModalOpen] = useState(false);
   const [isCriarCategoriaModalOpen, setIsCriarCategoriaModalOpen] = useState(false);
   const [isDeleteCategoriaModalOpen, setIsDeleteCategoriaModalOpen] = useState(false);
   const [selectedCategoriaId, setSelectedCategoriaId] = useState(null);
-  const [isEditarProdutoModalOpen,setIsEditarProdutoModalOpen] = useState(false)
+  const [isEditarProdutoModalOpen, setIsEditarProdutoModalOpen] = useState(false)
 
   const [isCriarFotosProdutoModalOpen, setIsCriarFotosProdutoModalOpen] = useState(false)
   const [isCriarProdutoModalOpen, setIsCriarProdutoModalOpen] = useState(false);
@@ -32,6 +33,9 @@ const Catalogo = () => {
 
   const [isDeleteProdutoModalOpen, setIsDeleteProdutoModalOpen] = useState(false);
   const [selectedProduto, setSelectedProduto] = useState(null);
+
+  const [isReorderMode, setIsReorderMode] = useState(false); // Estado para o modo de reordenação
+
 
   useEffect(() => {
     const fetchCategorias = async () => {
@@ -72,6 +76,24 @@ const Catalogo = () => {
       console.error("Erro ao atualizar status da categoria:", error);
     }
   };
+
+    // Função para alternar o status de uma categoria específica
+    const toggleProdutoStatus = async (produtoId) => {
+      try {
+        const produtoToUpdate = produtos.find((produto) => produto.id === produtoId);
+        const newStatus = produtoToUpdate.status === "ativo" ? "inativo" : "ativo";
+  
+        setProdutos((prevProdutos) =>
+          prevProdutos.map((produto) =>
+            produto.id === produtoId ? { ...produto, status: newStatus } : produto
+          )
+        );
+  
+        await changeProductStatus(produtoId, newStatus === "ativo");
+      } catch (error) {
+        console.error("Erro ao atualizar status da categoria:", error);
+      }
+    };
 
   // Alternar visibilidade da lista de produtos por categoria
   const toggleCategoriaExpansion = (categoriaId) => {
@@ -137,7 +159,7 @@ const Catalogo = () => {
     setIsEditarCategoriaModalOpen(true);
   };
 
-  const openEditarProdutoModal = (produto,categoria) => {
+  const openEditarProdutoModal = (produto, categoria) => {
     setSelectedCategoria(categoria);
     setSelectedProduto(produto);
     setIsEditarProdutoModalOpen(true);
@@ -148,7 +170,7 @@ const Catalogo = () => {
     setIsDeleteProdutoModalOpen(true);
   };
 
-  
+
   const handleDeleteProdutoModalClose = () => {
     setIsDeleteProdutoModalOpen(false);
     setSelectedProduto(null);
@@ -167,7 +189,7 @@ const Catalogo = () => {
   };
 
 
-  
+
   const handlCriarProdutoModalClose = async () => {
     setIsCriarProdutoModalOpen(false);
     setSelectedCategoria(null);
@@ -180,7 +202,7 @@ const Catalogo = () => {
     setProdutos(data.data);
   };
 
-  const openCriarProdutoModal = (categoria) =>{
+  const openCriarProdutoModal = (categoria) => {
     setSelectedCategoria(categoria)
     setIsCriarProdutoModalOpen(true)
   }
@@ -195,64 +217,159 @@ const Catalogo = () => {
     setIsCriarFotosProdutoModalOpen(true);
   };
 
+  const handleOnDragEnd = async (result) => {
+    if (!result.destination) return;
+
+    // Índices de origem e destino vindos do drag-and-drop (começam de 0)
+    const sourceIndex = result.source.index;
+    const destinationIndex = result.destination.index;
+
+    // console.log('Índice de origem:', sourceIndex);
+    //console.log('Índice de destino:', destinationIndex);
+
+    // Cria uma cópia do array de categorias
+    const reorderedCategorias = [...categorias];
+
+    // Remove o item da posição inicial
+    const [reorderedItem] = reorderedCategorias.splice(sourceIndex, 1);
+
+    // Insere o item na nova posição
+    reorderedCategorias.splice(destinationIndex, 0, reorderedItem);
+
+    // console.log("Categorias reorganizadas:", reorderedCategorias);
+
+    try {
+      // Enviar nova ordem para o backend
+      const response = await updateCategoriaOrder(reorderedCategorias);
+
+      if (response.status === 200) {
+        const data = await getCategorias();
+        setCategorias(data.data);
+        //console.log("Categorias reatualizadas do backend:", data.data);
+        setIsReorderMode(false)
+      } else {
+        console.error("Erro inesperado ao atualizar a ordem das categorias:", response);
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar a ordem das categorias:", error);
+    }
+  };
+
+
+
   return (
     <C.Container>
       <Navbar />
       <C.Title>Meu catálogo</C.Title>
-      <C.CreateButton onClick={() => setIsCriarCategoriaModalOpen(true)}>+</C.CreateButton>
-      {categorias.map((categoria) => (
-        <C.Card key={categoria.id}>
-          <C.StatusWrapper>
-            {/* Transformar o nome da categoria em um link */}
-            <C.CategoriaLink onClick={() => toggleCategoriaExpansion(categoria.id)}>
-              {categoria.name}
-            </C.CategoriaLink>
 
-            <C.ActionsWrapper>
-              <C.EditButton onClick={() => openEditarCategoriaModal(categoria)}>
-                <FaEdit />
-              </C.EditButton>
-              <C.TrashButton onClick={() => openDeleteCategoriaModal(categoria)}>
-                <FaTrashAlt />
-              </C.TrashButton>
-              <C.ToggleSwitch>
-                <input
-                  type="checkbox"
-                  checked={categoria.status === "ativo"}
-                  onChange={() => toggleCategoriaStatus(categoria.id)}
-                />
-                <C.Slider />
-              </C.ToggleSwitch>
-            </C.ActionsWrapper>
-          </C.StatusWrapper>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: "50vw"}}>
+  <div style={{ marginRight: "20px"}}>
+    {!isReorderMode && (
+      <C.CreateButton onClick={() => setIsCriarCategoriaModalOpen(true)}>
+        Nova Categoria
+      </C.CreateButton>
+    )}
+  </div>
 
-          {/* Mostrar produtos somente se a categoria estiver expandida */}
-          {expandedCategorias.includes(categoria.id) && (
-            <C.ProdutoList>
-              {getProdutosByCategoria(categoria.id).map((produto) => (
-                <C.ProdutoActions key={produto.id}>
-                  <C.ProdutoItem>{produto.titulo} </C.ProdutoItem>
-                  <div>
-                  <C.EditButton onClick={() => openCriarFotosProdutoModal(produto)}>
-                    <FaImages />
-                  </C.EditButton>
-                  &nbsp; &nbsp;
-                  <C.EditButton onClick={() => openEditarProdutoModal(produto,categoria)}>
+  <div style={{ marginLeft: "20px"}}>
+    <C.ReorderButton onClick={() => setIsReorderMode(!isReorderMode)}>
+      {isReorderMode ? "Salvar Ordem" : "Reordenar categorias"}
+    </C.ReorderButton>
+  </div>
+</div>
+
+
+
+      {isReorderMode ? (
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="categorias">
+            {(provided) => (
+              <C.CategoriaList {...provided.droppableProps} ref={provided.innerRef}>
+                {categorias
+                  .sort((a, b) => a.catalog_order - b.catalog_order)
+                  .map((categoria, catalog_order) => (
+                    <Draggable key={categoria.id} draggableId={String(categoria.catalog_order)} index={catalog_order}>
+                      {(provided) => (
+                        <C.Card
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <C.StatusWrapper>
+                            <C.CategoriaLink>{categoria.name}</C.CategoriaLink>
+                            <C.ActionsWrapper>
+                              <FaArrowsAlt />
+                            </C.ActionsWrapper>
+                          </C.StatusWrapper>
+                        </C.Card>
+                      )}
+                    </Draggable>
+                  ))}
+                {provided.placeholder}
+              </C.CategoriaList>
+            )}
+          </Droppable>
+        </DragDropContext>
+      ) : (
+        categorias
+          .sort((a, b) => a.catalog_order - b.catalog_order)
+          .map((categoria) => (
+            <C.Card key={categoria.catalog_order}>
+              <C.StatusWrapper>
+                <C.CategoriaLink onClick={() => toggleCategoriaExpansion(categoria.id)}>
+                  {categoria.name}
+                </C.CategoriaLink>
+
+                <C.ActionsWrapper>
+                  <C.EditButton onClick={() => openEditarCategoriaModal(categoria)}>
                     <FaEdit />
                   </C.EditButton>
-                  &nbsp; &nbsp;
-                  <C.TrashButton onClick={() => openDeleteProdutoModal(produto)}>
+                  <C.TrashButton onClick={() => openDeleteCategoriaModal(categoria)}>
                     <FaTrashAlt />
                   </C.TrashButton>
-                  </div>
-                </C.ProdutoActions>
-              ))}
-              <C.CreateButton onClick={() => openCriarProdutoModal(categoria)}>+</C.CreateButton>
-            </C.ProdutoList>
-          )}
+                  <C.ToggleSwitch>
+                    <input
+                      type="checkbox"
+                      checked={categoria.status === "ativo"}
+                      onChange={() => toggleCategoriaStatus(categoria.id)}
+                    />
+                    <C.Slider />
+                  </C.ToggleSwitch>
+                </C.ActionsWrapper>
+              </C.StatusWrapper>
 
-        </C.Card>
-      ))}
+              {expandedCategorias.includes(categoria.id) && (
+                <C.ProdutoList>
+                  {getProdutosByCategoria(categoria.id).map((produto) => (
+                    <C.ProdutoActions key={produto.id}>
+                      <C.ProdutoItem>{produto.titulo}</C.ProdutoItem>
+                      
+                        <C.EditImageButton onClick={() => openCriarFotosProdutoModal(produto)}>
+                          <FaImages />
+                        </C.EditImageButton>
+                        <C.EditProductButton onClick={() => openEditarProdutoModal(produto, categoria)}>
+                          <FaEdit />
+                        </C.EditProductButton>
+                        <C.TrashButton onClick={() => openDeleteProdutoModal(produto)}>
+                          <FaTrashAlt />
+                        </C.TrashButton>
+                        <C.ToggleSwitch>
+                    <input
+                      type="checkbox"
+                      checked={produto.status === "ativo"}
+                      onChange={() => toggleProdutoStatus(produto.id)}
+                    />
+                    <C.Slider />
+                  </C.ToggleSwitch>
+                    </C.ProdutoActions>
+                  ))}
+                  <C.CreateButton onClick={() => openCriarProdutoModal(categoria)}>+</C.CreateButton>
+                </C.ProdutoList>
+              )}
+            </C.Card>
+          ))
+      )}
+
 
       <EditCategoriaModal
         isOpen={isEditarCategoriaModalOpen}
@@ -274,7 +391,7 @@ const Catalogo = () => {
         categoria={selectedCategoria}
       />
 
-    <DeleteProdutoModal
+      <DeleteProdutoModal
         isOpen={isDeleteProdutoModalOpen}
         onClose={handleDeleteProdutoModalClose}
         onDelete={handleDeleteProduto}
@@ -288,7 +405,7 @@ const Catalogo = () => {
         categoria={selectedCategoria}
       />
 
-    <EditarProdutoModal
+      <EditarProdutoModal
         isOpen={isEditarProdutoModalOpen}
         onClose={() => setIsEditarProdutoModalOpen(false)}
         categoria={selectedCategoria}
@@ -296,7 +413,7 @@ const Catalogo = () => {
         onEdit={handleProdutoEdited}
       />
 
-    <CriarFotosProdutoModal
+      <CriarFotosProdutoModal
         isOpen={isCriarFotosProdutoModalOpen}
         onClose={() => setIsCriarFotosProdutoModalOpen(false)}
         categoria={selectedCategoria}

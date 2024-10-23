@@ -107,7 +107,7 @@ export const StatusWrapper = styled.div`
 export const ActionsWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 15px; /* Espaçamento entre o botão de edição e o toggle */
+  gap: 40px; /* Espaçamento entre o botão de edição e o toggle */
 `;
 
 export const EditButton = styled.button`
@@ -123,6 +123,30 @@ export const EditButton = styled.button`
 `;
 
 
+
+export const EditImageButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2196f3;
+  font-size: 20px;
+
+  &:hover {
+    color: #1769aa;
+  }
+`;
+
+export const EditProductButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2196f3;
+  font-size: 20px;
+
+  &:hover {
+    color: #1769aa;
+  }
+`;
 
 export const ShowProductsButton = styled.button`
   background: none;
@@ -151,8 +175,8 @@ export const ProdutoList = styled.ul`
 
 export const ProdutoActions = styled.div`
   display: flex;
-  align-items: center;  
-  justify-content: space-between;
+  align-items: center;
+  gap: 40px; /* Espaçamento entre o botão de edição e o toggle */
   
 `;
 
@@ -183,7 +207,7 @@ export const CategoriaLink = styled.span`
   cursor: pointer;
   color: #2196f3;
   text-decoration: underline;
-  font-size: 18px;
+  font-size: 16px;
 
   &:hover {
     color: #1769aa;
@@ -198,7 +222,19 @@ export const CreateButton = styled.button`
   border: none;
   cursor: pointer;
   color: #2196f3;
-  font-size: 40px;
+  font-size: 20px;
+
+  &:hover {
+    color: #1769aa;
+  }
+`;
+
+export const ReorderButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2196f3;
+  font-size: 20px;
 
   &:hover {
     color: #1769aa;
@@ -215,4 +251,19 @@ export const TrashButton = styled.button`
   &:hover {
     color: #1769aa;
   }
+`;
+
+export const CategoriaList = styled.div`
+  margin-bottom: 20px;
+`;
+export const CategoriaCardDragging = styled(Card)`
+  background-color: #e0f7fa; /* Cor de destaque enquanto arrasta */
+  border-color: #007bff;
+`;
+
+export const CategoriaDraggingOver = styled.div`
+  border: 2px dashed #007bff; /* Estilo de feedback ao arrastar */
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
 `;

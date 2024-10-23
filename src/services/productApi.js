@@ -102,11 +102,37 @@ const ProductApi = () => {
 
   }
 
+  const changeProductStatus = async(productId, status) => {
+    const newStatus = { "status": status ? "ativo" : "inativo" }
+    const response = await fetch(`http://localhost:3000/intellicatalog/v1/products/${productId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?.token}`,
+      },
+      body: JSON.stringify(newStatus),
+    });
+  
+    if (response.status === 401) {
+      // Redireciona para a tela de login
+      navigate('/login');
+  }
+  
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Erro ao atualizar produto");
+    }
+  
+    return await response.json();
+
+  }
+
   return {
     getProducts,
     deleteProduto,
     createProduto,
-    updateProduto
+    updateProduto,
+    changeProductStatus
   };
 }
 
