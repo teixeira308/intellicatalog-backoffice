@@ -103,6 +103,7 @@ const ProductApi = () => {
   }
 
   const changeProductStatus = async(productId, status) => {
+    console.log(productId)
     const newStatus = { "status": status ? "ativo" : "inativo" }
     const response = await fetch(`http://localhost:3000/intellicatalog/v1/products/${productId}`, {
       method: "PUT",
