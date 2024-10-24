@@ -26,14 +26,21 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
       'unit',
       'unitquantity',
       'promocional_price'
-      
     ];
-
+  
     // Filtra os dados mantendo apenas os campos permitidos
-    return Object.fromEntries(
+    const filteredData = Object.fromEntries(
       Object.entries(data).filter(([key]) => allowedFields.includes(key))
     );
+  
+    // Verifica se promocional_price é uma string vazia e a redefine para null
+    if (filteredData.promocional_price === '') {
+      filteredData.promocional_price = null;
+    }
+  
+    return filteredData;
   };
+  
 
   const handleChange = (e) => {
     setFormData({
