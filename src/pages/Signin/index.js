@@ -38,9 +38,9 @@ const Signin = () => {
 
   return (
     <C.Container>
-      <img src="favicon.png" alt="Descrição da imagem" style={{ width: '300px', marginBottom: '20px' }} />
+      <img src="favicon.png" alt="Descrição da imagem" style={{ width: '300px', marginBottom: '20px' , borderRadius: '20px' }} />
       
-     {/*  <C.Label>Doc Filler</C.Label>*/}
+     {/* \ <C.Label>Doc Filler</C.Label>*/}
       <C.Content>
         <Input
           type="email"

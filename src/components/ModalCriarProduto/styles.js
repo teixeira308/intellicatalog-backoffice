@@ -14,6 +14,17 @@ export const ModalOverlay = styled.div`
   z-index: 1000;
 `;
 
+export const Textarea = styled.textarea`
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  width: 100%; // Ajusta a largura para 100% do contêiner pai
+`;
+
+
+
+
 // Estilos para o container do modal
 export const ModalContainer = styled.div`
   background: #fff;

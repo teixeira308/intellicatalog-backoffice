@@ -175,21 +175,11 @@ export const ProdutoList = styled.ul`
 
 export const ProdutoActions = styled.div`
   display: flex;
-  align-items: center;
-  gap: 40px; /* Espaçamento entre o botão de edição e o toggle */
-  
+  flex-direction: column; // Alinha os itens na coluna
+  margin-bottom: 10px; // Espaço abaixo do contêiner, se desejado
 `;
 
-export const ProdutoItem = styled.li`
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  font-size: 16px;
-  color: #333;
  
-  &:last-child {
-    border-bottom: none;
-  }
-`;
 
 export const ToggleLink = styled.span`
   cursor: pointer;
@@ -266,4 +256,22 @@ export const CategoriaDraggingOver = styled.div`
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
+`;
+ 
+
+export const ProdutoItem = styled.li`
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+  color: #333;
+ 
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
+export const ProdutoOperations = styled.div`
+  display: flex; // Usa flexbox para alinhar os botões
+  gap: 45px; // Aumenta o espaçamento entre os botões (pode ajustar o valor conforme necessário)
+  margin-top: 9px; // Espaço acima dos botões
 `;

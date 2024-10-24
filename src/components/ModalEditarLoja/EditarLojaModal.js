@@ -187,7 +187,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
             </C.FormColumn>
 
           </C.FormRow>
-          <C.FormRow>
+         {/*} <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="delivery_fee">Taxa de entrega</C.Label>
               <C.Input
@@ -199,7 +199,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
               />
             </C.FormColumn>
 
-          </C.FormRow>
+          </C.FormRow>{*/}
 
 
 

@@ -260,7 +260,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
               />
             </C.FormColumn>
           </C.FormRow>
-
+  {/*
 
           <C.FormRow>
             <C.FormColumn>
@@ -276,7 +276,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
 
           </C.FormRow>
          
-         {/* <C.FormRow>
+        <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="usa_Status">Usa status da loja</C.Label>
               <C.Input

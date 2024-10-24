@@ -77,23 +77,23 @@ const Catalogo = () => {
     }
   };
 
-    // Função para alternar o status de uma categoria específica
-    const toggleProdutoStatus = async (produtoId) => {
-      try {
-        const produtoToUpdate = produtos.find((produto) => produto.id === produtoId);
-        const newStatus = produtoToUpdate.status === "ativo" ? "inativo" : "ativo";
-  
-        setProdutos((prevProdutos) =>
-          prevProdutos.map((produto) =>
-            produto.id === produtoId ? { ...produto, status: newStatus } : produto
-          )
-        );
-  
-        await changeProductStatus(produtoId, newStatus === "ativo");
-      } catch (error) {
-        console.error("Erro ao atualizar status da categoria:", error);
-      }
-    };
+  // Função para alternar o status de uma categoria específica
+  const toggleProdutoStatus = async (produtoId) => {
+    try {
+      const produtoToUpdate = produtos.find((produto) => produto.id === produtoId);
+      const newStatus = produtoToUpdate.status === "ativo" ? "inativo" : "ativo";
+
+      setProdutos((prevProdutos) =>
+        prevProdutos.map((produto) =>
+          produto.id === produtoId ? { ...produto, status: newStatus } : produto
+        )
+      );
+
+      await changeProductStatus(produtoId, newStatus === "ativo");
+    } catch (error) {
+      console.error("Erro ao atualizar status da categoria:", error);
+    }
+  };
 
   // Alternar visibilidade da lista de produtos por categoria
   const toggleCategoriaExpansion = (categoriaId) => {
@@ -262,21 +262,21 @@ const Catalogo = () => {
       <Navbar />
       <C.Title>Meu catálogo</C.Title>
 
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: "50vw"}}>
-  <div style={{ marginRight: "20px"}}>
-    {!isReorderMode && (
-      <C.CreateButton onClick={() => setIsCriarCategoriaModalOpen(true)}>
-        Nova Categoria
-      </C.CreateButton>
-    )}
-  </div>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: "50vw" }}>
+        <div style={{ marginRight: "20px" }}>
+          {!isReorderMode && (
+            <C.CreateButton onClick={() => setIsCriarCategoriaModalOpen(true)}>
+              Nova Categoria
+            </C.CreateButton>
+          )}
+        </div>
 
-  <div style={{ marginLeft: "20px"}}>
-    <C.ReorderButton onClick={() => setIsReorderMode(!isReorderMode)}>
-      {isReorderMode ? "Salvar Ordem" : "Reordenar categorias"}
-    </C.ReorderButton>
-  </div>
-</div>
+        <div style={{ marginLeft: "20px" }}>
+          <C.ReorderButton onClick={() => setIsReorderMode(!isReorderMode)}>
+            {isReorderMode ? "Salvar Ordem" : "Reordenar categorias"}
+          </C.ReorderButton>
+        </div>
+      </div>
 
 
 
@@ -286,9 +286,9 @@ const Catalogo = () => {
             {(provided) => (
               <C.CategoriaList {...provided.droppableProps} ref={provided.innerRef}>
                 {categorias
-                  .sort((a, b) => a.catalog_order - b.catalog_order)
-                  .map((categoria, catalog_order) => (
-                    <Draggable key={categoria.id} draggableId={String(categoria.catalog_order)} index={catalog_order}>
+                  .sort((a, b) => (a.catalog_order || 0) - (b.catalog_order || 0))
+                  .map((categoria, index) => (
+                    <Draggable key={categoria.id} draggableId={String(categoria.catalog_order || index)} index={index}>
                       {(provided) => (
                         <C.Card
                           ref={provided.innerRef}
@@ -305,6 +305,7 @@ const Catalogo = () => {
                       )}
                     </Draggable>
                   ))}
+
                 {provided.placeholder}
               </C.CategoriaList>
             )}
@@ -342,26 +343,30 @@ const Catalogo = () => {
                 <C.ProdutoList>
                   {getProdutosByCategoria(categoria.id).map((produto) => (
                     <C.ProdutoActions key={produto.id}>
-                      <C.ProdutoItem>{produto.titulo}</C.ProdutoItem>
-                      
-                        <C.EditImageButton onClick={() => openCriarFotosProdutoModal(produto)}>
-                          <FaImages />
-                        </C.EditImageButton>
-                        <C.EditProductButton onClick={() => openEditarProdutoModal(produto, categoria)}>
-                          <FaEdit />
-                        </C.EditProductButton>
-                        <C.TrashButton onClick={() => openDeleteProdutoModal(produto)}>
-                          <FaTrashAlt />
-                        </C.TrashButton>
-                        <C.ToggleSwitch>
-                    <input
-                      type="checkbox"
-                      checked={produto.status === "ativo"}
-                      onChange={() => toggleProdutoStatus(produto.id)}
-                    />
-                    <C.Slider />
-                  </C.ToggleSwitch>
+                      <C.ProdutoItem>{produto.titulo} <br />
+                        <C.ProdutoOperations> {/* Novo contêiner para as operações */}
+                          <C.EditImageButton onClick={() => openCriarFotosProdutoModal(produto)}>
+                            <FaImages />
+                          </C.EditImageButton>
+                          <C.EditProductButton onClick={() => openEditarProdutoModal(produto, categoria)}>
+                            <FaEdit />
+                          </C.EditProductButton>
+                          <C.TrashButton onClick={() => openDeleteProdutoModal(produto)}>
+                            <FaTrashAlt />
+                          </C.TrashButton>
+                          <C.ToggleSwitch>
+                            <input
+                              type="checkbox"
+                              checked={produto.status === "ativo"}
+                              onChange={() => toggleProdutoStatus(produto.id)}
+                            />
+                            <C.Slider />
+                          </C.ToggleSwitch>
+
+                        </C.ProdutoOperations>
+                      </C.ProdutoItem>
                     </C.ProdutoActions>
+
                   ))}
                   <C.CreateButton onClick={() => openCriarProdutoModal(categoria)}>+</C.CreateButton>
                 </C.ProdutoList>

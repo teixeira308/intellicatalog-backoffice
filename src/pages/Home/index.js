@@ -12,19 +12,25 @@ const Home = () => {
         <C.Step>
           <C.StepTitle>1. Crie suas categorias</C.StepTitle>
           <C.StepDescription>
-          Instrução 1
+          Entre no menu catálogo e crie sua primeira categoria.
           </C.StepDescription>
         </C.Step>
         <C.Step>
           <C.StepTitle>2. Registre seu produtos</C.StepTitle>
           <C.StepDescription>
-          Instrução 2
+          Após criar sua primeira categoria, registre seu produto e adicione imagens.
           </C.StepDescription>
         </C.Step>
         <C.Step>
           <C.StepTitle>3. Administre seu catalogo online</C.StepTitle>
           <C.StepDescription>
-          Instrução 3
+          Controle quais produtos estão disponíveis e a ordem das categorias no seu catálogo.
+          </C.StepDescription>
+        </C.Step>
+        <C.Step>
+          <C.StepTitle>4. Administre sua loja</C.StepTitle>
+          <C.StepDescription>
+          Personalize seu catálogo e receba os pedidos no whatsapp.
           </C.StepDescription>
         </C.Step>
       </C.Section>

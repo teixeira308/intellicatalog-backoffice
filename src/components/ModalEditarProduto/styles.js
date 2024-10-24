@@ -81,6 +81,19 @@ export const Input = styled.input`
   font-size: 1rem;
 `;
 
+export const Textarea = styled.textarea`
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  width: 100%; // Ajusta a largura para 100% do contêiner pai
+`;
+
+
+
+
+
+
 // Estilos para o botão de submit
 export const Button = styled.button`
   padding: 10px 15px;
