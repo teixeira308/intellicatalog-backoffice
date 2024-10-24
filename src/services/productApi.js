@@ -7,7 +7,8 @@ const ProductApi = () => {
   const navigate = useNavigate();
 
   const getProducts = async () => {
-    const response = await fetch("http://localhost:3000/intellicatalog/v1/products", {
+    
+    const response = await fetch(`http://localhost:3000/intellicatalog/v1/products/${user.userId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -128,12 +129,40 @@ const ProductApi = () => {
 
   }
 
+  
+  const updateProductOrder = async(produtos) =>{
+
+    console.log(produtos);
+    const response = await fetch(`http://localhost:3000/intellicatalog/v1/products/reorder`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?.token}`,
+      },
+      body: JSON.stringify(produtos),
+    });
+  
+    if (response.status === 401) {
+      // Redireciona para a tela de login
+      navigate('/login');
+  }
+  
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Erro ao atualizar produto");
+    }
+  
+    return await response.json();
+
+  }
+
   return {
     getProducts,
     deleteProduto,
     createProduto,
     updateProduto,
-    changeProductStatus
+    changeProductStatus,
+    updateProductOrder
   };
 }
 

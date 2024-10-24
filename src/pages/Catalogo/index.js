@@ -18,7 +18,7 @@ const Catalogo = () => {
   const [categorias, setCategorias] = useState([]);
   const [produtos, setProdutos] = useState([]);
   const { getCategorias, changeStatus, deleteCategoria, updateCategoriaOrder } = categoriaApi();
-  const { getProducts, deleteProduto, changeProductStatus } = productApi();
+  const { getProducts, deleteProduto, changeProductStatus, updateProductOrder } = productApi();
   const [selectedCategoria, setSelectedCategoria] = useState(null);
   const [expandedCategorias, setExpandedCategorias] = useState([]); // Para controlar categorias expandidas
   const [isEditarCategoriaModalOpen, setIsEditarCategoriaModalOpen] = useState(false);
@@ -35,6 +35,8 @@ const Catalogo = () => {
   const [selectedProduto, setSelectedProduto] = useState(null);
 
   const [isReorderMode, setIsReorderMode] = useState(false); // Estado para o modo de reordenação
+
+  
 
 
   useEffect(() => {
@@ -254,6 +256,7 @@ const Catalogo = () => {
       console.error("Erro ao atualizar a ordem das categorias:", error);
     }
   };
+
 
 
 
