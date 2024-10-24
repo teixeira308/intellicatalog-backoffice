@@ -132,14 +132,21 @@ const ProductApi = () => {
   
   const updateProductOrder = async(produtos) =>{
 
-    console.log(produtos);
+    // Estrutura do JSON esperado pelo backend
+    const payload = {
+      produtos: produtos.map((produto, index) => ({
+        id: produto.id,        // ID da categoria
+        product_order: index + 1 // Nova ordem (dependendo se começa com 1 ou 0)
+      }))
+    };
+    console.log("nova ordem:",payload);
     const response = await fetch(`http://localhost:3000/intellicatalog/v1/products/reorder`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${user?.token}`,
       },
-      body: JSON.stringify(produtos),
+      body: JSON.stringify(payload),
     });
   
     if (response.status === 401) {
@@ -150,9 +157,10 @@ const ProductApi = () => {
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.message || "Erro ao atualizar produto");
+    } else{
+      return response;
     }
-  
-    return await response.json();
+   
 
   }
 

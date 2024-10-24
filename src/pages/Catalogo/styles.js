@@ -219,6 +219,18 @@ export const CreateButton = styled.button`
   }
 `;
 
+export const ReorderButtonProducts = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2196f3;
+  font-size: 13px;
+
+  &:hover {
+    color: #1769aa;
+  }
+`;
+
 export const ReorderButton = styled.button`
   background: none;
   border: none;
@@ -275,3 +287,17 @@ export const ProdutoOperations = styled.div`
   gap: 45px; // Aumenta o espaçamento entre os botões (pode ajustar o valor conforme necessário)
   margin-top: 9px; // Espaço acima dos botões
 `;
+
+
+  export const ProdutoItemOrderChange = styled.div`
+  display: flex;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    color: #333;
+    justify-content: space-between;
+  
+    &:last-child {
+      border-bottom: none;
+    }
+  `;
