@@ -139,7 +139,7 @@ const ProductApi = () => {
         product_order: index + 1 // Nova ordem (dependendo se começa com 1 ou 0)
       }))
     };
-    console.log("nova ordem:",payload);
+    //console.log("nova ordem:",payload);
     const response = await fetch(`http://localhost:3000/intellicatalog/v1/products/reorder`, {
       method: "PUT",
       headers: {

@@ -266,7 +266,7 @@ const Catalogo = () => {
     const [reorderedItem] = produtosDaCategoria.splice(sourceIndex, 1);
     produtosDaCategoria.splice(destinationIndex, 0, reorderedItem);
 
-    console.log(produtosDaCategoria)
+    //console.log(produtosDaCategoria)
     try {
         const response = await updateProductOrder(produtosDaCategoria);
 
