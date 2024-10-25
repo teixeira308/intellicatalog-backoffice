@@ -191,8 +191,6 @@ const Catalogo = () => {
     }
   };
 
-
-
   const handlCriarProdutoModalClose = async () => {
     setIsCriarProdutoModalOpen(false);
     setSelectedCategoria(null);
@@ -244,7 +242,6 @@ const Catalogo = () => {
     try {
       // Enviar nova ordem para o backend
       const response = await updateCategoriaOrder(reorderedCategorias);
-
       if (response.status === 200) {
         const data = await getCategorias();
         setCategorias(data.data);
@@ -259,36 +256,32 @@ const Catalogo = () => {
   };
 
 
-  const handleProductOnDragEnd = async (result) => {
+  const handleProductOnDragEnd = async (result, categoriaId) => {
     if (!result.destination) return;
 
-    // Índices de origem e destino vindos do drag-and-drop (começam de 0)
     const sourceIndex = result.source.index;
     const destinationIndex = result.destination.index;
-    // Cria uma cópia do array de categorias
-    const reorderedProdutos = [...produtos];
-    console.log("ordem original:", produtos)
-    // Remove o item da posição inicial
-    const [reorderedItem] = reorderedProdutos.splice(sourceIndex, 1);
-    // Insere o item na nova posição
-    reorderedProdutos.splice(destinationIndex, 0, reorderedItem);
-    console.log("ordem nova:", reorderedProdutos);
-    try {
-      // Enviar nova ordem para o backend
-      const response = await updateProductOrder(reorderedProdutos);
 
-      if (response.status === 200) {
-        const data = await getProducts();
-        setProdutos(data.data);
-        //console.log("Categorias reatualizadas do backend:", data.data);
-        setIsReorderProductMode(false)
-      } else {
-        console.error("Erro inesperado ao atualizar a ordem dos produtos:", response.status);
-      }
+    const produtosDaCategoria = getProdutosByCategoria(categoriaId);
+    const [reorderedItem] = produtosDaCategoria.splice(sourceIndex, 1);
+    produtosDaCategoria.splice(destinationIndex, 0, reorderedItem);
+
+    console.log(produtosDaCategoria)
+    try {
+        const response = await updateProductOrder(produtosDaCategoria);
+
+        if (response.status === 200) {
+            const data = await getProducts();
+            setProdutos(data.data);
+            setIsReorderProductMode(false);
+        } else {
+            console.error("Erro inesperado ao atualizar a ordem dos produtos:", response.status);
+        }
     } catch (error) {
-      console.error("Erro ao atualizar a ordem dos produtos:", error);
+        console.error("Erro ao atualizar a ordem dos produtos:", error);
     }
-  };
+};
+
 
 
   return (
@@ -332,7 +325,7 @@ const Catalogo = () => {
                           <C.StatusWrapper>
                             <C.CategoriaLink>{categoria.name}</C.CategoriaLink>
                             <C.ActionsWrapper>
-                              <FaArrowsAlt style={{color: "blue"}}/>
+                              <FaArrowsAlt style={{ color: "blue" }} />
                             </C.ActionsWrapper>
                           </C.StatusWrapper>
                         </C.Card>
@@ -376,38 +369,36 @@ const Catalogo = () => {
               {expandedCategorias.includes(categoria.id) && (
                 <C.ProdutoList>
                   {isReorderProductMode ? (
-                    <DragDropContext onDragEnd={handleProductOnDragEnd}>
-                      <Droppable droppableId="produtos">
+                   <DragDropContext onDragEnd={(result) => handleProductOnDragEnd(result, categoria.id)}>
+                      <Droppable droppableId={`produtos-${categoria.id}`}>
                         {(provided) => (
                           <div
                             ref={provided.innerRef}
                             {...provided.droppableProps}
                             className="product-list"
                           >
-                            {produtos
-                             .sort((a, b) => (a.product_order || 0) - (b.product_order || 0))
-                            .map((produto, index) => (
-                              <Draggable
-                                key={produto.id}
-                                draggableId={produto.id.toString()}
-                                index={index}
-                              >
-                                {(provided) => (
-                                  <C.ProdutoActions
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                  >
-                                    <C.ProdutoItemOrderChange>
-                                      {produto.titulo} 
-                                       
-                                        <FaArrowsAlt style={{color: "blue"}}/> {/* Exibe ícone de mover */}
-                                       
-                                    </C.ProdutoItemOrderChange>
-                                  </C.ProdutoActions>
-                                )}
-                              </Draggable>
-                            ))}
+                            {getProdutosByCategoria(categoria.id)
+                              .sort((a, b) => (a.product_order || 0) - (b.product_order || 0))
+                              .map((produto, index) => (
+                                <Draggable
+                                  key={produto.id}
+                                  draggableId={`produto-${produto.id}`}
+                                  index={index}
+                                >
+                                  {(provided) => (
+                                    <C.ProdutoActions
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                    >
+                                      <C.ProdutoItemOrderChange>
+                                        {produto.titulo}
+                                        <FaArrowsAlt style={{ color: "blue" }} />
+                                      </C.ProdutoItemOrderChange>
+                                    </C.ProdutoActions>
+                                  )}
+                                </Draggable>
+                              ))}
                             {provided.placeholder}
                           </div>
                         )}
@@ -415,7 +406,6 @@ const Catalogo = () => {
                     </DragDropContext>
                   ) : (
                     getProdutosByCategoria(categoria.id)
-                      .sort((a, b) => (a.product_order || 0) - (b.product_order || 0))
                       .map((produto) => (
                         <C.ProdutoActions key={produto.id}>
                           <C.ProdutoItem>
@@ -443,14 +433,15 @@ const Catalogo = () => {
                         </C.ProdutoActions>
                       ))
                   )}
-                  <div style={{display:"flex", justifyContent: "space-between"}}>
-                  <C.CreateButton onClick={() => openCriarProdutoModal(categoria)}>+</C.CreateButton> <br />
-                  <C.ReorderButtonProducts onClick={() => setIsReorderProductMode(!isReorderProductMode)}>
-                    {isReorderProductMode ? "Salvar Ordem" : "Reordenar produtos"}
-                  </C.ReorderButtonProducts>
+                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <C.CreateButton onClick={() => openCriarProdutoModal(categoria)}>+</C.CreateButton> <br />
+                    <C.ReorderButtonProducts onClick={() => setIsReorderProductMode(!isReorderProductMode)}>
+                      {isReorderProductMode ? "Salvar Ordem" : "Reordenar produtos"}
+                    </C.ReorderButtonProducts>
                   </div>
                 </C.ProdutoList>
               )}
+
 
 
             </C.Card>
