@@ -7,6 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
   height: 100vh;
   gap: 20px;
+  
 `;
 
 
@@ -17,14 +18,14 @@ export const Title = styled.h2``;
 
 export const Card = styled.div`
   display: flex;
-  justify-content: space-between; /* Distribui os itens nos extremos */
+  justify-content: space-evenly; /* Distribui os itens nos extremos */
   align-items: center; /* Centraliza verticalmente */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   width: 97%;
   font-size: 20px;
   padding: 20px 20px;
-
+  max-width: 800px;
   font-size:17px;
   &:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);

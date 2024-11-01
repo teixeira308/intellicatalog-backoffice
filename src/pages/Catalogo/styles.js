@@ -17,15 +17,11 @@ export const Title = styled.h2``;
 
 
 export const Card = styled.div`
-
-
   width: 97%;
   font-size: 20px;
   padding: 20px 20px;
-
+  max-width: 800px;
   font-size:17px;
-  
- 
   display: flex;
   flex-direction: column;  /* Organiza os itens verticalmente */
   padding: 20px;
@@ -179,7 +175,7 @@ export const ProdutoActions = styled.div`
   margin-bottom: 10px; // Espaço abaixo do contêiner, se desejado
 `;
 
- 
+
 
 export const ToggleLink = styled.span`
   cursor: pointer;
@@ -204,15 +200,15 @@ export const CategoriaLink = styled.span`
   }
 `;
 
- 
 
- 
+
+
 export const CreateButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
   color: #2196f3;
-  font-size: 20px;
+  font-size: 13px;
 
   &:hover {
     color: #1769aa;
@@ -269,7 +265,7 @@ export const CategoriaDraggingOver = styled.div`
   border-radius: 5px;
   margin-bottom: 10px;
 `;
- 
+
 
 export const ProdutoItem = styled.li`
   padding: 10px;
@@ -289,7 +285,7 @@ export const ProdutoOperations = styled.div`
 `;
 
 
-  export const ProdutoItemOrderChange = styled.div`
+export const ProdutoItemOrderChange = styled.div`
   display: flex;
     padding: 10px;
     border-bottom: 1px solid #ddd;
@@ -301,3 +297,23 @@ export const ProdutoOperations = styled.div`
       border-bottom: none;
     }
   `;
+
+  export const WhatsappButton = styled.a`
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366;
+  color: white;
+  border-radius: 50%;
+  padding: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  
+  &:hover {
+    background-color: #128C7E;
+  }
+`;

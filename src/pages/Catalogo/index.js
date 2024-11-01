@@ -11,7 +11,7 @@ import CriarProdutoModal from "../../components/ModalCriarProduto/CriarProdutoMo
 import EditarProdutoModal from "../../components/ModalEditarProduto/EditarProdutoModal";
 import CriarFotosProdutoModal from "../../components/ModalCriarFotosProduto/CriarFotosProdutoModal";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit } from 'react-icons/fa'; // Ícone de lápis
+import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit,FaWhatsapp } from 'react-icons/fa'; // Ícone de lápis
 
 
 const Catalogo = () => {
@@ -434,7 +434,7 @@ const Catalogo = () => {
                       ))
                   )}
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <C.CreateButton onClick={() => openCriarProdutoModal(categoria)}>+</C.CreateButton> <br />
+                    <C.CreateButton onClick={() => openCriarProdutoModal(categoria)}>Novo Produto</C.CreateButton> <br />
                     <C.ReorderButtonProducts onClick={() => setIsReorderProductMode(!isReorderProductMode)}>
                       {isReorderProductMode ? "Salvar Ordem" : "Reordenar produtos"}
                     </C.ReorderButtonProducts>
@@ -498,7 +498,7 @@ const Catalogo = () => {
         produto={selectedProduto}
         onCreate={handleNewFotoProdutoCreated}
       />
-
+      
     </C.Container>
   );
 };

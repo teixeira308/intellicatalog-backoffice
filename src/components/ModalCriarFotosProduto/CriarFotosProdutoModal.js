@@ -16,7 +16,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
     if (isOpen && produto) {
       try {
         const fotos = await getFotoByProduto(produto); // Busca todas as fotos do produto
-       
+
 
         // Gera URLs para cada imagem junto com o ID
         const fotosUrls = await Promise.all(
@@ -32,7 +32,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
         console.error("Erro ao buscar fotos:", error);
       }
     }
-  }; 
+  };
 
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
       if (isOpen && produto) {
         try {
           const fotos = await getFotoByProduto(produto); // Busca todas as fotos do produto
-          
+
 
           // Gera URLs para cada imagem junto com o ID
           const fotosUrls = await Promise.all(
@@ -97,9 +97,9 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
       // Após criar a foto, recarregar as imagens do produto
       loadProductImages();
 
-    
-     handleClose();
-     onCreate();
+
+      handleClose();
+      onCreate();
     } catch (error) {
       console.error("Erro ao criar foto:", error);
     }
@@ -111,7 +111,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
     try {
       // Chame a API para deletar a imagem pelo ID
       await deleteFotoByProduto(id);
-  
+
       // Atualize o estado para remover a imagem da interface
       setImageUrls((prevImages) => prevImages.filter((item) => item.id !== id));
     } catch (error) {
@@ -119,7 +119,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
     }
   };
 
-  
+
   return (
     <C.ModalOverlay>
       <C.ModalContainer>
@@ -156,7 +156,6 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
                 id="description"
                 value={formData.description}
                 onChange={handleChange}
-                required
               />
             </C.FormColumn>
           </C.FormRow>
@@ -166,15 +165,20 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
           {/* Exibir todas as imagens do produto */}
           {imageUrls && (
             <C.ImageGallery>
-              {imageUrls.map((item,index) => (
+              {imageUrls.map((item, index) => (
                 <C.ImagePreview key={index}> {/* Use o id como chave */}
                   <img src={item.url} alt={`Foto do Produto ${produto.titulo}`} />
                   <C.DeleteButton onClick={() => handleDeleteImage(item.id)}>✖</C.DeleteButton> {/* Passa o id para a função de deletar */}
+
                 </C.ImagePreview>
+
               ))}
             </C.ImageGallery>
           )}
         </C.ModalForm>
+        <C.InfoText> {/* Estilize conforme necessário */}
+          A primaira imagem será a capa que aparecerá na lista de produtos.
+        </C.InfoText>
       </C.ModalContainer>
     </C.ModalOverlay>
   );

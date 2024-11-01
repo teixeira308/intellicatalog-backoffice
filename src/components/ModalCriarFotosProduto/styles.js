@@ -144,10 +144,16 @@ export const ImagePreview = styled.div`
   overflow: hidden; /* Para esconder partes excedentes da imagem */
   border-radius: 5px; /* Bordas arredondadas */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para a imagem */
-
+position: relative;
   img {
     width: 100%; /* Ajusta a imagem para ocupar o container */
     height: 100%; /* Ajusta a altura para ocupar o container */
     object-fit: cover; /* Garante que a imagem seja recortada proporcionalmente */
   }
+`;
+export const InfoText = styled.p`
+  font-size: 12px; /* Ajuste o tamanho da fonte conforme necessário */
+  color: #666; /* Cor do texto informativo */
+  text-align: center; /* Centraliza o texto */
+  margin-top: 5px; /* Espaço acima do texto */
 `;

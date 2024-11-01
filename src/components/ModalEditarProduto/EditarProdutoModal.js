@@ -143,7 +143,7 @@ const EditarLojaModal = ({ isOpen, onClose, produto, categoria, onEdit }) => {
                 id="description"
                 value={formData.description}
                 onChange={handleChange}
-                maxLength={100} // Limita a 100 caracteres
+                maxLength={500} // Limita a 100 caracteres
                 rows={4} // Define o número de linhas visíveis
                 placeholder="Digite sua descrição aqui..."
               />
