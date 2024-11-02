@@ -5,9 +5,10 @@ import { useNavigate } from 'react-router-dom';
 const LojaApi = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const api_url = process.env.REACT_APP_API;
 
   const getStores = async () => {
-    const response = await fetch("http://localhost:3000/intellicatalog/v1/stores/", {
+    const response = await fetch(`${api_url}/intellicatalog/v1/stores/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +30,7 @@ const LojaApi = () => {
 
     const newStatus = { "status": isOpen ? "Aberta" : "Fechada" }
 
-    const response = await fetch(`http://localhost:3000/intellicatalog/v1/stores/${id}`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/stores/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +55,7 @@ const LojaApi = () => {
 
   const updateLoja = async (id, loja) => {
 
-    const response = await fetch(`http://localhost:3000/intellicatalog/v1/stores/${id}`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/stores/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -76,7 +77,7 @@ const LojaApi = () => {
   }
 
   const getLojaConfig = async (store) => {
-    const response = await fetch(`http://localhost:3000/intellicatalog/v1/stores/${store.id}/config`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/stores/${store.id}/config`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -97,7 +98,7 @@ const LojaApi = () => {
   const updateLojaConfig = async (id, loja) => {
     console.log(loja);
 
-    const response = await fetch(`http://localhost:3000/intellicatalog/v1/stores/${id}/config`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/stores/${id}/config`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

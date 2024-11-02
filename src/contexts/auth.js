@@ -4,6 +4,7 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const api_url = process.env.REACT_APP_API;
 
   // Carregar o usuário do localStorage quando o componente monta
   useEffect(() => {
@@ -14,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const signin = (email, password) => {
-    return fetch("http://localhost:3000/intellicatalog/v1/users/login", {
+    return fetch(`${api_url}/intellicatalog/v1/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -5,10 +5,11 @@ import { useNavigate } from 'react-router-dom';
 const ProductApi = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const api_url = process.env.REACT_APP_API;
 
   const getProducts = async () => {
     
-    const response = await fetch(`http://localhost:3000/intellicatalog/v1/products/${user.userId}`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/products/${user.userId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +28,7 @@ const ProductApi = () => {
   }
 
   const deleteProduto = async (produto) => {
-    const response = await fetch(`http://localhost:3000/intellicatalog/v1/products/${produto.id}`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/products/${produto.id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${user?.token}`,
@@ -56,7 +57,7 @@ const ProductApi = () => {
       category_id: categoriaId
     };
    
-    const response = await fetch(`http://localhost:3000/intellicatalog/v1/products`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +81,7 @@ const ProductApi = () => {
 
   const updateProduto = async(id,produto) =>{
 
-    const response = await fetch(`http://localhost:3000/intellicatalog/v1/products/${id}`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/products/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -106,7 +107,7 @@ const ProductApi = () => {
   const changeProductStatus = async(productId, status) => {
     console.log(productId)
     const newStatus = { "status": status ? "ativo" : "inativo" }
-    const response = await fetch(`http://localhost:3000/intellicatalog/v1/products/${productId}`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/products/${productId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -140,7 +141,7 @@ const ProductApi = () => {
       }))
     };
     //console.log("nova ordem:",payload);
-    const response = await fetch(`http://localhost:3000/intellicatalog/v1/products/reorder`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/products/reorder`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom';
 const CategoriaApi = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  const api_url = process.env.REACT_APP_API;
 
   const getCategorias = async () => {
 
-    const response = await fetch(`http://localhost:3000/intellicatalog/v1/categories/users/${user.userId}`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/categories/users/${user.userId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +31,7 @@ const CategoriaApi = () => {
   const changeStatus = async (id, isOpen) => {
     const newStatus = { "status": isOpen ? "ativo" : "inativo" }
 
-    const response = await fetch(`http://localhost:3000/intellicatalog/v1/categories/${id}`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/categories/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +54,7 @@ const CategoriaApi = () => {
   }
 
   const updateCategoria = async (id, categoria) => {
-    const response = await fetch(`http://localhost:3000/intellicatalog/v1/categories/${id}`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/categories/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +85,7 @@ const CategoriaApi = () => {
     };
 
 
-    const response = await fetch(`http://localhost:3000/intellicatalog/v1/categories`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/categories`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -109,7 +109,7 @@ const CategoriaApi = () => {
   }
 
   const deleteCategoria = async (categoria) => {
-    const response = await fetch(`http://localhost:3000/intellicatalog/v1/categories/${categoria.id}`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/categories/${categoria.id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${user?.token}`,
@@ -142,7 +142,7 @@ const CategoriaApi = () => {
 
       console.log(JSON.stringify(payload))
       // Fazer requisição para atualizar a ordem das categorias
-      const response = await fetch(`http://localhost:3000/intellicatalog/v1/categories/reorder`, {
+      const response = await fetch(`${api_url}/intellicatalog/v1/categories/reorder`, {
         method: 'PUT',             // ou 'PUT', dependendo do backend
         headers: {
           'Content-Type': 'application/json', // Tipo de conteúdo esperado

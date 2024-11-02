@@ -5,12 +5,13 @@ import { useNavigate } from 'react-router-dom';
 const ProductImageApi = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
+    const api_url = process.env.REACT_APP_API;
 
     const createFotoProduto = async (product, photo) => {
         
         try {
 
-            const response = await fetch(`http://localhost:3000/intellicatalog/v1/products/${product.id}/products_images/upload`, {
+            const response = await fetch(`${api_url}/intellicatalog/v1/products/${product.id}/products_images/upload`, {
                 method: "POST",
                 headers: {
                     'Access-Control-Allow-Origin': '*',
@@ -40,7 +41,7 @@ const ProductImageApi = () => {
     }
 
     const getFotoProdutoDownload = async (product, photo) => {
-        const response = await fetch(`http://localhost:3000/intellicatalog/v1/products/${product.id}/products_images/download?arquivo=${photo.nomearquivo}`, {
+        const response = await fetch(`${api_url}/intellicatalog/v1/products/${product.id}/products_images/download?arquivo=${photo.nomearquivo}`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${user?.token}`
@@ -66,7 +67,7 @@ const ProductImageApi = () => {
 
     const getFotoByProduto = async (product) => {
 
-        const response = await fetch(`http://localhost:3000/intellicatalog/v1/products/${product.id}/products_images`, {
+        const response = await fetch(`${api_url}/intellicatalog/v1/products/${product.id}/products_images`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -86,7 +87,7 @@ const ProductImageApi = () => {
 
     const deleteFotoByProduto = async(fotoId) =>{
 
-        const response = await fetch(`http://localhost:3000/intellicatalog/v1/products/${fotoId}/products_images`, {
+        const response = await fetch(`${api_url}/intellicatalog/v1/products/${fotoId}/products_images`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${user?.token}`,

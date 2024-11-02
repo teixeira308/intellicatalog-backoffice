@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom';
 const LojaImageApi = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
-
+    const api_url = process.env.REACT_APP_API;
     
     const createFotoStore = async (store, photo) => {
         
         try {
 
-            const response = await fetch(`http://localhost:3000/intellicatalog/v1/stores/${store.id}/store_images/upload`, {
+            const response = await fetch(`${api_url}/intellicatalog/v1/stores/${store.id}/store_images/upload`, {
                 method: "POST",
                 headers: {
                     'Access-Control-Allow-Origin': '*',
@@ -42,7 +42,7 @@ const LojaImageApi = () => {
 
     const deleteFotoByStore = async(storeId,storeImageId) =>{
 
-        const response = await fetch(`http://localhost:3000/intellicatalog/v1/stores/${storeId}/store_images/${storeImageId}`, {
+        const response = await fetch(`${api_url}/intellicatalog/v1/stores/${storeId}/store_images/${storeImageId}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${user?.token}`,
@@ -63,7 +63,7 @@ const LojaImageApi = () => {
 
     const getFotoByStoreId = async (store) => {
         console.log("store de dentro: ",store.id)
-        const response = await fetch(`http://localhost:3000/intellicatalog/v1/stores/${store.id}/store_images`, {
+        const response = await fetch(`${api_url}/intellicatalog/v1/stores/${store.id}/store_images`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -82,7 +82,7 @@ const LojaImageApi = () => {
     }
     const getFotoByStore = async (store, store_image_id) => {
 
-        const response = await fetch(`http://localhost:3000/intellicatalog/v1/stores/${store.id}/store_images${store_image_id}`, {
+        const response = await fetch(`${api_url}/intellicatalog/v1/stores/${store.id}/store_images${store_image_id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const LojaImageApi = () => {
 
     const getFotoByUserId = async () => {  
         
-        const response = await fetch(`http://localhost:3000/intellicatalog/v1/stores/store_images/user/${user.userId}`, {
+        const response = await fetch(`${api_url}/intellicatalog/v1/stores/store_images/user/${user.userId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -124,7 +124,7 @@ const LojaImageApi = () => {
     
 
     const getFotoStoreDownload = async (photo) => {
-        const response = await fetch(`http://localhost:3000/intellicatalog/v1/stores/${photo.store_id}/store_images/download?arquivo=${photo.nomearquivo}`, {
+        const response = await fetch(`${api_url}/intellicatalog/v1/stores/${photo.store_id}/store_images/download?arquivo=${photo.nomearquivo}`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${user?.token}`
