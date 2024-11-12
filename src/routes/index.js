@@ -24,15 +24,15 @@ const RoutesApp = () => {
     <BrowserRouter>
       <Fragment>
         <Routes>
-          <Route exact path="/b/home" element={<Private Item={Home} />} />
-          <Route exact path="/b/catalogo" element={<Private Item={Catalogo} />} />
-          <Route exact path="/b/demonstracao" element={<Private Item={Demonstracao} />} />
-          <Route exact path="/b/suporte" element={<Private Item={Suporte} />} />
-          <Route exact path="/b/tutorial" element={<Private Item={Tutorial} />} />
-          <Route exact path="/b/minhaloja" element={<Private Item={Loja} />} />
-          <Route exact path="/b/inteligencia" element={<Private Item={Inteligencia} />} />
-          <Route path="/b/" element={<Signin />} />
-          <Route exact path="/b/signup" element={<Signup />} />
+          <Route exact path="/home" element={<Private Item={Home} />} />
+          <Route exact path="/catalogo" element={<Private Item={Catalogo} />} />
+          <Route exact path="/demonstracao" element={<Private Item={Demonstracao} />} />
+          <Route exact path="/suporte" element={<Private Item={Suporte} />} />
+          <Route exact path="/tutorial" element={<Private Item={Tutorial} />} />
+          <Route exact path="/minhaloja" element={<Private Item={Loja} />} />
+          <Route exact path="/inteligencia" element={<Private Item={Inteligencia} />} />
+          <Route path="/" element={<Signin />} />
+          <Route exact path="/signup" element={<Signup />} />
           <Route path="*" element={<Signin />} />
         </Routes>
       </Fragment>
