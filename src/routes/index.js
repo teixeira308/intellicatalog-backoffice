@@ -21,7 +21,7 @@ const RoutesApp = () => {
 
   
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='/b'>
       <Fragment>
         <Routes>
           <Route exact path="/home" element={<Private Item={Home} />} />
