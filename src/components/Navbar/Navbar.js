@@ -20,14 +20,14 @@ const Navbar = () => {
         Intellicatalog
       </C.Logo>
       <C.NavLinks className={menuOpen ? 'open' : ''}>
-        <C.Link onClick={() => { navigate("/home"); setMenuOpen(false); }}>Inicio</C.Link>
-        <C.Link onClick={() => { navigate("/catalogo"); setMenuOpen(false); }}>Catalogo</C.Link>
-        <C.Link onClick={() => { navigate("/minhaloja"); setMenuOpen(false); }}>Minha Loja</C.Link>
-        <C.Link onClick={() => { navigate("/demonstracao"); setMenuOpen(false); }}>Demonstração</C.Link>
-        <C.Link onClick={() => { navigate("/inteligencia"); setMenuOpen(false); }}>Venda com IA</C.Link>  
-        <C.Link onClick={() => { navigate("/suporte"); setMenuOpen(false); }}>Suporte</C.Link>
-        <C.Link onClick={() => { navigate("/tutorial"); setMenuOpen(false); }}>Tutorial</C.Link>    
-        <C.Link onClick={() => [signout(), navigate("/")]}>Sair</C.Link>
+        <C.Link onClick={() => { navigate("/b/home"); setMenuOpen(false); }}>Inicio</C.Link>
+        <C.Link onClick={() => { navigate("/b/catalogo"); setMenuOpen(false); }}>Catalogo</C.Link>
+        <C.Link onClick={() => { navigate("/b/minhaloja"); setMenuOpen(false); }}>Minha Loja</C.Link>
+        <C.Link onClick={() => { navigate("/b/demonstracao"); setMenuOpen(false); }}>Demonstração</C.Link>
+        <C.Link onClick={() => { navigate("/b/inteligencia"); setMenuOpen(false); }}>Venda com IA</C.Link>  
+        <C.Link onClick={() => { navigate("/b/suporte"); setMenuOpen(false); }}>Suporte</C.Link>
+        <C.Link onClick={() => { navigate("/b/tutorial"); setMenuOpen(false); }}>Tutorial</C.Link>    
+        <C.Link onClick={() => [signout(), navigate("/b")]}>Sair</C.Link>
       </C.NavLinks>
       <C.Hamburger onClick={toggleMenu}>
         <C.Bar />
