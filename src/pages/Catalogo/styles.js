@@ -232,7 +232,7 @@ export const ReorderButton = styled.button`
   border: none;
   cursor: pointer;
   color: #2196f3;
-  font-size: 20px;
+  font-size: 13px;
 
   &:hover {
     color: #1769aa;
