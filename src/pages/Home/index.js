@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <C.Container>
       <Navbar />
-      <C.Title>Bem vindo ao Vitrinesmart</C.Title>
+      <C.Title>Bem vindo ao Vitrine Smart</C.Title>
       <C.Section>
         <C.Subtitle>Vamos começar?</C.Subtitle>
         <C.Step>

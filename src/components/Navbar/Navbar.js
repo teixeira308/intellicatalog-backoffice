@@ -17,7 +17,7 @@ const Navbar = () => {
     <C.Navbar>
       <C.Logo>
         <C.LogoImage src={logo} alt="Logo" />&nbsp;
-        Vitrinesmart
+        Vitrine Smart
       </C.Logo>
       <C.NavLinks className={menuOpen ? 'open' : ''}>
         <C.Link onClick={() => { navigate("/home"); setMenuOpen(false); }}>Inicio</C.Link>
