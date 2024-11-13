@@ -176,7 +176,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
                 id="description"
                 value={formData.description}
                 onChange={handleChange}
-                required
+                
                 disabled={imageStoreUrls.length > 0}
               />
             </C.FormColumn>
