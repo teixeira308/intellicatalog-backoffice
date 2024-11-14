@@ -158,3 +158,9 @@ export const Description = styled.p`
   color: #555;
   text-align: center;
 `;
+
+export const LoadingImage = styled.img`
+   width: 50px; /* Largura das imagens */
+  height: 50px; /* Altura das imagens */
+  background-color: #f10f10f10;  /* Cor de fundo leve */
+`;

@@ -142,7 +142,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
             {loading ? (
               <>
                 {/* Exibe o GIF de carregamento */}
-                <img src={loadingGif} alt="Carregando..." />
+                <C.LoadingImage src={loadingGif} alt="Carregando..." />
               </>
             ) : (
               <>
