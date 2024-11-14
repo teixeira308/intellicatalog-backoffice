@@ -163,4 +163,5 @@ export const LoadingImage = styled.img`
    width: 60px; /* Largura das imagens */
   height: 60px; /* Altura das imagens */
   background-color: #f10f10f10;  /* Cor de fundo leve */
+  justify-content: center;
 `;
