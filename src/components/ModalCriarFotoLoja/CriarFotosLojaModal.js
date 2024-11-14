@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import * as C from "./styles";
 import LojaImageApi from "../../services/lojaImageApi";
+import loadingGif from '../loading.gif';
 
 const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
   //const { createFotoProduto, getFotoProdutoDownload, getFotoByProduto, deleteFotoByProduto } = LojaImageApi();
   const { getFotoStoreDownload, getFotoByStoreId, getFotoByUserId, deleteFotoByStore, createFotoStore } = LojaImageApi();
   const [fotos, setFotos] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     file: null,
     description: "",
@@ -87,7 +89,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const formDataToSend = new FormData();
       formDataToSend.append("file", formData.file);
@@ -97,7 +99,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
 
       // Após criar a foto, recarregar as imagens do produto
       loadStoreImages();
-
+      setLoading(false);
       handleClose();
       onCreate();
     } catch (error) {
@@ -110,8 +112,8 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
   const handleDeleteImage = async (id) => {
     try {
       // Chame a API para deletar a imagem pelo ID
-      console.log("store-image-id: ",id)
-      console.log("store-id: ",store.id)
+      console.log("store-image-id: ", id)
+      console.log("store-id: ", store.id)
       await deleteFotoByStore(store.id, id);
 
       // Atualize o estado para remover a imagem da interface
@@ -136,21 +138,29 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
-           {/* Exibir todas as imagens do produto */}
-           {imageStoreUrls.length > 0 && (
-            <C.ImageGallery>
-              {imageStoreUrls.slice(0, 1).map((item) => ( // Exibe apenas a primeira imagem
-                <>
-                  <C.ImagePreview key={item.id}> {/* Use o id como chave */}
-                    <img src={item.url} alt={`Foto da Loja ${store.namestore}`} />
+            {/* Exibir todas as imagens do produto */}
+            {loading ? (
+              <>
+                {/* Exibe o GIF de carregamento */}
+                <img src={loadingGif} alt="Carregando..." />
+              </>
+            ) : (
+              <>
+                {imageStoreUrls.length > 0 && (
+                  <C.ImageGallery>
+                    {imageStoreUrls.slice(0, 1).map((item) => ( // Exibe apenas a primeira imagem
+                      <>
+                        <C.ImagePreview key={item.id}> {/* Use o id como chave */}
+                          <img src={item.url} alt={`Foto da Loja ${store.namestore}`} />
 
-                    <C.DeleteButton onClick={() => handleDeleteImage(item.id)}>✖</C.DeleteButton>
-                  </C.ImagePreview>
-                  <C.Description>{item.description}</C.Description>
-                </>
-              ))}
-            </C.ImageGallery>
-          )}
+                          <C.DeleteButton onClick={() => handleDeleteImage(item.id)}>✖</C.DeleteButton>
+                        </C.ImagePreview>
+                        <C.Description>{item.description}</C.Description>
+                      </>
+                    ))}
+                  </C.ImageGallery>
+                )}
+              </>)}
           </C.FormRow>
           <C.FormRow>
             <C.Label htmlFor="file">Escolha a foto:</C.Label>
@@ -176,7 +186,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
                 id="description"
                 value={formData.description}
                 onChange={handleChange}
-                
+
                 disabled={imageStoreUrls.length > 0}
               />
             </C.FormColumn>
@@ -184,7 +194,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
 
           <C.Button type="submit">Salvar</C.Button>
 
-         
+
         </C.ModalForm>
       </C.ModalContainer>
     </C.ModalOverlay>
