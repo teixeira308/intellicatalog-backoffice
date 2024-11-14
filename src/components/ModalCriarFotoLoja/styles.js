@@ -160,7 +160,7 @@ export const Description = styled.p`
 `;
 
 export const LoadingImage = styled.img`
-   width: 10px; /* Largura das imagens */
-  height: 10px; /* Altura das imagens */
+   width: 30px; /* Largura das imagens */
+  height: 30px; /* Altura das imagens */
   background-color: #f10f10f10;  /* Cor de fundo leve */
 `;
