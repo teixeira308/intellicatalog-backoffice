@@ -157,3 +157,11 @@ export const InfoText = styled.p`
   text-align: center; /* Centraliza o texto */
   margin-top: 5px; /* Espaço acima do texto */
 `;
+
+
+export const LoadingImage = styled.img`
+   width: 50%; /* Largura das imagens */
+  height: 50%; /* Altura das imagens */
+  background-color: #f10f10f10;  /* Cor de fundo leve */
+  justify-content: center;
+`;

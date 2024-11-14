@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as C from "./styles";
 import productImageApi from "../../services/productImageApi";
+import loadingGif from '../loading.gif';
 
 const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
   const { createFotoProduto, getFotoProdutoDownload, getFotoByProduto, deleteFotoByProduto } = productImageApi();
@@ -10,9 +11,11 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
     description: "",
   });
   const [imageUrls, setImageUrls] = useState([]); // Estado para armazenar as URLs das imagens do produto
+  const [loading, setLoading] = useState(false);
 
   // Função para carregar as imagens do produto
   const loadProductImages = async () => {
+    setLoading(true)
     if (isOpen && produto) {
       try {
         const fotos = await getFotoByProduto(produto); // Busca todas as fotos do produto
@@ -28,6 +31,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
           })
         );
         setImageUrls(fotosUrls); // Define todas as URLs das imagens
+        setLoading(false)
       } catch (error) {
         console.error("Erro ao buscar fotos:", error);
       }
@@ -37,6 +41,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
 
   useEffect(() => {
     const fetchFotos = async () => {
+      setLoading(true)
       if (isOpen && produto) {
         try {
           const fotos = await getFotoByProduto(produto); // Busca todas as fotos do produto
@@ -52,6 +57,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
             })
           );
           setImageUrls(fotosUrls); // Define todas as URLs das imagens
+          setLoading(false)
         } catch (error) {
           console.error("Erro ao buscar fotos:", error);
         }
@@ -86,7 +92,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true)
     try {
       const formDataToSend = new FormData();
       formDataToSend.append("file", formData.file);
@@ -108,12 +114,14 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
   if (!isOpen) return null;
 
   const handleDeleteImage = async (id) => {
+    setLoading(true)
     try {
       // Chame a API para deletar a imagem pelo ID
       await deleteFotoByProduto(id);
 
       // Atualize o estado para remover a imagem da interface
       setImageUrls((prevImages) => prevImages.filter((item) => item.id !== id));
+      setLoading(false)
     } catch (error) {
       console.error("Erro ao deletar a imagem:", error);
     }
@@ -163,18 +171,25 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
           <C.Button type="submit">Salvar</C.Button>
 
           {/* Exibir todas as imagens do produto */}
-          {imageUrls && (
-            <C.ImageGallery>
-              {imageUrls.map((item, index) => (
-                <C.ImagePreview key={index}> {/* Use o id como chave */}
-                  <img src={item.url} alt={`Foto do Produto ${produto.titulo}`} />
-                  <C.DeleteButton onClick={() => handleDeleteImage(item.id)}>✖</C.DeleteButton> {/* Passa o id para a função de deletar */}
+          {loading ? (
+            <>
+              {/* Exibe o GIF de carregamento */}
+              <C.LoadingImage src={loadingGif} alt="Carregando..." />
+            </>
+          ) : (
+            <>
+              {imageUrls && (
+                <C.ImageGallery>
+                  {imageUrls.map((item, index) => (
+                    <C.ImagePreview key={index}> {/* Use o id como chave */}
+                      <img src={item.url} alt={`Foto do Produto ${produto.titulo}`} />
+                      <C.DeleteButton onClick={() => handleDeleteImage(item.id)}>✖</C.DeleteButton> {/* Passa o id para a função de deletar */}
 
-                </C.ImagePreview>
+                    </C.ImagePreview>
 
-              ))}
-            </C.ImageGallery>
-          )}
+                  ))}
+                </C.ImageGallery>
+              )} </>)}
         </C.ModalForm>
         <C.InfoText> {/* Estilize conforme necessário */}
           A primaira imagem será a capa que aparecerá na lista de produtos.
