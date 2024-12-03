@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts/auth";
 import { useNavigate } from "react-router-dom";
 
-const userApi = () => {
+const UserApi = () => {
   const { user } = useContext(AuthContext); // Para capturar o usuário autenticado, se necessário
   const navigate = useNavigate();
   const api_url = process.env.REACT_APP_API;
@@ -37,4 +37,4 @@ const userApi = () => {
   };
 };
 
-export default userApi;
+export default UserApi;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import userApi from "../../services/userApi";
+import UserApi from "../../services/userApi";
 import * as C from "./styles";
 
 const RedefinirSenha = () => {
@@ -11,7 +11,7 @@ const RedefinirSenha = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
-    const { updatePassword } = userApi(); // Importa o serviço
+    const { updatePassword } = UserApi(); // Importa o serviço
 
 
     const handleSubmit = async (e) => {
