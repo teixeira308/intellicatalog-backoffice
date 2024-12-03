@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import * as C from "./styles";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const Signin = () => {
@@ -58,7 +58,7 @@ const Signin = () => {
         <Button Text="Entrar" onClick={handleLogin} />
       <C.LabelSignup>
           <C.Strong>
-            <a href="b/esquecisenha">Esqueci minha senha</a>
+          <Link to="/esquecisenha">Esqueci minha senha</Link>
           </C.Strong>
         </C.LabelSignup> 
       </C.Content>
