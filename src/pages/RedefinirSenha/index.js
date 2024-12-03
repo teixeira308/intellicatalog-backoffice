@@ -37,10 +37,7 @@ const RedefinirSenha = () => {
 
             <C.Title>Redefinir senha</C.Title>
             <img src="favicon.png" alt="Descrição da imagem" style={{ width: '300px', marginBottom: '20px', borderRadius: '20px' }} />
-
-
             <C.Section>
-
                 <C.Subtitle>Insira sua nova senha abaixo:</C.Subtitle>
                 {message && <p style={{ color: "green" }}>{message}</p>}
                 {error && <p style={{ color: "red" }}>{error}</p>}
