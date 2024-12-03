@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import UserApi from "../../services/userApi";
 import * as C from "./styles";
 
-const RedefinirSenha = () => {
+const EsqueciSenha = () => {
 
     const { token } = useParams(); // Captura o token da URL
     const navigate = useNavigate();
@@ -50,4 +50,4 @@ const RedefinirSenha = () => {
     );
 };
 
-export default RedefinirSenha;
+export default EsqueciSenha;
