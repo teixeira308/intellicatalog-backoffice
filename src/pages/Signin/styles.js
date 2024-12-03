@@ -47,3 +47,15 @@ export const Strong = styled.strong`
     color: #676767;
   }
 `;
+
+export const Link = styled.div`
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 10px;
+  color: #fff;
+  align-items: center;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+`;
