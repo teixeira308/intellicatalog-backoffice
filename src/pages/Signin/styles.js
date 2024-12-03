@@ -52,7 +52,7 @@ export const Link = styled.div`
   cursor: pointer;
   font-size: 1rem;
   padding: 10px;
-  color: #fff;
+  color: #676767;
   align-items: center;
   
   &:hover {
