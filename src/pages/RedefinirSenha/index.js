@@ -39,13 +39,11 @@ const RedefinirSenha = () => {
 
     return (
         <C.Container>
-
-            <C.Title>Redefinir senha</C.Title>
             <img src="favicon.png" alt="Descrição da imagem" style={{ width: '300px', marginBottom: '20px', borderRadius: '20px' }} />
+            <C.Title>Redefinir senha</C.Title>
             <C.Section>
                 <C.Subtitle>Insira sua nova senha abaixo:</C.Subtitle>
-                {message && <p style={{ color: "green" }}>{message}</p>}
-                {error && <p style={{ color: "red" }}>{error}</p>}
+               
 
                 <form onSubmit={handleSubmit}>
                     <C.Step>
@@ -85,6 +83,8 @@ const RedefinirSenha = () => {
                     >
                         Redefinir senha
                     </button>
+                    {message && <p style={{ color: "green" }}>{message}</p>}
+                    {error && <p style={{ color: "red" }}>{error}</p>}
                 </form>
 
             </C.Section>

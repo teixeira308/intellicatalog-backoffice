@@ -9,7 +9,7 @@ const UserApi = () => {
 
   const updatePassword = async (token, newPassword) => {
     try {
-      const response = await fetch(`${api_url}/update-password`, {
+      const response = await fetch(`${api_url}/updatepassword`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
