@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import userApi from "../../services/userApi";
 import * as C from "./styles";
 
 const RedefinirSenha = () => {
@@ -8,6 +11,8 @@ const RedefinirSenha = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
+    const { updatePassword } = userApi(); // Importa o serviço
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,16 +23,16 @@ const RedefinirSenha = () => {
         }
 
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/update-password`, {
-                token,
-                newPassword,
-            });
-
-            setMessage(response.data.message);
+            const response = await updatePassword(token, newPassword);
+            setMessage(response.message);
             setError("");
-            setTimeout(() => navigate("/login"), 3000); // Redireciona para login após sucesso
+
+            // Opcional: Redirecionar após sucesso
+            setTimeout(() => {
+                navigate("/login");
+            }, 3000);
         } catch (err) {
-            setError(err.response?.data?.error || "Erro ao redefinir a senha.");
+            setError(err);
             setMessage("");
         }
     };
