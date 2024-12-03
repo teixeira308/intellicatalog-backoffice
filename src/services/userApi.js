@@ -9,7 +9,7 @@ const UserApi = () => {
 
   const updatePassword = async (token, newPassword) => {
     try {
-      const response = await fetch(`${api_url}/updatepassword`, {
+      const response = await fetch(`${api_url}/intellicatalog/v1/users/updatepassword`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
