@@ -58,7 +58,7 @@ const Signin = () => {
         <Button Text="Entrar" onClick={handleLogin} />
       <C.LabelSignup>
           <C.Strong>
-            <a href="/esquecisenha">Esqueci minha senha</a>
+            <a href="b/esquecisenha">Esqueci minha senha</a>
           </C.Strong>
         </C.LabelSignup> 
       </C.Content>
