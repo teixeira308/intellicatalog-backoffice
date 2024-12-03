@@ -11,6 +11,7 @@ import Catalogo from "../pages/Catalogo";
 import Loja from "../pages/Loja";
 import Inteligencia from "../pages/Inteligencia";
 import RedefinirSenha from "../pages/RedefinirSenha";
+import EsqueciSenha from "../pages/EsqueciSenha";
 
 const Private = ({ Item }) => {
   const { signed } = useAuth();
@@ -32,7 +33,8 @@ const RoutesApp = () => {
           <Route exact path="/tutorial" element={<Private Item={Tutorial} />} />
           <Route exact path="/minhaloja" element={<Private Item={Loja} />} />
           <Route exact path="/inteligencia" element={<Private Item={Inteligencia} />} />
-          <Route exact path="/redefinirsenha/:token" element={<Private Item={RedefinirSenha} />} />
+          <Route exact path="/redefinirsenha/:token" element={<Private Item={RedefinirSenha} />} />  
+          <Route exact path="/esquecisenha" element={<Private Item={EsqueciSenha} />} />
           <Route path="/" element={<Signin />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route path="*" element={<Signin />} />
