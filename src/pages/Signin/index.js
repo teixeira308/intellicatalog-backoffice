@@ -57,7 +57,6 @@ const Signin = () => {
         <C.labelError>{error}</C.labelError>
         <Button Text="Entrar" onClick={handleLogin} />
       <C.LabelSignup>
-          Não tem uma conta?
           <C.Strong>
             <a href="/esquecisenha">Esqueci minha senha</a>
           </C.Strong>
