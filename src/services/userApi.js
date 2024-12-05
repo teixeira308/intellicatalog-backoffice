@@ -32,8 +32,30 @@ const UserApi = () => {
     }
   };
 
+  const requestReset = async (email) => {
+    try {
+      const response = await fetch(`${api_url}/intellicatalog/v1/users/resetpassword`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.errors || "Erro ao enviar e-mail de redefinição.");
+      }
+
+      return { message: "E-mail enviado com sucesso." }; // Resposta em caso de sucesso
+    } catch (err) {
+      throw new Error(err.message || "Erro ao conectar com o servidor.");
+    }
+  };
+
+  
   return {
-    updatePassword,
+    updatePassword, requestReset
   };
 };
 
