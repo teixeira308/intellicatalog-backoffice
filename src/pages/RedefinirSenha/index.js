@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import UserApi from "../../services/userApi";
 import * as C from "./styles";
+import Button from "../../components/Button";
 
 const RedefinirSenha = () => {
 
@@ -32,9 +33,10 @@ const RedefinirSenha = () => {
                 navigate("/login");
             }, 3000);
         } catch (err) {
-            setError(err);
+            setError(err.response?.data?.message || "Ocorreu um erro.");
             setMessage("");
         }
+        
     };
 
     return (
@@ -70,7 +72,7 @@ const RedefinirSenha = () => {
                         />
                     </C.Step>
 
-                    <button
+                    <Button
                         type="submit"
                         style={{
                             padding: "10px 20px",
@@ -82,9 +84,9 @@ const RedefinirSenha = () => {
                         }}
                     >
                         Redefinir senha
-                    </button>
+                    </Button>
                     {message && <p style={{ color: "green" }}>{message}</p>}
-                    {error && <p style={{ color: "red" }}>{error}</p>}
+                    {error && <C.labelError>{error}</C.labelError>}
                 </form>
 
             </C.Section>

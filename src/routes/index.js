@@ -33,7 +33,7 @@ const RoutesApp = () => {
           <Route exact path="/tutorial" element={<Private Item={Tutorial} />} />
           <Route exact path="/minhaloja" element={<Private Item={Loja} />} />
           <Route exact path="/inteligencia" element={<Private Item={Inteligencia} />} />
-          <Route exact path="/redefinirsenha/:token" element={{RedefinirSenha}} />  
+          <Route exact path="/redefinirsenha/:token" element={<RedefinirSenha/>} />  
           <Route path="/esquecisenha" element={<EsqueciSenha/>} />
           <Route path="/" element={<Signin />} />
           <Route exact path="/signup" element={<Signup />} />
