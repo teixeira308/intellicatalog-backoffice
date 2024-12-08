@@ -69,3 +69,8 @@ export const labelError = styled.label`
   font-size: 14px;
   color: red;
 `;
+
+export const LabelForgot = styled.label`
+  font-size: 16px;
+  color: #676767;
+`;
