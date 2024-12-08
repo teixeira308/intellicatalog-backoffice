@@ -42,8 +42,8 @@ const EsqueciSenha = () => {
           value={email}
           onChange={(e) => [setEmail(e.target.value), setError("")]}
         />
-        {error && <C.ErrorMessage>{error}</C.ErrorMessage>}
-        {success && <C.SuccessMessage>{success}</C.SuccessMessage>}
+        {error && <p>{error}</p>}
+        {success && <p>{success}</p>}
         <Button Text="Enviar" onClick={handleForgotPassword} />
       </C.Section>
     </C.Container>
