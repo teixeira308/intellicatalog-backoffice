@@ -29,28 +29,32 @@ const RedefinirSenha = () => {
         setPasswordStrength(strength);
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-
+        console.log("entrou")
         if (newPassword !== confirmPassword) {
             setError("As senhas não coincidem.");
             return;
         }
-
-        try {
-            const response = await updatePassword(token, newPassword);
-            setMessage(response.message || "Senha redefinida com sucesso!");
-            setError("");
-
-            // Opcional: Redirecionar após sucesso
-            setTimeout(() => {
-                navigate("/login");
-            }, 3000);
-        } catch (err) {
-            setError(err.response?.data?.message || "Ocorreu um erro.");
-            setMessage("");
-        }
+    
+        updatePassword(token, newPassword)
+            .then((response) => {
+                // Mensagem de sucesso
+                setMessage(response.message || "Senha redefinida com sucesso!");
+                setError("");
+    
+                // Redireciona após sucesso
+                setTimeout(() => {
+                    navigate("/login");
+                }, 3000);
+            })
+            .catch((err) => {
+                // Mensagem de erro
+                setError(err.response?.data?.message || "Ocorreu um erro.");
+                setMessage("");
+            });
     };
+    
 
     return (
         <C.Container>
