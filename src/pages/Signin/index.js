@@ -32,9 +32,6 @@ const Signin = () => {
       })
       
   };
-  
-  
-  
 
   return (
     <C.Container>
