@@ -33,8 +33,7 @@ const EsqueciSenha = () => {
         alt="Descrição da imagem"
         style={{ width: "300px", marginBottom: "20px", borderRadius: "20px" }}
       />
-      <C.Section>
-        aaaaa
+      <C.Content>
         <C.Subtitle>Esqueci minha senha</C.Subtitle>
         <Input
           type="email"
@@ -42,10 +41,14 @@ const EsqueciSenha = () => {
           value={email}
           onChange={(e) => [setEmail(e.target.value), setError("")]}
         />
-        {error && <p>{error}</p>}
+        {error && <C.labelError>{error}</C.labelError>}
         {success && <p>{success}</p>}
-        <Button Text="Enviar" onClick={handleForgotPassword} />
-      </C.Section>
+        <C.LabelSignup>
+          <C.Strong>
+            <Button Text="Enviar" onClick={handleForgotPassword} />
+          </C.Strong>
+        </C.LabelSignup>
+      </C.Content>
     </C.Container>
   );
 };
