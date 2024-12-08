@@ -64,3 +64,8 @@ export const StepDescription = styled.p`
   font-size: 1rem;
   color: #666;
 `;
+
+export const labelError = styled.label`
+  font-size: 14px;
+  color: red;
+`;
