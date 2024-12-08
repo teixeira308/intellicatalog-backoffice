@@ -34,6 +34,7 @@ const EsqueciSenha = () => {
         style={{ width: "300px", marginBottom: "20px", borderRadius: "20px" }}
       />
       <C.Section>
+        aaaaa
         <C.Subtitle>Esqueci minha senha</C.Subtitle>
         <Input
           type="email"
