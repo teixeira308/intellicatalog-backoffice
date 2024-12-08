@@ -44,9 +44,9 @@ const EsqueciSenha = () => {
         {error && <C.labelError>{error}</C.labelError>}
         {success && <p>{success}</p>}
         <C.LabelForgot>
-          <C.Strong>
+          
             <Button Text="Enviar" onClick={handleForgotPassword} />
-          </C.Strong>
+          
         </C.LabelForgot>
       </C.Content>
     </C.Container>
