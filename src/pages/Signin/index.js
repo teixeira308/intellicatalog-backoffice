@@ -4,6 +4,7 @@ import Button from "../../components/Button";
 import * as C from "./styles";
 import { useNavigate, Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import logo from '../../assets/logo.png'
 
 const Signin = () => {
   const { signin } = useAuth();
@@ -35,7 +36,7 @@ const Signin = () => {
 
   return (
     <C.Container>
-      <img src="favicon.png" alt="Descrição da imagem" style={{ width: '300px', marginBottom: '20px' , borderRadius: '20px' }} />
+      <img src={logo} alt="Descrição da imagem" style={{ width: '300px', marginBottom: '20px' , borderRadius: '20px' }} />
       
      {/* \ <C.Label>Doc Filler</C.Label>*/}
       <C.Content>
