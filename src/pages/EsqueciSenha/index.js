@@ -48,16 +48,18 @@ const EsqueciSenha = () => {
         />
         {error && <C.LabelError>{error}</C.LabelError>}
         {success && <p>{success}</p>}
-        {loading && (
+        {loading ? (
           <img
             src="/loading.gif" // Substitua pelo caminho da sua imagem de loading
             alt="Carregando..."
             style={{ width: "50px", margin: "20px auto" }}
           />
-        )}
-        <C.LabelForgot>
+        ):(
+          <C.LabelForgot>
           <Button Text="Enviar" onClick={handleForgotPassword} disabled={loading} />
         </C.LabelForgot>
+
+        )}
       </C.Content>
     </C.Container>
   );
