@@ -63,7 +63,7 @@ const RedefinirSenha = () => {
             <C.Title>Redefinir senha</C.Title>
             <C.Section>
                 <C.Subtitle>Insira sua nova senha abaixo:</C.Subtitle>
-                <form onSubmit={handleSubmit}>
+                 
                     <C.Step>
                         <C.StepTitle>Nova senha</C.StepTitle>
                         <input
@@ -117,11 +117,12 @@ const RedefinirSenha = () => {
                     {loading ? (
                         <C.LoadingImage src={loadingGif} alt="Carregando..." />
                     ) : (
-                        <Button type="submit" Text="Redefinir senha" />
+                        //<Button type="submit" Text="Redefinir senha" />
+                        <Button Text="Redefinir senha" onClick={handleSubmit} disabled={loading} />
                     )}
                     {message && <p style={{ color: "green" }}>{message}</p>}
                     {error && <C.labelError>{error}</C.labelError>}
-                </form>
+                
             </C.Section>
         </C.Container>
     );
