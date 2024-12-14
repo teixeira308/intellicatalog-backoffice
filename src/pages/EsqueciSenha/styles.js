@@ -84,21 +84,27 @@ export const LoadingImage = styled.img`
 
 
 export const BackButton = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  position: fixed; /* Fixa no topo da tela */
+  top: 10px; /* Margem do topo */
+  left: 10px; /* Margem da esquerda */
+  z-index: 100; /* Garante que fique acima de outros elementos */
   background: none;
   border: none;
-  color: #007bff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #676767;
   font-size: 16px;
   cursor: pointer;
-  margin-bottom: 20px;
-
-  svg {
-    color: #007bff; // Cor do ícone
-  }
+  padding: 10px;
+  border-radius: 50%; /* Deixa com formato circular */
+  transition: background 0.3s;
 
   &:hover {
-    text-decoration: underline;
+    background: rgba(0, 0, 0, 0.1); /* Destaque ao passar o mouse */
+  }
+
+  svg {
+    color: #676767;
   }
 `;
