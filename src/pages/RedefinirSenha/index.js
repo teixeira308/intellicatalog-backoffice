@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import UserApi from "../../services/userApi";
 import * as C from "./styles";
 import Button from "../../components/Button";
+import loadingGif from '../../components/loading.gif';
 
 const RedefinirSenha = () => {
     const { token } = useParams(); // Captura o token da URL
@@ -13,6 +14,7 @@ const RedefinirSenha = () => {
     const [error, setError] = useState("");
     const [passwordStrength, setPasswordStrength] = useState({});
     const { updatePassword } = UserApi(); // Importa o serviço
+    const [loading, setLoading] = useState(false); // Estado para o loading
 
     const handlePasswordChange = (password) => {
         setNewPassword(password);
@@ -25,36 +27,29 @@ const RedefinirSenha = () => {
             number: /[0-9]/.test(password),
             specialChar: /[!@#$%^&*(),.?":{}|<>]/.test(password),
         };
-
         setPasswordStrength(strength);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("entrou")
+        setLoading(true); // Ativa o estado de loading
         if (newPassword !== confirmPassword) {
             setError("As senhas não coincidem.");
             return;
         }
-    
-        updatePassword(token, newPassword)
-            .then((response) => {
-                // Mensagem de sucesso
-                setMessage(response.message || "Senha redefinida com sucesso!");
-                setError("");
-    
-                // Redireciona após sucesso
-                setTimeout(() => {
-                    navigate("/login");
-                }, 3000);
-            })
-            .catch((err) => {
-                // Mensagem de erro
-                setError(err.response?.data?.message || "Ocorreu um erro.");
-                setMessage("");
-            });
+
+        try {
+            const response = await updatePassword(token, newPassword);
+            setSuccess(response.message);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false); // Desativa o estado de loading
+        }
+
     };
-    
+
 
     return (
         <C.Container>
@@ -109,15 +104,19 @@ const RedefinirSenha = () => {
 
                         {/* Div para exibir se as senhas coincidem */}
                         <div style={{ marginBottom: "20px", color: confirmPassword ? (confirmPassword === newPassword ? "green" : "red") : "black" }}>
-                            {confirmPassword 
-                                ? confirmPassword === newPassword 
-                                    ? "✔ Senhas coincidem" 
+                            {confirmPassword
+                                ? confirmPassword === newPassword
+                                    ? "✔ Senhas coincidem"
                                     : "✖ Senhas não coincidem"
                                 : "Repita para confirmar a senha"}
                         </div>
                     </C.Step>
 
-                    <Button type="submit" Text="Redefinir senha" />
+                    {loading ? (
+                        <C.LoadingImage src={loadingGif} alt="Carregando..." />
+                    ) : (
+                        <Button type="submit" Text="Redefinir senha" />
+                    )}
                     {message && <p style={{ color: "green" }}>{message}</p>}
                     {error && <C.labelError>{error}</C.labelError>}
                 </form>

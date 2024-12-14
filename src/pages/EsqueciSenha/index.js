@@ -5,6 +5,7 @@ import * as C from "./styles";
 import UserApi from "../../services/userApi";
 import { useNavigate } from "react-router-dom"; // Para navegação
 import { FaArrowLeft } from "react-icons/fa"; // Ícone de seta para voltar
+import loadingGif from '../../components/loading.gif';
 
 const EsqueciSenha = () => {
   const [email, setEmail] = useState("");
@@ -56,11 +57,7 @@ const EsqueciSenha = () => {
         {error && <C.LabelError>{error}</C.LabelError>}
         {success && <p>{success}</p>}
         {loading ? (
-          <img
-            src="/loading.gif" // Substitua pelo caminho da sua imagem de loading
-            alt="Carregando..."
-            style={{ width: "50px", margin: "20px auto" }}
-          />
+        <C.LoadingImage src={loadingGif} alt="Carregando..." />
         ):(
           <C.LabelForgot>
           <Button Text="Enviar" onClick={handleForgotPassword} disabled={loading} />
