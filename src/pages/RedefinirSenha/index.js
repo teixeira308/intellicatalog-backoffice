@@ -43,7 +43,7 @@ const RedefinirSenha = () => {
 
         try {
             const response = await updatePassword(token, newPassword);
-            setSuccess(response.message);
+            setMessage(response.message);
         } catch (err) {
             setError(err.message);
         } finally {
