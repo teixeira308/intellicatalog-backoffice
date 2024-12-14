@@ -65,7 +65,7 @@ export const StepDescription = styled.p`
   color: #666;
 `;
 
-export const labelError = styled.label`
+export const LabelError = styled.label`
   font-size: 14px;
   color: red;
 `;
@@ -80,3 +80,4 @@ export const LoadingImage = styled.img`
   background-color: #f10f10f10;  /* Cor de fundo leve */
   justify-content: center;
 `;
+
