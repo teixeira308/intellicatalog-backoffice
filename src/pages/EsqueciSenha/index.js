@@ -38,7 +38,7 @@ const EsqueciSenha = () => {
     <C.Container>
        <C.BackButton onClick={() => navigate(-1)}> 
         <FaArrowLeft size={20} />
-        <span>Voltar</span>
+        <span>  Voltar</span>
       </C.BackButton>
       <img
         src="favicon.png"
