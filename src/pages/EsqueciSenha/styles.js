@@ -81,3 +81,24 @@ export const LoadingImage = styled.img`
   justify-content: center;
 `;
 
+
+
+export const BackButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+
+  svg {
+    color: #007bff; // Cor do ícone
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
