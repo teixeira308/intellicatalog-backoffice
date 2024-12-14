@@ -58,12 +58,14 @@ const RedefinirSenha = () => {
             <img
                 src={logo}
                 alt="Descrição da imagem"
-                style={{ width: "300px", marginBottom: "20px", borderRadius: "20px" }}
+                style={{ width: "200px", marginBottom: "20px", borderRadius: "20px" }}
             />
             <C.Title>Redefinir senha</C.Title>
+            
             <C.Section>
+            {message ? ( <p style={{ color: "green" }}>{message}</p>) : (
+                <>
                 <C.Subtitle>Insira sua nova senha abaixo:</C.Subtitle>
-                 
                     <C.Step>
                         <C.StepTitle>Nova senha</C.StepTitle>
                         <input
@@ -120,8 +122,11 @@ const RedefinirSenha = () => {
                         //<Button type="submit" Text="Redefinir senha" />
                         <Button Text="Redefinir senha" onClick={handleSubmit} disabled={loading} />
                     )}
-                    {message && <p style={{ color: "green" }}>{message}</p>}
+                   
+
+                   
                     {error && <C.labelError>{error}</C.labelError>}
+                    </> )}
                 
             </C.Section>
         </C.Container>

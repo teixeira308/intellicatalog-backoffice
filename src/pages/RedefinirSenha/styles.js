@@ -10,7 +10,7 @@ export const Container = styled.div`
   background-color: #f4f4f4;
 `;
 
-export const Title = styled.h2`
+export const Title = styled.h3`
   font-size: 2rem;
   margin-bottom: 20px;
   color: #333;
@@ -24,7 +24,7 @@ export const Section = styled.div`
   width: 100%;
 `;
 
-export const Subtitle = styled.h3`
+export const Subtitle = styled.h4`
   font-size: 1.5rem;
   margin-bottom: 20px;
   color: #555;

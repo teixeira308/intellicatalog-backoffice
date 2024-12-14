@@ -37,7 +37,7 @@ export const Section = styled.div`
   width: 100%;
 `;
 
-export const Subtitle = styled.h3`
+export const Subtitle = styled.h4`
   font-size: 1.5rem;
   margin-bottom: 20px;
   color: #555;
