@@ -5,7 +5,7 @@ import * as C from "./styles";
 import UserApi from "../../services/userApi";
 import { useNavigate } from "react-router-dom"; // Para navegação
 import { FaArrowLeft } from "react-icons/fa"; // Ícone de seta para voltar
-import loadingGif from '../../components/loading.gif';
+import loadingGif from "../../components/loading.gif";
 
 const EsqueciSenha = () => {
   const [email, setEmail] = useState("");

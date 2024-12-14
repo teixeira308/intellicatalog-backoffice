@@ -4,6 +4,8 @@ import UserApi from "../../services/userApi";
 import * as C from "./styles";
 import Button from "../../components/Button";
 import loadingGif from '../../components/loading.gif';
+import logo from '../../assets/logo.png'
+
 
 const RedefinirSenha = () => {
     const { token } = useParams(); // Captura o token da URL
@@ -54,7 +56,7 @@ const RedefinirSenha = () => {
     return (
         <C.Container>
             <img
-                src="favicon.png"
+                src={logo}
                 alt="Descrição da imagem"
                 style={{ width: "300px", marginBottom: "20px", borderRadius: "20px" }}
             />
