@@ -115,7 +115,7 @@ const RedefinirSenha = () => {
                     </C.Step>
 
                     {loading ? (
-                        <C.LoadingImage src={loadingGif} alt="Carregando..." />
+                        <img src={loadingGif} alt="Carregando..." />
                     ) : (
                         //<Button type="submit" Text="Redefinir senha" />
                         <Button Text="Redefinir senha" onClick={handleSubmit} disabled={loading} />
