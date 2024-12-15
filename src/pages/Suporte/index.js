@@ -11,14 +11,13 @@ const Suporte = () => {
         <C.Subtitle>Em caso de algum problema ou erro inesperado, segue nosso contato:</C.Subtitle>
         <C.Step>
           <C.StepTitle>E-mail:</C.StepTitle>
-          <C.StepDescription>
-            <a href="mailto:contato@vitrinesmart.com">contato@vitrinesmart.com</a>
+          <C.StepDescription href="mailto:contato@vitrinesmart.com">contato@vitrinesmart.com
           </C.StepDescription>
         </C.Step>
         <C.Step>
           <C.StepTitle>Whatsapp:</C.StepTitle>
-          <C.StepDescription>
-            <a href="tel:+5511973472745">(11) 97347-2745</a>
+          <C.StepDescription href="https://wa.me/5511973472745?text=Olá,%20gostaria%20de%20mais%20informações" target="_blank">(11) 97347-2745
+
           </C.StepDescription>
         </C.Step>
       </C.Section>

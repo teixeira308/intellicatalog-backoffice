@@ -24,7 +24,7 @@ export const Section = styled.div`
   width: 100%;
 `;
 
-export const Subtitle = styled.h3`
+export const Subtitle = styled.h4`
   font-size: 1.5rem;
   margin-bottom: 20px;
   color: #555;
@@ -46,7 +46,7 @@ export const StepTitle = styled.h4`
   color: #333;
 `;
 
-export const StepDescription = styled.p`
+export const StepDescription = styled.a`
   font-size: 1rem;
   color: #666;
 `;
