@@ -32,7 +32,6 @@ const RoutesApp = () => {
           <Route exact path="/suporte" element={<Private Item={Suporte} />} />
           <Route exact path="/tutorial" element={<Private Item={Tutorial} />} />
           <Route exact path="/minhaloja" element={<Private Item={Loja} />} />
-          <Route exact path="/inteligencia" element={<Private Item={Inteligencia} />} />
           <Route exact path="/redefinirsenha/:token" element={<RedefinirSenha/>} />  
           <Route path="/esquecisenha" element={<EsqueciSenha/>} />
           <Route path="/" element={<Signin />} />

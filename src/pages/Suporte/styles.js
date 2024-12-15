@@ -3,12 +3,11 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: top;
+  justify-content: center;
   flex-direction: column;
   height: 100vh;
   padding: 20px;
   background-color: #f4f4f4;
-  margin-top: 100px;
 `;
 
 export const Title = styled.h2`
@@ -17,42 +16,37 @@ export const Title = styled.h2`
   color: #333;
 `;
 
-export const InfoSection = styled.div`
+export const Section = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 600px;
+  max-width: 800px;
   width: 100%;
 `;
 
 export const Subtitle = styled.h3`
-  font-size: 1.0rem;
+  font-size: 1.5rem;
   margin-bottom: 20px;
   color: #555;
 `;
 
-export const ContactInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-export const ContactItem = styled.div`
+export const Step = styled.div`
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
   margin: 10px 0;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
-export const ContactLabel = styled.span`
-  font-weight: bold;
-  font-size: 0.9rem;
+export const StepTitle = styled.h4`
+  font-size: 1.25rem;
+  margin-bottom: 10px;
   color: #333;
 `;
 
-export const ContactDetail = styled.a`
-  font-size: 0.9rem;
-  color: #007bff;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
+export const StepDescription = styled.p`
+  font-size: 1rem;
+  color: #666;
 `;

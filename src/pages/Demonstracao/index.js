@@ -7,7 +7,7 @@ const Demonstracao = () => {
     <C.Container>
       <Navbar />
       <C.Title>Demonstração</C.Title>
-      <p>Veja no vídeo como utilizar o Intellicatalog para adminstrar seu catálogo.</p>
+      <p>Veja no vídeo como utilizar o Vitrine Smart para adminstrar seu catálogo.</p>
        </C.Container>
   )
 };

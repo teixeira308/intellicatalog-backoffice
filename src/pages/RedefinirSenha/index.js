@@ -74,6 +74,7 @@ const RedefinirSenha = () => {
             <C.Title>Redefinir senha</C.Title>
             
             <C.Section>
+                
             {message ? ( 
                 <>
                 <p style={{ color: "green" }}>{message}</p>
@@ -81,7 +82,7 @@ const RedefinirSenha = () => {
                 </>
                 ) : (
                 <>
-                <C.Subtitle>Insira sua nova senha abaixo:</C.Subtitle>
+                
                     <C.Step>
                         <C.StepTitle>Nova senha</C.StepTitle>
                         <input

@@ -11,7 +11,7 @@ const Tutorial = () => {
                 <C.CardBody>
                     <C.Accordion>
                         <C.AccordionItem>
-                            <C.AccordionHeader>Criar registro de pessoa</C.AccordionHeader>
+                            <C.AccordionHeader>Alterar logo da Loja</C.AccordionHeader>
                             <C.AccordionBody>
                                 <ol>
                                     <li>Entre no menu pessoas</li>
@@ -24,7 +24,7 @@ const Tutorial = () => {
                             </C.AccordionBody>
                         </C.AccordionItem>
                         <C.AccordionItem>
-                            <C.AccordionHeader>Criar template</C.AccordionHeader>
+                            <C.AccordionHeader>Alterar dados da loja</C.AccordionHeader>
                             <C.AccordionBody>
                                 <ol>
                                     <li>Há campos disponíveis para os dados de pessoas:
@@ -55,7 +55,29 @@ const Tutorial = () => {
                             </C.AccordionBody>
                         </C.AccordionItem>
                         <C.AccordionItem>
-                            <C.AccordionHeader>Download de documentos completados automaticamente</C.AccordionHeader>
+                            <C.AccordionHeader>Alterar configurações da loja</C.AccordionHeader>
+                            <C.AccordionBody>
+                                <ol>
+                                    <li>Entre no menu pessoas</li>
+                                    <li>Encontre a pessoa que deseja gerar o arquivo e clique no ícone de download</li>
+                                    <li>Selecione o template que deseja gerar</li>
+                                    <li>Confira o arquivo gerado</li>
+                                </ol>
+                            </C.AccordionBody>
+                        </C.AccordionItem>
+                        <C.AccordionItem>
+                            <C.AccordionHeader>Mudar link da loja</C.AccordionHeader>
+                            <C.AccordionBody>
+                                <ol>
+                                    <li>Entre no menu pessoas</li>
+                                    <li>Encontre a pessoa que deseja gerar o arquivo e clique no ícone de download</li>
+                                    <li>Selecione o template que deseja gerar</li>
+                                    <li>Confira o arquivo gerado</li>
+                                </ol>
+                            </C.AccordionBody>
+                        </C.AccordionItem>
+                        <C.AccordionItem>
+                            <C.AccordionHeader>Abrir ou fechar a loja</C.AccordionHeader>
                             <C.AccordionBody>
                                 <ol>
                                     <li>Entre no menu pessoas</li>
