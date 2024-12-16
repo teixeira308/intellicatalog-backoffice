@@ -4,11 +4,18 @@ import Navbar from "../../components/Navbar/Navbar";
 
 const Demonstracao = () => {
   return (
-    <C.Container>
-      <Navbar />
-      <C.Title>Demonstração</C.Title>
-      <p>Veja no vídeo como utilizar o Vitrine Smart para adminstrar seu catálogo.</p>
-       </C.Container>
+
+
+<C.Container>
+<Navbar />
+<C.Title>Demonstração</C.Title>
+<C.Section>
+  <C.Subtitle>Veja no vídeo como utilizar o Vitrine Smart para adminstrar seu catálogo.</C.Subtitle>
+  <C.Step>
+   
+  </C.Step>
+</C.Section>
+</C.Container>
   )
 };
 
