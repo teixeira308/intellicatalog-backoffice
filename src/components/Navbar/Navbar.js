@@ -23,9 +23,9 @@ const Navbar = () => {
         <C.Link onClick={() => { navigate("/home"); setMenuOpen(false); }}>Inicio</C.Link>
         <C.Link onClick={() => { navigate("/catalogo"); setMenuOpen(false); }}>Catalogo</C.Link>
         <C.Link onClick={() => { navigate("/minhaloja"); setMenuOpen(false); }}>Minha Loja</C.Link>
-        <C.Link onClick={() => { navigate("/demonstracao"); setMenuOpen(false); }}>Demonstração</C.Link> 
-        <C.Link onClick={() => { navigate("/suporte"); setMenuOpen(false); }}>Suporte</C.Link>
         <C.Link onClick={() => { navigate("/tutorial"); setMenuOpen(false); }}>Tutorial</C.Link>    
+        <C.Link onClick={() => { navigate("/demonstracao"); setMenuOpen(false); }}>Demonstração</C.Link> 
+        <C.Link onClick={() => { navigate("/suporte"); setMenuOpen(false); }}>Suporte</C.Link>        
         <C.Link onClick={() => [signout(), navigate("/")]}>Sair</C.Link>
       </C.NavLinks>
       <C.Hamburger onClick={toggleMenu}>
