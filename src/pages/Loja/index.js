@@ -163,6 +163,7 @@ const Loja = () => {
              </C.ImagePreview>
            ))}
          <C.StoreInfoWrapper>
+         <C.StatusIndicator isOpen={store.status === "Aberta"} />
            <C.StatusWrapper>{store.namestore}</C.StatusWrapper>
          </C.StoreInfoWrapper>
          <C.ToggleSwitch>
