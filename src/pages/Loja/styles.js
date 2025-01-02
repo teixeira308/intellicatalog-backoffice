@@ -45,7 +45,6 @@ export const StatusIndicator = styled.span`
 
 
 export const ToggleSwitch = styled.label`
- padding: 10px;
   position: relative;
   display: inline-block;
   width: 40px; /* Diminuído */
@@ -100,7 +99,6 @@ export const StatusWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 10px;
 `;
 
 export const ActionsWrapper = styled.div`
@@ -145,7 +143,6 @@ export const ImagePreview = styled.div`
   border-radius: 50%; /* Bordas bolinha */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para a imagem */
 
-   padding: 10px;
   img {
     width: 100%; /* Ajusta a imagem para ocupar o container */
     height: 100%; /* Ajusta a altura para ocupar o container */
@@ -166,8 +163,6 @@ export const StoreInfoWrapper = styled.div`
   display: flex;
   flex-direction: column; /* Alinha os elementos em coluna */
   margin-top: 10px; /* Espaço entre as imagens e o nome + botões */
- justify-content: center;
-
 `;
  
 export const InfoWrapper = styled.div`
@@ -175,7 +170,6 @@ export const InfoWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
-  align-items: center;
   margin-bottom: 20px; /* Espaçamento inferior para separar do ButtonsWrapper */
 `;
 
