@@ -154,35 +154,36 @@ const Loja = () => {
       {stores.map((store) => (
         <C.Card key={store.id}>
 
-<C.InfoWrapper>
-          {/* Filtra as imagens que pertencem à loja atual */}
-          {imageStoreUrls
-            .filter((item) => item.store_id === store.id) // Filtra por storeId
-            .map((item, index) => (
-              <C.ImagePreview key={index}> {/* Use o id como chave */}
-                <img src={item.url} alt={`Foto da store ${store.namestore}`} />
-              </C.ImagePreview>
-            ))}
-          <C.StatusIndicator isOpen={store.status === "Aberta"} />
-          {/* Agrupando nome da loja e botões em wrappers */}
-          <C.StoreInfoWrapper>
-            <C.StatusWrapper>
+          <C.InfoWrapper>
+            {/* Filtra as imagens que pertencem à loja atual */}
+            {imageStoreUrls
+              .filter((item) => item.store_id === store.id) // Filtra por storeId
+              .map((item, index) => (
+                <C.ImagePreview key={index}> {/* Use o id como chave */}
+                  <img src={item.url} alt={`Foto da store ${store.namestore}`} />
+                </C.ImagePreview>
+              ))}
+            <C.StatusIndicator isOpen={store.status === "Aberta"} />
+            {/* Agrupando nome da loja e botões em wrappers */}
+            <C.StoreInfoWrapper>
+              <C.StatusWrapper>
 
-              {store.namestore}
-            </C.StatusWrapper>
+                {store.namestore}
+              </C.StatusWrapper>
 
 
 
-          </C.StoreInfoWrapper>
-          <C.ToggleSwitch>
-            <input
-              type="checkbox"
-              checked={store.status === "Aberta"}
-              onChange={() => toggleStoreStatus(store.id)}
-            />
-            <C.Slider />
-          </C.ToggleSwitch>
+            </C.StoreInfoWrapper>
+            <C.ToggleSwitch>
+              <input
+                type="checkbox"
+                checked={store.status === "Aberta"}
+                onChange={() => toggleStoreStatus(store.id)}
+              />
+              <C.Slider />
+            </C.ToggleSwitch>
           </C.InfoWrapper>
+          acredita
           <C.ButtonsWrapper>
             <C.ActionsWrapper>
               <C.EditButton onClick={() => openCriarFotoLojaModal(store)}>
