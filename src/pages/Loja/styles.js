@@ -49,7 +49,8 @@ export const ToggleSwitch = styled.label`
   display: inline-block;
   width: 40px; /* Diminuído */
   height: 20px; /* Diminuído */
-
+ align-items: center;
+  justify-content: center;
   input {
     opacity: 0;
     width: 0;

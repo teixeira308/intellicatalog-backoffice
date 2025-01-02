@@ -162,8 +162,9 @@ const Loja = () => {
                <img src={item.url} alt={`Foto da store ${store.namestore}`} />
              </C.ImagePreview>
            ))}
+            <C.StatusIndicator isOpen={store.status === "Aberta"} />
          <C.StoreInfoWrapper>
-         <C.StatusIndicator isOpen={store.status === "Aberta"} />
+        
            <C.StatusWrapper>{store.namestore}</C.StatusWrapper>
          </C.StoreInfoWrapper>
          <C.ToggleSwitch>
