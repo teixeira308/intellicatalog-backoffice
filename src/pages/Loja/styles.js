@@ -170,3 +170,11 @@ export const ButtonsWrapper = styled.div`
   flex-wrap: wrap; /* Permite quebra de linha dos botões */
   justify-content: center; /* Centraliza os botões */
 `;
+
+export const InfoWrapper = styled.div`
+  margin-top: 20px; /* Espaço entre os botões e o restante do conteúdo */
+  width: 100%; /* Garante que os botões ocupem a largura completa */
+  display: flex;
+  flex-wrap: wrap; /* Permite quebra de linha dos botões */
+  justify-content: center; /* Centraliza os botões */
+`;

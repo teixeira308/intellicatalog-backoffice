@@ -140,9 +140,9 @@ const Loja = () => {
   };
 
 
-  const openStoreSite = (store) =>{
+  const openStoreSite = (store) => {
 
-    window.open(store_site+store.identificadorexterno, '_blank')
+    window.open(store_site + store.identificadorexterno, '_blank')
   }
 
 
@@ -154,6 +154,7 @@ const Loja = () => {
       {stores.map((store) => (
         <C.Card key={store.id}>
 
+<C.InfoWrapper>
           {/* Filtra as imagens que pertencem à loja atual */}
           {imageStoreUrls
             .filter((item) => item.store_id === store.id) // Filtra por storeId
@@ -169,9 +170,9 @@ const Loja = () => {
 
               {store.namestore}
             </C.StatusWrapper>
-            
-         
-  
+
+
+
           </C.StoreInfoWrapper>
           <C.ToggleSwitch>
             <input
@@ -181,32 +182,32 @@ const Loja = () => {
             />
             <C.Slider />
           </C.ToggleSwitch>
-          
+          </C.InfoWrapper>
           <C.ButtonsWrapper>
-    <C.ActionsWrapper>
-      <C.EditButton onClick={() => openCriarFotoLojaModal(store)}>
-        <FaImages />
-        <br />
-        Foto de perfil
-      </C.EditButton>
-      <C.EditButton onClick={() => openEditarLojaModal(store)}>
-        <FaEdit />
-        <br />
-        Informações
-      </C.EditButton>
-      <C.EditButton onClick={() => openEditarLojaConfigModal(store)}>
-        <FaCog />
-        <br />
-        Configurações
-      </C.EditButton>
-      <C.EditButton onClick={() => openStoreSite(store)}>
-        <FaRegWindowRestore />
-        <br />
-        Ir para loja
-      </C.EditButton>
-    </C.ActionsWrapper>
-  </C.ButtonsWrapper>
-            
+            <C.ActionsWrapper>
+              <C.EditButton onClick={() => openCriarFotoLojaModal(store)}>
+                <FaImages />
+                <br />
+                Foto de perfil
+              </C.EditButton>
+              <C.EditButton onClick={() => openEditarLojaModal(store)}>
+                <FaEdit />
+                <br />
+                Informações
+              </C.EditButton>
+              <C.EditButton onClick={() => openEditarLojaConfigModal(store)}>
+                <FaCog />
+                <br />
+                Configurações
+              </C.EditButton>
+              <C.EditButton onClick={() => openStoreSite(store)}>
+                <FaRegWindowRestore />
+                <br />
+                Ir para loja
+              </C.EditButton>
+            </C.ActionsWrapper>
+          </C.ButtonsWrapper>
+
         </C.Card>
       ))}
 
