@@ -162,7 +162,7 @@ export const ImageGallery = styled.div`
 
 export const StoreInfoWrapper = styled.div`
   display: flex;
-  flex-direction: column; /* Alinha os elementos em coluna */
+  flex-direction: line; /* Alinha os elementos em coluna */
   align-items: center; /* Centraliza horizontalmente */
   text-align: center; /* Alinha o texto no centro */
   margin-top: 10px; /* Espaço entre os elementos acima */
@@ -172,7 +172,7 @@ export const StoreInfoWrapper = styled.div`
 export const InfoWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column; /* Alinha os itens em coluna */
+  flex-direction: line; /* Alinha os itens em coluna */
   align-items: center; /* Centraliza horizontalmente */
   justify-content: center; /* Centraliza verticalmente */
   width: 100%;
