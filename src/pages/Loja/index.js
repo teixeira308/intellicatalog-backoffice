@@ -181,6 +181,7 @@ const Loja = () => {
             />
             <C.Slider />
           </C.ToggleSwitch>
+          <br/> <br/>
           <C.ActionsWrapper>
               <C.EditButton onClick={() => openCriarFotoLojaModal(store)}>
                 <FaImages /> <br/>
