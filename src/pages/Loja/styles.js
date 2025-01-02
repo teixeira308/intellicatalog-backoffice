@@ -163,18 +163,18 @@ export const StoreInfoWrapper = styled.div`
   margin-top: 10px; /* Espaço entre as imagens e o nome + botões */
 `;
  
-export const ButtonsWrapper = styled.div`
-  margin-top: 20px; /* Espaço entre os botões e o restante do conteúdo */
-  width: 100%; /* Garante que os botões ocupem a largura completa */
+export const InfoWrapper = styled.div`
+  width: 100%; /* Garante que ocupe a linha inteira */
   display: flex;
-  flex-wrap: wrap; /* Permite quebra de linha dos botões */
-  justify-content: center; /* Centraliza os botões */
+  justify-content: space-between; /* Distribui os itens dentro do InfoWrapper */
+  align-items: center; /* Centraliza os itens verticalmente */
+  margin-bottom: 20px; /* Adiciona espaço entre o InfoWrapper e o ButtonsWrapper */
 `;
 
-export const InfoWrapper = styled.div`
-  margin-top: 20px; /* Espaço entre os botões e o restante do conteúdo */
-  width: 100%; /* Garante que os botões ocupem a largura completa */
+export const ButtonsWrapper = styled.div`
+  width: 100%; /* Garante que ocupe a linha inteira */
   display: flex;
   flex-wrap: wrap; /* Permite quebra de linha dos botões */
   justify-content: center; /* Centraliza os botões */
+  gap: 10px; /* Espaçamento entre os botões */
 `;
