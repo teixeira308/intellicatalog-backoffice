@@ -99,6 +99,7 @@ export const StatusWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  padding: 10px;
 `;
 
 export const ActionsWrapper = styled.div`
@@ -163,6 +164,7 @@ export const StoreInfoWrapper = styled.div`
   display: flex;
   flex-direction: column; /* Alinha os elementos em coluna */
   margin-top: 10px; /* Espaço entre as imagens e o nome + botões */
+  padding: 10px;
 `;
  
 export const InfoWrapper = styled.div`
