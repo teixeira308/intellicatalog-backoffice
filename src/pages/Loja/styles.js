@@ -112,8 +112,8 @@ export const EditButton = styled.button`
   border-radius: 4px; /* Arredonda levemente os cantos */
   cursor: pointer;
   color: #2196f3;
-  font-size: 20px;
-  width: 40px;
+  font-size: 70px;
+  width: 100px;
 
   &:hover {
     color: #1769aa;
