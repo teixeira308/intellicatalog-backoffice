@@ -181,7 +181,7 @@ const Loja = () => {
             />
             <C.Slider />
           </C.ToggleSwitch>
-          <br/> <br/>
+          <C.Card>
           <C.ActionsWrapper>
               <C.EditButton onClick={() => openCriarFotoLojaModal(store)}>
                 <FaImages /> <br/>
@@ -200,6 +200,7 @@ const Loja = () => {
                 Ir para loja
               </C.EditButton>
             </C.ActionsWrapper>
+            </C.Card>
         </C.Card>
       ))}
 
