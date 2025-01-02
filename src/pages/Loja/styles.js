@@ -18,19 +18,21 @@ export const Title = styled.h2``;
 
 export const Card = styled.div`
   display: flex;
-  justify-content: space-evenly; /* Distribui os itens nos extremos */
-  align-items: center; /* Centraliza verticalmente */
+  flex-direction: column; /* Alinha os elementos verticalmente */
+  justify-content: space-evenly; /* Distribui os itens no espaço disponível */
+  align-items: center; /* Centraliza horizontalmente */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   width: 97%;
-  font-size: 20px;
   padding: 20px 20px;
   max-width: 800px;
-  font-size:17px;
+  font-size: 17px;
+
   &:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
 `;
+
 
 export const StatusIndicator = styled.span`
   height: 15px;
@@ -164,17 +166,17 @@ export const StoreInfoWrapper = styled.div`
 `;
  
 export const InfoWrapper = styled.div`
-  width: 100%; /* Garante que ocupe a linha inteira */
   display: flex;
-  justify-content: space-between; /* Distribui os itens dentro do InfoWrapper */
-  align-items: center; /* Centraliza os itens verticalmente */
-  margin-bottom: 20px; /* Adiciona espaço entre o InfoWrapper e o ButtonsWrapper */
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px; /* Espaçamento inferior para separar do ButtonsWrapper */
 `;
 
+
 export const ButtonsWrapper = styled.div`
-  width: 100%; /* Garante que ocupe a linha inteira */
   display: flex;
-  flex-wrap: wrap; /* Permite quebra de linha dos botões */
-  justify-content: center; /* Centraliza os botões */
-  gap: 10px; /* Espaçamento entre os botões */
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
 `;
