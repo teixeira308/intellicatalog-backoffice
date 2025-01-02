@@ -49,7 +49,7 @@ export const ToggleSwitch = styled.label`
   display: inline-block;
   width: 40px; /* Diminuído */
   height: 20px; /* Diminuído */
- align-items: center;
+  align-items: center;
   justify-content: center;
   input {
     opacity: 0;
@@ -163,15 +163,20 @@ export const ImageGallery = styled.div`
 export const StoreInfoWrapper = styled.div`
   display: flex;
   flex-direction: column; /* Alinha os elementos em coluna */
-  margin-top: 10px; /* Espaço entre as imagens e o nome + botões */
+  align-items: center; /* Centraliza horizontalmente */
+  text-align: center; /* Alinha o texto no centro */
+  margin-top: 10px; /* Espaço entre os elementos acima */
 `;
+
  
 export const InfoWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column; /* Alinha os itens em coluna */
+  align-items: center; /* Centraliza horizontalmente */
+  justify-content: center; /* Centraliza verticalmente */
   width: 100%;
-  margin-bottom: 20px; /* Espaçamento inferior para separar do ButtonsWrapper */
+  margin-bottom: 20px; /* Espaçamento inferior */
 `;
 
 
