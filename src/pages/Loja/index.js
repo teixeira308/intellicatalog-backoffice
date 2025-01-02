@@ -152,64 +152,54 @@ const Loja = () => {
       <C.Title>Minha Loja</C.Title>
 
       {stores.map((store) => (
-        <C.Card key={store.id}>
-
-          <C.InfoWrapper>
-            {/* Filtra as imagens que pertencem à loja atual */}
-            {imageStoreUrls
-              .filter((item) => item.store_id === store.id) // Filtra por storeId
-              .map((item, index) => (
-                <C.ImagePreview key={index}> {/* Use o id como chave */}
-                  <img src={item.url} alt={`Foto da store ${store.namestore}`} />
-                </C.ImagePreview>
-              ))}
-            <C.StatusIndicator isOpen={store.status === "Aberta"} />
-            {/* Agrupando nome da loja e botões em wrappers */}
-            <C.StoreInfoWrapper>
-              <C.StatusWrapper>
-
-                {store.namestore}
-              </C.StatusWrapper>
-
-
-
-            </C.StoreInfoWrapper>
-            <C.ToggleSwitch>
-              <input
-                type="checkbox"
-                checked={store.status === "Aberta"}
-                onChange={() => toggleStoreStatus(store.id)}
-              />
-              <C.Slider />
-            </C.ToggleSwitch>
-          </C.InfoWrapper>
-          acredita
-          <C.ButtonsWrapper>
-            <C.ActionsWrapper>
-              <C.EditButton onClick={() => openCriarFotoLojaModal(store)}>
-                <FaImages />
-                <br />
-                Foto de perfil
-              </C.EditButton>
-              <C.EditButton onClick={() => openEditarLojaModal(store)}>
-                <FaEdit />
-                <br />
-                Informações
-              </C.EditButton>
-              <C.EditButton onClick={() => openEditarLojaConfigModal(store)}>
-                <FaCog />
-                <br />
-                Configurações
-              </C.EditButton>
-              <C.EditButton onClick={() => openStoreSite(store)}>
-                <FaRegWindowRestore />
-                <br />
-                Ir para loja
-              </C.EditButton>
-            </C.ActionsWrapper>
-          </C.ButtonsWrapper>
-
-        </C.Card>
+       <C.Card key={store.id}>
+       <C.InfoWrapper>
+         {/* Conteúdo do InfoWrapper */}
+         {imageStoreUrls
+           .filter((item) => item.store_id === store.id)
+           .map((item, index) => (
+             <C.ImagePreview key={index}>
+               <img src={item.url} alt={`Foto da store ${store.namestore}`} />
+             </C.ImagePreview>
+           ))}
+         <C.StoreInfoWrapper>
+           <C.StatusWrapper>{store.namestore}</C.StatusWrapper>
+         </C.StoreInfoWrapper>
+         <C.ToggleSwitch>
+           <input
+             type="checkbox"
+             checked={store.status === "Aberta"}
+             onChange={() => toggleStoreStatus(store.id)}
+           />
+           <C.Slider />
+         </C.ToggleSwitch>
+       </C.InfoWrapper>
+       <C.ButtonsWrapper>
+         <C.ActionsWrapper>
+           <C.EditButton onClick={() => openCriarFotoLojaModal(store)}>
+             <FaImages />
+             <br />
+             Foto de perfil
+           </C.EditButton>
+           <C.EditButton onClick={() => openEditarLojaModal(store)}>
+             <FaEdit />
+             <br />
+             Informações
+           </C.EditButton>
+           <C.EditButton onClick={() => openEditarLojaConfigModal(store)}>
+             <FaCog />
+             <br />
+             Configurações
+           </C.EditButton>
+           <C.EditButton onClick={() => openStoreSite(store)}>
+             <FaRegWindowRestore />
+             <br />
+             Ir para loja
+           </C.EditButton>
+         </C.ActionsWrapper>
+       </C.ButtonsWrapper>
+     </C.Card>
+     
       ))}
 
 
