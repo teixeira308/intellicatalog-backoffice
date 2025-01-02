@@ -166,7 +166,8 @@ export const StoreInfoWrapper = styled.div`
   display: flex;
   flex-direction: column; /* Alinha os elementos em coluna */
   margin-top: 10px; /* Espaço entre as imagens e o nome + botões */
-  padding: 10px;
+ justify-content: center;
+
 `;
  
 export const InfoWrapper = styled.div`
@@ -174,6 +175,7 @@ export const InfoWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
+  align-items: center;
   margin-bottom: 20px; /* Espaçamento inferior para separar do ButtonsWrapper */
 `;
 
