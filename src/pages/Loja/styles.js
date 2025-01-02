@@ -101,8 +101,9 @@ export const StatusWrapper = styled.div`
 
 export const ActionsWrapper = styled.div`
   display: flex;
-  align-items: center;
-  gap: 20px; /* Espaçamento entre o botão de edição e o toggle */
+  flex-wrap: wrap; /* Permite que os itens quebrem linha */
+  justify-content: center; /* Centraliza os botões horizontalmente */
+  gap: 20px; /* Espaçamento entre os botões */
   margin-top: 20px; /* Espaço entre o nome da loja e os botões */
 `;
 
@@ -112,14 +113,23 @@ export const EditButton = styled.button`
   border-radius: 4px; /* Arredonda levemente os cantos */
   cursor: pointer;
   color: #2196f3;
-  font-size: 70px;
-  width: 100px;
+  font-size: 18px; /* Ajusta o tamanho da fonte */
+  padding: 10px; /* Adiciona espaço interno para tornar os botões mais confortáveis */
+  flex: 1 1 calc(50% - 20px); /* Cada botão ocupa 50% da largura menos o gap */
+  max-width: calc(50% - 20px); /* Garante que os botões não ultrapassem 50% */
+  text-align: center; /* Centraliza o texto e os ícones */
 
   &:hover {
     color: #1769aa;
     border-color: #1769aa; /* Altera a cor da borda no hover */
   }
+
+  svg {
+    margin-right: 8px; /* Adiciona espaço entre o ícone e o texto */
+    font-size: 20px; /* Ajusta o tamanho do ícone */
+  }
 `;
+
 
 
 
