@@ -45,6 +45,7 @@ export const StatusIndicator = styled.span`
 
 
 export const ToggleSwitch = styled.label`
+ padding: 10px;
   position: relative;
   display: inline-block;
   width: 40px; /* Diminuído */
@@ -144,6 +145,7 @@ export const ImagePreview = styled.div`
   border-radius: 50%; /* Bordas bolinha */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para a imagem */
 
+   padding: 10px;
   img {
     width: 100%; /* Ajusta a imagem para ocupar o container */
     height: 100%; /* Ajusta a altura para ocupar o container */
