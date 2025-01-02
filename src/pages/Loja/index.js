@@ -172,16 +172,20 @@ const Loja = () => {
             
             <C.ActionsWrapper>
               <C.EditButton onClick={() => openCriarFotoLojaModal(store)}>
-                <FaImages />
+                <FaImages /> 
+                Foto de perfil
               </C.EditButton>
               <C.EditButton onClick={() => openEditarLojaModal(store)}>
                 <FaEdit />
+                Informações
               </C.EditButton>
               <C.EditButton onClick={() => openEditarLojaConfigModal(store)}>
                 <FaCog />
+                Configurações
               </C.EditButton>
               <C.EditButton onClick={() => openStoreSite(store)}>
                 <FaRegWindowRestore />
+                Ir para loja
               </C.EditButton>
             </C.ActionsWrapper>
   
