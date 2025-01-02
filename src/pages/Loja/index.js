@@ -181,26 +181,32 @@ const Loja = () => {
             />
             <C.Slider />
           </C.ToggleSwitch>
-          <C.Card>
-          <C.ActionsWrapper>
-              <C.EditButton onClick={() => openCriarFotoLojaModal(store)}>
-                <FaImages /> <br/>
-                Foto de perfil
-              </C.EditButton>
-              <C.EditButton onClick={() => openEditarLojaModal(store)}>
-                <FaEdit /><br/>
-                Informações
-              </C.EditButton>
-              <C.EditButton onClick={() => openEditarLojaConfigModal(store)}>
-                <FaCog /><br/>
-                Configurações
-              </C.EditButton>
-              <C.EditButton onClick={() => openStoreSite(store)}>
-                <FaRegWindowRestore /><br/>
-                Ir para loja
-              </C.EditButton>
-            </C.ActionsWrapper>
-            </C.Card>
+          
+          <C.ButtonsWrapper>
+    <C.ActionsWrapper>
+      <C.EditButton onClick={() => openCriarFotoLojaModal(store)}>
+        <FaImages />
+        <br />
+        Foto de perfil
+      </C.EditButton>
+      <C.EditButton onClick={() => openEditarLojaModal(store)}>
+        <FaEdit />
+        <br />
+        Informações
+      </C.EditButton>
+      <C.EditButton onClick={() => openEditarLojaConfigModal(store)}>
+        <FaCog />
+        <br />
+        Configurações
+      </C.EditButton>
+      <C.EditButton onClick={() => openStoreSite(store)}>
+        <FaRegWindowRestore />
+        <br />
+        Ir para loja
+      </C.EditButton>
+    </C.ActionsWrapper>
+  </C.ButtonsWrapper>
+            
         </C.Card>
       ))}
 
