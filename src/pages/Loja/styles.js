@@ -108,15 +108,19 @@ export const ActionsWrapper = styled.div`
 
 export const EditButton = styled.button`
   background: none;
-  border: none;
+  border: 2px solid #2196f3; /* Adiciona uma borda com cor azul */
+  border-radius: 4px; /* Arredonda levemente os cantos */
   cursor: pointer;
   color: #2196f3;
   font-size: 20px;
-  
+  width: 40px;
+
   &:hover {
     color: #1769aa;
+    border-color: #1769aa; /* Altera a cor da borda no hover */
   }
 `;
+
 
 
 export const ImagePreview = styled.div`

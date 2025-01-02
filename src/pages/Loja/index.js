@@ -184,26 +184,7 @@ const Loja = () => {
                 <FaRegWindowRestore />
               </C.EditButton>
             </C.ActionsWrapper>
-
-            <div>
-            <button style="flex: 1 1 50%; display: flex; align-items: center; justify-content: center; border: 1px solid #000; background-color: #f0f0f0; font-size: 1.5rem; cursor: pointer; height: 50%; transition: background-color 0.3s;"
-            onmouseover="this.style.backgroundColor='#ddd'" onmouseout="this.style.backgroundColor='#f0f0f0'">
-        Botão 1
-    </button>
-    <button style="flex: 1 1 50%; display: flex; align-items: center; justify-content: center; border: 1px solid #000; background-color: #f0f0f0; font-size: 1.5rem; cursor: pointer; height: 50%; transition: background-color 0.3s;"
-            onmouseover="this.style.backgroundColor='#ddd'" onmouseout="this.style.backgroundColor='#f0f0f0'">
-        Botão 2
-    </button>
-    <button style="flex: 1 1 50%; display: flex; align-items: center; justify-content: center; border: 1px solid #000; background-color: #f0f0f0; font-size: 1.5rem; cursor: pointer; height: 50%; transition: background-color 0.3s;"
-            onmouseover="this.style.backgroundColor='#ddd'" onmouseout="this.style.backgroundColor='#f0f0f0'">
-        Botão 3
-    </button>
-    <button style="flex: 1 1 50%; display: flex; align-items: center; justify-content: center; border: 1px solid #000; background-color: #f0f0f0; font-size: 1.5rem; cursor: pointer; height: 50%; transition: background-color 0.3s;"
-            onmouseover="this.style.backgroundColor='#ddd'" onmouseout="this.style.backgroundColor='#f0f0f0'">
-        Botão 4
-    </button>
-            </div>
-
+  
           </C.StoreInfoWrapper>
           <C.ToggleSwitch>
             <input
