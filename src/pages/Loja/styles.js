@@ -165,7 +165,7 @@ export const StoreInfoWrapper = styled.div`
   align-items: center; /* Centraliza horizontalmente */
   text-align: center; /* Alinha o texto no centro */
   margin-top: 10px; /* Espaço entre os elementos acima */
-  gap: 20px; /* Espaçamento entre os itens filhos */
+  
 `;
 
  
@@ -177,6 +177,7 @@ export const InfoWrapper = styled.div`
   justify-content: center; /* Centraliza verticalmente */
   width: 100%;
   margin-bottom: 20px; /* Espaçamento inferior */
+  gap: 20px; /* Espaçamento entre os itens filhos */
 `;
 
 
