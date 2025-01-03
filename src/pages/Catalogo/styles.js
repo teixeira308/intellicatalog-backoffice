@@ -44,10 +44,9 @@ export const StatusIndicator = styled.span`
 
 export const ToggleSwitch = styled.label`
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  width: 40px;
-  height: 20px;
+  display: inline-block;
+  width: 30px; /* Reduzido */
+  height: 16px; /* Reduzido */
 
   input {
     opacity: 0;
@@ -65,13 +64,13 @@ export const Slider = styled.span`
   bottom: 0;
   background-color: #ccc;
   transition: 0.4s;
-  border-radius: 20px;
+  border-radius: 16px;
 
   &::before {
     position: absolute;
     content: '';
-    height: 16px;
-    width: 16px;
+    height: 12px; /* Reduzido proporcionalmente */
+    width: 12px; /* Reduzido proporcionalmente */
     left: 2px;
     bottom: 2px;
     background-color: white;
@@ -84,7 +83,7 @@ export const Slider = styled.span`
   }
 
   input:checked + &::before {
-    transform: translateX(20px);
+    transform: translateX(14px); /* Ajustado para o novo tamanho */
   }
 `;
 
@@ -248,27 +247,34 @@ export const CategoriaDraggingOver = styled.div`
 
 export const ProdutoItem = styled.li`
   display: flex;
-  flex-direction: column; /* Organiza os elementos verticalmente */
+  align-items: center; /* Alinha verticalmente no centro */
+  justify-content: space-between; /* Espaça o título e os botões/toggle */
   padding: 10px;
   border-bottom: 1px solid #ddd;
-  font-size: 16px;
+  font-size: 14px; /* Diminui o tamanho da fonte */
   color: #333;
-  gap: 10px; /* Espaçamento entre título e botões */
 
   &:last-child {
     border-bottom: none;
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column; /* Empilha os itens em telas muito pequenas */
+    align-items: flex-start; /* Alinha os itens à esquerda */
+    gap: 10px; /* Espaço entre os itens */
   }
 `;
 
 
 
+
 export const ProdutoOperations = styled.div`
   display: flex;
-  flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha se necessário */
-  align-items: center; /* Centraliza os elementos verticalmente */
-  justify-content: flex-start; /* Alinha os botões à esquerda */
-  gap: 15px; /* Espaçamento consistente entre os botões */
+  align-items: center; /* Centraliza os itens verticalmente */
+  gap: 10px; /* Espaçamento reduzido entre os itens */
+  flex-wrap: nowrap; /* Impede quebra de linha */
 `;
+
 
 
 
