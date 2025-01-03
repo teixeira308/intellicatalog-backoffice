@@ -230,7 +230,7 @@ export const CategoriaList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 100px;
+  width: 300px;
   background-color: red;
 `;
 export const CategoriaCardDragging = styled(Card)`
