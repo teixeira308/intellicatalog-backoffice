@@ -18,18 +18,15 @@ export const Title = styled.h2``;
 
 export const Card = styled.div`
   width: 97%;
-  font-size: 20px;
-  padding: 20px 20px;
   max-width: 800px;
-  font-size:17px;
-  display: flex;
-  flex-direction: column;  /* Organiza os itens verticalmente */
+  font-size: 17px;
   padding: 20px;
   margin: 10px 0;
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, background-color 0.2s ease;
 `;
 
 export const StatusIndicator = styled.span`
@@ -135,16 +132,10 @@ export const ShowProductsButton = styled.button`
   }
 `;
 
-export const ProdutoList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 20px auto; /* Centraliza horizontalmente */
-  width: 100%;
-  max-width: 800px; /* Limita a largura máxima */
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 15px;
+export const ProdutoList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 
@@ -230,18 +221,18 @@ export const ReorderButtonProducts = styled.button`
 
 
 export const CategoriaList = styled.div`
-  margin-bottom: 20px;
-`;
-export const CategoriaCardDragging = styled(Card)`
-  background-color: #e0f7fa; /* Cor de destaque enquanto arrasta */
-  border-color: #007bff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
-export const CategoriaDraggingOver = styled.div`
+export const CategoriaCardDragging = styled(Card)`
+  background-color: #e0f7fa; /* Cor de destaque enquanto arrasta */
+`;
+
+export const CategoriaDraggingOver = styled(Card)`
   border: 2px dashed #007bff; /* Estilo de feedback ao arrastar */
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  background-color: #f0f8ff; /* Fundo diferenciado */
 `;
 
 
