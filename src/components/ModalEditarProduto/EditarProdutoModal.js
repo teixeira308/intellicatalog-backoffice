@@ -144,14 +144,14 @@ const EditarLojaModal = ({ isOpen, onClose, produto, categoria, onEdit }) => {
                 value={formData.description}
                 onChange={handleChange}
                 maxLength={500} // Limita a 100 caracteres
-                rows={4} // Define o número de linhas visíveis
+                rows={10} // Define o número de linhas visíveis
                 placeholder="Digite sua descrição aqui..."
               />
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="description">Preço</C.Label>
+              <C.Label htmlFor="price">Preço</C.Label>
               <NumericFormat
                 className="NumericFormat"
                 name="price"
@@ -169,7 +169,7 @@ const EditarLojaModal = ({ isOpen, onClose, produto, categoria, onEdit }) => {
               />
             </C.FormColumn>
             <C.FormColumn>
-              <C.Label htmlFor="description">Preço promocional</C.Label>
+              <C.Label htmlFor="promocional_price">Preço promocional</C.Label>
               <NumericFormat
                 className="NumericFormat"
                 name="promocional_price"
