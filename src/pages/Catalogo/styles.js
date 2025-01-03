@@ -44,9 +44,10 @@ export const StatusIndicator = styled.span`
 
 export const ToggleSwitch = styled.label`
   position: relative;
-  display: inline-block;
-  width: 40px; /* Diminuído */
-  height: 20px; /* Diminuído */
+  display: inline-flex; /* Garante alinhamento consistente */
+  align-items: center; /* Centraliza os itens no centro verticalmente */
+  width: 40px;
+  height: 20px;
 
   input {
     opacity: 0;
@@ -64,15 +65,15 @@ export const Slider = styled.span`
   bottom: 0;
   background-color: #ccc;
   transition: 0.4s;
-  border-radius: 20px; /* Ajustado proporcionalmente ao novo tamanho */
+  border-radius: 20px;
 
   &::before {
     position: absolute;
     content: '';
-    height: 16px; /* Diminuído proporcionalmente */
-    width: 16px; /* Diminuído proporcionalmente */
-    left: 2px; /* Ajuste para centralizar corretamente dentro do toggle */
-    bottom: 2px; /* Ajuste para centralizar corretamente dentro do toggle */
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
     background-color: white;
     transition: 0.4s;
     border-radius: 50%;
@@ -83,10 +84,9 @@ export const Slider = styled.span`
   }
 
   input:checked + &::before {
-    transform: translateX(20px); /* Ajustado para o novo tamanho */
+    transform: translateX(20px);
   }
 `;
-
 
 export const StatusText = styled.p`
   margin-top: 10px;
@@ -173,6 +173,7 @@ export const ProdutoActions = styled.div`
   display: flex;
   flex-direction: column; // Alinha os itens na coluna
   margin-bottom: 10px; // Espaço abaixo do contêiner, se desejado
+   gap: 10px; /* Espaçamento entre os itens */
 `;
 
 
@@ -279,11 +280,14 @@ export const CategoriaDraggingOver = styled.div`
 
 
 export const ProdutoItem = styled.li`
+  display: flex;
+  justify-content: space-between; /* Garante que o toggle fique à direita */
+  align-items: center; /* Centraliza verticalmente */
   padding: 10px;
   border-bottom: 1px solid #ddd;
   font-size: 16px;
   color: #333;
- 
+
   &:last-child {
     border-bottom: none;
   }
@@ -291,7 +295,8 @@ export const ProdutoItem = styled.li`
 
 export const ProdutoOperations = styled.div`
   display: flex; // Usa flexbox para alinhar os botões
-  gap: 45px; // Aumenta o espaçamento entre os botões (pode ajustar o valor conforme necessário)
+  align-items: center; // Centraliza os itens verticalmente
+  gap: 45px; // Espaçamento entre os botões
   margin-top: 9px; // Espaço acima dos botões
 `;
 
