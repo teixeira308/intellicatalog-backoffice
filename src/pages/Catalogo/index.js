@@ -411,14 +411,15 @@ const Catalogo = () => {
                           <C.ProdutoItem>
                             {produto.titulo} <br />
                             <C.ProdutoOperations>
-                              <C.EditImageButton onClick={() => openCriarFotosProdutoModal(produto)}>
-                                <FaImages />
-                              </C.EditImageButton>
+                             
                               <C.EditProductButton onClick={() => openEditarProdutoModal(produto, categoria)}>
-                                <FaEdit />
+                                <FaEdit /> Editar
                               </C.EditProductButton>
+                              <C.EditImageButton onClick={() => openCriarFotosProdutoModal(produto)}>
+                                <FaImages /> Imagens
+                              </C.EditImageButton>
                               <C.TrashButton onClick={() => openDeleteProdutoModal(produto)}>
-                                <FaTrashAlt />
+                                <FaTrashAlt /> Excluir
                               </C.TrashButton>
                               <C.ToggleSwitch>
                                 <input
