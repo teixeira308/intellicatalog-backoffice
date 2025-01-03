@@ -71,7 +71,7 @@ export const Slider = styled.span`
     content: '';
     height: 16px; /* Diminuído proporcionalmente */
     width: 16px; /* Diminuído proporcionalmente */
-    left: 2px; /* Ajuste para centralizar corretamente dentro do toggle */
+    left: 4px; /* Ajuste para centralizar corretamente dentro do toggle */
     bottom: 2px; /* Ajuste para centralizar corretamente dentro do toggle */
     background-color: white;
     transition: 0.4s;
