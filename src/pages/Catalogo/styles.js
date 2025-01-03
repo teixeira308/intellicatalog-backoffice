@@ -111,7 +111,7 @@ export const EditButton = styled.button`
   border: none;
   cursor: pointer;
   color: #2196f3;
-  font-size: 10px;
+  font-size: 15px;
 
   &:hover {
     color: #1769aa;
@@ -255,7 +255,7 @@ export const TrashButton = styled.button`
   border: none;
   cursor: pointer;
   color: red;
-  font-size: 20px;
+  font-size: 15px;
 
   &:hover {
     color: #1769aa;
