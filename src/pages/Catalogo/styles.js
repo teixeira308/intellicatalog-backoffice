@@ -139,14 +139,15 @@ export const ShowProductsButton = styled.button`
 export const ProdutoList = styled.ul`
   list-style: none;
   padding: 0;
-  margin-top: 10px;
+  margin: 20px auto; /* Centraliza horizontalmente */
   width: 100%;
+  max-width: 800px; /* Limita a largura máxima */
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 15px;
-  
 `;
+
 
 export const ProdutoActions = styled.div`
   display: flex;
@@ -247,12 +248,12 @@ export const CategoriaDraggingOver = styled.div`
 
 export const ProdutoItem = styled.li`
   display: flex;
-  justify-content: space-between; /* Mantém os botões e o toggle à direita */
-  align-items: center;
+  flex-direction: column; /* Organiza os elementos verticalmente */
   padding: 10px;
   border-bottom: 1px solid #ddd;
   font-size: 16px;
   color: #333;
+  gap: 10px; /* Espaçamento entre título e botões */
 
   &:last-child {
     border-bottom: none;
@@ -260,12 +261,15 @@ export const ProdutoItem = styled.li`
 `;
 
 
+
 export const ProdutoOperations = styled.div`
-  display: flex; // Usa flexbox para alinhar os botões
-  align-items: center; // Centraliza os itens verticalmente
-  gap: 45px; // Espaçamento entre os botões
-  margin-top: 9px; // Espaço acima dos botões
+  display: flex;
+  flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha se necessário */
+  align-items: center; /* Centraliza os elementos verticalmente */
+  justify-content: flex-start; /* Alinha os botões à esquerda */
+  gap: 15px; /* Espaçamento consistente entre os botões */
 `;
+
 
 
 export const ProdutoItemOrderChange = styled.div`
