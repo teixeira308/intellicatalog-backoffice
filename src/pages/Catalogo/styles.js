@@ -111,7 +111,7 @@ export const EditButton = styled.button`
   border: none;
   cursor: pointer;
   color: #2196f3;
-  font-size: 20px;
+  font-size: 10px;
 
   &:hover {
     color: #1769aa;
