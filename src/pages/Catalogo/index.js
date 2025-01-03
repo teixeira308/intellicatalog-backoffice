@@ -350,10 +350,10 @@ const Catalogo = () => {
 
                 <C.ActionsWrapper>
                   <C.EditButton onClick={() => openEditarCategoriaModal(categoria)}>
-                    <FaEdit />
+                    <FaEdit /> Editar
                   </C.EditButton>
                   <C.TrashButton onClick={() => openDeleteCategoriaModal(categoria)}>
-                    <FaTrashAlt />
+                    <FaTrashAlt /> Excluir
                   </C.TrashButton>
                   <C.ToggleSwitch>
                     <input
