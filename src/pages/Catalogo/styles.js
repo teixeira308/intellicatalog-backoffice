@@ -205,15 +205,36 @@ export const CategoriaLink = styled.span`
 
 export const CreateButton = styled.button`
   background: none;
-  border: none;
+  border: 1px solid #2196f3; /* Adiciona uma borda */
+  border-radius: 20px; /* Torna as bordas arredondadas */
   cursor: pointer;
   color: #2196f3;
   font-size: 13px;
+  padding: 5px 10px; /* Adiciona espaço interno para melhor aparência */
+  transition: 0.3s; /* Suaviza a transição do hover */
 
   &:hover {
     color: #1769aa;
+    border-color: #1769aa; /* Altera a cor da borda no hover */
   }
 `;
+
+export const ReorderButton = styled.button`
+  background: none;
+  border: 1px solid #2196f3; /* Adiciona uma borda */
+  border-radius: 20px; /* Torna as bordas arredondadas */
+  cursor: pointer;
+  color: #2196f3;
+  font-size: 13px;
+  padding: 5px 10px; /* Adiciona espaço interno para melhor aparência */
+  transition: 0.3s; /* Suaviza a transição do hover */
+
+  &:hover {
+    color: #1769aa;
+    border-color: #1769aa; /* Altera a cor da borda no hover */
+  }
+`;
+
 
 export const ReorderButtonProducts = styled.button`
   background: none;
@@ -227,17 +248,7 @@ export const ReorderButtonProducts = styled.button`
   }
 `;
 
-export const ReorderButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #2196f3;
-  font-size: 13px;
 
-  &:hover {
-    color: #1769aa;
-  }
-`;
 
 export const TrashButton = styled.button`
   background: none;
