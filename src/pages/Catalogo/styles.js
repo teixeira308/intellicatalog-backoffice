@@ -44,8 +44,8 @@ export const StatusIndicator = styled.span`
 
 export const ToggleSwitch = styled.label`
   position: relative;
-  display: inline-flex; /* Garante alinhamento consistente */
-  align-items: center; /* Centraliza os itens no centro verticalmente */
+  display: inline-flex;
+  align-items: center;
   width: 40px;
   height: 20px;
 
@@ -120,29 +120,8 @@ export const EditButton = styled.button`
 
 
 
-export const EditImageButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #2196f3;
-  font-size: 15px;
-
-  &:hover {
-    color: #1769aa;
-  }
-`;
-
-export const EditProductButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #2196f3;
-  font-size: 15px;
-
-  &:hover {
-    color: #1769aa;
-  }
-`;
+ 
+ 
 
 export const ShowProductsButton = styled.button`
   background: none;
@@ -250,19 +229,6 @@ export const ReorderButtonProducts = styled.button`
 `;
 
 
-
-export const TrashButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: red;
-  font-size: 15px;
-
-  &:hover {
-    color: #1769aa;
-  }
-`;
-
 export const CategoriaList = styled.div`
   margin-bottom: 20px;
 `;
@@ -281,8 +247,8 @@ export const CategoriaDraggingOver = styled.div`
 
 export const ProdutoItem = styled.li`
   display: flex;
-  justify-content: space-between; /* Garante que o toggle fique à direita */
-  align-items: center; /* Centraliza verticalmente */
+  justify-content: space-between; /* Mantém os botões e o toggle à direita */
+  align-items: center;
   padding: 10px;
   border-bottom: 1px solid #ddd;
   font-size: 16px;
@@ -292,6 +258,7 @@ export const ProdutoItem = styled.li`
     border-bottom: none;
   }
 `;
+
 
 export const ProdutoOperations = styled.div`
   display: flex; // Usa flexbox para alinhar os botões
@@ -331,5 +298,34 @@ export const ProdutoItemOrderChange = styled.div`
   
   &:hover {
     background-color: #128C7E;
+  }
+`;
+
+export const BaseButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2196f3;
+  font-size: 15px;
+  display: flex;
+  align-items: center; /* Centraliza ícone e texto */
+  gap: 5px; /* Espaçamento entre ícone e texto */
+  padding: 5px 10px;
+  border-radius: 8px; /* Borda arredondada para todos */
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background-color: rgba(33, 150, 243, 0.1);
+    color: #1769aa;
+  }
+`;
+
+export const EditProductButton = styled(BaseButton)``;
+export const EditImageButton = styled(BaseButton)``;
+export const TrashButton = styled(BaseButton)`
+  color: red;
+
+  &:hover {
+    color: darkred;
   }
 `;

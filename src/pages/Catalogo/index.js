@@ -409,7 +409,7 @@ const Catalogo = () => {
                       .map((produto) => (
                         <C.ProdutoActions key={produto.id}>
                           <C.ProdutoItem>
-                            {produto.titulo} <br />
+                            <span>{produto.titulo}</span>
                             <C.ProdutoOperations>
                              
                               <C.EditProductButton onClick={() => openEditarProdutoModal(produto, categoria)}>
