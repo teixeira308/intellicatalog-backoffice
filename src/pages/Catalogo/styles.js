@@ -231,6 +231,7 @@ export const CategoriaList = styled.div`
   flex-direction: column;
   gap: 10px;
   width: 100px;
+  background-color: red;
 `;
 export const CategoriaCardDragging = styled(Card)`
   background-color: #e0f7fa; /* Cor de destaque enquanto arrasta */
