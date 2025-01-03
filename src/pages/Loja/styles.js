@@ -117,7 +117,6 @@ export const EditButton = styled.button`
   cursor: pointer;
   color: #2196f3;
   font-size: 18px; /* Ajusta o tamanho da fonte */
-  padding: 10px; /* Adiciona espaço interno para tornar os botões mais confortáveis */
   flex: 1 1 calc(50% - 20px); /* Cada botão ocupa 50% da largura menos o gap */
   max-width: calc(50% - 20px); /* Garante que os botões não ultrapassem 50% */
   text-align: center; /* Centraliza o texto e os ícones */
@@ -166,6 +165,7 @@ export const StoreInfoWrapper = styled.div`
   align-items: center; /* Centraliza horizontalmente */
   text-align: center; /* Alinha o texto no centro */
   margin-top: 10px; /* Espaço entre os elementos acima */
+  gap: 20px; /* Espaçamento entre os itens filhos */
 `;
 
  
