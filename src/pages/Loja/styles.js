@@ -177,7 +177,7 @@ export const InfoWrapper = styled.div`
   justify-content: center; /* Centraliza verticalmente */
   width: 100%;
   margin-bottom: 20px; /* Espaçamento inferior */
-  gap: 20px; /* Espaçamento entre os itens filhos */
+  gap: 40px; /* Espaçamento entre os itens filhos */
 `;
 
 
