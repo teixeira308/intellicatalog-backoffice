@@ -8,25 +8,33 @@ const ServicesApi = () => {
   const api_url = process.env.REACT_APP_API;
 
   const getServicesByUser = async () => {
-    
-    const response = await fetch(`${api_url}/intellicatalog/v1/services?user=${user.userId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user?.token}`,
-      },
-    });
-    if (response.status === 401) {
-      // Redireciona para a tela de login
-      navigate('/login');
+    try {
+      const response = await fetch(`${api_url}/intellicatalog/v1/services?user=${user.userId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.token}`,
+        },
+      });
+  
+      if (response.status === 401) {
+        navigate('/login'); // Redireciona para o login
+        return; // Para evitar execução posterior
+      }
+  
+      if (!response.ok) {
+        throw new Error(`Erro ao buscar serviços: ${response.status}`);
+      }
+  
+      const data = await response.json(); // Garante que o JSON seja obtido
+      console.log("Resposta da API: ", data); // Verifique o formato retornado aqui
+      return data; // Retorna os dados diretamente
+    } catch (error) {
+      console.error("Erro na requisição getServicesByUser:", error.message);
+      throw error; // Repropaga o erro para lidar adequadamente
     }
-    if (!response.ok) {
-      throw new Error("Erro ao buscar serviços");
-    }
- 
-
-    return await response.json();
-  }
+  };
+  
 
   const deleteServices = async (servico) => {
     const response = await fetch(`${api_url}/intellicatalog/v1/services/${servico.id}`, {

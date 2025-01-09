@@ -10,15 +10,19 @@ const Servicos = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await getServicesByUser();
-        console.log("resposta: ",response.data)
-        setServicos(response.data);
+        const services = await getServicesByUser(); // Recebe o objeto completo retornado
+        if (services) {
+          console.log("Serviços carregados: ", services);
+          setServicos(services); // Define diretamente o retorno, dependendo do formato
+        }
       } catch (error) {
-        console.error("Erro ao carregar serviços:", error);
+        console.error("Erro ao carregar serviços:", error.message);
       }
     };
+  
     fetchServices();
   }, []);
+  
 
 
   return (
