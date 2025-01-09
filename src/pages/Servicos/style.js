@@ -10,7 +10,18 @@ export const Container = styled.div`
   padding-top: 220px; /* Adiciona espaço abaixo do Navbar */
   background-color: #f4f4f4;
 `;
+export const PageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
 
+export const MainContent = styled.main`
+  flex: 1;
+  padding: 20px;
+  padding-top: 80px; /* Espaço para o Navbar */
+  background-color: #f4f4f4;
+`;
  
 
 export const Section = styled.div`
@@ -109,5 +120,41 @@ export const CardDetail = styled.p`
   strong {
     font-weight: bold;
     color: #333;
+  }
+`;
+
+ 
+
+export const ActionsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 40px; /* Espaçamento entre o botão de edição e o toggle */
+`;
+
+export const BaseButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2196f3;
+  font-size: 15px;
+  display: flex;
+  align-items: center; /* Centraliza ícone e texto */
+  gap: 5px; /* Espaçamento entre ícone e texto */
+  padding: 5px 10px;
+  border-radius: 8px; /* Borda arredondada para todos */
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background-color: rgba(33, 150, 243, 0.1);
+    color: #1769aa;
+  }
+`;
+
+export const EditButton = styled(BaseButton)``;
+export const TrashButton = styled(BaseButton)`
+  color: red;
+
+  &:hover {
+    color: darkred;
   }
 `;
