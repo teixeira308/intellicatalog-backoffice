@@ -63,6 +63,7 @@ const Servicos = () => {
                         ? `R$ ${parseFloat(servico.price).toFixed(2)}`
                         : "Preço não informado"}
                     </C.CardDetail>
+                    <C.CardDetail>
                     <C.ActionsWrapper>
                       <C.EditButton onClick={() => openEditarCategoriaModal(categoria)}>
                         <FaEdit /> Editar
@@ -72,6 +73,7 @@ const Servicos = () => {
                       </C.TrashButton>
                        
                     </C.ActionsWrapper>
+                    </C.CardDetail>
                   </C.CardBody>
                 </C.Card>
               ))
