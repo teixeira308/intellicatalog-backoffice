@@ -1,5 +1,5 @@
 import React from "react";
-import * as C from "./styles";
+import * as C from "./style";
 import Navbar from "../../components/Navbar/Navbar";
 
 const Agenda = () => {
