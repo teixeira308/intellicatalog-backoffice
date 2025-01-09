@@ -10,11 +10,7 @@ export const Container = styled.div`
   background-color: #f4f4f4;
 `;
 
-export const Title = styled.h2`
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #333;
-`;
+ 
 
 export const Section = styled.div`
   display: flex;
@@ -66,9 +62,7 @@ export const Card = styled.div`
 
 
 
-export const Container = styled.div`
-  padding: 20px;
-`;
+ 
 
 export const Title = styled.h1`
   font-size: 24px;
@@ -76,30 +70,11 @@ export const Title = styled.h1`
   text-align: center;
 `;
 
-export const Section = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+ 
 
-export const Step = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-`;
+ 
 
-export const Card = styled.div`
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
+ 
 
 export const CardHeader = styled.div`
   display: flex;
