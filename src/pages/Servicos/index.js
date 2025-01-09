@@ -64,7 +64,7 @@ const Servicos = () => {
                         : "Preço não informado"}
                     </C.CardDetail>
                     <C.CardDetail>
-                    <C.ActionsWrapper>
+                     
                       <C.EditButton onClick={() => openEditarCategoriaModal(categoria)}>
                         <FaEdit /> Editar
                       </C.EditButton>
@@ -72,7 +72,7 @@ const Servicos = () => {
                         <FaTrashAlt /> Excluir
                       </C.TrashButton>
                        
-                    </C.ActionsWrapper>
+                   
                     </C.CardDetail>
                   </C.CardBody>
                 </C.Card>
