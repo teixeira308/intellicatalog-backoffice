@@ -10,8 +10,8 @@ const Servicos = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const data = await getServicesByUser();
-        setServicos(data.data);
+        const response = await getServicesByUser();
+        setServicos(response.data);
       } catch (error) {
         console.error("Erro ao carregar serviços:", error);
       }
@@ -27,15 +27,22 @@ const Servicos = () => {
     <Navbar />
     <C.Title>Serviços</C.Title>
     <C.Section>
+      <C.Subtitle>Veja no vídeo como utilizar o Vitrine Smart para administrar seu catálogo.</C.Subtitle>
       <C.Step>
         {servicos.length > 0 ? (
           servicos.map((servico) => (
             <C.Card key={servico.id}>
               <p>{servico.name}</p>
-              <p>{servico.description}</p>
+              <p>{servico.description || "Descrição não informada"}</p>
               <p>{servico.category || "Sem categoria"}</p>
               <p>
-                {servico.price ? `R$ ${servico.price.toFixed(2)}` : "Preço não informado"}
+                {servico.duration ? `${servico.duration} minutos` : "Duração não especificada"}
+              </p>
+              <p>
+                {servico.price ? `R$ ${parseFloat(servico.price).toFixed(2)}` : "Preço não informado"}
+              </p>
+              <p>
+                {servico.is_active ? "Ativo" : "Inativo"}
               </p>
             </C.Card>
           ))
