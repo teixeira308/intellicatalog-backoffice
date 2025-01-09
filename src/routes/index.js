@@ -9,9 +9,10 @@ import Suporte from "../pages/Suporte";
 import Tutorial from "../pages/Tutorial";
 import Catalogo from "../pages/Catalogo";
 import Loja from "../pages/Loja";
-import Inteligencia from "../pages/Inteligencia";
+import Agenda from "../pages/Agenda";
 import RedefinirSenha from "../pages/RedefinirSenha";
 import EsqueciSenha from "../pages/EsqueciSenha";
+import Servicos from "../pages/Servicos";
 
 const Private = ({ Item }) => {
   const { signed } = useAuth();
@@ -32,7 +33,9 @@ const RoutesApp = () => {
           <Route exact path="/suporte" element={<Private Item={Suporte} />} />
           <Route exact path="/tutorial" element={<Private Item={Tutorial} />} />
           <Route exact path="/minhaloja" element={<Private Item={Loja} />} />
-          <Route exact path="/redefinirsenha/:token" element={<RedefinirSenha/>} />  
+          <Route exact path="/redefinirsenha/:token" element={<RedefinirSenha/>} />
+          <Route exact path="/agenda" element={<Private Item={Agenda} />} /> 
+          <Route exact path="/servicos" element={<Private Item={Servicos} />} /> 
           <Route path="/esquecisenha" element={<EsqueciSenha/>} />
           <Route path="/" element={<Signin />} />
           <Route exact path="/signup" element={<Signup />} />

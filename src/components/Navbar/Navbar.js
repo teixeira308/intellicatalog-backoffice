@@ -21,8 +21,10 @@ const Navbar = () => {
       </C.Logo>
       <C.NavLinks className={menuOpen ? 'open' : ''}>
         <C.Link onClick={() => { navigate("/home"); setMenuOpen(false); }}>Inicio</C.Link>
-        <C.Link onClick={() => { navigate("/catalogo"); setMenuOpen(false); }}>Catalogo</C.Link>
         <C.Link onClick={() => { navigate("/minhaloja"); setMenuOpen(false); }}>Minha Loja</C.Link>
+        <C.Link onClick={() => { navigate("/catalogo"); setMenuOpen(false); }}>Catalogo</C.Link>
+        <C.Link onClick={() => { navigate("/servicos"); setMenuOpen(false); }}>Serviços</C.Link>
+        <C.Link onClick={() => { navigate("/agenda"); setMenuOpen(false); }}>Agenda</C.Link>
         <C.Link onClick={() => { navigate("/tutorial"); setMenuOpen(false); }}>Tutorial</C.Link>    
         <C.Link onClick={() => { navigate("/demonstracao"); setMenuOpen(false); }}>Demonstração</C.Link> 
         <C.Link onClick={() => { navigate("/suporte"); setMenuOpen(false); }}>Suporte</C.Link>        
