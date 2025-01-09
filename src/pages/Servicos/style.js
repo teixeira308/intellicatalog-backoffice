@@ -7,6 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
   height: 100vh;
   padding: 20px;
+  padding-top: 80px; /* Adiciona espaço abaixo do Navbar */
   background-color: #f4f4f4;
 `;
 
