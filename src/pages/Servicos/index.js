@@ -11,7 +11,7 @@ const Servicos = () => {
     const fetchServices = async () => {
       try {
         const response = await getServicesByUser();
-        console.log(response.data)
+        console.log("resposta: ",response.data)
         setServicos(response.data);
       } catch (error) {
         console.error("Erro ao carregar serviços:", error);
