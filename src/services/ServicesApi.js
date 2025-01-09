@@ -8,7 +8,7 @@ const ServicesApi = () => {
   const api_url = process.env.REACT_APP_API;
 
   const getServicesByUser = async () => {
-    
+    console.log(`${api_url}/intellicatalog/v1/services?user=${user.userId}`);
     const response = await fetch(`${api_url}/intellicatalog/v1/services?user=${user.userId}`, {
       method: "GET",
       headers: {
