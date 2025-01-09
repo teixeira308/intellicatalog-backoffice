@@ -7,7 +7,7 @@ const ServicesApi = () => {
   const navigate = useNavigate();
   const api_url = process.env.REACT_APP_API;
 
-  const getServices = async () => {
+  const getServicesByUser = async () => {
     
     const response = await fetch(`${api_url}/intellicatalog/v1/services?user=${user.userId}`, {
       method: "GET",
@@ -100,7 +100,7 @@ const ServicesApi = () => {
   }
 
   return {
-    getServices,
+    getServicesByUser,
     deleteServices,
     createServices,
     updateServices,
