@@ -50,3 +50,16 @@ export const StepDescription = styled.a`
   font-size: 1rem;
   color: #666;
 `;
+
+export const Card = styled.div`
+  width: 97%;
+  max-width: 800px;
+  font-size: 17px;
+  padding: 20px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+`;
