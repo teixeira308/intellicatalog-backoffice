@@ -65,12 +65,12 @@ const Servicos = () => {
                     </C.CardDetail>
                     <C.CardDetail>
                      
-                      <C.EditButton onClick={() => openEditarCategoriaModal(categoria)}>
+                   
                         <FaEdit /> Editar
-                      </C.EditButton>
-                      <C.TrashButton onClick={() => openDeleteCategoriaModal(categoria)}>
+                    
+                   
                         <FaTrashAlt /> Excluir
-                      </C.TrashButton>
+                    
                        
                    
                     </C.CardDetail>
