@@ -29,34 +29,50 @@ const Servicos = () => {
 
 
     <C.Container>
-    <Navbar />
-    <C.Title>Serviços</C.Title>
-    <C.Section>
-      <C.Subtitle>Veja no vídeo como utilizar o Vitrine Smart para administrar seu catálogo.</C.Subtitle>
-      <C.Step>
-        {servicos.length > 0 ? (
-          servicos.map((servico) => (
-            <C.Card key={servico.id}>
-              <p>{servico.name}</p>
-              <p>{servico.description || "Descrição não informada"}</p>
-              <p>{servico.category || "Sem categoria"}</p>
-              <p>
-                {servico.duration ? `${servico.duration} minutos` : "Duração não especificada"}
-              </p>
-              <p>
-                {servico.price ? `R$ ${parseFloat(servico.price).toFixed(2)}` : "Preço não informado"}
-              </p>
-              <p>
+  <Navbar />
+  <C.Title>Serviços</C.Title>
+  <C.Section>
+    <C.Step>
+      {servicos.length > 0 ? (
+        servicos.map((servico) => (
+          <C.Card key={servico.id}>
+            <C.CardHeader>
+              <C.CardTitle>{servico.name}</C.CardTitle>
+              <C.CardStatus isActive={servico.is_active}>
                 {servico.is_active ? "Ativo" : "Inativo"}
-              </p>
-            </C.Card>
-          ))
-        ) : (
-          <p>Nenhum serviço encontrado</p>
-        )}
-      </C.Step>
-    </C.Section>
-  </C.Container>
+              </C.CardStatus>
+            </C.CardHeader>
+            <C.CardBody>
+              <C.CardDetail>
+                <strong>Descrição:</strong>{" "}
+                {servico.description || "Descrição não informada"}
+              </C.CardDetail>
+              <C.CardDetail>
+                <strong>Categoria:</strong>{" "}
+                {servico.category || "Sem categoria"}
+              </C.CardDetail>
+              <C.CardDetail>
+                <strong>Duração:</strong>{" "}
+                {servico.duration
+                  ? `${servico.duration} minutos`
+                  : "Duração não especificada"}
+              </C.CardDetail>
+              <C.CardDetail>
+                <strong>Preço:</strong>{" "}
+                {servico.price
+                  ? `R$ ${parseFloat(servico.price).toFixed(2)}`
+                  : "Preço não informado"}
+              </C.CardDetail>
+            </C.CardBody>
+          </C.Card>
+        ))
+      ) : (
+        <p>Nenhum serviço encontrado</p>
+      )}
+    </C.Step>
+  </C.Section>
+</C.Container>
+
   )
 };
 
