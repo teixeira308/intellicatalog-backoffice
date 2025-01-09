@@ -23,6 +23,7 @@ const ServicesApi = () => {
     if (!response.ok) {
       throw new Error("Erro ao buscar serviços");
     }
+    console.log(response.json())
 
     return await response.json();
   }
