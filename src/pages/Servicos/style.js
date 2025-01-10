@@ -154,6 +154,17 @@ export const BaseButton = styled.button`
  
 
 
+ 
+ 
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  gap: 10px; /* Espaço entre os botões */
+  justify-content: center; /* Centraliza os botões no eixo horizontal */
+  align-items: center; /* Alinha os botões verticalmente */
+  margin-top: 10px; /* Espaço superior */
+`;
+
 export const ActionButton = styled.button`
   display: flex;
   align-items: center;
