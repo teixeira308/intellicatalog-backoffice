@@ -65,7 +65,6 @@ const Servicos = () => {
                     </C.CardDetail>
                     <C.CardDetail>
                      
-                   
                         <FaEdit /> Editar
                     
                    

@@ -27,6 +27,7 @@ export const MainContent = styled.main`
 export const Section = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   max-width: 800px;
   width: 100%;
