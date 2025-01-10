@@ -31,56 +31,55 @@ const Servicos = () => {
       <Navbar />
       <C.MainContent>
         <C.Title>Serviços</C.Title>
-        
-          <C.Step>
-            {servicos.length > 0 ? (
-              servicos.map((servico) => (
-                <C.Card key={servico.id}>
-                  <C.CardHeader>
-                    <C.CardTitle>{servico.name}</C.CardTitle>
-                    <C.CardStatus isActive={servico.is_active}>
-                      {servico.is_active ? "Ativo" : "Inativo"}
-                    </C.CardStatus>
-                  </C.CardHeader>
-                  <C.CardBody>
-                    <C.CardDetail>
-                      <strong>Descrição:</strong>{" "}
-                      {servico.description || "Descrição não informada"}
-                    </C.CardDetail>
-                    <C.CardDetail>
-                      <strong>Categoria:</strong>{" "}
-                      {servico.category || "Sem categoria"}
-                    </C.CardDetail>
-                    <C.CardDetail>
-                      <strong>Duração:</strong>{" "}
-                      {servico.duration
-                        ? `${servico.duration} minutos`
-                        : "Duração não especificada"}
-                    </C.CardDetail>
-                    <C.CardDetail>
-                      <strong>Preço:</strong>{" "}
-                      {servico.price
-                        ? `R$ ${parseFloat(servico.price).toFixed(2)}`
-                        : "Preço não informado"}
-                    </C.CardDetail>
-                    <C.CardDetail>
-                     
-                        <FaEdit /> Editar
-                    
-                   
-                        <FaTrashAlt /> Excluir
-                    
-                       
-                   
-                    </C.CardDetail>
-                  </C.CardBody>
-                </C.Card>
-              ))
-            ) : (
-              <p>Nenhum serviço encontrado</p>
-            )}
-          </C.Step>
-        
+
+        <C.Step>
+          {servicos.length > 0 ? (
+            servicos.map((servico) => (
+              <C.Card key={servico.id}>
+                <C.CardHeader>
+                  <C.CardTitle>{servico.name}</C.CardTitle>
+                  <C.CardStatus isActive={servico.is_active}>
+                    {servico.is_active ? "Ativo" : "Inativo"}
+                  </C.CardStatus>
+                </C.CardHeader>
+                <C.CardBody>
+                  <C.CardDetail>
+                    <strong>Descrição:</strong>{" "}
+                    {servico.description || "Descrição não informada"}
+                  </C.CardDetail>
+                  <C.CardDetail>
+                    <strong>Categoria:</strong>{" "}
+                    {servico.category || "Sem categoria"}
+                  </C.CardDetail>
+                  <C.CardDetail>
+                    <strong>Duração:</strong>{" "}
+                    {servico.duration
+                      ? `${servico.duration} minutos`
+                      : "Duração não especificada"}
+                  </C.CardDetail>
+                  <C.CardDetail>
+                    <strong>Preço:</strong>{" "}
+                    {servico.price
+                      ? `R$ ${parseFloat(servico.price).toFixed(2)}`
+                      : "Preço não informado"}
+                  </C.CardDetail>
+                  <C.CardDetail>
+                    <C.EditButton>
+                      <FaEdit /> Editar
+                    </C.EditButton>
+                    <C.TrashButton>
+                      <FaTrashAlt /> Excluir
+                    </C.TrashButton>
+                  </C.CardDetail>
+
+                </C.CardBody>
+              </C.Card>
+            ))
+          ) : (
+            <p>Nenhum serviço encontrado</p>
+          )}
+        </C.Step>
+
       </C.MainContent>
     </C.PageWrapper>
 
