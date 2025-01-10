@@ -61,6 +61,7 @@ export const StepDescription = styled.a`
 
 export const Card = styled.div`
   width: 97%;
+  align-items: center;
   max-width: 800px;
   font-size: 17px;
   padding: 20px;
