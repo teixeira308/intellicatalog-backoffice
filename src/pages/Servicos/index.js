@@ -64,13 +64,16 @@ const Servicos = () => {
                       : "Preço não informado"}
                   </C.CardDetail>
                   <C.CardDetail>
-                    <C.EditButton>
-                      <FaEdit /> Editar
-                    </C.EditButton>
-                    <C.TrashButton>
-                      <FaTrashAlt /> Excluir
-                    </C.TrashButton>
+                    <C.ButtonGroup>
+                      <C.EditButton>
+                        <FaEdit /> Editar
+                      </C.EditButton>
+                      <C.TrashButton>
+                        <FaTrashAlt /> Excluir
+                      </C.TrashButton>
+                    </C.ButtonGroup>
                   </C.CardDetail>
+
 
                 </C.CardBody>
               </C.Card>
