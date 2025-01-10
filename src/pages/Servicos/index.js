@@ -44,6 +44,11 @@ const Servicos = () => {
     }
   };
 
+  const openDeleteServiceModal = (servico) => {
+    setSelectedServico(servico);
+    setIsDeleteServicoModalOpen(true);
+  };
+
   return (
     <>
     <C.PageWrapper>
@@ -87,7 +92,7 @@ const Servicos = () => {
                       <C.EditButton>
                         <FaEdit /> Editar
                       </C.EditButton>
-                      <C.TrashButton>
+                      <C.TrashButton onClick={() => openDeleteServiceModal(servico)}>
                         <FaTrashAlt /> Excluir
                       </C.TrashButton>
                     </C.ButtonGroup>
