@@ -42,6 +42,8 @@ export const Step = styled.div`
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
+  padding: 20px;
+  margin: 10px 0;
   align-items: center;
   justify-content: center;
     max-width: 800px;

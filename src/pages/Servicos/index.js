@@ -3,10 +3,13 @@ import * as C from "./style";
 import Navbar from "../../components/Navbar/Navbar";
 import ServicesApi from "../../services/ServicesApi";
 import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp } from 'react-icons/fa'; // Ícone de lápis
+import DeleteServiceModal from "../../components/ModalDeleteServico/DeleteServicoModal";
 
 const Servicos = () => {
   const [servicos, setServicos] = useState([]);
   const { getServicesByUser, deleteServices, createServices } = ServicesApi();
+  const [isDeleteServicoModalOpen, setIsDeleteServicoModalOpen] = useState(false);
+    const [selectedServico, setSelectedServico] = useState(null);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -24,15 +27,31 @@ const Servicos = () => {
     fetchServices();
   }, []);
 
+  const handleDeleteServicoModalClose = () => {
+    setIsDeleteServicoModalOpen(false);
+    setSelectedServico(null);
+  };
 
+  const handleDeleteServico = async () => {
+    try {
+      if (selectedServico) {
+        await deleteServices(selectedServico);
+        setServicos(servicos.filter((servico) => servico.id !== selectedServico.id));
+      }
+      handleDeleteServicoModalClose();
+    } catch (error) {
+      console.error("Erro ao deletar serviço:", error);
+    }
+  };
 
   return (
+    <>
     <C.PageWrapper>
       <Navbar />
       <C.MainContent>
         <C.Title>Serviços</C.Title>
 
-        <C.Step>
+        
           {servicos.length > 0 ? (
             servicos.map((servico) => (
               <C.Card key={servico.id}>
@@ -81,12 +100,18 @@ const Servicos = () => {
           ) : (
             <p>Nenhum serviço encontrado</p>
           )}
-        </C.Step>
+        
 
       </C.MainContent>
     </C.PageWrapper>
 
-
+<DeleteServiceModal
+        isOpen={isDeleteServicoModalOpen}
+        onClose={handleDeleteServicoModalClose}
+        onDelete={handleDeleteServico}
+        servico={selectedServico}
+      />
+      </>
   )
 };
 
