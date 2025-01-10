@@ -207,6 +207,16 @@ export const EditButton = styled(ActionButton)`
   }
 `;
 
+export const CreateButton = styled(ActionButton)`
+  background-color: #4caf50; /* Verde para editar */
+  color: #fff; /* Texto branco */
+  border: none;
+
+  &:hover {
+    background-color: #45a049; /* Verde mais escuro no hover */
+  }
+`;
+
 export const TrashButton = styled(ActionButton)`
   background-color: #f44336; /* Vermelho para excluir */
   color: #fff; /* Texto branco */

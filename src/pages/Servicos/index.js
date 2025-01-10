@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as C from "./style";
 import Navbar from "../../components/Navbar/Navbar";
 import ServicesApi from "../../services/ServicesApi";
-import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp } from 'react-icons/fa'; // Ícone de lápis
+import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp,FaPlusCircle } from 'react-icons/fa'; // Ícone de lápis
 import DeleteServiceModal from "../../components/ModalDeleteServico/DeleteServicoModal";
 
 const Servicos = () => {
@@ -27,6 +27,7 @@ const Servicos = () => {
     fetchServices();
   }, []);
 
+  //DELETE SERVICE
   const handleDeleteServicoModalClose = () => {
     setIsDeleteServicoModalOpen(false);
     setSelectedServico(null);
@@ -56,7 +57,9 @@ const Servicos = () => {
       <C.MainContent>
         <C.Title>Serviços</C.Title>
 
-        
+        <C.CreateButton>
+                        <FaPlusCircle /> Novo Serviço
+        </C.CreateButton>
           {servicos.length > 0 ? (
             servicos.map((servico) => (
               <C.Card key={servico.id}>
