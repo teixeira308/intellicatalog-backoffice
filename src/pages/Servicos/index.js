@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import * as C from "./style";
 import Navbar from "../../components/Navbar/Navbar";
 import ServicesApi from "../../services/ServicesApi";
-import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp,FaPlusCircle, FaRandom } from 'react-icons/fa'; // Ícone de lápis
+import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp, FaPlusCircle, FaRandom } from 'react-icons/fa'; // Ícone de lápis
 import DeleteServiceModal from "../../components/ModalDeleteServico/DeleteServicoModal";
 
 const Servicos = () => {
   const [servicos, setServicos] = useState([]);
   const { getServicesByUser, deleteServices, createServices } = ServicesApi();
   const [isDeleteServicoModalOpen, setIsDeleteServicoModalOpen] = useState(false);
-    const [selectedServico, setSelectedServico] = useState(null);
+  const [selectedServico, setSelectedServico] = useState(null);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -52,18 +52,18 @@ const Servicos = () => {
 
   return (
     <>
-    <C.PageWrapper>
-      <Navbar />
-      <C.MainContent>
-        <C.Title>Serviços</C.Title>
-
-        <C.CreateButton>
-                        <FaPlusCircle /> Novo Serviço
-        </C.CreateButton>
-
-        <C.ReordButton>
-                        <FaRandom /> Reordenar Serviços
-        </C.ReordButton>
+      <C.PageWrapper>
+        <Navbar />
+        <C.MainContent>
+          <C.Title>Serviços</C.Title>
+          <C.ButtonGroup>
+            <C.CreateButton>
+              <FaPlusCircle /> Novo Serviço
+            </C.CreateButton>
+            <C.ReordButton>
+              <FaRandom /> Reordenar Serviços
+            </C.ReordButton>
+          </C.ButtonGroup>
           {servicos.length > 0 ? (
             servicos.map((servico) => (
               <C.Card key={servico.id}>
@@ -112,18 +112,18 @@ const Servicos = () => {
           ) : (
             <p>Nenhum serviço encontrado</p>
           )}
-        
 
-      </C.MainContent>
-    </C.PageWrapper>
 
-<DeleteServiceModal
+        </C.MainContent>
+      </C.PageWrapper>
+
+      <DeleteServiceModal
         isOpen={isDeleteServicoModalOpen}
         onClose={handleDeleteServicoModalClose}
         onDelete={handleDeleteServico}
         servico={selectedServico}
       />
-      </>
+    </>
   )
 };
 
