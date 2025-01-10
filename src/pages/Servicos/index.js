@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as C from "./style";
 import Navbar from "../../components/Navbar/Navbar";
 import ServicesApi from "../../services/ServicesApi";
-import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp,FaPlusCircle } from 'react-icons/fa'; // Ícone de lápis
+import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp,FaPlusCircle, FaRandom } from 'react-icons/fa'; // Ícone de lápis
 import DeleteServiceModal from "../../components/ModalDeleteServico/DeleteServicoModal";
 
 const Servicos = () => {
@@ -60,6 +60,10 @@ const Servicos = () => {
         <C.CreateButton>
                         <FaPlusCircle /> Novo Serviço
         </C.CreateButton>
+
+        <C.ReordButton>
+                        <FaRandom /> Reordenar Serviços
+        </C.ReordButton>
           {servicos.length > 0 ? (
             servicos.map((servico) => (
               <C.Card key={servico.id}>

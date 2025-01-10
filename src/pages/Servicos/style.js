@@ -21,6 +21,7 @@ export const MainContent = styled.main`
   padding: 20px;
   padding-top: 80px; /* Espaço para o Navbar */
   background-color: #f4f4f4;
+  
 `;
  
 
@@ -209,6 +210,16 @@ export const EditButton = styled(ActionButton)`
 
 export const CreateButton = styled(ActionButton)`
   background-color: #4caf50; /* Verde para editar */
+  color: #fff; /* Texto branco */
+  border: none;
+
+  &:hover {
+    background-color: #45a049; /* Verde mais escuro no hover */
+  }
+`;
+
+export const ReordButton = styled(ActionButton)`
+  background-color: #1769aa; /* Verde para editar */
   color: #fff; /* Texto branco */
   border: none;
 
