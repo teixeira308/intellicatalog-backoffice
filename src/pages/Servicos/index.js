@@ -31,7 +31,7 @@ const Servicos = () => {
       <Navbar />
       <C.MainContent>
         <C.Title>Serviços</C.Title>
-        <C.Section>
+        
           <C.Step>
             {servicos.length > 0 ? (
               servicos.map((servico) => (
@@ -80,7 +80,7 @@ const Servicos = () => {
               <p>Nenhum serviço encontrado</p>
             )}
           </C.Step>
-        </C.Section>
+        
       </C.MainContent>
     </C.PageWrapper>
 
