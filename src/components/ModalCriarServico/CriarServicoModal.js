@@ -4,7 +4,7 @@ import servicesApi from "../../services/ServicesApi";
 import { NumericFormat } from 'react-number-format';
 
 const CriarServicoModal = ({ isOpen, onClose, onCreate }) => {
-  const { createService } = servicesApi();
+  const { createServices } = servicesApi();
   const [formData, setFormData] = useState({
     name: "",
     description:"",
@@ -45,10 +45,8 @@ const CriarServicoModal = ({ isOpen, onClose, onCreate }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(formData)
       const filteredData = filterFormData(formData);
-      console.log(filteredData)
-      await createService(filteredData);
+      await createServices(filteredData);
       resetFormData();
       onClose();
       onCreate();
