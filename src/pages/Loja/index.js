@@ -177,6 +177,7 @@ const Loja = () => {
        </C.InfoWrapper>
        <C.ButtonsWrapper>
          <C.ActionsWrapper>
+         {/*}
            <C.EditButton onClick={() => openCriarFotoLojaModal(store)}>
              <FaImages />
              <br />
@@ -196,7 +197,21 @@ const Loja = () => {
              <FaRegWindowRestore />
              <br />
              Ir para loja
-           </C.EditButton>
+           </C.EditButton> {*/}
+
+           <IconButton onClick={() => openModal(setIsCriarFotosLojaModalOpen, store)}>
+                  <FaImages />
+                </IconButton>
+                <IconButton onClick={() => openModal(setIsEditarLojaModalOpen, store)}>
+                  <FaEdit />
+                </IconButton>
+                <IconButton onClick={() => openModal(setIsEditarLojaConfigModalOpen, store)}>
+                  <FaCog />
+                </IconButton>
+                <IconButton onClick={() => window.open(store_site + store.identificadorexterno, "_blank")}>
+                  <FaRegWindowRestore />
+                </IconButton>
+
          </C.ActionsWrapper>
        </C.ButtonsWrapper>
      </C.Card>
