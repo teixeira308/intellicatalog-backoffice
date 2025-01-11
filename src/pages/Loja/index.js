@@ -9,6 +9,10 @@ import EditLojaConfigModal from "../../components/ModalEditarLojaConfig/EditarLo
 import { FaEdit, FaImages, FaCog, FaRegWindowRestore } from 'react-icons/fa'; // Importa o ícone de lápis
 import LojaImageApi from "../../services/lojaImageApi";
 
+import {
+  IconButton,
+} from "@mui/material";
+
 
 const Loja = () => {
   const [stores, setStores] = useState([]);
@@ -40,6 +44,11 @@ const Loja = () => {
     };
     fetchStores();
   }, []);
+
+  const openModal = (modalSetter, store) => {
+    setSelectedLoja(store);
+    modalSetter(true);
+  };
 
 
   // Função para carregar as imagens do stores do usuario
