@@ -187,11 +187,10 @@ export const CreateButton = styled.button`
   border-radius: 20px; /* Torna as bordas arredondadas */
   cursor: pointer; 
   font-size: 13px;
-  padding: 5px 10px; /* Adiciona espaço interno para melhor aparência */
   transition: 0.3s; /* Suaviza a transição do hover */
   width: 180px;
   &:hover {
-    color: #1769aa;
+    color:rgb(194, 194, 194);
     border-color: #1769aa; /* Altera a cor da borda no hover */
   }
 `;
@@ -205,11 +204,11 @@ export const ReorderButton = styled.button`
   background-color: #1769aa; /* Verde para editar */
   color: #fff; /* Texto branco */
   font-size: 13px;
-  padding: 5px 10px; /* Adiciona espaço interno para melhor aparência */
+ 
   transition: 0.3s; /* Suaviza a transição do hover */
 width: 180px;
   &:hover {
-    color: #1769aa;
+    color:rgb(194, 194, 194);
     border-color: #1769aa; /* Altera a cor da borda no hover */
   }
 `;
@@ -247,6 +246,8 @@ export const CategoriaDraggingOver = styled(Card)`
 export const ProdutoItem = styled.li`
   display: flex;
   align-items: center; /* Alinha verticalmente no centro */
+  justify-content: space-between; /* Espaça o título e os botões/toggle */
+  padding: 10px;
   border-bottom: 1px solid #ddd;
   font-size: 14px; /* Diminui o tamanho da fonte */
   color: #333;
