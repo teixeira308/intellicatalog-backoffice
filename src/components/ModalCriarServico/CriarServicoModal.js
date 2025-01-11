@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as C from "./styles";
-import servicesApi from "../../services/ServicesApiApi";
+import servicesApi from "../../services/ServicesApi";
 import { NumericFormat } from 'react-number-format';
 
 const CriarServicoModal = ({ isOpen, onClose, onCreate, categoria }) => {

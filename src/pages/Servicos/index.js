@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import ServicesApi from "../../services/ServicesApi";
 import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp, FaPlusCircle, FaRandom } from 'react-icons/fa'; // Ícone de lápis
 import DeleteServiceModal from "../../components/ModalDeleteServico/DeleteServicoModal";
+import CriarServicoModal from "../../components/ModalCriarServico/CriarServicoModal";
 
 const Servicos = () => {
   const [servicos, setServicos] = useState([]);
@@ -62,6 +63,9 @@ const Servicos = () => {
     setServicos(data);
   };
 
+  const openCriarProdutoModal = () => {
+    setIsCriarServicoModalOpen(true);
+  };
 
   return (
     <>
@@ -70,7 +74,7 @@ const Servicos = () => {
         <C.MainContent>
           <C.Title>Serviços</C.Title>
           <C.ButtonGroup>
-            <C.CreateButton onClick={() => openCriarServiceModal()}>
+            <C.CreateButton onClick={() => openCriarProdutoModal()}>
               <FaPlusCircle /> Novo Serviço
             </C.CreateButton>
             <C.ReordButton>
