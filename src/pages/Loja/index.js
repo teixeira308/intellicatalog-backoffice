@@ -149,7 +149,7 @@ const Loja = () => {
   return (
     <C.Container>
       <Navbar />
-      <C.Title>Minha Loja</C.Title>
+      <C.Title>{store.namestore}</C.Title>
 
       {stores.map((store) => (
        <C.Card key={store.id}>
@@ -160,16 +160,13 @@ const Loja = () => {
                <img src={item.url} alt={`Foto da store ${store.namestore}`} />
              </C.ImagePreview>
            ))}
-           
+
        <C.InfoWrapper>
          {/* Conteúdo do InfoWrapper */}
         
-           
-         <C.StoreInfoWrapper>
-           <C.StatusWrapper>{store.namestore}</C.StatusWrapper>
-         </C.StoreInfoWrapper>
 
          <C.StatusIndicator isOpen={store.status === "Aberta"}> {store.status === "Aberta" ? "Aberta" : "Fechada"}  </C.StatusIndicator>
+         <br/>
          <C.ToggleSwitch>
            <input
              type="checkbox"
