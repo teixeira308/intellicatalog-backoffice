@@ -171,7 +171,7 @@ export const CategoriaLink = styled.span`
   color: #2196f3;
   text-decoration: underline;
   font-size: 16px;
-  width: 20px;
+  width: 100%;
   &:hover {
     color: #1769aa;
   }
