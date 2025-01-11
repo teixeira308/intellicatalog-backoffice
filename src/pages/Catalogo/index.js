@@ -369,13 +369,6 @@ const Catalogo = () => {
                       <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
                     </MenuItem>
                   </Menu>
-
-                  <C.EditButton onClick={() => openEditarCategoriaModal(categoria)}>
-                    <FaEdit /> Editar
-                  </C.EditButton>
-                  <C.TrashButton onClick={() => openDeleteCategoriaModal(categoria)}>
-                    <FaTrashAlt /> Excluir
-                  </C.TrashButton>
                   <C.ToggleSwitch>
                     <input
                       type="checkbox"
