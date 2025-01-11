@@ -61,7 +61,7 @@ const Servicos = () => {
               <FaPlusCircle /> Novo Serviço
             </C.CreateButton>
             <C.ReordButton>
-              <FaRandom /> Reordenar Serviços
+              <FaRandom /> Reordenar
             </C.ReordButton>
           </C.ButtonGroup>
           {servicos.length > 0 ? (
@@ -78,16 +78,7 @@ const Servicos = () => {
                     <strong>Descrição:</strong>{" "}
                     {servico.description || "Descrição não informada"}
                   </C.CardDetail>
-                  <C.CardDetail>
-                    <strong>Categoria:</strong>{" "}
-                    {servico.category || "Sem categoria"}
-                  </C.CardDetail>
-                  <C.CardDetail>
-                    <strong>Duração:</strong>{" "}
-                    {servico.duration
-                      ? `${servico.duration} minutos`
-                      : "Duração não especificada"}
-                  </C.CardDetail>
+                 
                   <C.CardDetail>
                     <strong>Preço:</strong>{" "}
                     {servico.price

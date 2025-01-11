@@ -21,6 +21,7 @@ export const MainContent = styled.main`
   padding: 20px;
   padding-top: 80px; /* Espaço para o Navbar */
   background-color: #f4f4f4;
+  width: 800px;
   
 `;
  
