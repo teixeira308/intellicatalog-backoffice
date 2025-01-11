@@ -11,7 +11,7 @@ import CriarProdutoModal from "../../components/ModalCriarProduto/CriarProdutoMo
 import EditarProdutoModal from "../../components/ModalEditarProduto/EditarProdutoModal";
 import CriarFotosProdutoModal from "../../components/ModalCriarFotosProduto/CriarFotosProdutoModal";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit,FaWhatsapp } from 'react-icons/fa'; // Ícone de lápis
+import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp,FaRandom,FaPlusCircle } from 'react-icons/fa'; // Ícone de lápis
 
 
 const Catalogo = () => {
@@ -268,19 +268,19 @@ const Catalogo = () => {
 
     //console.log(produtosDaCategoria)
     try {
-        const response = await updateProductOrder(produtosDaCategoria);
+      const response = await updateProductOrder(produtosDaCategoria);
 
-        if (response.status === 200) {
-            const data = await getProducts();
-            setProdutos(data.data);
-            setIsReorderProductMode(false);
-        } else {
-            console.error("Erro inesperado ao atualizar a ordem dos produtos:", response.status);
-        }
+      if (response.status === 200) {
+        const data = await getProducts();
+        setProdutos(data.data);
+        setIsReorderProductMode(false);
+      } else {
+        console.error("Erro inesperado ao atualizar a ordem dos produtos:", response.status);
+      }
     } catch (error) {
-        console.error("Erro ao atualizar a ordem dos produtos:", error);
+      console.error("Erro ao atualizar a ordem dos produtos:", error);
     }
-};
+  };
 
 
 
@@ -293,14 +293,14 @@ const Catalogo = () => {
         <div style={{ marginRight: "20px" }}>
           {!isReorderMode && (
             <C.CreateButton onClick={() => setIsCriarCategoriaModalOpen(true)}>
-              Nova Categoria
+              <FaPlusCircle />Nova Categoria
             </C.CreateButton>
           )}
         </div>
 
         <div style={{ marginLeft: "20px" }}>
           <C.ReorderButton onClick={() => setIsReorderMode(!isReorderMode)}>
-            {isReorderMode ? "Salvar Ordem" : "Reordenar categorias"}
+            {isReorderMode ? "Salvar Ordem" : <><FaRandom /> Reordenar categorias</>}
           </C.ReorderButton>
         </div>
       </div>
@@ -369,7 +369,7 @@ const Catalogo = () => {
               {expandedCategorias.includes(categoria.id) && (
                 <C.ProdutoList>
                   {isReorderProductMode ? (
-                   <DragDropContext onDragEnd={(result) => handleProductOnDragEnd(result, categoria.id)}>
+                    <DragDropContext onDragEnd={(result) => handleProductOnDragEnd(result, categoria.id)}>
                       <Droppable droppableId={`produtos-${categoria.id}`}>
                         {(provided) => (
                           <div
@@ -411,7 +411,7 @@ const Catalogo = () => {
                           <C.ProdutoItem>
                             <span>{produto.titulo}</span>
                             <C.ProdutoOperations>
-                             
+
                               <C.EditProductButton onClick={() => openEditarProdutoModal(produto, categoria)}>
                                 <FaEdit /> Editar
                               </C.EditProductButton>
@@ -499,7 +499,7 @@ const Catalogo = () => {
         produto={selectedProduto}
         onCreate={handleNewFotoProdutoCreated}
       />
-      
+
     </C.Container>
   );
 };

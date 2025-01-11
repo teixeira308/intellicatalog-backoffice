@@ -181,11 +181,11 @@ export const CategoriaLink = styled.span`
 
 
 export const CreateButton = styled.button`
-  background: none;
-  border: 1px solid #2196f3; /* Adiciona uma borda */
+  
+  background-color: #4caf50; /* Verde para editar */
+  color: #fff; /* Texto branco */
   border-radius: 20px; /* Torna as bordas arredondadas */
-  cursor: pointer;
-  color: #2196f3;
+  cursor: pointer; 
   font-size: 13px;
   padding: 5px 10px; /* Adiciona espaço interno para melhor aparência */
   transition: 0.3s; /* Suaviza a transição do hover */
@@ -197,11 +197,13 @@ export const CreateButton = styled.button`
 `;
 
 export const ReorderButton = styled.button`
-  background: none;
-  border: 1px solid #2196f3; /* Adiciona uma borda */
+  
+   
   border-radius: 20px; /* Torna as bordas arredondadas */
   cursor: pointer;
-  color: #2196f3;
+  
+  background-color: #1769aa; /* Verde para editar */
+  color: #fff; /* Texto branco */
   font-size: 13px;
   padding: 5px 10px; /* Adiciona espaço interno para melhor aparência */
   transition: 0.3s; /* Suaviza a transição do hover */
