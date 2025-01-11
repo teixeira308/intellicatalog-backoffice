@@ -7,7 +7,7 @@ import { Drawer, IconButton, List, ListItem, ListItemText, Divider } from "@mui/
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-const Navbar = () => {
+const NavbarEvolve = () => {
   const { signout } = useAuth();
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -70,4 +70,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavbarEvolve;
