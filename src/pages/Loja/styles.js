@@ -112,7 +112,7 @@ export const ActionsWrapper = styled.div`
 
 export const EditButton = styled.button`
   background: none;
-  border: 2px solid #2196f3; /* Adiciona uma borda com cor azul */
+  border: 2px rgb(63, 65, 66); /* Adiciona uma borda com cor azul */
   border-radius: 4px; /* Arredonda levemente os cantos */
   cursor: pointer;
   color:rgb(69, 73, 75);
