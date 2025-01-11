@@ -425,8 +425,6 @@ const Catalogo = () => {
                         <C.ProdutoActions key={produto.id}>
                           <C.ProdutoItem>
                             <span>{produto.titulo}</span>
-                          
-
                               <IconButton onClick={(event) => setMenuProdAnchor(event.currentTarget)}>
                                 <FaEllipsisV />
                               </IconButton>
@@ -453,7 +451,6 @@ const Catalogo = () => {
                                 />
                                 <C.Slider />
                               </C.ToggleSwitch>
-                           
                           </C.ProdutoItem>
                         </C.ProdutoActions>
                       ))

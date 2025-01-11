@@ -247,20 +247,12 @@ export const CategoriaDraggingOver = styled(Card)`
 export const ProdutoItem = styled.li`
   display: flex;
   align-items: center; /* Alinha verticalmente no centro */
-  justify-content: space-between; /* Espaça o título e os botões/toggle */
-  padding: 10px;
   border-bottom: 1px solid #ddd;
   font-size: 14px; /* Diminui o tamanho da fonte */
   color: #333;
 
   &:last-child {
     border-bottom: none;
-  }
-
-  @media (max-width: 600px) {
-    flex-direction: column; /* Empilha os itens em telas muito pequenas */
-    align-items: flex-start; /* Alinha os itens à esquerda */
-    gap: 10px; /* Espaço entre os itens */
   }
 `;
 
