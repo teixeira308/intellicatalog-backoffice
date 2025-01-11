@@ -138,8 +138,8 @@ export const EditButton = styled.button`
 
 export const ImagePreview = styled.div`
   position: relative; /* Necessário para posicionar o botão */
-  width: 50px; /* Largura das imagens */
-  height: 50px; /* Altura das imagens */
+  width: 200px; /* Largura das imagens */
+  height: 200px; /* Altura das imagens */
   overflow: hidden; /* Para esconder partes excedentes da imagem */
   border-radius: 50%; /* Bordas bolinha */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para a imagem */

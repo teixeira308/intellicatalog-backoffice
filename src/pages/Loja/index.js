@@ -153,8 +153,6 @@ const Loja = () => {
 
       {stores.map((store) => (
        <C.Card key={store.id}>
-       <C.InfoWrapper>
-         {/* Conteúdo do InfoWrapper */}
          {imageStoreUrls
            .filter((item) => item.store_id === store.id)
            .map((item, index) => (
@@ -162,6 +160,10 @@ const Loja = () => {
                <img src={item.url} alt={`Foto da store ${store.namestore}`} />
              </C.ImagePreview>
            ))}
+           
+       <C.InfoWrapper>
+         {/* Conteúdo do InfoWrapper */}
+        
            
          <C.StoreInfoWrapper>
            <C.StatusWrapper>{store.namestore}</C.StatusWrapper>
