@@ -41,7 +41,7 @@ const Catalogo = () => {
 
   const [menuAnchor, setMenuAnchor] = useState(null);
 
-  const [menuProdAnchor, setmenuProdAnchor] = useState(null);
+  const [menuProdAnchor, setMenuProdAnchor] = useState(null);
 
 
   useEffect(() => {
