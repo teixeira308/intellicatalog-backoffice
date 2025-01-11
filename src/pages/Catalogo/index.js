@@ -426,15 +426,24 @@ const Catalogo = () => {
                             <span>{produto.titulo}</span>
                             <C.ProdutoOperations>
 
-                              <C.EditProductButton onClick={() => openEditarProdutoModal(produto, categoria)}>
-                                <FaEdit /> Editar
-                              </C.EditProductButton>
-                              <C.EditImageButton onClick={() => openCriarFotosProdutoModal(produto)}>
-                                <FaImages /> Imagens
-                              </C.EditImageButton>
-                              <C.TrashButton onClick={() => openDeleteProdutoModal(produto)}>
-                                <FaTrashAlt /> Excluir
-                              </C.TrashButton>
+                              <IconButton onClick={(event) => setMenuAnchor(event.currentTarget)}>
+                                <FaEllipsisV />
+                              </IconButton>
+                              <Menu
+                                anchorEl={menuAnchor}
+                                open={Boolean(menuAnchor)}
+                                onClose={() => setMenuAnchor(null)}
+                              >
+                                 <MenuItem onClick={() => { openCriarFotosProdutoModal(produto); setMenuAnchor(null); }}>
+                                  <FaImages style={{ marginRight: 8 }} /> Imagens
+                                </MenuItem>
+                                <MenuItem onClick={() => { openEditarProdutoModal(produto, categoria); setMenuAnchor(null); }}>
+                                  <FaEdit style={{ marginRight: 8 }} /> Editar
+                                </MenuItem>
+                                <MenuItem onClick={() => { openDeleteProdutoModal(produto); setMenuAnchor(null); }}>
+                                  <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
+                                </MenuItem>
+                              </Menu>
                               <C.ToggleSwitch>
                                 <input
                                   type="checkbox"
@@ -450,9 +459,9 @@ const Catalogo = () => {
                   )}
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <C.CreateButton onClick={() => openCriarProdutoModal(categoria)}>Novo Produto</C.CreateButton> <br />
-                    <C.ReorderButtonProducts onClick={() => setIsReorderProductMode(!isReorderProductMode)}>
-                      {isReorderProductMode ? "Salvar Ordem" : "Reordenar produtos"}
-                    </C.ReorderButtonProducts>
+                    <C.ReorderButton onClick={() => setIsReorderProductMode(!isReorderProductMode)}>
+                      {isReorderProductMode ? "Salvar Ordem" : <><FaRandom /> Reordenar produtos</>}
+                    </C.ReorderButton>
                   </div>
                 </C.ProdutoList>
               )}
