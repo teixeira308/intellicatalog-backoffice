@@ -297,7 +297,7 @@ const Catalogo = () => {
         <div style={{ marginRight: "20px" }}>
           {!isReorderMode && (
             <C.CreateButton onClick={() => setIsCriarCategoriaModalOpen(true)}>
-              <FaPlusCircle />Nova Categoria
+              <FaPlusCircle /> &nbsp; Nova Categoria
             </C.CreateButton>
           )}
         </div>
@@ -456,7 +456,7 @@ const Catalogo = () => {
                       ))
                   )}
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <C.CreateButton onClick={() => openCriarProdutoModal(categoria)}>Novo Produto</C.CreateButton> <br />
+                    <C.CreateButton onClick={() => openCriarProdutoModal(categoria)}> <FaPlusCircle /> &nbsp;Novo Produto</C.CreateButton> <br />
                     <C.ReorderButton onClick={() => setIsReorderProductMode(!isReorderProductMode)}>
                       {isReorderProductMode ? "Salvar Ordem" : <><FaRandom /> Reordenar produtos</>}
                     </C.ReorderButton>
