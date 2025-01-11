@@ -180,41 +180,6 @@ export const CategoriaLink = styled.span`
 
 
 
-export const CreateButton = styled(ActionButton)`
-  background-color: #4caf50; /* Verde para editar */
-  color: #fff; /* Texto branco */
-  border: none;
-
-  &:hover {
-    background-color: #45a049; /* Verde mais escuro no hover */
-  }
-`;
-
-export const ReorderButton = styled(ActionButton)`
-  
-  background-color: #1769aa; /* Verde para editar */
-  color: #fff; /* Texto branco */
-  border: none;
-
-  &:hover {
-    background-color: #45a049; /* Verde mais escuro no hover */
-  }
-`;
-
-
-export const ReorderButtonProducts = styled(ActionButton)`
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #2196f3;
-  font-size: 13px;
-
-  &:hover {
-    color: #1769aa;
-  }
-`;
-
-
 export const CategoriaList = styled.div`
   display: flex;
   flex-direction: column;
@@ -348,5 +313,41 @@ export const ActionButton = styled.button`
 
   svg {
     font-size: 16px; /* Tamanho do ícone */
+  }
+`;
+
+
+
+export const CreateButton = styled(ActionButton)`
+  background-color: #4caf50; /* Verde para editar */
+  color: #fff; /* Texto branco */
+  border: none;
+
+  &:hover {
+    background-color: #45a049; /* Verde mais escuro no hover */
+  }
+`;
+
+export const ReorderButton = styled(ActionButton)`
+  
+  background-color: #1769aa; /* Verde para editar */
+  color: #fff; /* Texto branco */
+  border: none;
+
+  &:hover {
+    background-color: #45a049; /* Verde mais escuro no hover */
+  }
+`;
+
+
+export const ReorderButtonProducts = styled(ActionButton)`
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2196f3;
+  font-size: 13px;
+
+  &:hover {
+    color: #1769aa;
   }
 `;
