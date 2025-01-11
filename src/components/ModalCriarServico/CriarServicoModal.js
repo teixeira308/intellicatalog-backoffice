@@ -43,6 +43,7 @@ const CriarServicoModal = ({ isOpen, onClose, onCreate }) => {
   };
 
   const handleSubmit = async (e) => {
+    console.log("entrou");
     e.preventDefault();
     try {
       const filteredData = filterFormData(formData);
