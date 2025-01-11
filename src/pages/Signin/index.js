@@ -111,7 +111,7 @@ const Signin = () => {
           Esqueceu sua senha?{" "}
           <Button
             variant="text"
-            color="primary"
+            color="action"
             onClick={() => navigate("/esquecisenha")}
             style={{ textTransform: "none" }}
           >
