@@ -4,8 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import * as C from "./styles";
 import logo from "../../assets/logo.png";
 import { Drawer, IconButton, List, ListItem, ListItemText, Divider, useMediaQuery } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import LogoutIcon from "@mui/icons-material/Logout";
+import { FaBars, FaSignOutAlt } from "react-icons/fa";
 import { useTheme } from "@mui/material/styles";
 
 const Navbar = () => {
@@ -54,7 +53,7 @@ const Navbar = () => {
       </ListItem>
       <Divider />
       <ListItem button onClick={() => [signout(), navigate("/")]}>
-        <LogoutIcon style={{ marginRight: "10px" }} />
+        <FaSignOutAlt style={{ marginRight: "10px" }} />
         <ListItemText primary="Sair" />
       </ListItem>
     </List>
@@ -71,7 +70,7 @@ const Navbar = () => {
         // Menu Mobile com Drawer
         <>
           <IconButton edge="start" color="inherit" onClick={toggleDrawer(true)}>
-            <MenuIcon />
+            <FaBars />
           </IconButton>
           <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
             {renderMenuItems()}
