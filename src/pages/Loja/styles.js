@@ -112,19 +112,18 @@ export const ActionsWrapper = styled.div`
 
 export const EditButton = styled.button`
   background: none;
-  border: 2px;
-  border-color: rgb(63, 65, 66); /* Adiciona uma borda com cor azul */
+  border: 2px solid rgb(63, 65, 66); /* Adiciona uma borda sólida com cor */
   border-radius: 4px; /* Arredonda levemente os cantos */
   cursor: pointer;
-  color:rgb(69, 73, 75);
+  color: rgb(69, 73, 75);
   font-size: 18px; /* Ajusta o tamanho da fonte */
   flex: 1 1 calc(50% - 20px); /* Cada botão ocupa 50% da largura menos o gap */
   max-width: calc(50% - 20px); /* Garante que os botões não ultrapassem 50% */
   text-align: center; /* Centraliza o texto e os ícones */
   padding: 20px;
   &:hover {
-    color:rgba(0, 0, 0, 0.61);
-    border-color:rgb(63, 65, 66); /* Altera a cor da borda no hover */
+    color: rgba(0, 0, 0, 0.61);
+    border-color: rgb(63, 65, 66); /* Altera a cor da borda no hover */
   }
 
   svg {
@@ -132,7 +131,6 @@ export const EditButton = styled.button`
     font-size: 20px; /* Ajusta o tamanho do ícone */
   }
 `;
-
 
 
 
@@ -173,6 +171,7 @@ export const StoreInfoWrapper = styled.div`
 export const InfoWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
+  padding: 30px;
   flex-direction: line; /* Alinha os itens em coluna */
   align-items: center; /* Centraliza horizontalmente */
   justify-content: center; /* Centraliza verticalmente */
