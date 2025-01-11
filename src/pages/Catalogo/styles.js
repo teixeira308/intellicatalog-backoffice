@@ -181,10 +181,10 @@ export const CategoriaLink = styled.span`
 
 
 export const CreateButton = styled.button`
-  
+  border: none;
   background-color: #4caf50; /* Verde para editar */
   color: #fff; /* Texto branco */
-  border-radius: 20px; /* Torna as bordas arredondadas */
+   
   cursor: pointer; 
   font-size: 13px;
   padding: 5px 10px; /* Adiciona espaço interno para melhor aparência */
@@ -199,9 +199,9 @@ export const CreateButton = styled.button`
 export const ReorderButton = styled.button`
   
    
-  border-radius: 20px; /* Torna as bordas arredondadas */
-  cursor: pointer;
   
+  cursor: pointer;
+   border: none;
   background-color: #1769aa; /* Verde para editar */
   color: #fff; /* Texto branco */
   font-size: 13px;
