@@ -115,15 +115,15 @@ export const EditButton = styled.button`
   border: 2px solid #2196f3; /* Adiciona uma borda com cor azul */
   border-radius: 4px; /* Arredonda levemente os cantos */
   cursor: pointer;
-  color: #2196f3;
+  color:rgb(69, 73, 75);
   font-size: 18px; /* Ajusta o tamanho da fonte */
   flex: 1 1 calc(50% - 20px); /* Cada botão ocupa 50% da largura menos o gap */
   max-width: calc(50% - 20px); /* Garante que os botões não ultrapassem 50% */
   text-align: center; /* Centraliza o texto e os ícones */
-
+  padding: 20px;
   &:hover {
-    color: #1769aa;
-    border-color: #1769aa; /* Altera a cor da borda no hover */
+    color:rgba(0, 0, 0, 0.61);
+    border-color:rgb(63, 65, 66); /* Altera a cor da borda no hover */
   }
 
   svg {

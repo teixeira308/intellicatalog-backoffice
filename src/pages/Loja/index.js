@@ -9,10 +9,6 @@ import EditLojaConfigModal from "../../components/ModalEditarLojaConfig/EditarLo
 import { FaEdit, FaImages, FaCog, FaRegWindowRestore } from 'react-icons/fa'; // Importa o ícone de lápis
 import LojaImageApi from "../../services/lojaImageApi";
 
-import {
-  IconButton,
-} from "@mui/material";
-
 
 const Loja = () => {
   const [stores, setStores] = useState([]);
@@ -44,11 +40,6 @@ const Loja = () => {
     };
     fetchStores();
   }, []);
-
-  const openModal = (modalSetter, store) => {
-    setSelectedLoja(store);
-    modalSetter(true);
-  };
 
 
   // Função para carregar as imagens do stores do usuario
@@ -186,19 +177,26 @@ const Loja = () => {
        </C.InfoWrapper>
        <C.ButtonsWrapper>
          <C.ActionsWrapper>
-           <IconButton onClick={() => openModal(setIsCriarFotosLojaModalOpen, store)}>
-                  <FaImages />
-                </IconButton>
-                <IconButton onClick={() => openModal(setIsEditarLojaModalOpen, store)}>
-                  <FaEdit />
-                </IconButton>
-                <IconButton onClick={() => openModal(setIsEditarLojaConfigModalOpen, store)}>
-                  <FaCog />
-                </IconButton>
-                <IconButton onClick={() => window.open(store_site + store.identificadorexterno, "_blank")}>
-                  <FaRegWindowRestore />
-                </IconButton>
-
+           <C.EditButton onClick={() => openCriarFotoLojaModal(store)}>
+             <FaImages />
+             <br />
+             Foto de perfil
+           </C.EditButton>
+           <C.EditButton onClick={() => openEditarLojaModal(store)}>
+             <FaEdit />
+             <br />
+             Informações
+           </C.EditButton>
+           <C.EditButton onClick={() => openEditarLojaConfigModal(store)}>
+             <FaCog />
+             <br />
+             Configurações
+           </C.EditButton>
+           <C.EditButton onClick={() => openStoreSite(store)}>
+             <FaRegWindowRestore />
+             <br />
+             Ir para loja
+           </C.EditButton>
          </C.ActionsWrapper>
        </C.ButtonsWrapper>
      </C.Card>
