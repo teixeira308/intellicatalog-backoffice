@@ -149,9 +149,11 @@ const Loja = () => {
   return (
     <C.Container>
       <Navbar />
-      <C.Title>{store.namestore}</C.Title>
-
+     
       {stores.map((store) => (
+        <>
+         <C.Title>{store.namestore}</C.Title>
+
        <C.Card key={store.id}>
          {imageStoreUrls
            .filter((item) => item.store_id === store.id)
@@ -201,7 +203,7 @@ const Loja = () => {
          </C.ActionsWrapper>
        </C.ButtonsWrapper>
      </C.Card>
-     
+     </>
       ))}
 
 
