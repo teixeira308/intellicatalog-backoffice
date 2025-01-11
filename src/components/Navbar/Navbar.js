@@ -73,7 +73,7 @@ const Navbar = () => {
           <IconButton edge="start" color="inherit" onClick={toggleDrawer(true)}>
             <MenuIcon />
           </IconButton>
-          <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
+          <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
             {renderMenuItems()}
           </Drawer>
         </>
