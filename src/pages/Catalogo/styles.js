@@ -181,35 +181,23 @@ export const CategoriaLink = styled.span`
 
 
 export const CreateButton = styled.button`
-  border: none;
   background-color: #4caf50; /* Verde para editar */
   color: #fff; /* Texto branco */
-  border-radius: 20px; /* Torna as bordas arredondadas */
-  cursor: pointer; 
-  font-size: 13px;
-  transition: 0.3s; /* Suaviza a transição do hover */
-  width: 180px;
+  border: none;
+
   &:hover {
-    color:rgb(194, 194, 194);
-    border-color: #1769aa; /* Altera a cor da borda no hover */
+    background-color: #45a049; /* Verde mais escuro no hover */
   }
 `;
 
 export const ReorderButton = styled.button`
   
-   
-  border-radius: 20px; /* Torna as bordas arredondadas */
-  cursor: pointer;
-   border: none;
   background-color: #1769aa; /* Verde para editar */
   color: #fff; /* Texto branco */
-  font-size: 13px;
- 
-  transition: 0.3s; /* Suaviza a transição do hover */
-width: 180px;
+  border: none;
+
   &:hover {
-    color:rgb(194, 194, 194);
-    border-color: #1769aa; /* Altera a cor da borda no hover */
+    background-color: #45a049; /* Verde mais escuro no hover */
   }
 `;
 
