@@ -3,7 +3,7 @@ import * as C from "./styles";
 import servicesApi from "../../services/ServicesApi";
 import { NumericFormat } from 'react-number-format';
 
-const CriarServicoModal = ({ isOpen, onClose, onCreate, categoria }) => {
+const CriarServicoModal = ({ isOpen, onClose, onCreate }) => {
   const { createService } = servicesApi();
   const [formData, setFormData] = useState({
     name: "",
@@ -86,36 +86,23 @@ const CriarServicoModal = ({ isOpen, onClose, onCreate, categoria }) => {
     <C.ModalOverlay>
       <C.ModalContainer>
         <C.ModalHeader>
-          <h2>Novo Produto</h2>
+          <h2>Novo Serviço</h2>
           <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="name">Título</C.Label>
+              <C.Label htmlFor="name">Nome</C.Label>
               <C.Input
                 type="text"
-                name="titulo"
-                id="titulo"
-                value={formData.titulo}
+                name="name"
+                id="name"
+                value={formData.name}
                 onChange={handleChange}
                 required
               />
             </C.FormColumn>
           </C.FormRow>
-
-          <C.FormRow>
-            <C.FormColumn>
-              <C.Label htmlFor="description">Marca</C.Label>
-              <C.Input
-                type="text"
-                name="brand"
-                id="brand"
-                value={formData.brand}
-                onChange={handleChange}
-              />
-            </C.FormColumn>
-            </C.FormRow>
             <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="description">Descrição</C.Label>
