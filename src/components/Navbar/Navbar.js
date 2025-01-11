@@ -23,11 +23,11 @@ const Navbar = () => {
 
   return (
     <>
+   
+    <C.Navbar>
     <C.Logo>
         <C.LogoImage src={logo} alt="Logo" />&nbsp; Vitrine Smart
       </C.Logo>
-    <C.Navbar>
-      
 
       {/* Botão para abrir o Drawer */}
       <IconButton edge="start" color="inherit" onClick={toggleDrawer(true)}>
