@@ -180,7 +180,7 @@ export const CategoriaLink = styled.span`
 
 
 
-export const CreateButton = styled.button`
+export const CreateButton = styled(ActionButton)`
   background-color: #4caf50; /* Verde para editar */
   color: #fff; /* Texto branco */
   border: none;
@@ -190,7 +190,7 @@ export const CreateButton = styled.button`
   }
 `;
 
-export const ReorderButton = styled.button`
+export const ReorderButton = styled(ActionButton)`
   
   background-color: #1769aa; /* Verde para editar */
   color: #fff; /* Texto branco */
@@ -202,7 +202,7 @@ export const ReorderButton = styled.button`
 `;
 
 
-export const ReorderButtonProducts = styled.button`
+export const ReorderButtonProducts = styled(ActionButton)`
   background: none;
   border: none;
   cursor: pointer;
@@ -317,5 +317,36 @@ export const TrashButton = styled(BaseButton)`
 
   &:hover {
     color: darkred;
+  }
+`;
+
+export const ActionButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Espaço entre o ícone e o texto */
+  background-color: #f4f4f4; /* Cor de fundo padrão */
+  border: 1px solid #ddd; /* Borda leve */
+  border-radius: 50px; /* Forma arredondada */
+  padding: 8px 12px; /* Espaço interno do botão */
+  font-size: 14px; /* Tamanho da fonte */
+  color: #333; /* Cor do texto */
+  cursor: pointer; /* Muda o cursor ao passar o mouse */
+  transition: all 0.3s ease; /* Transições suaves */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra leve */
+
+  &:hover {
+    background-color: #e0e0e0; /* Cor ao passar o mouse */
+    border-color: #bbb; /* Cor da borda ao passar o mouse */
+    color: #000; /* Texto mais escuro no hover */
+  }
+
+  &:active {
+    transform: scale(0.98); /* Leve redução ao clicar */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Ajuste da sombra ao clicar */
+  }
+
+  svg {
+    font-size: 16px; /* Tamanho do ícone */
   }
 `;
