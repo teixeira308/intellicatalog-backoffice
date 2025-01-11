@@ -11,7 +11,9 @@ import CriarProdutoModal from "../../components/ModalCriarProduto/CriarProdutoMo
 import EditarProdutoModal from "../../components/ModalEditarProduto/EditarProdutoModal";
 import CriarFotosProdutoModal from "../../components/ModalCriarFotosProduto/CriarFotosProdutoModal";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp,FaRandom,FaPlusCircle } from 'react-icons/fa'; // Ícone de lápis
+import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaEllipsisV, FaRandom, FaPlusCircle } from 'react-icons/fa'; // Ícone de lápis
+import { Menu, MenuItem, IconButton } from "@mui/material";
+
 
 
 const Catalogo = () => {
@@ -37,6 +39,7 @@ const Catalogo = () => {
   const [isReorderMode, setIsReorderMode] = useState(false); // Estado para o modo de reordenação
   const [isReorderProductMode, setIsReorderProductMode] = useState(false); // Estado para o modo de reordenação
 
+  const [menuAnchor, setMenuAnchor] = useState(null);
 
 
 
@@ -349,6 +352,24 @@ const Catalogo = () => {
                 </C.CategoriaLink>
 
                 <C.ActionsWrapper>
+
+                  <IconButton onClick={(event) => setMenuAnchor(event.currentTarget)}>
+                    <FaEllipsisV />
+                  </IconButton>
+
+                  <Menu
+                    anchorEl={menuAnchor}
+                    open={Boolean(menuAnchor)}
+                    onClose={() => setMenuAnchor(null)}
+                  >
+                    <MenuItem onClick={() => { openEditarCategoriaModal(categoria); setMenuAnchor(null); }}>
+                      <FaEdit style={{ marginRight: 8 }} /> Editar
+                    </MenuItem>
+                    <MenuItem onClick={() => { openDeleteCategoriaModal(categoria); setMenuAnchor(null); }}>
+                      <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
+                    </MenuItem>
+                  </Menu>
+
                   <C.EditButton onClick={() => openEditarCategoriaModal(categoria)}>
                     <FaEdit /> Editar
                   </C.EditButton>
