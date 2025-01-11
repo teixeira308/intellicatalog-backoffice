@@ -59,7 +59,7 @@ const ServicesApi = () => {
 
 
   const createServices = async (servico) => {
-
+    console.log("entrou na chamada")
    
     const response = await fetch(`${api_url}/intellicatalog/v1/services`, {
       method: "POST",
