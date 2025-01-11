@@ -9,6 +9,7 @@ const Servicos = () => {
   const [servicos, setServicos] = useState([]);
   const { getServicesByUser, deleteServices, createServices } = ServicesApi();
   const [isDeleteServicoModalOpen, setIsDeleteServicoModalOpen] = useState(false);
+  const [isCriarServicoModalOpen, setIsCriarServicoModalOpen] = useState(false);
   const [selectedServico, setSelectedServico] = useState(null);
 
   useEffect(() => {
@@ -50,6 +51,18 @@ const Servicos = () => {
     setIsDeleteServicoModalOpen(true);
   };
 
+  //CRIAR SERVIÇO
+
+  const handleCriarServicoModalClose = () => {
+    setIsCriarServicoModalOpen(false);
+  };
+
+  const handleNewServicoCreated = async () => {
+    const data = await getServicesByUser();
+    setServicos(data);
+  };
+
+
   return (
     <>
       <C.PageWrapper>
@@ -57,56 +70,60 @@ const Servicos = () => {
         <C.MainContent>
           <C.Title>Serviços</C.Title>
           <C.ButtonGroup>
-            <C.CreateButton>
+            <C.CreateButton onClick={() => openCriarServiceModal()}>
               <FaPlusCircle /> Novo Serviço
             </C.CreateButton>
             <C.ReordButton>
               <FaRandom /> Reordenar
             </C.ReordButton>
           </C.ButtonGroup>
-          {servicos.length > 0 ? (
-            servicos.map((servico) => (
-              <C.Card key={servico.id}>
-                <C.CardHeader>
-                  <C.CardTitle>{servico.name}</C.CardTitle>
-                  <C.CardStatus isActive={servico.is_active}>
-                    {servico.is_active ? "Ativo" : "Inativo"}
-                  </C.CardStatus>
-                </C.CardHeader>
-                <C.CardBody>
-                  <C.CardDetail>
-                    <strong>Descrição:</strong>{" "}
-                    {servico.description || "Descrição não informada"}
-                  </C.CardDetail>
-                 
-                  <C.CardDetail>
-                    <strong>Preço:</strong>{" "}
-                    {servico.price
-                      ? `R$ ${parseFloat(servico.price).toFixed(2)}`
-                      : "Preço não informado"}
-                  </C.CardDetail>
-                  <C.CardDetail>
-                    <C.ButtonGroup>
-                      <C.EditButton>
-                        <FaEdit /> Editar
-                      </C.EditButton>
-                      <C.TrashButton onClick={() => openDeleteServiceModal(servico)}>
-                        <FaTrashAlt /> Excluir
-                      </C.TrashButton>
-                    </C.ButtonGroup>
-                  </C.CardDetail>
+          <C.Section>
+            {servicos.length > 0 ? (
+              servicos.map((servico) => (
+                <C.Card key={servico.id}>
+                  <C.CardHeader>
+                    <C.CardTitle>{servico.name}</C.CardTitle>
+                    <C.CardStatus isActive={servico.is_active}>
+                      {servico.is_active ? "Ativo" : "Inativo"}
+                    </C.CardStatus>
+                  </C.CardHeader>
+                  <C.CardBody>
+                    <C.CardDetail>
+                      <strong>Descrição:</strong>{" "}
+                      {servico.description || "Descrição não informada"}
+                    </C.CardDetail>
+                    <C.CardDetail>
+                      <strong>Preço:</strong>{" "}
+                      {servico.price
+                        ? `R$ ${parseFloat(servico.price).toFixed(2)}`
+                        : "Preço não informado"}
+                    </C.CardDetail>
+                    <C.CardDetail>
+                      <C.ButtonGroup>
+                        <C.EditButton>
+                          <FaEdit /> Editar
+                        </C.EditButton>
+                        <C.TrashButton onClick={() => openDeleteServiceModal(servico)}>
+                          <FaTrashAlt /> Excluir
+                        </C.TrashButton>
+                      </C.ButtonGroup>
+                    </C.CardDetail>
+                  </C.CardBody>
+                </C.Card>
 
-
-                </C.CardBody>
-              </C.Card>
-            ))
-          ) : (
-            <p>Nenhum serviço encontrado</p>
-          )}
-
-
+              ))
+            ) : (
+              <p>Nenhum serviço encontrado</p>
+            )}
+          </C.Section>
         </C.MainContent>
       </C.PageWrapper>
+
+      <CriarServicoModal
+        isOpen={isCriarServicoModalOpen}
+        onClose={handleCriarServicoModalClose}
+        onCreate={handleNewServicoCreated}
+      />
 
       <DeleteServiceModal
         isOpen={isDeleteServicoModalOpen}

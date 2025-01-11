@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import * as C from "./styles";
-import productApi from "../../services/productApi";
+import servicesApi from "../../services/ServicesApiApi";
 import { NumericFormat } from 'react-number-format';
 
 const CriarServicoModal = ({ isOpen, onClose, onCreate, categoria }) => {
-  const { createProduto } = productApi();
+  const { createService } = servicesApi();
   const [formData, setFormData] = useState({
     name: "",
     description:"",
@@ -23,12 +23,6 @@ const CriarServicoModal = ({ isOpen, onClose, onCreate, categoria }) => {
     const filteredData = Object.fromEntries(
       Object.entries(data).filter(([key]) => allowedFields.includes(key))
     );
-  
-    // Verifica se promocional_price é uma string vazia e a redefine para null
-    if (filteredData.promocional_price === '') {
-      filteredData.promocional_price = null;
-    }
-  
     return filteredData;
   };
   
@@ -42,12 +36,9 @@ const CriarServicoModal = ({ isOpen, onClose, onCreate, categoria }) => {
 
   const resetFormData = () => {
     setFormData({
-      titulo: "",
-      brand: "",
-      description:"",
-      price:"",
-      unit:"",
-      unitquantity:"",
+      name: "",
+      price: "",
+      description:""
     });
   };
 
@@ -55,12 +46,12 @@ const CriarServicoModal = ({ isOpen, onClose, onCreate, categoria }) => {
     e.preventDefault();
     try {
       const filteredData = filterFormData(formData);
-      await createProduto(filteredData,categoria.id);
+      await createService(filteredData);
       resetFormData();
       onClose();
       onCreate();
     } catch (error) {
-      console.error("Erro ao criar produto:", error);
+      console.error("Erro ao criar serviço:", error);
     }
   };
 
@@ -158,33 +149,6 @@ const CriarServicoModal = ({ isOpen, onClose, onCreate, categoria }) => {
                   setFormData(prevFormData => ({
                     ...prevFormData,
                     price: value // Atualiza o valor no formData
-                  }));
-                }}
-                thousandSeparator={true}
-                decimalScale={2}
-                fixedDecimalScale={true}
-                prefix={'R$ '}
-                placeholder="R$ 0,00" // Placeholder para o formato esperado
-                style={{
-                  padding: '8px',
-                  border: '1px solid #ccc',
-                  borderRadius: '4px',
-                  fontSize: '1rem',
-                  width: '100%',
-                }}
-              />
-            </C.FormColumn>
-            <C.FormColumn>
-              <C.Label htmlFor="price">Preço promocional</C.Label>
-              <NumericFormat
-                name="promocional_price"
-                id="promocional_price"
-                value={formData.promocional_price}
-                onValueChange={(values) => {
-                  const { value } = values; // Obtenha o valor numérico
-                  setFormData(prevFormData => ({
-                    ...prevFormData,
-                    promocional_price: value // Atualiza o valor no formData
                   }));
                 }}
                 thousandSeparator={true}
