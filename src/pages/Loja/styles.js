@@ -40,7 +40,7 @@ export const StatusIndicator = styled.span`
   border-radius: 50%;
   display: inline-block;
   margin-right: 10px;
-  background-color: ${(props) => (props.isOpen ? 'green' : 'red')};
+  color: ${(props) => (props.isOpen ? 'green' : 'red')};
 `;
 
 
