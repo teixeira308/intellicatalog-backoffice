@@ -41,6 +41,7 @@ const Catalogo = () => {
 
   const [menuAnchor, setMenuAnchor] = useState(null);
 
+  const [menuProdAnchor, setmenuProdAnchor] = useState(null);
 
 
   useEffect(() => {
@@ -426,21 +427,21 @@ const Catalogo = () => {
                             <span>{produto.titulo}</span>
                             <C.ProdutoOperations>
 
-                              <IconButton onClick={(event) => setMenuAnchor(event.currentTarget)}>
+                              <IconButton onClick={(event) => setMenuProdAnchor(event.currentTarget)}>
                                 <FaEllipsisV />
                               </IconButton>
                               <Menu
-                                anchorEl={menuAnchor}
-                                open={Boolean(menuAnchor)}
-                                onClose={() => setMenuAnchor(null)}
+                                anchorEl={menuProdAnchor}
+                                open={Boolean(menuProdAnchor)}
+                                onClose={() => setMenuProdAnchor(null)}
                               >
-                                 <MenuItem onClick={() => { openCriarFotosProdutoModal(produto); setMenuAnchor(null); }}>
+                                 <MenuItem onClick={() => { openCriarFotosProdutoModal(produto); setMenuProdAnchor(null); }}>
                                   <FaImages style={{ marginRight: 8 }} /> Imagens
                                 </MenuItem>
-                                <MenuItem onClick={() => { openEditarProdutoModal(produto, categoria); setMenuAnchor(null); }}>
+                                <MenuItem onClick={() => { openEditarProdutoModal(produto, categoria); setMenuProdAnchor(null); }}>
                                   <FaEdit style={{ marginRight: 8 }} /> Editar
                                 </MenuItem>
-                                <MenuItem onClick={() => { openDeleteProdutoModal(produto); setMenuAnchor(null); }}>
+                                <MenuItem onClick={() => { openDeleteProdutoModal(produto); setMenuProdAnchor(null); }}>
                                   <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
                                 </MenuItem>
                               </Menu>
