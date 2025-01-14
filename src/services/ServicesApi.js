@@ -83,9 +83,9 @@ const ServicesApi = () => {
     return await response.json();
   }
 
-  const updateService = async(servico) =>{
+  const updateService = async(servicoId,servico) =>{
 
-    const response = await fetch(`${api_url}/intellicatalog/v1/services/${servico.id}`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/services/${servicoId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
