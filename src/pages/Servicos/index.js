@@ -5,6 +5,7 @@ import ServicesApi from "../../services/ServicesApi";
 import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp, FaPlusCircle, FaRandom } from 'react-icons/fa'; // Ícone de lápis
 import DeleteServiceModal from "../../components/ModalDeleteServico/DeleteServicoModal";
 import CriarServicoModal from "../../components/ModalCriarServico/CriarServicoModal";
+import EditarServicoModal from "../../components/ModalEditarServico/EditarServicoModal";
 
 const Servicos = () => {
   const [servicos, setServicos] = useState([]);
@@ -12,6 +13,7 @@ const Servicos = () => {
   const [isDeleteServicoModalOpen, setIsDeleteServicoModalOpen] = useState(false);
   const [isCriarServicoModalOpen, setIsCriarServicoModalOpen] = useState(false);
   const [selectedServico, setSelectedServico] = useState(null);
+  const [isEditarServicoModalOpen,setIsEditarServicoModalOpen] = useState(null);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -67,6 +69,20 @@ const Servicos = () => {
     setIsCriarServicoModalOpen(true);
   };
 
+  //EDITAR SERVIÇO
+
+  const openEditarServicoModal = (servico) => {
+    setSelectedServico(servico);
+    setIsEditarServicoModalOpen(true);
+  };
+
+  const handleServicoEdited = async () => {
+    const data = await getServicesByUser();
+    setServicos(data);
+    setIsEditarServicoModalOpen(false)
+  };
+
+
   return (
     <>
       <C.PageWrapper>
@@ -104,7 +120,7 @@ const Servicos = () => {
                     </C.CardDetail>
                     <C.CardDetail>
                       <C.ButtonGroup>
-                        <C.EditButton>
+                        <C.EditButton onClick={() => openEditarServicoModal(servico)}>
                           <FaEdit /> Editar
                         </C.EditButton>
                         <C.TrashButton onClick={() => openDeleteServiceModal(servico)}>
@@ -134,6 +150,13 @@ const Servicos = () => {
         onClose={handleDeleteServicoModalClose}
         onDelete={handleDeleteServico}
         servico={selectedServico}
+      />
+
+     <EditarServicoModal
+        isOpen={isEditarServicoModalOpen}
+        onClose={() => setIsEditarServicoModalOpen(false)}
+        servico={selectedServico}
+        onEdit={handleServicoEdited}
       />
     </>
   )

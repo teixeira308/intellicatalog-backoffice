@@ -83,7 +83,7 @@ const ServicesApi = () => {
     return await response.json();
   }
 
-  const updateServices = async(servico) =>{
+  const updateService = async(servico) =>{
 
     const response = await fetch(`${api_url}/intellicatalog/v1/services/${servico.id}`, {
       method: "PUT",
@@ -112,7 +112,7 @@ const ServicesApi = () => {
     getServicesByUser,
     deleteServices,
     createServices,
-    updateServices,
+    updateService,
    
   };
 }
