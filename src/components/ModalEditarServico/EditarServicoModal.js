@@ -49,6 +49,7 @@ const EditarServicoModal = ({ isOpen, onClose, servico, onEdit }) => {
     e.preventDefault();
     try {
       const filteredData = filterFormData(formData);
+      console.log(servico.id)
       await updateService(servico.id, filteredData);
       onEdit();
     } catch (error) {

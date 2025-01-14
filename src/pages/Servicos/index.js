@@ -72,6 +72,7 @@ const Servicos = () => {
   //EDITAR SERVIÇO
 
   const openEditarServicoModal = (servico) => {
+    console.log(servico)
     setSelectedServico(servico);
     setIsEditarServicoModalOpen(true);
   };
