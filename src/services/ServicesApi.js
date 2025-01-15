@@ -108,11 +108,63 @@ const ServicesApi = () => {
 
   }
 
+  const updateServiceStatus = async (servicoId, updatedServico) => {
+    const response = await fetch(`${api_url}/intellicatalog/v1/services/${servicoId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?.token}`,
+      },
+      body: JSON.stringify(updatedServico),
+    });
+  
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Erro ao atualizar o status do serviço");
+    }
+  };
+  
+  
+  const updateServiceOrder = async (servicos) => {
+    // Estrutura do JSON esperado pelo backend
+    const payload = {
+      servicos: servicos.map((servico, index) => ({
+        id: servico.id,          // ID do serviço
+        service_order: index + 1, // Nova ordem (dependendo se começa com 1 ou 0)
+      })),
+    };
+  
+    const response = await fetch(`${api_url}/intellicatalog/v1/services/reorder`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?.token}`,
+      },
+      body: JSON.stringify(payload),
+    });
+  
+    if (response.status === 401) {
+      // Redireciona para a tela de login
+      navigate('/login');
+    }
+  
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Erro ao atualizar serviços");
+    }
+  
+    return await response.json();
+  };
+  
+
+
   return {
     getServicesByUser,
     deleteServices,
     createServices,
     updateService,
+    updateServiceOrder,
+    updateServiceStatus
    
   };
 }

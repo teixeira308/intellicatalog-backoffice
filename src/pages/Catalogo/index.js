@@ -311,7 +311,8 @@ const Catalogo = () => {
 
 
 
-      {isReorderMode ? (
+      {
+      isReorderMode ? (
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="categorias">
             {(provided) => (

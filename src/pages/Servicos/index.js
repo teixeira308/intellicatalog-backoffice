@@ -9,18 +9,21 @@ import EditarServicoModal from "../../components/ModalEditarServico/EditarServic
 
 const Servicos = () => {
   const [servicos, setServicos] = useState([]);
-  const { getServicesByUser, deleteServices, createServices } = ServicesApi();
+  const { getServicesByUser, deleteServices, updateServiceOrder, updateServiceStatus  } = ServicesApi();
   const [isDeleteServicoModalOpen, setIsDeleteServicoModalOpen] = useState(false);
   const [isCriarServicoModalOpen, setIsCriarServicoModalOpen] = useState(false);
   const [selectedServico, setSelectedServico] = useState(null);
-  const [isEditarServicoModalOpen,setIsEditarServicoModalOpen] = useState(null);
+  const [isEditarServicoModalOpen, setIsEditarServicoModalOpen] = useState(null);
+
+  const [isReorderMode, setIsReorderMode] = useState(false); // Estado para o modo de reordenação
+  const [isReorderProductMode, setIsReorderProductMode] = useState(false); // Estado para o modo de reordenação
 
   useEffect(() => {
     const fetchServices = async () => {
       try {
         const services = await getServicesByUser(); // Recebe o objeto completo retornado
         if (services) {
-          console.log("Serviços carregados: ", services);
+          // console.log("Serviços carregados: ", services);
           setServicos(services); // Define diretamente o retorno, dependendo do formato
         }
       } catch (error) {
@@ -82,6 +85,73 @@ const Servicos = () => {
     setIsEditarServicoModalOpen(false)
   };
 
+  //REORDENAR
+
+  const handleChangeStatusServico = async (servico) => {
+    try {
+      if (servico) {
+        // Altera o status localmente e envia ao backend
+        const updatedServico = {
+          ...servico,
+          is_active: servico.is_active === 1 ? 0 : 1, // Alterna o status
+        };
+  
+        // Chamada à API para atualizar o status
+        await updateServiceStatus(servico.id, updatedServico);
+  
+        // Atualiza a lista de serviços no estado
+        setServicos((prevServicos) =>
+          prevServicos.map((s) =>
+            s.id === servico.id ? { ...s, is_active: updatedServico.is_active } : s
+          )
+        );
+      }
+    } catch (error) {
+      console.error("Erro ao mudar o status do serviço:", error);
+    }
+  };
+  
+
+  const handleOnDragEnd = async (result) => {
+    if (!result.destination) return;
+
+    // Índices de origem e destino vindos do drag-and-drop (começam de 0)
+    const sourceIndex = result.source.index;
+    const destinationIndex = result.destination.index;
+
+    // console.log('Índice de origem:', sourceIndex);
+    //console.log('Índice de destino:', destinationIndex);
+
+    // Cria uma cópia do array de categorias
+    const reorderedServices = [...servicos];
+
+    // Remove o item da posição inicial
+    const [reorderedItem] = reorderedServices.splice(sourceIndex, 1);
+
+    // Insere o item na nova posição
+    reorderedServices.splice(destinationIndex, 0, reorderedItem);
+
+    // console.log("Categorias reorganizadas:", reorderedCategorias);
+
+    try {
+      // Enviar nova ordem para o backend
+      const response = await updateServiceOrder(reorderedServices);
+      if (response.status === 200) {
+        const data = await getServicesByUser();
+        setServicos(data);
+        //console.log("Categorias reatualizadas do backend:", data.data);
+        setIsReorderMode(false)
+      } else {
+        console.error("Erro inesperado ao atualizar a ordem dos serviços:", response);
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar a ordem dos serviços:", error);
+    }
+  };
+
+  //UPDATE STATUS
+
+
 
   return (
     <>
@@ -98,43 +168,75 @@ const Servicos = () => {
             </C.ReordButton>
           </C.ButtonGroup>
           <C.Section>
-            {servicos.length > 0 ? (
-              servicos.map((servico) => (
-                <C.Card key={servico.id}>
-                  <C.CardHeader>
-                    <C.CardTitle>{servico.name}</C.CardTitle>
-                    <C.CardStatus isActive={servico.is_active}>
-                      {servico.is_active ? "Ativo" : "Inativo"}
-                    </C.CardStatus>
-                  </C.CardHeader>
-                  <C.CardBody>
-                    <C.CardDetail>
-                      <strong>Descrição:</strong>{" "}
-                      {servico.description || "Descrição não informada"}
-                    </C.CardDetail>
-                    <C.CardDetail>
-                      <strong>Preço:</strong>{" "}
-                      {servico.price
-                        ? `R$ ${parseFloat(servico.price).toFixed(2)}`
-                        : "Preço não informado"}
-                    </C.CardDetail>
-                    <C.CardDetail>
-                      <C.ButtonGroup>
-                        <C.EditButton onClick={() => openEditarServicoModal(servico)}>
-                          <FaEdit /> Editar
-                        </C.EditButton>
-                        <C.TrashButton onClick={() => openDeleteServiceModal(servico)}>
-                          <FaTrashAlt /> Excluir
-                        </C.TrashButton>
-                      </C.ButtonGroup>
-                    </C.CardDetail>
-                  </C.CardBody>
-                </C.Card>
 
-              ))
-            ) : (
-              <p>Nenhum serviço encontrado</p>
-            )}
+            {
+              isReorderMode ? (
+                <DragDropContext onDragEnd={handleOnDragEnd}>
+                  <Droppable droppableId="servicos">
+                    {(provided) => (
+                      <C.ServicoList {...provided.droppableProps} ref={provided.innerRef}>
+                        {servicos
+                          .sort((a, b) => (a.servico_order || 0) - (b.servico_order || 0))
+                          .map((servico, index) => (
+                            <Draggable key={servico.id} draggableId={String(servico.servico_order || index)} index={index}>
+                              {(provided) => (
+                                <C.Card
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                >
+                                  <C.StatusWrapper>
+                                    <C.CategoriaLink>{servico.name}</C.CategoriaLink>
+                                    <C.ActionsWrapper>
+                                      <FaArrowsAlt style={{ color: "blue" }} />
+                                    </C.ActionsWrapper>
+                                  </C.StatusWrapper>
+                                </C.Card>
+                              )}
+                            </Draggable>
+                          ))}
+
+                        {provided.placeholder}
+                      </C.ServicoList>
+                    )}
+                  </Droppable>
+                </DragDropContext>
+              ) : (
+                servicos.map((servico) => (
+                  <C.Card key={servico.id}>
+                    <C.CardHeader>
+                      <C.CardTitle>{servico.name}</C.CardTitle>
+                      <C.CardStatus onClick={() => {handleChangeStatusServico(servico);}}>
+                        {servico.is_active ? "Ativo" : "Inativo"}
+                      </C.CardStatus>
+                    </C.CardHeader>
+                    <C.CardBody>
+                      <C.CardDetail>
+                        <strong>Descrição:</strong>{" "}
+                        {servico.description || "Descrição não informada"}
+                      </C.CardDetail>
+                      <C.CardDetail>
+                        <strong>Preço:</strong>{" "}
+                        {servico.price
+                          ? `R$ ${parseFloat(servico.price).toFixed(2)}`
+                          : "Preço não informado"}
+                      </C.CardDetail>
+                      <C.CardDetail>
+                        <C.ButtonGroup>
+                          <C.EditButton onClick={() => openEditarServicoModal(servico)}>
+                            <FaEdit /> Editar
+                          </C.EditButton>
+                          <C.TrashButton onClick={() => openDeleteServiceModal(servico)}>
+                            <FaTrashAlt /> Excluir
+                          </C.TrashButton>
+                        </C.ButtonGroup>
+                      </C.CardDetail>
+                    </C.CardBody>
+                  </C.Card>
+                )
+                )
+              )
+            }
           </C.Section>
         </C.MainContent>
       </C.PageWrapper>
@@ -152,7 +254,7 @@ const Servicos = () => {
         servico={selectedServico}
       />
 
-     <EditarServicoModal
+      <EditarServicoModal
         isOpen={isEditarServicoModalOpen}
         onClose={() => setIsEditarServicoModalOpen(false)}
         servico={selectedServico}

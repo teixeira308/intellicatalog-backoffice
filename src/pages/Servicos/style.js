@@ -236,3 +236,10 @@ export const TrashButton = styled(ActionButton)`
     background-color: #d32f2f; /* Vermelho mais escuro no hover */
   }
 `;
+
+export const ServicoList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 400px; 
+`;
