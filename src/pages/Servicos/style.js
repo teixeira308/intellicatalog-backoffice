@@ -243,3 +243,9 @@ export const ServicoList = styled.div`
   gap: 10px;
   width: 400px; 
 `;
+
+export const StatusWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
