@@ -6,6 +6,7 @@ import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp, FaPlusCircle, Fa
 import DeleteServiceModal from "../../components/ModalDeleteServico/DeleteServicoModal";
 import CriarServicoModal from "../../components/ModalCriarServico/CriarServicoModal";
 import EditarServicoModal from "../../components/ModalEditarServico/EditarServicoModal";
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const Servicos = () => {
   const [servicos, setServicos] = useState([]);
@@ -186,7 +187,7 @@ const Servicos = () => {
                                   {...provided.dragHandleProps}
                                 >
                                   <C.StatusWrapper>
-                                    <C.CategoriaLink>{servico.name}</C.CategoriaLink>
+                                    <C.CardDetail>{servico.name}</C.CardDetail>
                                     <C.ActionsWrapper>
                                       <FaArrowsAlt style={{ color: "blue" }} />
                                     </C.ActionsWrapper>
