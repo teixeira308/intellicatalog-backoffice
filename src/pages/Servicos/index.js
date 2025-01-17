@@ -164,7 +164,7 @@ const Servicos = () => {
             <C.CreateButton onClick={() => openCriarProdutoModal()}>
               <FaPlusCircle /> Novo Serviço
             </C.CreateButton>
-            <C.ReordButton>
+            <C.ReordButton onClick={() => setIsReorderMode(!isReorderMode)}>
               <FaRandom /> Reordenar
             </C.ReordButton>
           </C.ButtonGroup>
