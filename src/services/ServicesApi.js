@@ -125,14 +125,16 @@ const ServicesApi = () => {
   };
   
   
-  const updateServiceOrder = async (servicos) => {
+  const updateServiceOrder = async (services) => {
+    console.log('entrou')
     // Estrutura do JSON esperado pelo backend
     const payload = {
-      servicos: servicos.map((servico, index) => ({
+      services: services.map((servico, index) => ({
         id: servico.id,          // ID do serviço
         service_order: index + 1, // Nova ordem (dependendo se começa com 1 ou 0)
       })),
     };
+    console.log(payload);
   
     const response = await fetch(`${api_url}/intellicatalog/v1/services/reorder`, {
       method: "PUT",
