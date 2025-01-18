@@ -131,7 +131,7 @@ const ServicesApi = () => {
     const payload = {
       services: services.map((servico, index) => ({
         id: servico.id,          // ID do serviço
-        service_order: index + 1, // Nova ordem (dependendo se começa com 1 ou 0)
+        servico_order: index + 1, // Nova ordem (dependendo se começa com 1 ou 0)
       })),
     };
     console.log(payload);
