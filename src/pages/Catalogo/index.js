@@ -433,7 +433,7 @@ const Catalogo = () => {
                           <C.ProdutoActions key={produto.id}>
                             <C.ProdutoItem>
                               <span>{produto.titulo}</span>
-                              <FaBoxOpen/><span>{produto.estoque}</span>
+                              <span><FaBoxOpen/>: {produto.estoque}</span>
                               <IconButton onClick={(event) => setMenuProdAnchor(event.currentTarget)}>
                                 <FaEllipsisV />
                               </IconButton>
@@ -449,7 +449,7 @@ const Catalogo = () => {
                                   <FaEdit style={{ marginRight: 8 }} /> Estoque
                                 </MenuItem>
                                 <MenuItem onClick={() => { openEditarProdutoModal(produto, categoria); setMenuProdAnchor(null); }}>
-                                  <FaEdit style={{ marginRight: 8 }} /> Editar
+                                  <FaBoxOpen style={{ marginRight: 8 }} /> Editar
                                 </MenuItem>
                                 <MenuItem onClick={() => { openDeleteProdutoModal(produto); setMenuProdAnchor(null); }}>
                                   <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
