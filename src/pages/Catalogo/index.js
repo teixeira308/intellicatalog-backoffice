@@ -12,7 +12,7 @@ import EditarProdutoModal from "../../components/ModalEditarProduto/EditarProdut
 import CriarFotosProdutoModal from "../../components/ModalCriarFotosProduto/CriarFotosProdutoModal";
 import EditarEstoqueProdutoModal from "../../components/ModalEditarEstoqueProduto/EditarEstoqueProduto";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaEllipsisV, FaRandom, FaPlusCircle } from 'react-icons/fa'; // Ícone de lápis
+import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaEllipsisV, FaRandom, FaPlusCircle,FaBoxOpen} from 'react-icons/fa'; // Ícone de lápis
 import { Menu, MenuItem, IconButton } from "@mui/material";
 
 
@@ -433,7 +433,7 @@ const Catalogo = () => {
                           <C.ProdutoActions key={produto.id}>
                             <C.ProdutoItem>
                               <span>{produto.titulo}</span>
-                              <span>{produto.estoque}</span>
+                              <span><FaBoxOpen /> {produto.estoque}</span>
                               <IconButton onClick={(event) => setMenuProdAnchor(event.currentTarget)}>
                                 <FaEllipsisV />
                               </IconButton>

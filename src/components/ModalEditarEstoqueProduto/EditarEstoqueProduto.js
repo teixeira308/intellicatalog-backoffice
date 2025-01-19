@@ -82,9 +82,10 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
+          <C.Button variant="outline-secondary" onClick={decreaseQuantity(formData.estoque)}>-</C.Button>
             <C.FormColumn>
               <C.Label htmlFor="estoque">Estoque</C.Label>
-              <C.Button variant="outline-secondary" onClick={decreaseQuantity(formData.estoque)}>-</C.Button>
+             
               <C.Input
                 type="text"
                 name="estoque"
