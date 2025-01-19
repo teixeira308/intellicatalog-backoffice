@@ -446,10 +446,10 @@ const Catalogo = () => {
                                   <FaImages style={{ marginRight: 8 }} /> Imagens
                                 </MenuItem>
                                 <MenuItem onClick={() => { openEditarEstoqueProdutoModal(produto); setMenuProdAnchor(null); }}>
-                                  <FaEdit style={{ marginRight: 8 }} /> Estoque
+                                  <FaBoxOpen style={{ marginRight: 8 }} /> Estoque
                                 </MenuItem>
                                 <MenuItem onClick={() => { openEditarProdutoModal(produto, categoria); setMenuProdAnchor(null); }}>
-                                  <FaBoxOpen style={{ marginRight: 8 }} /> Editar
+                                  <FaEdit style={{ marginRight: 8 }} /> Editar
                                 </MenuItem>
                                 <MenuItem onClick={() => { openDeleteProdutoModal(produto); setMenuProdAnchor(null); }}>
                                   <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
