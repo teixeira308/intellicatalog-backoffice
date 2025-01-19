@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: line;
+  flex-direction: column;
   height: 100vh;
   padding: 20px;
   padding-top: 220px; /* Adiciona espaço abaixo do Navbar */
