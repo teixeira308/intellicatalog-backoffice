@@ -173,6 +173,10 @@ const Catalogo = () => {
     setSelectedProduto(produto);
     setIsEditarProdutoModalOpen(true);
   };
+  const openEditarEstoqueProdutoModal = (produto) => 
+    setSelectedProduto(produto);
+    setIsEditarProdutoModalOpen(true);
+  };
 
   const openDeleteProdutoModal = (produto) => {
     setSelectedProduto(produto);
