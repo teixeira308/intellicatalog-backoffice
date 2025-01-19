@@ -84,7 +84,7 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
           <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="estoque">Estoque</C.Label>
-              <Button variant="outline-secondary" onClick={decreaseQuantity(formData.estoque)}>-</Button>
+              <C.Button variant="outline-secondary" onClick={decreaseQuantity(formData.estoque)}>-</C.Button>
               <C.Input
                 type="text"
                 name="estoque"
@@ -95,8 +95,8 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
               />
             </C.FormColumn>
 
-            &nbsp; &nbsp;{quantity}   &nbsp;&nbsp;
-            <Button variant="outline-secondary" onClick={increaseQuantity(formData.estoque)}>+</Button>
+        
+            <C.Button variant="outline-secondary" onClick={increaseQuantity(formData.estoque)}>+</C.Button>
           </C.FormRow>
           <C.Button type="submit">Salvar</C.Button>
         </C.ModalForm>
