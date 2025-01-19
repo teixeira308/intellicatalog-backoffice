@@ -136,7 +136,10 @@ const Servicos = () => {
 
     try {
       // Enviar nova ordem para o backend
+      console.log(reorderedServices);
+
       const response = await updateServiceOrder(reorderedServices);
+      console.log(response.status);
       if (response.status === 200) {
         const data = await getServicesByUser();
         setServicos(data);

@@ -134,7 +134,7 @@ const ServicesApi = () => {
         servico_order: index + 1, // Nova ordem (dependendo se começa com 1 ou 0)
       })),
     };
-    console.log(payload);
+    console.log("envio para  api:",payload);
   
     const response = await fetch(`${api_url}/intellicatalog/v1/services/reorder`, {
       method: "PUT",
@@ -157,8 +157,6 @@ const ServicesApi = () => {
   
     return await response.json();
   };
-  
-
 
   return {
     getServicesByUser,
