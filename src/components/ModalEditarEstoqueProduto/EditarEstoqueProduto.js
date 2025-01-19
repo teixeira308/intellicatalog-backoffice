@@ -6,7 +6,7 @@ import "./styles.css"
 
 const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
   const { updateEstoqueProduto } = productApi();
- 
+
   const [formData, setFormData] = useState({
     estoque: "",
   });
@@ -56,13 +56,17 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
   };
 
   const increaseQuantity = () => {
-    formData.estoque= formData.estoque + 1;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      estoque: (prevFormData.estoque || 0) + 1,
+    }));
   };
 
   const decreaseQuantity = () => {
-    if (formData.estoque > 1) {
-      formData.estoque= formData.estoque - 1;
-    }
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      estoque: prevFormData.estoque > 1 ? prevFormData.estoque - 1 : 0,
+    }));
   };
 
 
@@ -81,23 +85,19 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
               <C.Label>Produto: {produto.titulo} </C.Label>
             </C.FormColumn>
           </C.FormRow>
-          <C.FormRow>
-          
+          <C.FormRow> 
             <C.FormColumn>
-              <C.Button variant="outline-secondary" onClick={decreaseQuantity(formData.estoque)}>-</C.Button>
+              <C.Button variant="outline-secondary" onClick={decreaseQuantity}>-</C.Button>
               <C.Input
                 type="text"
                 name="estoque"
                 id="estoque"
-                value={formData.estoque}
+                value={formData.estoque || 0} // Garantir que o valor inicial seja 0
                 onChange={handleChange}
                 required
               />
-              <C.Button variant="outline-secondary" onClick={increaseQuantity(formData.estoque)}>+</C.Button>
-            </C.FormColumn>
-
-        
-            
+              <C.Button variant="outline-secondary" onClick={increaseQuantity}>+</C.Button>
+            </C.FormColumn> 
           </C.FormRow>
           <C.Button type="submit">Salvar</C.Button>
         </C.ModalForm>
