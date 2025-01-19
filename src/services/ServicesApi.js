@@ -155,7 +155,7 @@ const ServicesApi = () => {
       throw new Error(errorData.message || "Erro ao atualizar serviços");
     }
   
-    return await response.json();
+    return await response;
   };
 
   return {
