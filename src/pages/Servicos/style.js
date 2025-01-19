@@ -30,8 +30,11 @@ export const Section = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: 800px;
-  width: 100%;
+  width: 100%; /* Para adaptabilidade em telas menores */
+  margin: 0 auto; /* Centraliza horizontalmente */
+  padding: 20px; /* Adicione um espaçamento interno opcional */
 `;
+
 
 export const Subtitle = styled.p`
   font-size: 1.5rem;
