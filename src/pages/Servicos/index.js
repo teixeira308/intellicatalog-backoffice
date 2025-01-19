@@ -206,7 +206,7 @@ const Servicos = () => {
                 servicos
                 .sort((a, b) => a.servico_order - b.servico_order)
                 .map((servico) => (
-                  <C.Card key={servico.id}>
+                  <C.Card key={servico.servico_order}>
                     <C.CardHeader>
                       <C.CardTitle>{servico.name}</C.CardTitle>
                       <C.CardStatus onClick={() => {handleChangeStatusServico(servico);}}>
