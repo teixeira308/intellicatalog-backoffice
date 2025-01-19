@@ -203,7 +203,9 @@ const Servicos = () => {
                   </Droppable>
                 </DragDropContext>
               ) : (
-                servicos.map((servico) => (
+                servicos
+                .sort((a, b) => a.servico_order - b.servico_order)
+                .map((servico) => (
                   <C.Card key={servico.id}>
                     <C.CardHeader>
                       <C.CardTitle>{servico.name}</C.CardTitle>
