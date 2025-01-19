@@ -165,13 +165,41 @@ const ProductApi = () => {
 
   }
 
+
+  const updateEstoqueProduto = async(productId, estoque) => {
+    console.log(productId)
+    const newEstoque = { "estoque": estoque ? estoque : 0 }
+    const response = await fetch(`${api_url}/intellicatalog/v1/products/${productId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?.token}`,
+      },
+      body: JSON.stringify(newEstoque),
+    });
+  
+    if (response.status === 401) {
+      // Redireciona para a tela de login
+      navigate('/login');
+  }
+  
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Erro ao atualizar estoque do produto");
+    }
+  
+    return await response.json();
+
+  }
+
   return {
     getProducts,
     deleteProduto,
     createProduto,
     updateProduto,
     changeProductStatus,
-    updateProductOrder
+    updateProductOrder,
+    updateEstoqueProduto
   };
 }
 
