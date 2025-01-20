@@ -58,18 +58,17 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
   const increaseQuantity = () => {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      estoque: (prevFormData.estoque || 0) + 1,
+      estoque: String(Number(prevFormData.estoque || 0) + 1), // Incrementa e converte para string
     }));
   };
-
+  
   const decreaseQuantity = () => {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      estoque: prevFormData.estoque > 1 ? prevFormData.estoque - 1 : 0,
+      estoque: String(Math.max(Number(prevFormData.estoque || 0) - 1, 0)), // Decrementa e mantém como string
     }));
   };
-
-
+  
   if (!isOpen) return null;
 
   return (
@@ -92,7 +91,7 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
                 type="text"
                 name="estoque"
                 id="estoque"
-                value={formData.estoque || 0} // Garantir que o valor inicial seja 0
+                value={formData.estoque} // Garantir que o valor inicial seja 0
                 onChange={handleChange}
                 required
               />
