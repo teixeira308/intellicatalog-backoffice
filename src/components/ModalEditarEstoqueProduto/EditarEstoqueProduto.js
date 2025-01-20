@@ -88,7 +88,7 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
     <C.ModalOverlay>
       <C.ModalContainer>
         <C.ModalHeader>
-          <h2>Editar Estoque Produto</h2>
+          <h2>Atualizar Estoque</h2>
           <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
