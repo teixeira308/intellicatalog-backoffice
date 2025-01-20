@@ -448,7 +448,7 @@ const Catalogo = () => {
                                 open={Boolean(menuProdAnchor)}
                                 onClose={() => setMenuProdAnchor(null)}
                               >
-                                <MenuItem onClick={() => {   console.log(produto);setSelectedProduto(produto);openCriarFotosProdutoModal(produto); setMenuProdAnchor(null); }}>
+                                <MenuItem onClick={() => {   console.log(produto); setSelectedProduto(produto);openCriarFotosProdutoModal(produto); setMenuProdAnchor(null); }}>
                                   <FaImages style={{ marginRight: 8 }} /> Imagens
                                 </MenuItem>
                                 <MenuItem onClick={() => { console.log(produto); setSelectedProduto(produto); openEditarEstoqueProdutoModal(produto); setMenuProdAnchor(null); }}>

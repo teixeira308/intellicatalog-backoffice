@@ -15,7 +15,6 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const signin = (email, password) => {
-    console.log(api_url);
     return fetch(`${api_url}/intellicatalog/v1/users/login`, {
       method: "POST",
       headers: {
