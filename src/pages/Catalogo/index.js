@@ -448,16 +448,16 @@ const Catalogo = () => {
                                 open={Boolean(menuProdAnchor)}
                                 onClose={() => setMenuProdAnchor(null)}
                               >
-                                <MenuItem onClick={() => { openCriarFotosProdutoModal(produto); setMenuProdAnchor(null); }}>
+                                <MenuItem onClick={() => {   setSelectedProduto(produto);openCriarFotosProdutoModal(produto); setMenuProdAnchor(null); }}>
                                   <FaImages style={{ marginRight: 8 }} /> Imagens
                                 </MenuItem>
-                                <MenuItem onClick={() => { openEditarEstoqueProdutoModal(produto); setMenuProdAnchor(null); }}>
+                                <MenuItem onClick={() => { setSelectedProduto(produto); openEditarEstoqueProdutoModal(produto); setMenuProdAnchor(null); }}>
                                   <FaBoxOpen style={{ marginRight: 8 }} /> Estoque
                                 </MenuItem>
-                                <MenuItem onClick={() => { openEditarProdutoModal(produto, categoria); setMenuProdAnchor(null); }}>
+                                <MenuItem onClick={() => { setSelectedProduto(produto); openEditarProdutoModal(produto, categoria); setMenuProdAnchor(null); }}>
                                   <FaEdit style={{ marginRight: 8 }} /> Editar
                                 </MenuItem>
-                                <MenuItem onClick={() => { openDeleteProdutoModal(produto); setMenuProdAnchor(null); }}>
+                                <MenuItem onClick={() => { setSelectedProduto(produto); openDeleteProdutoModal(produto); setMenuProdAnchor(null); }}>
                                   <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
                                 </MenuItem>
                               </Menu>
