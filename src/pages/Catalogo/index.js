@@ -135,6 +135,12 @@ const Catalogo = () => {
     setIsEditarProdutoModalOpen(false)
   };
 
+  const handleEstoqueProdutoEdited = async () => {
+    const data = await getProducts();
+    setProdutos(data.data);
+    setIsEditarEstoqueProdutoModalOpen(false)
+  };
+
 
 
   const handlCriarCategoriaModalClose = () => {
@@ -529,7 +535,7 @@ const Catalogo = () => {
         isOpen={isEditarEstoqueProdutoModalOpen}
         onClose={() => setIsEditarEstoqueProdutoModalOpen(false)}
         produto={selectedProduto}
-        onEdit={handleProdutoEdited}
+        onEdit={handleEstoqueProdutoEdited}
       />
 
       <CriarFotosProdutoModal
