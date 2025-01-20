@@ -86,6 +86,7 @@ const Navbar = () => {
           <C.Link onClick={() => handleNavigate("/minhaloja")}>Minha Loja</C.Link>
           <C.Link onClick={() => handleNavigate("/catalogo")}>Catálogo</C.Link>
           <C.Link onClick={() => handleNavigate("/servicos")}>Serviços</C.Link>
+          <C.Link onClick={() => handleNavigate("/pedidos")}>Pedidos</C.Link>
           <C.Link onClick={() => handleNavigate("/agenda")}>Agenda</C.Link>
           <C.Link onClick={() => handleNavigate("/tutorial")}>Tutorial</C.Link>
           <C.Link onClick={() => handleNavigate("/demonstracao")}>Demonstração</C.Link>
