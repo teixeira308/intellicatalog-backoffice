@@ -7,6 +7,15 @@ import "./styles.css"
 const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
   const { updateEstoqueProduto } = productApi();
 
+  useEffect(() => {
+    if (produto) {
+      setFormData({
+        estoque: String(produto.estoque || "0"), // Garante que seja uma string
+      });
+    }
+  }, [produto]);
+
+  
   const [formData, setFormData] = useState({
     estoque: "",
   });
