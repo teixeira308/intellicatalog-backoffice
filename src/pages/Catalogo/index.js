@@ -43,7 +43,7 @@ const Catalogo = () => {
 
   const [menuAnchor, setMenuAnchor] = useState(null);
 
-  const [menuProdAnchor, setMenuProdAnchor] = useState(null);
+  const [menuProdAnchor, setMenuProdAnchor] = useState({}});
 
 
   useEffect(() => {
@@ -142,6 +142,20 @@ const Catalogo = () => {
   };
 
 
+  const openProductMenu = (event, produtoId) => {
+    setMenuProdAnchor((prevState) => ({
+      ...prevState,
+      [produtoId]: event.currentTarget,
+    }));
+  };
+
+  const closeProductMenu = (produtoId) => {
+    setMenuProdAnchor((prevState) => ({
+      ...prevState,
+      [produtoId]: null,
+    }));
+  };
+  
 
   const handlCriarCategoriaModalClose = () => {
     setIsCriarCategoriaModalOpen(false);
@@ -444,20 +458,20 @@ const Catalogo = () => {
                                 <FaEllipsisV />
                               </IconButton>
                               <Menu
-                                anchorEl={menuProdAnchor}
-                                open={Boolean(menuProdAnchor)}
-                                onClose={() => setMenuProdAnchor(null)}
+                                anchorEl={menuProdAnchor[produto.id]}
+                                open={Boolean(menuProdAnchor[produto.id])}
+                                onClose={() => closeProductMenu(produto.id)}
                               >
-                                <MenuItem onClick={() => {   console.log(produto); setSelectedProduto(produto);openCriarFotosProdutoModal(produto); setMenuProdAnchor(null); }}>
+                                <MenuItem onClick={() => {setSelectedProduto(produto);openCriarFotosProdutoModal(produto); closeProductMenu(produto.id); }}>
                                   <FaImages style={{ marginRight: 8 }} /> Imagens
                                 </MenuItem>
-                                <MenuItem onClick={() => { console.log(produto); setSelectedProduto(produto); openEditarEstoqueProdutoModal(produto); setMenuProdAnchor(null); }}>
+                                <MenuItem onClick={() => {setSelectedProduto(produto); openEditarEstoqueProdutoModal(produto); closeProductMenu(produto.id); }}>
                                   <FaBoxOpen style={{ marginRight: 8 }} /> Estoque
                                 </MenuItem>
-                                <MenuItem onClick={() => {console.log(produto);  setSelectedProduto(produto); openEditarProdutoModal(produto, categoria); setMenuProdAnchor(null); }}>
+                                <MenuItem onClick={() => {setSelectedProduto(produto); openEditarProdutoModal(produto, categoria); closeProductMenu(produto.id);}}>
                                   <FaEdit style={{ marginRight: 8 }} /> Editar
                                 </MenuItem>
-                                <MenuItem onClick={() => { console.log(produto); setSelectedProduto(produto); openDeleteProdutoModal(produto); setMenuProdAnchor(null); }}>
+                                <MenuItem onClick={() => {setSelectedProduto(produto); openDeleteProdutoModal(produto); closeProductMenu(produto.id); }}>
                                   <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
                                 </MenuItem>
                               </Menu>
