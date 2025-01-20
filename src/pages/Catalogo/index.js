@@ -43,7 +43,7 @@ const Catalogo = () => {
 
   const [menuAnchor, setMenuAnchor] = useState(null);
 
-  const [menuProdAnchor, setMenuProdAnchor] = useState({}});
+  const [menuProdAnchor, setMenuProdAnchor] = useState({});
 
 
   useEffect(() => {
@@ -454,7 +454,7 @@ const Catalogo = () => {
                             <C.ProdutoItem>
                               <span>{produto.titulo}</span>
                               <span><FaBoxOpen/>: {produto.estoque || 0}</span>
-                              <IconButton onClick={(event) => setMenuProdAnchor(event.currentTarget)}>
+                              <IconButton onClick={(event) => openProductMenu(event, produto.id)}>
                                 <FaEllipsisV />
                               </IconButton>
                               <Menu
@@ -462,16 +462,16 @@ const Catalogo = () => {
                                 open={Boolean(menuProdAnchor[produto.id])}
                                 onClose={() => closeProductMenu(produto.id)}
                               >
-                                <MenuItem onClick={() => {setSelectedProduto(produto);openCriarFotosProdutoModal(produto); closeProductMenu(produto.id); }}>
+                                <MenuItem onClick={() => {     setSelectedProduto(produto);openCriarFotosProdutoModal(produto); closeProductMenu(produto.id); }}>
                                   <FaImages style={{ marginRight: 8 }} /> Imagens
                                 </MenuItem>
-                                <MenuItem onClick={() => {setSelectedProduto(produto); openEditarEstoqueProdutoModal(produto); closeProductMenu(produto.id); }}>
+                                <MenuItem onClick={() => { console.log(produto); setSelectedProduto(produto); openEditarEstoqueProdutoModal(produto); closeProductMenu(produto.id); }}>
                                   <FaBoxOpen style={{ marginRight: 8 }} /> Estoque
                                 </MenuItem>
-                                <MenuItem onClick={() => {setSelectedProduto(produto); openEditarProdutoModal(produto, categoria); closeProductMenu(produto.id);}}>
+                                <MenuItem onClick={() => {console.log(produto);  setSelectedProduto(produto); openEditarProdutoModal(produto, categoria); closeProductMenu(produto.id);}}>
                                   <FaEdit style={{ marginRight: 8 }} /> Editar
                                 </MenuItem>
-                                <MenuItem onClick={() => {setSelectedProduto(produto); openDeleteProdutoModal(produto); closeProductMenu(produto.id); }}>
+                                <MenuItem onClick={() => { console.log(produto); setSelectedProduto(produto); openDeleteProdutoModal(produto); closeProductMenu(produto.id); }}>
                                   <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
                                 </MenuItem>
                               </Menu>
