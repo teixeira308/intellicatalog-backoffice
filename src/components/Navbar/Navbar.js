@@ -36,6 +36,9 @@ const Navbar = () => {
       <ListItem button onClick={() => handleNavigate("/catalogo")}>
         <ListItemText primary="Catálogo" />
       </ListItem>
+      <ListItem button onClick={() => handleNavigate("/pedidos")}>
+        <ListItemText primary="Pedidos" />
+      </ListItem>
       <ListItem button onClick={() => handleNavigate("/servicos")}>
         <ListItemText primary="Serviços" />
       </ListItem>

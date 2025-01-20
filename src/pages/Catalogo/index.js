@@ -43,7 +43,7 @@ const Catalogo = () => {
 
   const [menuAnchor, setMenuAnchor] = useState(null);
 
-  const [menuProdAnchor, setMenuProdAnchor] = useState({}});
+  const [menuProdAnchor, setMenuProdAnchor] = useState({});
 
 
   useEffect(() => {
