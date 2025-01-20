@@ -168,7 +168,7 @@ const ProductApi = () => {
 
   const updateEstoqueProduto = async(productId, estoque) => {
     console.log(productId)
-    const newEstoque = { "estoque": estoque ? estoque : 0 }
+    const newEstoque = { "estoque": estoque.estoque ? estoque.estoque : 0 }
     const response = await fetch(`${api_url}/intellicatalog/v1/products/${productId}`, {
       method: "PUT",
       headers: {
