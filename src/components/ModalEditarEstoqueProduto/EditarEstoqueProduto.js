@@ -36,11 +36,13 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
   }, [produto]);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value, // Atualiza somente o campo correspondente
+    }));
   };
+
 
 
 
@@ -58,17 +60,19 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
   const increaseQuantity = () => {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      estoque: String(Number(prevFormData.estoque || 0) + 1), // Incrementa e converte para string
+      estoque: String(Number(prevFormData.estoque || 0) + 1), // Garante que estoque seja string
     }));
   };
-  
+
   const decreaseQuantity = () => {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      estoque: String(Math.max(Number(prevFormData.estoque || 0) - 1, 0)), // Decrementa e mantém como string
+      estoque: String(Math.max(Number(prevFormData.estoque || 0) - 1, 0)), // Garante que estoque seja string
     }));
   };
-  
+
+
+
   if (!isOpen) return null;
 
   return (
@@ -84,19 +88,20 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
               <C.Label>Produto: {produto.titulo} </C.Label>
             </C.FormColumn>
           </C.FormRow>
-          <C.FormRow> 
+          <C.FormRow>
             <C.FormColumn>
               <C.Button variant="outline-secondary" onClick={decreaseQuantity}>-</C.Button>
               <C.Input
                 type="text"
                 name="estoque"
                 id="estoque"
-                value={formData.estoque} // Garantir que o valor inicial seja 0
+                value={formData.estoque || "0"} // Garante que seja string (usa "0" como fallback)
                 onChange={handleChange}
                 required
               />
+
               <C.Button variant="outline-secondary" onClick={increaseQuantity}>+</C.Button>
-            </C.FormColumn> 
+            </C.FormColumn>
           </C.FormRow>
           <C.Button type="submit">Salvar</C.Button>
         </C.ModalForm>
