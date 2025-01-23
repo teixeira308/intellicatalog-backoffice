@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as C from "./styles";
+import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp, FaPlusCircle, FaRandom, FaSearch } from 'react-icons/fa'; // Ícone de lápis
 import Navbar from "../../components/Navbar/Navbar";
 import PedidoApi from "../../services/PedidoApi";
 
@@ -56,7 +57,21 @@ const Pedidos = () => {
                   <strong>Total:</strong>{" "}
                   R${pedido.total_amount}
                 </C.CardDetail>
+                <C.CardDetail>
+                        <C.ButtonGroup>
+                        <C.EditButton>
+                            <FaSearch /> Detalhes
+                          </C.EditButton>
+                          <C.EditButton>
+                            <FaEdit /> Editar
+                          </C.EditButton>
+                          <C.TrashButton >
+                            <FaTrashAlt /> Excluir
+                          </C.TrashButton>
+                        </C.ButtonGroup>
+                      </C.CardDetail>
               </C.CardBody>
+              
             </C.Card>
           ))
         ) : (
