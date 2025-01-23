@@ -28,11 +28,11 @@ const Pedidos = () => {
       <Navbar />
       <C.Title>Pedidos</C.Title>
        <C.ButtonGroup>
-                  <C.CreateButton onClick={() => openCriarProdutoModal()}>
+                  <C.CreateButton>
                     <FaPlusCircle /> Novo Serviço
                   </C.CreateButton>
-                  <C.ReordButton onClick={() => setIsReorderMode(!isReorderMode)}>
-                    <FaRandom /> Reordenar
+                  <C.ReordButton>
+                    <FaRandom/>Reordenar
                   </C.ReordButton>
                 </C.ButtonGroup>
       <C.Section>
