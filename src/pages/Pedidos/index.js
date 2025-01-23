@@ -58,20 +58,20 @@ const Pedidos = () => {
                   R${pedido.total_amount}
                 </C.CardDetail>
                 <C.CardDetail>
-                        <C.ButtonGroup>
-                        <C.EditButton>
-                            <FaSearch /> Detalhes
-                          </C.EditButton>
-                          <C.EditButton>
-                            <FaEdit /> Editar
-                          </C.EditButton>
-                          <C.TrashButton >
-                            <FaTrashAlt /> Excluir
-                          </C.TrashButton>
-                        </C.ButtonGroup>
-                      </C.CardDetail>
+                  <C.ButtonGroup>
+                    <C.EditButton>
+                      <FaSearch /> Detalhes
+                    </C.EditButton>
+                    <C.EditButton>
+                      <FaEdit /> Editar
+                    </C.EditButton>
+                    <C.TrashButton >
+                      <FaTrashAlt /> Excluir
+                    </C.TrashButton>
+                  </C.ButtonGroup>
+                </C.CardDetail>
               </C.CardBody>
-              
+
             </C.Card>
           ))
         ) : (

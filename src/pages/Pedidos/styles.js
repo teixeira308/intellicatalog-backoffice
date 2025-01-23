@@ -99,3 +99,31 @@ export const CardDetail = styled.p`
     color: #333;
   }
 `;
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  gap: 10px; /* Espaço entre os botões */
+  justify-content: center; /* Centraliza os botões no eixo horizontal */
+  align-items: center; /* Alinha os botões verticalmente */
+  margin-top: 10px; /* Espaço superior */
+`;
+
+export const TrashButton = styled(ActionButton)`
+  background-color: #f44336; /* Vermelho para excluir */
+  color: #fff; /* Texto branco */
+  border: none;
+
+  &:hover {
+    background-color: #d32f2f; /* Vermelho mais escuro no hover */
+  }
+`;
+
+export const EditButton = styled(ActionButton)`
+  background-color: #4caf50; /* Verde para editar */
+  color: #fff; /* Texto branco */
+  border: none;
+
+  &:hover {
+    background-color: #45a049; /* Verde mais escuro no hover */
+  }
+`;
