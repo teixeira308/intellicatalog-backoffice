@@ -27,6 +27,14 @@ const Pedidos = () => {
     <C.Container>
       <Navbar />
       <C.Title>Pedidos</C.Title>
+       <C.ButtonGroup>
+                  <C.CreateButton onClick={() => openCriarProdutoModal()}>
+                    <FaPlusCircle /> Novo Serviço
+                  </C.CreateButton>
+                  <C.ReordButton onClick={() => setIsReorderMode(!isReorderMode)}>
+                    <FaRandom /> Reordenar
+                  </C.ReordButton>
+                </C.ButtonGroup>
       <C.Section>
         {pedidos.length > 0 ? (
           pedidos.map((pedido, index) => (

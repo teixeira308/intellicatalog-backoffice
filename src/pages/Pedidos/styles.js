@@ -7,6 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
   height: 100vh;
   padding: 20px;
+  padding-top: 220px; /* Adiciona espaço abaixo do Navbar */
   background-color: #f4f4f4;
 `;
 
@@ -153,6 +154,26 @@ export const TrashButton = styled(ActionButton)`
 
 export const EditButton = styled(ActionButton)`
   background-color: #4caf50; /* Verde para editar */
+  color: #fff; /* Texto branco */
+  border: none;
+
+  &:hover {
+    background-color: #45a049; /* Verde mais escuro no hover */
+  }
+`;
+
+export const CreateButton = styled(ActionButton)`
+  background-color: #4caf50; /* Verde para editar */
+  color: #fff; /* Texto branco */
+  border: none;
+
+  &:hover {
+    background-color: #45a049; /* Verde mais escuro no hover */
+  }
+`;
+
+export const ReordButton = styled(ActionButton)`
+  background-color: #1769aa; /* Verde para editar */
   color: #fff; /* Texto branco */
   border: none;
 
