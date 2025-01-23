@@ -41,14 +41,22 @@ const Pedidos = () => {
                   <strong>Cliente:</strong>{" "}
                   {pedido.phone}
                 </C.CardDetail>
+                <C.CardDetail>
+                  <strong>Data:</strong> {new Intl.DateTimeFormat("pt-BR", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                    hour12: false,
+                  }).format(new Date(pedido.order_date))}
+                </C.CardDetail>
+                <C.CardDetail>
+                  <strong>Total:</strong>{" "}
+                  R${pedido.total_amount}
+                </C.CardDetail>
               </C.CardBody>
-             
-              <p>Data do pedido: {pedido.order_date}</p>
-              <p>Método de pagamento: {pedido.payment_method}</p>
-              <p>Observação: {pedido.notes}</p>
-              <p>Endereço: {pedido.delivery_address}</p>
-              <p>Total: R${pedido.total_amount}</p>
-              {/* Adicione mais campos conforme necessário */}
             </C.Card>
           ))
         ) : (
