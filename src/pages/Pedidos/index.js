@@ -31,8 +31,13 @@ const Pedidos = () => {
           pedidos.map((pedido, index) => (
             <C.Card key={pedido.id || index}>
               <p>ID do Pedido: {pedido.id}</p>
-              <p>Cliente: {pedido.cliente}</p>
-              <p>Total: {pedido.total}</p>
+              <p>Data do pedido: {pedido.order_date}</p>
+              <p>Método de pagamento: {pedido.payment_method}</p>
+              <p>Status: {pedido.status}</p>
+              <p>Observação: {pedido.notes}</p>
+              <p>Endereço: {pedido.delivery_address}</p>
+              <p>Cliente: {pedido.phone}</p>
+              <p>Total: R${pedido.total_amount}</p>
               {/* Adicione mais campos conforme necessário */}
             </C.Card>
           ))
