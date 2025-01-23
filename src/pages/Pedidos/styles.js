@@ -64,3 +64,38 @@ export const Card = styled.div`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, background-color 0.2s ease;
 `;
+
+export const CardHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const CardTitle = styled.h2`
+  font-size: 18px;
+  color: #333;
+`;
+
+export const CardStatus = styled.span`
+  background-color: ${(props) => (props.isActive ? "#4caf50" : "#f44336")};
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+`;
+
+export const CardBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+export const CardDetail = styled.p`
+  font-size: 14px;
+  color: #555;
+  strong {
+    font-weight: bold;
+    color: #333;
+  }
+`;
