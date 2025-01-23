@@ -29,7 +29,7 @@ const Pedidos = () => {
       <C.Title>Pedidos</C.Title>
        <C.ButtonGroup>
                   <C.CreateButton>
-                    <FaPlusCircle /> Novo Serviço
+                    <FaPlusCircle /> Novo Pedido
                   </C.CreateButton>
                   <C.ReordButton>
                     <FaRandom/>Reordenar
