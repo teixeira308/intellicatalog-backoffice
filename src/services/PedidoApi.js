@@ -125,12 +125,40 @@ const PedidoApi = () => {
     return await response.json();
   }
 
+  const addItemPedido = async (pedido,item) =>{
+    
+    console.log(pedido," - ",item);
+
+    const response = await fetch(`${api_url}/intellicatalog/v1/orders/${pedido.id}/item`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?.token}`,
+      },
+      body: JSON.stringify(item),
+    });
+
+    if (response.status === 401) {
+      // Redireciona para a tela de login
+      navigate('/login');
+    }
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Erro ao criar pedido");
+    }
+
+    return await response.json();
+  }
+
+
   return {
     createPedido,
     getPedidos,
     deletarPedido,
     updatePedido,
-    deletarItemPedido
+    deletarItemPedido,
+    addItemPedido
   };
 }
 
