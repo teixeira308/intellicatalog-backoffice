@@ -5,7 +5,7 @@ import "./styles.css";
 
 const DetalhespedidoModal = ({ isOpen, onClose, pedido }) => {
 
-
+  if (!isOpen) return null;
   return (
     <C.ModalOverlay>
       <C.ModalContainer>
