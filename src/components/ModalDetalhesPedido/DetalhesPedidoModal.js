@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import * as C from "./styles"; 
+import * as C from "./styles";
+import productApi from "../../services/productApi";
 import { NumericFormat } from 'react-number-format';
 import "./styles.css"
 
-const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
- 
+const EditarLojaModal = ({ isOpen, onClose, produto, categoria, onEdit }) => {
+  const { updateProduto } = productApi();
   const [formData, setFormData] = useState({
-    delivery_address: "",
-    payment_method: "",
+    titulo: "",
+    brand: "",
     description: "",
     price: "",
     unit: "",
@@ -18,8 +19,8 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
   const filterFormData = (data) => {
     // Campos permitidos
     const allowedFields = [
-      'delivery_address',
-      'payment_method',
+      'titulo',
+      'brand',
       'description',
       'price',
       'unit',
@@ -43,14 +44,57 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
 
 
   useEffect(() => {
-    if (pedido) {
-      setFormData(pedido);
+    if (produto) {
+      setFormData(produto);
     }
-  }, [pedido]);
+  }, [produto]);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const filteredData = filterFormData(formData);
+      await updateProduto(produto.id, filteredData);
+      onEdit();
+    } catch (error) {
+      console.error("Erro ao editar produto:", error);
+    }
+  };
 
   if (!isOpen) return null;
 
- 
+  const handlePriceChange = (e) => {
+    let value = e.target.value;
+
+    // Permite apenas números e um único ponto decimal
+    value = value.replace(/[^0-9.]/g, '');
+
+    // Garante que haja no máximo um ponto decimal
+    const parts = value.split('.');
+    if (parts.length > 2) {
+      value = parts[0] + '.' + parts[1]; // Remove pontos extras
+    }
+
+    // Limita a quantidade de casas decimais a duas
+    if (parts[1] && parts[1].length > 2) {
+      value = `${parts[0]}.${parts[1].slice(0, 2)}`;
+    }
+
+    // Atualiza o valor no formData
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      price: value
+    }));
+  };
+
   return (
     <C.ModalOverlay>
       <C.ModalContainer>
@@ -172,4 +216,4 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
   );
 };
 
-export default DetalhesPedidoModal;
+export default EditarLojaModal;

@@ -3,10 +3,13 @@ import * as C from "./styles";
 import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp, FaPlusCircle, FaRandom, FaSearch } from 'react-icons/fa'; // Ícone de lápis
 import Navbar from "../../components/Navbar/Navbar";
 import PedidoApi from "../../services/PedidoApi";
+import DetalhesPedidoModal from "../../components/ModalEditarProduto/EditarProdutoModal";
 
 const Pedidos = () => {
   const [pedidos, setPedidos] = useState([]);
   const { getPedidos } = PedidoApi();
+  const [isDetalhesPedidoModalOpen, setIsDetalhesPedidoModalOpen] = useState(false);
+  const [selectedPedido, setSelectedPedido] = useState(null);
 
   useEffect(() => {
     const fetchPedidos = async () => {
@@ -22,6 +25,11 @@ const Pedidos = () => {
 
     fetchPedidos();
   }, []);
+
+  const openDetalhesPedidoModal = (pedido) => {
+    setSelectedPedido(pedido);
+    setIsDetalhesPedidoModalOpen(true);
+  };
 
   return (
     <C.Container>
@@ -51,7 +59,7 @@ const Pedidos = () => {
                   {pedido.phone}
                 </C.CardDetail>
                 <C.CardDetail>
-                  <strong>Data:</strong> {new Intl.DateTimeFormat("pt-BR", {
+                  <strong>Criado em:</strong> {new Intl.DateTimeFormat("pt-BR", {
                     day: "2-digit",
                     month: "2-digit",
                     year: "numeric",
@@ -67,7 +75,7 @@ const Pedidos = () => {
                 </C.CardDetail>
                 <C.CardDetail>
                   <C.ButtonGroup>
-                    <C.EditButton>
+                    <C.EditButton onClick={() => { openDetalhesPedidoModal(pedido);} } >
                       <FaSearch /> Detalhes
                     </C.EditButton>
                     <C.EditButton>
@@ -86,7 +94,13 @@ const Pedidos = () => {
           <p>Nenhum pedido encontrado.</p>
         )}
       </C.Section>
+      <DetalhesPedidoModal
+        isOpen={isDetalhesPedidoModalOpen}
+        onClose={() => setIsDetalhesPedidoModalOpen(false)}
+        pedido={selectedPedido}
+      />
     </C.Container>
+    
   );
 };
 
