@@ -41,11 +41,32 @@ export const CloseButton = styled.button`
   color: #333;
 `;
 
-// Estilos para o formulário do modal
 export const ModalForm = styled.form`
   display: flex;
   flex-direction: column;
+  max-height: 70vh; /* Define uma altura máxima */
+  overflow-y: auto; /* Ativa a barra de rolagem vertical */
+  padding: 1rem; /* Adiciona espaçamento interno */
+  gap: 1rem; /* Espaçamento entre os elementos internos */
+  scrollbar-width: thin; /* Estiliza a barra no Firefox */
+  scrollbar-color: #c1c1c1 transparent;
+
+  /* Estiliza a barra de rolagem para navegadores baseados em Webkit (Chrome, Edge, etc.) */
+  &::-webkit-scrollbar {
+    width: 8px; /* Largura da barra */
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1; /* Cor do polegar */
+    border-radius: 4px; /* Deixa os cantos arredondados */
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #a1a1a1; /* Cor ao passar o mouse */
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent; /* Cor do fundo da barra */
+  }
 `;
+
 
 // Estilos para cada linha do formulário
 export const FormRow = styled.div`
