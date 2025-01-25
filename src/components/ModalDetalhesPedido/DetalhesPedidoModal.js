@@ -19,19 +19,11 @@ const DetalhespedidoModal = ({ isOpen, onClose, pedido }) => {
           <C.FormRow>
             <C.FormColumn>
               <C.Label>Data do Pedido</C.Label> {new Date(pedido.order_date).toLocaleString("pt-BR", {
-                  dateStyle: "short",
-                  timeStyle: "short",
-                })}
-               
+                dateStyle: "short",
+                timeStyle: "short",
+              })}
+
             </C.FormColumn>
-          </C.FormRow>
-          <C.FormRow>
-            <C.FormColumn>
-              <C.Label>Status</C.Label>
-              {pedido.status}
-            </C.FormColumn>
-          </C.FormRow>
-          <C.FormRow>
             <C.FormColumn>
               <C.Label>Telefone</C.Label>
               {pedido.phone}
@@ -42,18 +34,10 @@ const DetalhespedidoModal = ({ isOpen, onClose, pedido }) => {
               <C.Label>Endereço de Entrega</C.Label>
               {pedido.delivery_address}
             </C.FormColumn>
-          </C.FormRow>
-          <C.FormRow>
             <C.FormColumn>
               <C.Label>Total do Pedido</C.Label>
-              <NumericFormat
-                className="NumericFormat"
-                value={pedido.total_amount}
-                displayType="text"
-                thousandSeparator
-                prefix="R$ "
-                readOnly
-              />
+           {pedido.total_amount}
+                
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
@@ -67,36 +51,36 @@ const DetalhespedidoModal = ({ isOpen, onClose, pedido }) => {
           <C.FormRow>
             <C.FormColumn>
               <C.Label>Itens do Pedido</C.Label>
-            
-                {pedido.items.map((item, index) => (
-                  <div key={index}>
-                    <p>
-                      <strong>Produto ID:</strong> {item.product_id}
-                    </p>
-                    <p>
-                      <strong>Quantidade:</strong> {item.quantity}
-                    </p>
-                    <p>
-                      <strong>Preço Unitário:</strong>{" "}
-                      <NumericFormat
-                        value={item.unit_price}
-                        displayType="text"
-                        thousandSeparator
-                        prefix="R$ "
-                      />
-                    </p>
-                    <p>
-                      <strong>Total:</strong>{" "}
-                      <NumericFormat
-                        value={item.total_price}
-                        displayType="text"
-                        thousandSeparator
-                        prefix="R$ "
-                      />
-                    </p>
-                  </div>
-                ))}
-             
+
+              {pedido.items.map((item, index) => (
+                <div key={index}>
+                  <p>
+                    <strong>Produto ID:</strong> {item.product_id}
+                  </p>
+                  <p>
+                    <strong>Quantidade:</strong> {item.quantity}
+                  </p>
+                  <p>
+                    <strong>Preço Unitário:</strong>{" "}
+                    <NumericFormat
+                      value={item.unit_price}
+                      displayType="text"
+                      thousandSeparator
+                      prefix="R$ "
+                    />
+                  </p>
+                  <p>
+                    <strong>Total:</strong>{" "}
+                    <NumericFormat
+                      value={item.total_price}
+                      displayType="text"
+                      thousandSeparator
+                      prefix="R$ "
+                    />
+                  </p>
+                </div>
+              ))}
+
             </C.FormColumn>
           </C.FormRow>
 

@@ -71,30 +71,6 @@ const EditarLojaModal = ({ isOpen, onClose, produto, categoria, onEdit }) => {
 
   if (!isOpen) return null;
 
-  const handlePriceChange = (e) => {
-    let value = e.target.value;
-
-    // Permite apenas números e um único ponto decimal
-    value = value.replace(/[^0-9.]/g, '');
-
-    // Garante que haja no máximo um ponto decimal
-    const parts = value.split('.');
-    if (parts.length > 2) {
-      value = parts[0] + '.' + parts[1]; // Remove pontos extras
-    }
-
-    // Limita a quantidade de casas decimais a duas
-    if (parts[1] && parts[1].length > 2) {
-      value = `${parts[0]}.${parts[1].slice(0, 2)}`;
-    }
-
-    // Atualiza o valor no formData
-    setFormData(prevFormData => ({
-      ...prevFormData,
-      price: value
-    }));
-  };
-
   return (
     <C.ModalOverlay>
       <C.ModalContainer>
