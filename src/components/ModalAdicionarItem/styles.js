@@ -106,3 +106,66 @@ export const Button = styled.button`
     background-color: #0056b3;
   }
 `;
+
+export const ProductRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+`;
+
+export const ProductName = styled.span`
+  flex: 2;
+`;
+
+export const QuantityControls = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const QuantityButton = styled.button`
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  font-size: 18px;
+  background-color: #f0f0f0;
+  border: none;
+  cursor: pointer;
+`;
+
+export const QuantityValue = styled.span`
+  width: 20px;
+  text-align: center;
+`;
+
+export const ProductPrice = styled.span`
+  flex: 1;
+  text-align: right;
+  font-weight: bold;
+`;
+
+
+export const ModalBody = styled.div`
+  padding: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+ 
+
+ 
+ 
+
+ 
+export const ModalFooter = styled.div`
+  padding: 15px;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: flex-end;
+`;
+ 
