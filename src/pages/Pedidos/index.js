@@ -146,7 +146,7 @@ const Pedidos = () => {
     <EditarPedidoModal
         isOpen={isEditarPedidoModalOpen}
         onClose={() => setIsEditarPedidoModalOpen(false)}
-        produto={selectedPedido}
+        pedido={selectedPedido}
         onEdit={handlePedidoEdited}
       />
 
