@@ -105,6 +105,7 @@ const Pedidos = () => {
     setIsDeletarItemPedidoModalOpen(false);
     setSelectedPedido(null);
     setSelectedItem(null);
+    handlePedidoEdited();
   };
 
   const handlePedidoEdited = async () => {
