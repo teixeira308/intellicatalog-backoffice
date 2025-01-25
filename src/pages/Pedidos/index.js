@@ -195,7 +195,7 @@ const Pedidos = () => {
                                   thousandSeparator
                                   prefix="R$ "
                                 /></C.CardDetail>
-                              <C.TrashButton onClick={() => { openDeletarItemPedidoModal(pedido,item); }}>
+                              <C.TrashButton onClick={() => { openDeletarItemPedidoModal(pedido,produto); }}>
                                 <FaTrashAlt />
                               </C.TrashButton>
                             </C.CardBody>
