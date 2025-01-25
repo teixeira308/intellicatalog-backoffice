@@ -75,6 +75,7 @@ const Pedidos = () => {
   };
 
   const openDeletarItemPedidoModal = (pedido,item) => {
+    console.log(item);
     setSelectedPedido(pedido);
     setSelectedItem(item);
     setIsDeletarItemPedidoModalOpen(true);
