@@ -58,8 +58,6 @@ const Pedidos = () => {
   const handleDeletarItemPedido = async () => {
     try {
       if (selectedPedido && selectedItem) {
-        console.log("pedido: ", selectedPedido)
-        console.log("item: ", selectedItem)
         await deletarItemPedido(selectedPedido, selectedItem);
         setPedidos(pedidos.filter((pedido) => pedido.id !== selectedPedido.id));
       }
