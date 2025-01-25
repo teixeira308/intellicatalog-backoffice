@@ -3,12 +3,11 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: top;
   flex-direction: column;
   height: 100vh;
-  padding: 20px;
-  padding-top: 220px; /* Adiciona espaço abaixo do Navbar */
-  background-color: #f4f4f4;
+  gap: 20px;
+  margin-top:80px;
 `;
 
 

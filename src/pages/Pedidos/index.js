@@ -64,9 +64,6 @@ const Pedidos = () => {
                   <C.CreateButton>
                     <FaPlusCircle /> Novo Pedido
                   </C.CreateButton>
-                  <C.ReordButton>
-                    <FaRandom/>Reordenar
-                  </C.ReordButton>
                 </C.ButtonGroup>
       <C.Section>
         {pedidos.length > 0 ? (
