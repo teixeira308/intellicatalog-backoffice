@@ -43,7 +43,7 @@ const DeletarItemPedidoModal = ({ isOpen, onClose, pedido, item, onDelete }) => 
     <C.ModalOverlay>
       <C.ModalContainer>
         <C.ModalHeader>
-          <h2>Deletar Item #{item.id} do Pedido #{pedido.id}</h2>
+          <h2>Deletar Item do Pedido </h2>
           <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
