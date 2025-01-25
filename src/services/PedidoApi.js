@@ -136,7 +136,7 @@ const PedidoApi = () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${user?.token}`,
       },
-      body: {'item':item},
+      body: {'items':item},
     });
 
     if (response.status === 401) {
