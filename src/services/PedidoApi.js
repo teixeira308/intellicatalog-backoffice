@@ -127,7 +127,8 @@ const PedidoApi = () => {
 
   const addItemPedido = async (item,pedido) =>{
     console.log("entrou")
-    console.log(pedido," - ",item);
+
+    console.log(pedido," - ",{'item':item});
     console.log(user?.token)
     const response = await fetch(`${api_url}/intellicatalog/v1/orders/${pedido}/item`, {
       method: "PUT",
@@ -135,7 +136,7 @@ const PedidoApi = () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${user?.token}`,
       },
-      body: item,
+      body: {'item':item},
     });
 
     if (response.status === 401) {
