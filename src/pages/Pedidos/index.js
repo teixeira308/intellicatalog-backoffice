@@ -65,7 +65,7 @@ const Pedidos = () => {
 
   const handlePedidoEdited = async () => {
     const data = await getPedidos();
-    setPedidos(data.data);
+    setPedidos(data);
     setIsEditarPedidoModalOpen(false)
   };
 
