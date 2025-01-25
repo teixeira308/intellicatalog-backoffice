@@ -32,7 +32,7 @@ const Pedidos = () => {
     try {
       if (selectedPedido) {
         await deletarPedido(selectedPedido);
-        setProdutos(pedidos.filter((pedido) => pedido.id !== selectedPedido.id));
+        setPedidos(pedidos.filter((pedido) => pedido.id !== selectedPedido.id));
       }
       handleDeletarPedidoModalClose();
     } catch (error) {
