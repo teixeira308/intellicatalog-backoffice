@@ -43,13 +43,13 @@ const DeletarItemPedidoModal = ({ isOpen, onClose, pedido, item, onDelete }) => 
     <C.ModalOverlay>
       <C.ModalContainer>
         <C.ModalHeader>
-          <h2>Deletar Item do Pedido </h2>
+          <h2>Deletar produto do Pedido </h2>
           <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
           <C.FormRow>
             <C.FormColumn>
-              <p>Deseja realmente excluir o item #{item.product_id} do Pedido #{pedido.id}?</p>
+              <p>Deseja realmente excluir o produto #{item.product_id} do Pedido #{pedido.id}?</p>
               
             </C.FormColumn>
           </C.FormRow>
