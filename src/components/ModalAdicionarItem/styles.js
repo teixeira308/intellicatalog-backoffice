@@ -28,13 +28,14 @@ export const Textarea = styled.textarea`
 // Estilos para o container do modal
 export const ModalContainer = styled.div`
   background: #fff;
-  padding: 20px;
+  width: 800px; /* Aumenta a largura */
+  max-height: 90vh; /* Limita a altura */
   border-radius: 8px;
-  max-width: 600px;
-  width: 100%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 `;
-
 // Estilos para o cabeçalho do modal
 export const ModalHeader = styled.div`
   display: flex;
@@ -109,47 +110,52 @@ export const Button = styled.button`
 
 export const ProductRow = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding: 10px 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ddd;
 `;
 
 export const ProductName = styled.span`
-  flex: 2;
+  flex: 1;
+  font-size: 16px;
 `;
 
 export const QuantityControls = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
 `;
 
 export const QuantityButton = styled.button`
   width: 30px;
   height: 30px;
-  text-align: center;
-  font-size: 18px;
-  background-color: #f0f0f0;
+  background-color: #007bff;
+  color: white;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
+  font-size: 18px;
+
+  &:hover {
+    background-color: #0056b3;
+  }
 `;
 
 export const QuantityValue = styled.span`
-  width: 20px;
+  width: 40px;
   text-align: center;
+  font-size: 16px;
 `;
 
 export const ProductPrice = styled.span`
-  flex: 1;
-  text-align: right;
+  font-size: 16px;
   font-weight: bold;
+  text-align: right;
 `;
-
 
 export const ModalBody = styled.div`
   padding: 20px;
-  max-height: 400px;
+  max-height: 600px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -168,4 +174,3 @@ export const ModalFooter = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
- 

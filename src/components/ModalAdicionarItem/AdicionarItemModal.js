@@ -33,33 +33,43 @@ const AdicionarItemModal = ({ isOpen, onClose, onCreate, orderId }) => {
     fetchProdutos();
   }, []);
 
-  const handleIncreaseQuantity = (productId) => {
+  const handleIncreaseQuantity = (productId, unitPrice) => {
     setQuantidades((prev) => ({
       ...prev,
-      [productId]: (prev[productId] || 0) + 1,
+      [productId]: {
+        quantity: (prev[productId]?.quantity || 0) + 1,
+        unitPrice,
+        totalPrice: ((prev[productId]?.quantity || 0) + 1) * unitPrice,
+      },
     }));
   };
 
-  const handleDecreaseQuantity = (productId) => {
-    setQuantidades((prev) => ({
-      ...prev,
-      [productId]: Math.max((prev[productId] || 0) - 1, 0),
-    }));
+  const handleDecreaseQuantity = (productId, unitPrice) => {
+    setQuantidades((prev) => {
+      const currentQuantity = prev[productId]?.quantity || 0;
+      if (currentQuantity === 0) return prev;
+
+      return {
+        ...prev,
+        [productId]: {
+          quantity: currentQuantity - 1,
+          unitPrice,
+          totalPrice: (currentQuantity - 1) * unitPrice,
+        },
+      };
+    });
   };
 
   const handleSubmit = async () => {
     const items = Object.entries(quantidades)
-      .filter(([_, quantity]) => quantity > 0)
-      .map(([productId, quantity]) => {
-        const produto = produtos.find((p) => p.id === parseInt(productId, 10));
-        return {
-          order_id: orderId,
-          product_id: produto.id,
-          quantity,
-          unit_price: produto.price,
-          total_price: (produto.price * quantity).toFixed(2),
-        };
-      });
+      .filter(([_, data]) => data.quantity > 0)
+      .map(([productId, data]) => ({
+        order_id: orderId,
+        product_id: parseInt(productId, 10),
+        quantity: data.quantity,
+        unit_price: data.unitPrice.toFixed(2),
+        total_price: data.totalPrice.toFixed(2),
+      }));
 
     if (items.length === 0) {
       alert("Nenhum item foi selecionado.");
@@ -67,7 +77,7 @@ const AdicionarItemModal = ({ isOpen, onClose, onCreate, orderId }) => {
     }
 
     try {
-      await addItemPedido(orderId,{ items });
+      await addItemPedido({ items });
       alert("Itens adicionados com sucesso!");
       onCreate();
       onClose();
@@ -86,26 +96,47 @@ const AdicionarItemModal = ({ isOpen, onClose, onCreate, orderId }) => {
           <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
         </C.ModalHeader>
         <C.ModalBody>
-          {categorias.map((categoria) => (
-            <div key={categoria.id}>
-              <h3>{categoria.name}</h3>
-              {produtos
-                .filter((produto) => produto.category_id === categoria.id)
-                .map((produto) => (
-                  <C.ProductRow key={produto.id}>
-                    <C.ProductName>{produto.titulo}</C.ProductName>
-                    <C.QuantityControls>
-                      <C.QuantityButton onClick={() => handleDecreaseQuantity(produto.id)}>-</C.QuantityButton>
-                      <C.QuantityValue>{quantidades[produto.id] || 0}</C.QuantityValue>
-                      <C.QuantityButton onClick={() => handleIncreaseQuantity(produto.id)}>+</C.QuantityButton>
-                    </C.QuantityControls>
-                    <C.ProductPrice>
-                      R$ {produto.price}
-                    </C.ProductPrice>
-                  </C.ProductRow>
-                ))}
-            </div>
-          ))}
+          {categorias
+            .filter((categoria) =>
+              produtos.some((produto) => produto.category_id === categoria.id)
+            )
+            .map((categoria) => (
+              <div key={categoria.id}>
+                <h3>{categoria.name}</h3>
+                {produtos
+                  .filter((produto) => produto.category_id === categoria.id)
+                  .map((produto) => (
+                    <C.ProductRow key={produto.id}>
+                      <C.ProductName>{produto.titulo}</C.ProductName>
+                      <C.QuantityControls>
+                        <C.QuantityButton
+                          onClick={() =>
+                            handleDecreaseQuantity(produto.id, produto.price)
+                          }
+                        >
+                          -
+                        </C.QuantityButton>
+                        <C.QuantityValue>
+                          {quantidades[produto.id]?.quantity || 0}
+                        </C.QuantityValue>
+                        <C.QuantityButton
+                          onClick={() =>
+                            handleIncreaseQuantity(produto.id, produto.price)
+                          }
+                        >
+                          +
+                        </C.QuantityButton>
+                      </C.QuantityControls>
+                      <C.ProductPrice>
+                        Total: R${" "}
+                        {(
+                          quantidades[produto.id]?.totalPrice || 0
+                        ).toFixed(2)}
+                      </C.ProductPrice>
+                    </C.ProductRow>
+                  ))}
+              </div>
+            ))}
         </C.ModalBody>
         <C.ModalFooter>
           <C.Button onClick={handleSubmit}>Adicionar Itens ao Pedido</C.Button>
