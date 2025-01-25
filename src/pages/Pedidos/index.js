@@ -99,6 +99,13 @@ const Pedidos = () => {
     setSelectedPedido(pedido);
     setIsEditarPedidoModalOpen(true);
   }
+
+  const openCriarPedidoModal = () => {
+    
+    setIsCriarPedidoModalOpen(true)
+  }
+
+
   const togglePedidoItems = (pedidoId) => {
     setExpandedPedidoId(expandedPedidoId === pedidoId ? null : pedidoId);
   };
@@ -131,7 +138,7 @@ const Pedidos = () => {
       <Navbar />
       <C.Title>Pedidos</C.Title>
       <C.ButtonGroup>
-        <C.CreateButton>
+        <C.CreateButton onClick={() => openCriarPedidoModal()}>
           <FaPlusCircle /> Novo Pedido
         </C.CreateButton>
       </C.ButtonGroup>
