@@ -11,6 +11,7 @@ const EditarPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
     phone: "",
     delivery_address: "",
     notes: "",
+    id: ""
   });
 
   const filterFormData = (data) => {
@@ -19,7 +20,8 @@ const EditarPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
       'payment_method',
       'phone',
       'delivery_address',
-      'notes', 
+      'notes',
+      'id'
     ];
   
     // Filtra os dados mantendo apenas os campos permitidos
@@ -64,7 +66,7 @@ const EditarPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
     <C.ModalOverlay>
       <C.ModalContainer>
         <C.ModalHeader>
-          <h2>Editar Pedido</h2>
+          <h2>Editar Pedido #{formData.id}</h2>
           <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
@@ -77,6 +79,17 @@ const EditarPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
                 name="payment_method"
                 id="payment_method"
                 value={formData.payment_method}
+                onChange={handleChange}
+                required
+              />
+            </C.FormColumn>
+            <C.FormColumn>
+              <C.Label htmlFor="phone">Telefone</C.Label>
+              <C.Input
+                type="text"
+                name="phone"
+                id="phone"
+                value={formData.phone}
                 onChange={handleChange}
                 required
               />
