@@ -73,7 +73,7 @@ const DetalhespedidoModal = ({ isOpen, onClose, pedido }) => {
               {pedido.items.map((item, index) => {
                 const produto = getProdutoDetalhes(item.product_id);
                 return (
-                  <div key={index} style={{ marginBottom: "1rem" }}>
+                  <c.Card key={index} style={{ marginBottom: "1rem" }}>
                     {produto ? (
                       <>
                         <p>
@@ -107,7 +107,7 @@ const DetalhespedidoModal = ({ isOpen, onClose, pedido }) => {
                     ) : (
                       <p>Produto não encontrado.</p>
                     )}
-                  </div>
+                  </c.Card>
                 );
               })}
             </C.FormColumn>
