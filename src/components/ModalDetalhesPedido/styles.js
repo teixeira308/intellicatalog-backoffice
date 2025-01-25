@@ -114,7 +114,7 @@ export const Card = styled.div`
   max-width: 800px;
   font-size: 16px;
   padding: 5px;
-  margin: 5px 0;
+  margin: 10px 0;
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #fff;
