@@ -133,7 +133,9 @@ const PedidoApi = () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${user?.token}`,
       },
-      body: {'items': [item]},
+      body: JSON.stringify({
+        items: [item], // Certifique-se de que `item` esteja no formato correto
+      }),
     });
 
     if (response.status === 401) {
