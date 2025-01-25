@@ -44,6 +44,7 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
 
   useEffect(() => {
     if (pedido) {
+      console.log(pedido)
       setFormData(pedido);
     }
   }, [pedido]);
@@ -55,7 +56,7 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
     <C.ModalOverlay>
       <C.ModalContainer>
         <C.ModalHeader>
-          <h2>Editar Produto</h2>
+          <h2>Detalhes</h2>
           <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
         </C.ModalHeader>
         <C.ModalForm>
@@ -164,7 +165,7 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
               />
             </C.FormColumn>
             </C.FormRow>{*/}
-          <C.Button type="submit">Salvar</C.Button>
+          <C.Button onClick={onClose}>Fechar</C.Button>
         </C.ModalForm>
       </C.ModalContainer>
     </C.ModalOverlay>
