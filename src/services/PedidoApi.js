@@ -125,11 +125,11 @@ const PedidoApi = () => {
     return await response.json();
   }
 
-  const addItemPedido = async (pedido,item) =>{
+  const addItemPedido = async (item,pedido) =>{
     console.log("entrou")
     console.log(pedido," - ",item);
     console.log(user?.token)
-    const response = await fetch(`${api_url}/intellicatalog/v1/orders/${pedido}/item`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/orders/${pedido.id}/item`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
