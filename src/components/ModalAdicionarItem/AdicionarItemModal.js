@@ -80,7 +80,7 @@ const AdicionarItemModal = ({ isOpen, onClose, onCreate, orderId }) => {
     }
 
     try {
-      await addItemPedido({ items },orderId.id);
+      await addItemPedido( items ,orderId.id);
       onCreate();
       onClose();
     } catch (error) {
