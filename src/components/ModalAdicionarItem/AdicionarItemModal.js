@@ -66,7 +66,7 @@ const AdicionarItemModal = ({ isOpen, onClose, onCreate, orderId }) => {
     const items = Object.entries(quantidades)
       .filter(([_, data]) => data.quantity > 0)
       .map(([productId, data]) => ({
-        order_id: orderId,
+        order_id: orderId.id,
         product_id: parseInt(productId, 10),
         quantity: data.quantity,
         unit_price: data.unitPrice,
