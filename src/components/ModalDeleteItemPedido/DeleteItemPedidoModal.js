@@ -49,7 +49,7 @@ const DeletarItemPedidoModal = ({ isOpen, onClose, pedido, item, onDelete }) => 
         <C.ModalForm onSubmit={handleSubmit}>
           <C.FormRow>
             <C.FormColumn>
-              <p>Deseja realmente excluir o item #{item.id} do Pedido #{pedido.id}?</p>
+              <p>Deseja realmente excluir o item #{item.product_id} do Pedido #{pedido.id}?</p>
               
             </C.FormColumn>
           </C.FormRow>

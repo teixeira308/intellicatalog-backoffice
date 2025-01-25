@@ -7,11 +7,7 @@ const PedidoApi = () => {
   const navigate = useNavigate();
   const api_url = process.env.REACT_APP_API;
 
-
-  const createPedido = async (pedido) => {
-
-
-  };
+ 
 
   const getPedidos = async () => {
 
@@ -99,6 +95,10 @@ const PedidoApi = () => {
     return response.json(); // Opcional, pode ser ignorado se a resposta não contiver dados.
 
   } 
+
+  const createPedido = async (pedido) =>{
+    return null;
+  }
 
   return {
     createPedido,
