@@ -76,38 +76,45 @@ const DetalhespedidoModal = ({ isOpen, onClose, pedido }) => {
                   <C.Card key={index} style={{ marginBottom: "1rem" }}>
                     {produto ? (
                       <>
-                      <C.FormRow>
-                      <C.FormColumn>
-                        
-                      </C.FormColumn>
-                      </C.FormRow>
-                        <p>
-                          <strong>Produto:</strong> {produto.titulo}
-                        </p>
-                        <p>
-                          <strong>Marca:</strong> {produto.brand}
-                        </p>
-                        <p>
-                          <strong>Quantidade:</strong> {item.quantity}
-                        </p>
-                        <p>
-                          <strong>Preço Unitário:</strong>{" "}
-                          <NumericFormat
-                            value={item.unit_price}
-                            displayType="text"
-                            thousandSeparator
-                            prefix="R$ "
-                          />
-                        </p>
-                        <p>
-                          <strong>Total:</strong>{" "}
-                          <NumericFormat
-                            value={item.total_price}
-                            displayType="text"
-                            thousandSeparator
-                            prefix="R$ "
-                          />
-                        </p>
+                        <C.FormRow>
+                          <C.FormColumn>
+                            <strong>Produto:</strong> {produto.titulo}
+                          </C.FormColumn>
+                          <C.FormColumn>
+                            <strong>Marca:</strong> {produto.brand}
+                          </C.FormColumn>
+                        </C.FormRow>
+                        <C.FormRow>
+                          <C.FormColumn>
+                            <strong>Quantidade:</strong> {item.quantity}
+                          </C.FormColumn>
+                        </C.FormRow>
+                        <C.FormRow>
+                          <C.FormColumn>
+                            <strong>Preço Unitário:</strong>{" "}
+                            <NumericFormat
+                              value={item.unit_price}
+                              displayType="text"
+                              thousandSeparator
+                              prefix="R$ "
+                            />
+                          </C.FormColumn>
+
+
+
+
+                          <C.FormColumn> 
+
+                          
+                            <strong>Total:</strong>{" "}
+                            <NumericFormat
+                              value={item.total_price}
+                              displayType="text"
+                              thousandSeparator
+                              prefix="R$ "
+                            />
+                           </C.FormColumn>
+                        </C.FormRow>
                       </>
                     ) : (
                       <p>Produto não encontrado.</p>
