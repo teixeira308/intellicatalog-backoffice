@@ -75,9 +75,9 @@ const DetalhespedidoModal = ({ isOpen, onClose, pedido }) => {
           <C.FormRow>
             <C.FormColumn>
               <C.Label>Itens do Pedido</C.Label>
-              <C.ItemsList>
+            
                 {pedido.items.map((item, index) => (
-                  <C.Item key={index}>
+                  <div key={index}>
                     <p>
                       <strong>Produto ID:</strong> {item.product_id}
                     </p>
@@ -102,9 +102,9 @@ const DetalhespedidoModal = ({ isOpen, onClose, pedido }) => {
                         prefix="R$ "
                       />
                     </p>
-                  </C.Item>
+                  </div>
                 ))}
-              </C.ItemsList>
+             
             </C.FormColumn>
           </C.FormRow>
 
