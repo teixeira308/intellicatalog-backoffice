@@ -76,6 +76,11 @@ const DetalhespedidoModal = ({ isOpen, onClose, pedido }) => {
                   <C.Card key={index} style={{ marginBottom: "1rem" }}>
                     {produto ? (
                       <>
+                      <C.FormRow>
+                      <C.FormColumn>
+                        
+                      </C.FormColumn>
+                      </C.FormRow>
                         <p>
                           <strong>Produto:</strong> {produto.titulo}
                         </p>
