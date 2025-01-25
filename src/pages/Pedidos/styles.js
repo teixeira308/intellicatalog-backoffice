@@ -180,3 +180,20 @@ export const ReordButton = styled(ActionButton)`
     background-color: #45a049; /* Verde mais escuro no hover */
   }
 `;
+
+export const ItemList = styled.div`
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+`;
+
+export const Item = styled.div`
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+  &:last-child {
+    border-bottom: none;
+  }
+`;

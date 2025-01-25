@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import * as C from "./styles";
+import { NumericFormat } from "react-number-format";
 import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp, FaPlusCircle, FaRandom, FaSearch } from 'react-icons/fa'; // Ícone de lápis
 import Navbar from "../../components/Navbar/Navbar";
 import PedidoApi from "../../services/PedidoApi";
+import productApi from "../../services/productApi";
 import DetalhesPedidoModal from "../../components/ModalDetalhesPedido/DetalhesPedidoModal";
 import DeletarPedidoModal from "../../components/ModalDeletePedido/DeletePedidoModal";
 import EditarPedidoModal from "../../components/ModalEditarPedido/EditarPedidoModal";
@@ -14,20 +16,24 @@ const Pedidos = () => {
   const [isDeletarPedidoModalOpen, setIsDeletarPedidoModalOpen] = useState(false);
   const [isEditarPedidoModalOpen, setIsEditarPedidoModalOpen] = useState(false);
   const [selectedPedido, setSelectedPedido] = useState(null);
+  const [produtos, setProdutos] = useState([]);
+  const { getProducts } = productApi();
+  const [expandedPedidoId, setExpandedPedidoId] = useState(null); // Controla qual pedido está expandido
+  
 
   useEffect(() => {
-    const fetchPedidos = async () => {
+    const fetchPedidosEProdutos = async () => {
       try {
-        const pedidos = await getPedidos(); // Recebe o objeto completo retornado
-        if (pedidos) {
-          setPedidos(pedidos); // Define diretamente o retorno
-        }
+        const pedidos = await getPedidos();
+        const produtos = await getProducts();
+        setPedidos(pedidos);
+        setProdutos(produtos.data);
       } catch (error) {
-        console.error("Erro ao carregar pedidos:", error.message);
+        console.error("Erro ao carregar dados:", error.message);
       }
     };
 
-    fetchPedidos();
+    fetchPedidosEProdutos();
   }, []);
 
   const handleDeletarPedido = async () => {
@@ -57,6 +63,14 @@ const Pedidos = () => {
     setSelectedPedido(pedido);
     setIsEditarPedidoModalOpen(true);
   }
+  const togglePedidoItems = (pedidoId) => {
+    setExpandedPedidoId(expandedPedidoId === pedidoId ? null : pedidoId);
+  };
+
+  const getProdutoDetalhes = (productId) => {
+    return produtos.find((produto) => produto.id === productId);
+  };
+
 
   const handleDeletarPedidoModalClose = () => {
     setIsDeletarPedidoModalOpen(false);
@@ -110,6 +124,9 @@ const Pedidos = () => {
                 </C.CardDetail>
                 <C.CardDetail>
                   <C.ButtonGroup>
+                  <C.ReordButton onClick={() => togglePedidoItems(pedido.id)}>
+                      {expandedPedidoId === pedido.id ? "Ocultar Itens" : "Ver Itens"}
+                    </C.ReordButton>
                     <C.ReordButton onClick={() => { openDetalhesPedidoModal(pedido);} } >
                       <FaSearch /> Detalhes
                     </C.ReordButton>
@@ -121,6 +138,40 @@ const Pedidos = () => {
                     </C.TrashButton>
                   </C.ButtonGroup>
                 </C.CardDetail>
+                {expandedPedidoId === pedido.id && (
+                  <C.ItemList>
+                    {pedido.items.map((item, idx) => {
+                      const produto = getProdutoDetalhes(item.product_id);
+                      return (
+                        <C.Item key={idx}>
+                          {produto ? (
+                            <>
+                              <strong>Produto:</strong> {produto.titulo} <br />
+                              <strong>Quantidade:</strong> {item.quantity} <br />
+                              <strong>Preço Unitário:</strong>{" "}
+                              <NumericFormat
+                                value={item.unit_price}
+                                displayType="text"
+                                thousandSeparator
+                                prefix="R$ "
+                              />
+                              <br />
+                              <strong>Total:</strong>{" "}
+                              <NumericFormat
+                                value={item.total_price}
+                                displayType="text"
+                                thousandSeparator
+                                prefix="R$ "
+                              />
+                            </>
+                          ) : (
+                            <p>Produto não encontrado.</p>
+                          )}
+                        </C.Item>
+                      );
+                    })}
+                  </C.ItemList>
+                )}
               </C.CardBody>
 
             </C.Card>
