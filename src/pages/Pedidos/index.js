@@ -140,6 +140,9 @@ const Pedidos = () => {
                 </C.CardDetail>
                 {expandedPedidoId === pedido.id && (
                   <>
+                   <C.CreateButton>
+                    <FaPlusCircle /> Produto
+                  </C.CreateButton>
                     {pedido.items.map((item, idx) => {
                       const produto = getProdutoDetalhes(item.product_id);
                       return (
@@ -164,7 +167,9 @@ const Pedidos = () => {
                                 thousandSeparator
                                 prefix="R$ "
                               /></C.CardDetail>
-                              <C.TrashButton/>
+                              <C.TrashButton>
+                              <FaTrashAlt />
+                              </C.TrashButton>
                             </C.CardBody>
                           ) : (
                             <p>Pedido sem produtos.</p>
