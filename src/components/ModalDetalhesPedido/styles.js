@@ -131,10 +131,10 @@ export const Button = styled.button`
 `;
 
 export const Card = styled.div`
-  width: 97%;
+  width: 100%;
   max-width: 800px;
   font-size: 16px;
-  padding: 5px;
+  padding: 10px;
   margin: 10px 0;
   border: 1px solid #ddd;
   border-radius: 8px;
