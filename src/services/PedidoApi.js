@@ -126,7 +126,7 @@ const PedidoApi = () => {
   }
 
   const addItemPedido = async (pedido,item) =>{
-    
+    console.log("entrou")
     console.log(pedido," - ",item);
 
     const response = await fetch(`${api_url}/intellicatalog/v1/orders/${pedido.id}/item`, {

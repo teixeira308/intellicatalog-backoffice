@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import * as C from "./styles";
 import productApi from "../../services/productApi";
 import categoriaApi from "../../services/categoriaApi";
+import PedidoApi from "../../services/PedidoApi";
 
 const AdicionarItemModal = ({ isOpen, onClose, onCreate, orderId }) => {
   const [categorias, setCategorias] = useState([]);
   const [produtos, setProdutos] = useState([]);
   const [quantidades, setQuantidades] = useState({});
   const { getCategorias } = categoriaApi();
-  const { getProducts, addItemPedido } = productApi();
+  const { getProducts } = productApi();
+  const {addItemPedido} = PedidoApi();
 
   useEffect(() => {
     const fetchCategorias = async () => {
@@ -71,9 +73,7 @@ const AdicionarItemModal = ({ isOpen, onClose, onCreate, orderId }) => {
         total_price: data.totalPrice,
       }));
 
-      console.log({items});
-      console.log(orderId.id);
-      console.log(orderId);
+    
     if (items.length === 0) {
       alert("Nenhum item foi selecionado.");
       return;
@@ -81,7 +81,6 @@ const AdicionarItemModal = ({ isOpen, onClose, onCreate, orderId }) => {
 
     try {
       await addItemPedido({ items },orderId.id);
-      alert("Itens adicionados com sucesso!");
       onCreate();
       onClose();
     } catch (error) {
