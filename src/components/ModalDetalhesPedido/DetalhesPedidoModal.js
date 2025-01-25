@@ -10,45 +10,37 @@ const DetalhespedidoModal = ({ isOpen, onClose, pedido }) => {
     <C.ModalOverlay>
       <C.ModalContainer>
         <C.ModalHeader>
-          <h2>Detalhes do Pedido</h2>
+          <h2>Pedido #{pedido.id}</h2>
           <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
         </C.ModalHeader>
         <C.ModalForm>
           {/* Informações do Pedido */}
+
           <C.FormRow>
             <C.FormColumn>
-              <C.Label>Pedido #{pedido.id}</C.Label>
-            </C.FormColumn>
-          </C.FormRow>
-          <C.FormRow>
-            <C.FormColumn>
-              <C.Label>Data do Pedido</C.Label>
-              <C.Input
-                type="text"
-                value={new Date(pedido.order_date).toLocaleString("pt-BR", {
+              <C.Label>Data do Pedido</C.Label> {new Date(pedido.order_date).toLocaleString("pt-BR", {
                   dateStyle: "short",
                   timeStyle: "short",
                 })}
-                readOnly
-              />
+               
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
               <C.Label>Status</C.Label>
-              <C.Input type="text" value={pedido.status} readOnly />
+              {pedido.status}
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
               <C.Label>Telefone</C.Label>
-              <C.Input type="text" value={pedido.phone} readOnly />
+              {pedido.phone}
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
               <C.Label>Endereço de Entrega</C.Label>
-              <C.Input type="text" value={pedido.delivery_address} readOnly />
+              {pedido.delivery_address}
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
@@ -67,7 +59,7 @@ const DetalhespedidoModal = ({ isOpen, onClose, pedido }) => {
           <C.FormRow>
             <C.FormColumn>
               <C.Label>Notas</C.Label>
-              <C.Textarea value={pedido.notes || "Nenhuma nota"} readOnly />
+              {pedido.notes || "Nenhuma nota"}
             </C.FormColumn>
           </C.FormRow>
 
