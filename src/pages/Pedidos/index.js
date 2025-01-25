@@ -147,6 +147,7 @@ const Pedidos = () => {
                           {produto ? (
                             <C.CardBody>
                              <C.CardDetail> <strong>Produto:</strong> {produto.titulo}</C.CardDetail>
+                             <C.CardDetail> <strong>Marca:</strong> {produto.brand}</C.CardDetail>
                              <C.CardDetail><strong>Quantidade:</strong> {item.quantity} </C.CardDetail>
                              <C.CardDetail> <strong>Preço Unitário:</strong>{" "}
                               <NumericFormat
