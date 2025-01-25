@@ -8,18 +8,21 @@ import productApi from "../../services/productApi";
 import DetalhesPedidoModal from "../../components/ModalDetalhesPedido/DetalhesPedidoModal";
 import DeletarPedidoModal from "../../components/ModalDeletePedido/DeletePedidoModal";
 import EditarPedidoModal from "../../components/ModalEditarPedido/EditarPedidoModal";
+import DeletarItemPedidoModal from "../../components/ModalDeleteItemPedido/DeleteItemPedidoModal";
 
 const Pedidos = () => {
   const [pedidos, setPedidos] = useState([]);
-  const { getPedidos, deletarPedido } = PedidoApi();
+  const { getPedidos, deletarPedido, deletarItemPedido } = PedidoApi();
   const [isDetalhesPedidoModalOpen, setIsDetalhesPedidoModalOpen] = useState(false);
   const [isDeletarPedidoModalOpen, setIsDeletarPedidoModalOpen] = useState(false);
+  const [isDeletarItemPedidoModalOpen, setIsDeletarItemPedidoModalOpen] = useState(false);
   const [isEditarPedidoModalOpen, setIsEditarPedidoModalOpen] = useState(false);
   const [selectedPedido, setSelectedPedido] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
   const [produtos, setProdutos] = useState([]);
   const { getProducts } = productApi();
   const [expandedPedidoId, setExpandedPedidoId] = useState(null); // Controla qual pedido está expandido
-  
+
 
   useEffect(() => {
     const fetchPedidosEProdutos = async () => {
@@ -48,6 +51,18 @@ const Pedidos = () => {
     }
   };
 
+  const handleDeletarItemPedido = async () => {
+    try {
+      if (selectedPedido && selectedItem) {
+        await deletarItemPedido(selectedPedido, selectedItem);
+        setPedidos(pedidos.filter((pedido) => pedido.id !== selectedPedido.id));
+      }
+      handleDeletarItemPedidoModalClose();
+    } catch (error) {
+      console.error("Erro ao deletar Pedido:", error);
+    }
+  };
+
 
   const openDetalhesPedidoModal = (pedido) => {
     setSelectedPedido(pedido);
@@ -58,8 +73,14 @@ const Pedidos = () => {
     setSelectedPedido(pedido);
     setIsDeletarPedidoModalOpen(true);
   };
-  
-  const openEditarPedidoModal = (pedido) =>{
+
+  const openDeletarItemPedidoModal = (pedido,item) => {
+    setSelectedPedido(pedido);
+    setSelectedItem(item);
+    setIsDeletarItemPedidoModalOpen(true);
+  };
+
+  const openEditarPedidoModal = (pedido) => {
     setSelectedPedido(pedido);
     setIsEditarPedidoModalOpen(true);
   }
@@ -77,6 +98,12 @@ const Pedidos = () => {
     setSelectedPedido(null);
   };
 
+  const handleDeletarItemPedidoModalClose = () => {
+    setIsDeletarItemPedidoModalOpen(false);
+    setSelectedPedido(null);
+    setSelectedItem(null);
+  };
+
   const handlePedidoEdited = async () => {
     const data = await getPedidos();
     setPedidos(data);
@@ -87,11 +114,11 @@ const Pedidos = () => {
     <C.Container>
       <Navbar />
       <C.Title>Pedidos</C.Title>
-       <C.ButtonGroup>
-                  <C.CreateButton>
-                    <FaPlusCircle /> Novo Pedido
-                  </C.CreateButton>
-                </C.ButtonGroup>
+      <C.ButtonGroup>
+        <C.CreateButton>
+          <FaPlusCircle /> Novo Pedido
+        </C.CreateButton>
+      </C.ButtonGroup>
       <C.Section>
         {pedidos.length > 0 ? (
           pedidos.map((pedido, index) => (
@@ -124,51 +151,51 @@ const Pedidos = () => {
                 </C.CardDetail>
                 <C.CardDetail>
                   <C.ButtonGroup>
-                  <C.ReordButton onClick={() => togglePedidoItems(pedido.id)}>
+                    <C.ReordButton onClick={() => togglePedidoItems(pedido.id)}>
                       {expandedPedidoId === pedido.id ? "Ocultar Itens" : "Ver Itens"}
                     </C.ReordButton>
-                    <C.ReordButton onClick={() => { openDetalhesPedidoModal(pedido);} } >
+                    <C.ReordButton onClick={() => { openDetalhesPedidoModal(pedido); }} >
                       <FaSearch /> Detalhes
                     </C.ReordButton>
-                    <C.EditButton onClick={() => { openEditarPedidoModal(pedido);} } >
+                    <C.EditButton onClick={() => { openEditarPedidoModal(pedido); }} >
                       <FaEdit /> Editar
                     </C.EditButton>
-                    <C.TrashButton  onClick={() => { openDeletarPedidoModal(pedido); }} >
+                    <C.TrashButton onClick={() => { openDeletarPedidoModal(pedido); }} >
                       <FaTrashAlt /> Excluir
                     </C.TrashButton>
                   </C.ButtonGroup>
                 </C.CardDetail>
                 {expandedPedidoId === pedido.id && (
                   <>
-                   <C.CreateButton>
-                    <FaPlusCircle /> Produto
-                  </C.CreateButton>
+                    <C.CreateButton>
+                      <FaPlusCircle /> Produto
+                    </C.CreateButton>
                     {pedido.items.map((item, idx) => {
                       const produto = getProdutoDetalhes(item.product_id);
                       return (
                         <C.Card key={idx}>
                           {produto ? (
                             <C.CardBody>
-                             <C.CardDetail> <strong>Produto:</strong> {produto.titulo}</C.CardDetail>
-                             <C.CardDetail> <strong>Marca:</strong> {produto.brand}</C.CardDetail>
-                             <C.CardDetail><strong>Quantidade:</strong> {item.quantity} </C.CardDetail>
-                             <C.CardDetail> <strong>Preço Unitário:</strong>{" "}
-                              <NumericFormat
-                                value={item.unit_price}
-                                displayType="text"
-                                thousandSeparator
-                                prefix="R$ "
-                              />
+                              <C.CardDetail> <strong>Produto:</strong> {produto.titulo}</C.CardDetail>
+                              <C.CardDetail> <strong>Marca:</strong> {produto.brand}</C.CardDetail>
+                              <C.CardDetail><strong>Quantidade:</strong> {item.quantity} </C.CardDetail>
+                              <C.CardDetail> <strong>Preço Unitário:</strong>{" "}
+                                <NumericFormat
+                                  value={item.unit_price}
+                                  displayType="text"
+                                  thousandSeparator
+                                  prefix="R$ "
+                                />
                               </C.CardDetail>
                               <C.CardDetail> <strong>Total:</strong>{" "}
-                              <NumericFormat
-                                value={item.total_price}
-                                displayType="text"
-                                thousandSeparator
-                                prefix="R$ "
-                              /></C.CardDetail>
-                              <C.TrashButton>
-                              <FaTrashAlt />
+                                <NumericFormat
+                                  value={item.total_price}
+                                  displayType="text"
+                                  thousandSeparator
+                                  prefix="R$ "
+                                /></C.CardDetail>
+                              <C.TrashButton onClick={() => { openDeletarItemPedidoModal(pedido,item); }}>
+                                <FaTrashAlt />
                               </C.TrashButton>
                             </C.CardBody>
                           ) : (
@@ -194,22 +221,31 @@ const Pedidos = () => {
       />
 
 
-    <DeletarPedidoModal
+      <DeletarPedidoModal
         isOpen={isDeletarPedidoModalOpen}
         onClose={handleDeletarPedidoModalClose}
         onDelete={handleDeletarPedido}
         pedido={selectedPedido}
       />
 
-    <EditarPedidoModal
+      <EditarPedidoModal
         isOpen={isEditarPedidoModalOpen}
         onClose={() => setIsEditarPedidoModalOpen(false)}
         pedido={selectedPedido}
         onEdit={handlePedidoEdited}
       />
 
+      <DeletarItemPedidoModal
+        isOpen={isDeletarItemPedidoModalOpen}
+        onClose={handleDeletarItemPedidoModalClose}
+        onDelete={handleDeletarItemPedido}
+        pedido={selectedPedido}
+        item={selectedItem}
+      />
+
+
     </C.Container>
-    
+
   );
 };
 
