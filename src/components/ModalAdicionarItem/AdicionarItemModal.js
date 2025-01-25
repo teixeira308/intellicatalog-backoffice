@@ -69,8 +69,8 @@ const AdicionarItemModal = ({ isOpen, onClose, onCreate, orderId }) => {
         order_id: orderId.id,
         product_id: parseInt(productId, 10),
         quantity: data.quantity,
-        unit_price: data.unitPrice.toFixed(2).toString(),
-        total_price: data.totalPrice.toFixed(2).toString(),
+        unit_price: data.unitPrice,
+        total_price: data.totalPrice,
       }));
 
     

@@ -35,7 +35,6 @@ const EditarPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
 
   useEffect(() => {
     if (pedido) {
-      console.log(pedido)
       setFormData(pedido);
     }
   }, [pedido]);
