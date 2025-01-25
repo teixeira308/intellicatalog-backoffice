@@ -67,10 +67,11 @@ const AdicionarItemModal = ({ isOpen, onClose, onCreate, orderId }) => {
         order_id: orderId,
         product_id: parseInt(productId, 10),
         quantity: data.quantity,
-        unit_price: data.unitPrice.toFixed(2),
-        total_price: data.totalPrice.toFixed(2),
+        unit_price: data.unitPrice,
+        total_price: data.totalPrice,
       }));
 
+      console.log(items);
     if (items.length === 0) {
       alert("Nenhum item foi selecionado.");
       return;
@@ -131,7 +132,7 @@ const AdicionarItemModal = ({ isOpen, onClose, onCreate, orderId }) => {
                         Total: R${" "}
                         {(
                           quantidades[produto.id]?.totalPrice || 0
-                        ).toFixed(2)}
+                        )}
                       </C.ProductPrice>
                     </C.ProductRow>
                   ))}
