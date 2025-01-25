@@ -46,6 +46,11 @@ const Pedidos = () => {
     setIsDetalhesPedidoModalOpen(true);
   };
 
+  const openDeletarPedidoModal = (pedido) => {
+    setSelectedPedido(pedido);
+    setIsDeletarPedidoModalOpen(true);
+  };
+
   const handleDeletarPedidoModalClose = () => {
     setIsDeletarPedidoModalOpen(false);
     setSelectedPedido(null);
@@ -101,7 +106,7 @@ const Pedidos = () => {
                     <C.EditButton>
                       <FaEdit /> Editar
                     </C.EditButton>
-                    <C.TrashButton >
+                    <C.TrashButton  onClick={() => { openDeletarPedidoModal(pedido); }} >
                       <FaTrashAlt /> Excluir
                     </C.TrashButton>
                   </C.ButtonGroup>
