@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import * as C from "./styles"; 
+import * as C from "./styles";
+import productApi from "../../services/productApi";
 import { NumericFormat } from 'react-number-format';
 import "./styles.css"
 
-const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
- 
+const EditarLojaModal = ({ isOpen, onClose, produto, categoria, onEdit }) => {
+  const { updateProduto } = productApi();
   const [formData, setFormData] = useState({
-    delivery_address: "",
-    payment_method: "",
+    titulo: "",
+    brand: "",
     description: "",
-    id: "",
+    price: "",
     unit: "",
     unitquantity: "",
     promocional_price:""
@@ -18,9 +19,9 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
   const filterFormData = (data) => {
     // Campos permitidos
     const allowedFields = [
-      'delivery_address',
-      'payment_method',
-      'id',
+      'titulo',
+      'brand',
+      'description',
       'price',
       'unit',
       'unitquantity',
@@ -43,26 +44,68 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
 
 
   useEffect(() => {
-    if (pedido) {
-      console.log(pedido)
-      setFormData(pedido);
+    if (produto) {
+      setFormData(produto);
     }
-  }, [pedido]);
+  }, [produto]);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const filteredData = filterFormData(formData);
+      await updateProduto(produto.id, filteredData);
+      onEdit();
+    } catch (error) {
+      console.error("Erro ao editar produto:", error);
+    }
+  };
 
   if (!isOpen) return null;
 
- 
+  const handlePriceChange = (e) => {
+    let value = e.target.value;
+
+    // Permite apenas números e um único ponto decimal
+    value = value.replace(/[^0-9.]/g, '');
+
+    // Garante que haja no máximo um ponto decimal
+    const parts = value.split('.');
+    if (parts.length > 2) {
+      value = parts[0] + '.' + parts[1]; // Remove pontos extras
+    }
+
+    // Limita a quantidade de casas decimais a duas
+    if (parts[1] && parts[1].length > 2) {
+      value = `${parts[0]}.${parts[1].slice(0, 2)}`;
+    }
+
+    // Atualiza o valor no formData
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      price: value
+    }));
+  };
+
   return (
     <C.ModalOverlay>
       <C.ModalContainer>
         <C.ModalHeader>
-          <h2>Detalhes</h2>
+          <h2>Editar Produto</h2>
           <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
         </C.ModalHeader>
-        <C.ModalForm>
+        <C.ModalForm onSubmit={handleSubmit}>
           <C.FormRow>
             <C.FormColumn>
-              <C.Label>Pedido # {formData.id}</C.Label>
+              <C.Label>Categoria: {categoria.name} </C.Label>
 
             </C.FormColumn>
           </C.FormRow>
@@ -74,6 +117,7 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
                 name="titulo"
                 id="titulo"
                 value={formData.titulo}
+                onChange={handleChange}
                 required
               />
             </C.FormColumn>
@@ -87,7 +131,7 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
                 name="brand"
                 id="brand"
                 value={formData.brand}
-               
+                onChange={handleChange}
               />
             </C.FormColumn>
           </C.FormRow>
@@ -98,7 +142,7 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
                 name="description"
                 id="description"
                 value={formData.description}
-               
+                onChange={handleChange}
                 maxLength={500} // Limita a 100 caracteres
                 rows={10} // Define o número de linhas visíveis
                 placeholder="Digite sua descrição aqui..."
@@ -165,11 +209,11 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
               />
             </C.FormColumn>
             </C.FormRow>{*/}
-          <C.Button onClick={onClose}>Fechar</C.Button>
+          <C.Button type="submit">Salvar</C.Button>
         </C.ModalForm>
       </C.ModalContainer>
     </C.ModalOverlay>
   );
 };
 
-export default DetalhesPedidoModal;
+export default EditarLojaModal;
