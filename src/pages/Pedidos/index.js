@@ -139,11 +139,11 @@ const Pedidos = () => {
                   </C.ButtonGroup>
                 </C.CardDetail>
                 {expandedPedidoId === pedido.id && (
-                  <C.ItemList>
+                  <C.Card>
                     {pedido.items.map((item, idx) => {
                       const produto = getProdutoDetalhes(item.product_id);
                       return (
-                        <C.Item key={idx}>
+                        <C.CardDetail key={idx}>
                           {produto ? (
                             <>
                               <strong>Produto:</strong> {produto.titulo} <br />
@@ -165,12 +165,12 @@ const Pedidos = () => {
                               />
                             </>
                           ) : (
-                            <p>Produto não encontrado.</p>
+                            <p>Pedido sem produtos.</p>
                           )}
-                        </C.Item>
+                        </C.CardDetail>
                       );
                     })}
-                  </C.ItemList>
+                  </C.Card>
                 )}
               </C.CardBody>
 
