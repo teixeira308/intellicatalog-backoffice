@@ -9,7 +9,7 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
     delivery_address: "",
     payment_method: "",
     description: "",
-    price: "",
+    id: "",
     unit: "",
     unitquantity: "",
     promocional_price:""
@@ -20,7 +20,7 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
     const allowedFields = [
       'delivery_address',
       'payment_method',
-      'description',
+      'id',
       'price',
       'unit',
       'unitquantity',
@@ -58,10 +58,10 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
           <h2>Editar Produto</h2>
           <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
         </C.ModalHeader>
-        <C.ModalForm onSubmit={handleSubmit}>
+        <C.ModalForm>
           <C.FormRow>
             <C.FormColumn>
-              <C.Label>Categoria: {categoria.name} </C.Label>
+              <C.Label>Pedido # {formData.id}</C.Label>
 
             </C.FormColumn>
           </C.FormRow>
@@ -73,7 +73,6 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
                 name="titulo"
                 id="titulo"
                 value={formData.titulo}
-                onChange={handleChange}
                 required
               />
             </C.FormColumn>
@@ -87,7 +86,7 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
                 name="brand"
                 id="brand"
                 value={formData.brand}
-                onChange={handleChange}
+               
               />
             </C.FormColumn>
           </C.FormRow>
@@ -98,7 +97,7 @@ const DetalhesPedidoModal = ({ isOpen, onClose, pedido }) => {
                 name="description"
                 id="description"
                 value={formData.description}
-                onChange={handleChange}
+               
                 maxLength={500} // Limita a 100 caracteres
                 rows={10} // Define o número de linhas visíveis
                 placeholder="Digite sua descrição aqui..."
