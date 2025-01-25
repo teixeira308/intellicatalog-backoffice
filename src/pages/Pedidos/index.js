@@ -52,6 +52,11 @@ const Pedidos = () => {
     setSelectedPedido(pedido);
     setIsDeletarPedidoModalOpen(true);
   };
+  
+  const openEditarPedidoModal = (pedido) =>{
+    setSelectedPedido(pedido);
+    setIsEditarPedidoModalOpen(true);
+  }
 
   const handleDeletarPedidoModalClose = () => {
     setIsDeletarPedidoModalOpen(false);
@@ -108,7 +113,7 @@ const Pedidos = () => {
                     <C.ReordButton onClick={() => { openDetalhesPedidoModal(pedido);} } >
                       <FaSearch /> Detalhes
                     </C.ReordButton>
-                    <C.EditButton onClick={() => { openDetalhesPedidoModal(pedido);} } >
+                    <C.EditButton onClick={() => { openEditarPedidoModal(pedido);} } >
                       <FaEdit /> Editar
                     </C.EditButton>
                     <C.TrashButton  onClick={() => { openDeletarPedidoModal(pedido); }} >
