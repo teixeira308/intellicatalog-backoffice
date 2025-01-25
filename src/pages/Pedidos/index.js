@@ -139,38 +139,38 @@ const Pedidos = () => {
                   </C.ButtonGroup>
                 </C.CardDetail>
                 {expandedPedidoId === pedido.id && (
-                  <C.Card>
+                  <C.ItemList>
                     {pedido.items.map((item, idx) => {
                       const produto = getProdutoDetalhes(item.product_id);
                       return (
-                        <C.CardDetail key={idx}>
+                        <C.Card key={idx}>
                           {produto ? (
-                            <>
-                              <strong>Produto:</strong> {produto.titulo} <br />
-                              <strong>Quantidade:</strong> {item.quantity} <br />
-                              <strong>Preço Unitário:</strong>{" "}
+                            <C.CardBody>
+                             <C.CardDetail> <strong>Produto:</strong> {produto.titulo}</C.CardDetail>
+                             <C.CardDetail><strong>Quantidade:</strong> {item.quantity} </C.CardDetail>
+                             <C.CardDetail> <strong>Preço Unitário:</strong>{" "}
                               <NumericFormat
                                 value={item.unit_price}
                                 displayType="text"
                                 thousandSeparator
                                 prefix="R$ "
                               />
-                              <br />
-                              <strong>Total:</strong>{" "}
+                              </C.CardDetail>
+                              <C.CardDetail> <strong>Total:</strong>{" "}
                               <NumericFormat
                                 value={item.total_price}
                                 displayType="text"
                                 thousandSeparator
                                 prefix="R$ "
-                              />
-                            </>
+                              /></C.CardDetail>
+                            </C.CardBody>
                           ) : (
                             <p>Pedido sem produtos.</p>
                           )}
-                        </C.CardDetail>
+                        </C.Card>
                       );
                     })}
-                  </C.Card>
+                  </C.ItemList>
                 )}
               </C.CardBody>
 
