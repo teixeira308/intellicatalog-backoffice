@@ -71,14 +71,16 @@ const AdicionarItemModal = ({ isOpen, onClose, onCreate, orderId }) => {
         total_price: data.totalPrice,
       }));
 
-      console.log(items);
+      console.log({items});
+      console.log(orderId.id);
+      console.log(orderId);
     if (items.length === 0) {
       alert("Nenhum item foi selecionado.");
       return;
     }
 
     try {
-      await addItemPedido({ items });
+      await addItemPedido({ items },orderId.id);
       alert("Itens adicionados com sucesso!");
       onCreate();
       onClose();
