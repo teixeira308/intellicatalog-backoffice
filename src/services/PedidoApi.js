@@ -136,7 +136,7 @@ const PedidoApi = () => {
         Authorization: `Bearer ${user?.token}`,
       },
       body: JSON.stringify({
-        items: [item], // Certifique-se de que `item` esteja no formato correto
+        items: item, // Certifique-se de que `item` esteja no formato correto
       }),
     });
 
