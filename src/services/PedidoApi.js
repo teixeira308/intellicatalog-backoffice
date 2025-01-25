@@ -33,8 +33,8 @@ const PedidoApi = () => {
         return await response.json();
       }
 
-      const deletarPedido = async (id) =>{
-        const response = await fetch(`${api_url}/intellicatalog/v1/orders/${id}`, {
+      const deletarPedido = async (pedido) =>{
+        const response = await fetch(`${api_url}/intellicatalog/v1/orders/${pedido.id}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${user?.token}`,
