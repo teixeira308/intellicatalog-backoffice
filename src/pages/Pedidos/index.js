@@ -108,7 +108,7 @@ const Pedidos = () => {
                     <C.ReordButton onClick={() => { openDetalhesPedidoModal(pedido);} } >
                       <FaSearch /> Detalhes
                     </C.ReordButton>
-                    <C.EditButton onClick={() => { openDetalhesPedidoModal(pedido);} } >>
+                    <C.EditButton onClick={() => { openDetalhesPedidoModal(pedido);} } >
                       <FaEdit /> Editar
                     </C.EditButton>
                     <C.TrashButton  onClick={() => { openDeletarPedidoModal(pedido); }} >
