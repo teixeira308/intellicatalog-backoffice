@@ -10,6 +10,7 @@ import DeletarPedidoModal from "../../components/ModalDeletePedido/DeletePedidoM
 import EditarPedidoModal from "../../components/ModalEditarPedido/EditarPedidoModal";
 import DeletarItemPedidoModal from "../../components/ModalDeleteItemPedido/DeleteItemPedidoModal";
 import CriarPedidoModal from "../../components/ModalCriarPedido/CriarPedidoModal";
+import AdicionarItemModal from "../../components/ModalAdicionarItem/AdicionarItemModal";
 
 const Pedidos = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -18,7 +19,8 @@ const Pedidos = () => {
   const [isDeletarPedidoModalOpen, setIsDeletarPedidoModalOpen] = useState(false);
   const [isDeletarItemPedidoModalOpen, setIsDeletarItemPedidoModalOpen] = useState(false);
   const [isEditarPedidoModalOpen, setIsEditarPedidoModalOpen] = useState(false);
-  const [isCriarPedidoModalOpen,setIsCriarPedidoModalOpen] = useState(false);
+  const [isCriarPedidoModalOpen, setIsCriarPedidoModalOpen] = useState(false);
+  const [isAdicionarItemPedidoModalOpen, setIsAdicionarItemPedidoModalOpen] = useState(false);
   const [selectedPedido, setSelectedPedido] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
   const [produtos, setProdutos] = useState([]);
@@ -78,6 +80,12 @@ const Pedidos = () => {
     setPedidos(data);
   };
 
+  const handleAdicionarItemPedidoModalClose = async () => {
+    setIsAdicionarItemPedidoModalOpen(false)
+    const data = await getPedidos();
+    setPedidos(data);
+  };
+
   const openDetalhesPedidoModal = (pedido) => {
     setSelectedPedido(pedido);
     setIsDetalhesPedidoModalOpen(true);
@@ -89,10 +97,16 @@ const Pedidos = () => {
   };
 
   const openDeletarItemPedidoModal = (pedido, item) => {
-    console.log(item);
+
     setSelectedPedido(pedido);
     setSelectedItem(item);
     setIsDeletarItemPedidoModalOpen(true);
+  };
+
+  const openAdicionarItemPedidoModal = (pedido) => {
+
+    setSelectedPedido(pedido); 
+    setIsAdicionarItemPedidoModalOpen(true);
   };
 
   const openEditarPedidoModal = (pedido) => {
@@ -101,7 +115,7 @@ const Pedidos = () => {
   }
 
   const openCriarPedidoModal = () => {
-    
+
     setIsCriarPedidoModalOpen(true)
   }
 
@@ -190,7 +204,7 @@ const Pedidos = () => {
                 </C.CardDetail>
                 {expandedPedidoId === pedido.id && (
                   <>
-                    <C.CreateButton>
+                    <C.CreateButton onClick={() => { openAdicionarItemPedidoModal(pedido); }}>
                       <FaPlusCircle /> Produto
                     </C.CreateButton>
                     {pedido.items.map((item, idx) => {
@@ -269,7 +283,14 @@ const Pedidos = () => {
       <CriarPedidoModal
         isOpen={isCriarPedidoModalOpen}
         onClose={handlCriarPedidoModalClose}
-        onCreate={handleNewPedidoCreated} 
+        onCreate={handleNewPedidoCreated}
+      />
+
+      <AdicionarItemModal
+        isOpen={isAdicionarItemPedidoModalOpen}
+        onClose={handleAdicionarItemPedidoModalClose}
+        onCreate={handleNewPedidoCreated}
+        orderId={selectedPedido}
       />
     </C.Container>
 
