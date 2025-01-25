@@ -54,7 +54,7 @@ const PedidoApi = () => {
 
   }
 
-  const updatePedido = async (pedido) => {
+  const updatePedido = async (id,pedido) => {
 
     const response = await fetch(`${api_url}/intellicatalog/v1/orders/${id}`, {
       method: "PUT",
