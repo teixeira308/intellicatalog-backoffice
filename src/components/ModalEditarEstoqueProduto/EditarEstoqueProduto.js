@@ -15,7 +15,7 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
     }
   }, [produto]);
 
-  
+
   const [formData, setFormData] = useState({
     estoque: "",
   });
@@ -99,7 +99,7 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
-              <C.Button  type="button" variant="outline-secondary" onClick={decreaseQuantity}>-</C.Button>
+              <C.Button type="button" variant="outline-secondary" onClick={increaseQuantity}>+</C.Button>
               <C.Input
                 type="text"
                 name="estoque"
@@ -108,8 +108,8 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
                 onChange={handleChange}
                 required
               />
+              <C.Button type="button" variant="outline-secondary" onClick={decreaseQuantity}>-</C.Button>
 
-              <C.Button  type="button" variant="outline-secondary" onClick={increaseQuantity}>+</C.Button>
             </C.FormColumn>
           </C.FormRow>
           <C.Button type="submit">Salvar</C.Button>

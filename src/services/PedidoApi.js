@@ -33,9 +33,31 @@ const PedidoApi = () => {
         return await response.json();
       }
 
+      const deletarPedido = async (id) =>{
+        const response = await fetch(`${api_url}/intellicatalog/v1/orders/${id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+          },
+        });
+    
+        if (response.status === 401) {
+          // Redireciona para a tela de login
+          navigate('/login');
+        }
+    
+        if (!response.ok) {
+          throw new Error("Erro ao deletar pedido");
+        }
+    
+        return response.json(); // Opcional, pode ser ignorado se a resposta não contiver dados.
+    
+      }
+
     return {
         createPedido,
-        getPedidos
+        getPedidos,
+        deletarPedido
     };
 }
 

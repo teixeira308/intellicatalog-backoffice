@@ -4,11 +4,13 @@ import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp, FaPlusCircle, Fa
 import Navbar from "../../components/Navbar/Navbar";
 import PedidoApi from "../../services/PedidoApi";
 import DetalhesPedidoModal from "../../components/ModalDetalhesPedido/DetalhesPedidoModal";
+import DeletarPedidoModal from "../../components/ModalDeletePedido/DeletePedidoModal";
 
 const Pedidos = () => {
   const [pedidos, setPedidos] = useState([]);
-  const { getPedidos } = PedidoApi();
+  const { getPedidos, deletarPedido } = PedidoApi();
   const [isDetalhesPedidoModalOpen, setIsDetalhesPedidoModalOpen] = useState(false);
+  const [isDeletarPedidoModalOpen, setIsDeletarPedidoModalOpen] = useState(false);
   const [selectedPedido, setSelectedPedido] = useState(null);
 
   useEffect(() => {
@@ -26,9 +28,27 @@ const Pedidos = () => {
     fetchPedidos();
   }, []);
 
+  const handleDeletarPedido = async () => {
+    try {
+      if (selectedPedido) {
+        await deletarPedido(selectedPedido);
+        setProdutos(pedidos.filter((pedido) => pedido.id !== selectedPedido.id));
+      }
+      handleDeletarPedidoModalClose();
+    } catch (error) {
+      console.error("Erro ao deletar categoria:", error);
+    }
+  };
+
+
   const openDetalhesPedidoModal = (pedido) => {
     setSelectedPedido(pedido);
     setIsDetalhesPedidoModalOpen(true);
+  };
+
+  const handleDeletarPedidoModalClose = () => {
+    setIsDeletarPedidoModalOpen(false);
+    setSelectedPedido(null);
   };
 
   return (
@@ -97,6 +117,14 @@ const Pedidos = () => {
       <DetalhesPedidoModal
         isOpen={isDetalhesPedidoModalOpen}
         onClose={() => setIsDetalhesPedidoModalOpen(false)}
+        pedido={selectedPedido}
+      />
+
+
+    <DeletarPedidoModal
+        isOpen={isDeletarPedidoModalOpen}
+        onClose={handleDeletarPedidoModalClose}
+        onDelete={handleDeletarPedido}
         pedido={selectedPedido}
       />
     </C.Container>
