@@ -126,7 +126,7 @@ const PedidoApi = () => {
   }
 
   const addItemPedido = async (item,pedido) =>{
-
+    console.log({'items':item}); 
     const response = await fetch(`${api_url}/intellicatalog/v1/orders/${pedido}/items`, {
       method: "PUT",
       headers: {
