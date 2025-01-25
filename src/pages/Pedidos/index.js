@@ -9,6 +9,7 @@ import DetalhesPedidoModal from "../../components/ModalDetalhesPedido/DetalhesPe
 import DeletarPedidoModal from "../../components/ModalDeletePedido/DeletePedidoModal";
 import EditarPedidoModal from "../../components/ModalEditarPedido/EditarPedidoModal";
 import DeletarItemPedidoModal from "../../components/ModalDeleteItemPedido/DeleteItemPedidoModal";
+import CriarPedidoModal from "../../components/ModalCriarPedido/CriarPedidoModal";
 
 const Pedidos = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -17,6 +18,7 @@ const Pedidos = () => {
   const [isDeletarPedidoModalOpen, setIsDeletarPedidoModalOpen] = useState(false);
   const [isDeletarItemPedidoModalOpen, setIsDeletarItemPedidoModalOpen] = useState(false);
   const [isEditarPedidoModalOpen, setIsEditarPedidoModalOpen] = useState(false);
+  const [isCriarPedidoModalOpen,setIsCriarPedidoModalOpen] = useState(false);
   const [selectedPedido, setSelectedPedido] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
   const [produtos, setProdutos] = useState([]);
@@ -54,8 +56,8 @@ const Pedidos = () => {
   const handleDeletarItemPedido = async () => {
     try {
       if (selectedPedido && selectedItem) {
-        console.log("pedido: ",selectedPedido)
-        console.log("item: ",selectedItem)
+        console.log("pedido: ", selectedPedido)
+        console.log("item: ", selectedItem)
         await deletarItemPedido(selectedPedido, selectedItem);
         setPedidos(pedidos.filter((pedido) => pedido.id !== selectedPedido.id));
       }
@@ -65,6 +67,16 @@ const Pedidos = () => {
     }
   };
 
+  const handlCriarPedidoModalClose = async () => {
+    setIsCriarPedidoModalOpen(false);
+    const data = await getPedidos();
+    setPedidos(data);
+  };
+
+  const handleNewPedidoCreated = async () => {
+    const data = await getPedidos();
+    setPedidos(data);
+  };
 
   const openDetalhesPedidoModal = (pedido) => {
     setSelectedPedido(pedido);
@@ -76,7 +88,7 @@ const Pedidos = () => {
     setIsDeletarPedidoModalOpen(true);
   };
 
-  const openDeletarItemPedidoModal = (pedido,item) => {
+  const openDeletarItemPedidoModal = (pedido, item) => {
     console.log(item);
     setSelectedPedido(pedido);
     setSelectedItem(item);
@@ -198,7 +210,7 @@ const Pedidos = () => {
                                   thousandSeparator
                                   prefix="R$ "
                                 /></C.CardDetail>
-                              <C.TrashButton onClick={() => { openDeletarItemPedidoModal(pedido,produto); }}>
+                              <C.TrashButton onClick={() => { openDeletarItemPedidoModal(pedido, produto); }}>
                                 <FaTrashAlt />
                               </C.TrashButton>
                             </C.CardBody>
@@ -247,7 +259,11 @@ const Pedidos = () => {
         item={selectedItem}
       />
 
-
+      <CriarPedidoModal
+        isOpen={isCriarPedidoModalOpen}
+        onClose={handlCriarPedidoModalClose}
+        onCreate={handleNewPedidoCreated} 
+      />
     </C.Container>
 
   );
