@@ -5,12 +5,14 @@ import Navbar from "../../components/Navbar/Navbar";
 import PedidoApi from "../../services/PedidoApi";
 import DetalhesPedidoModal from "../../components/ModalDetalhesPedido/DetalhesPedidoModal";
 import DeletarPedidoModal from "../../components/ModalDeletePedido/DeletePedidoModal";
+import EditarPedidoModal from "../../components/ModalEditarPedido/EditarPedidoModal";
 
 const Pedidos = () => {
   const [pedidos, setPedidos] = useState([]);
   const { getPedidos, deletarPedido } = PedidoApi();
   const [isDetalhesPedidoModalOpen, setIsDetalhesPedidoModalOpen] = useState(false);
   const [isDeletarPedidoModalOpen, setIsDeletarPedidoModalOpen] = useState(false);
+  const [isEditarPedidoModalOpen, setIsEditarPedidoModalOpen] = useState(false);
   const [selectedPedido, setSelectedPedido] = useState(null);
 
   useEffect(() => {
@@ -56,6 +58,12 @@ const Pedidos = () => {
     setSelectedPedido(null);
   };
 
+  const handlePedidoEdited = async () => {
+    const data = await getPedidos();
+    setPedidos(data.data);
+    setIsEditarPedidoModalOpen(false)
+  };
+
   return (
     <C.Container>
       <Navbar />
@@ -97,10 +105,10 @@ const Pedidos = () => {
                 </C.CardDetail>
                 <C.CardDetail>
                   <C.ButtonGroup>
-                    <C.EditButton onClick={() => { openDetalhesPedidoModal(pedido);} } >
+                    <C.ReordButton onClick={() => { openDetalhesPedidoModal(pedido);} } >
                       <FaSearch /> Detalhes
-                    </C.EditButton>
-                    <C.EditButton>
+                    </C.ReordButton>
+                    <C.EditButton onClick={() => { openDetalhesPedidoModal(pedido);} } >>
                       <FaEdit /> Editar
                     </C.EditButton>
                     <C.TrashButton  onClick={() => { openDeletarPedidoModal(pedido); }} >
@@ -129,6 +137,14 @@ const Pedidos = () => {
         onDelete={handleDeletarPedido}
         pedido={selectedPedido}
       />
+
+    <EditarPedidoModal
+        isOpen={isEditarPedidoModalOpen}
+        onClose={() => setIsEditarPedidoModalOpen(false)}
+        produto={selectedPedido}
+        onEdit={handlePedidoEdited}
+      />
+
     </C.Container>
     
   );
