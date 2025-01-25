@@ -3,7 +3,7 @@ import * as C from "./styles";
 import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp, FaPlusCircle, FaRandom, FaSearch } from 'react-icons/fa'; // Ícone de lápis
 import Navbar from "../../components/Navbar/Navbar";
 import PedidoApi from "../../services/PedidoApi";
-import DetalhesPedidoModal from "../../components/ModalEditarProduto/EditarProdutoModal";
+import DetalhesPedidoModal from "../../components/ModalDetalhesPedido/DetalhesPedidoModal";
 
 const Pedidos = () => {
   const [pedidos, setPedidos] = useState([]);
