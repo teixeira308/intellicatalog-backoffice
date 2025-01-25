@@ -98,11 +98,11 @@ const PedidoApi = () => {
 
   const createPedido = async (pedido) =>{
     const pedidoComUserId = {
-      ...produto,
+      ...pedido,
       user_id: user.userId, // Pega o user_id do objeto `user`
-      category_id: categoriaId
+      
     };
-   
+    console.log(pedidoComUserId);
     const response = await fetch(`${api_url}/intellicatalog/v1/orders`, {
       method: "POST",
       headers: {
