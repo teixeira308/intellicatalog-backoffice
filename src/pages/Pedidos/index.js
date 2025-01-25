@@ -164,6 +164,7 @@ const Pedidos = () => {
                                 thousandSeparator
                                 prefix="R$ "
                               /></C.CardDetail>
+                              <C.TrashButton/>
                             </C.CardBody>
                           ) : (
                             <p>Pedido sem produtos.</p>
