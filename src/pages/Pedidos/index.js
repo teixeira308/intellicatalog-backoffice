@@ -38,7 +38,7 @@ const Pedidos = () => {
       }
       handleDeletarPedidoModalClose();
     } catch (error) {
-      console.error("Erro ao deletar categoria:", error);
+      console.error("Erro ao deletar Pedido:", error);
     }
   };
 

@@ -67,12 +67,7 @@ const EditarPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
           <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
-          <C.FormRow>
-            <C.FormColumn>
-              <C.Label>Categoria: {categoria.name} </C.Label>
-
-            </C.FormColumn>
-          </C.FormRow>
+           
           <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="payment_method">Método de pagamento</C.Label>
