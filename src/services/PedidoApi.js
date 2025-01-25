@@ -126,7 +126,9 @@ const PedidoApi = () => {
   }
 
   const addItemPedido = async (item,pedido) =>{
-    console.log({'items':item}); 
+    console.log('Item sendo enviado:', JSON.stringify({
+      items: [item],
+    }, null, 2));
     const response = await fetch(`${api_url}/intellicatalog/v1/orders/${pedido}/items`, {
       method: "PUT",
       headers: {
@@ -145,6 +147,7 @@ const PedidoApi = () => {
 
     if (!response.ok) {
       const errorData = await response.json();
+      console.error('Erro ao enviar dados:', errorData);
       throw new Error(errorData.message || "Erro ao criar pedido");
     }
 
