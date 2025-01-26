@@ -60,9 +60,11 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
     try {
       const filteredData = filterFormData(formData);
       await updateEstoqueProduto(produto.id, filteredData);
+      window.addToast("Ação realizada com sucesso!", "success");
       onEdit();
     } catch (error) {
       console.error("Erro ao editar estoque produto:", error);
+      window.addToast("Ocorreu um erro ao editar estoque produto: "+error, "error");
     }
   };
 

@@ -46,11 +46,13 @@ const CriarCategoriaModal = ({ isOpen, onClose, onCreate }) => {
     try {
       const filteredData = filterFormData(formData);
       await createCategoria(filteredData);
+      window.addToast("Ação realizada com sucesso!", "success");
       resetFormData();
       onClose();
       onCreate();
     } catch (error) {
       console.error("Erro ao criar categoria:", error);
+      window.addToast("Ocorreu um erro ao criar categoria: "+ error, "error");
     }
   };
 

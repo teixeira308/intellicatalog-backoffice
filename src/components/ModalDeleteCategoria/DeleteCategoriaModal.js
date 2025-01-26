@@ -34,9 +34,12 @@ const EditarLojaModal = ({ isOpen, onClose, categoria, onDelete }) => {
     e.preventDefault();
     try {
       const filteredData = filterFormData(formData);
+      
       onDelete();
+      window.addToast("Ação realizada com sucesso!", "success");
     } catch (error) {
       console.error("Erro ao editar categoria:", error);
+      window.addToast("Ocorreu um erro ao editar categoria: "+error, "error");
     }
   };
 

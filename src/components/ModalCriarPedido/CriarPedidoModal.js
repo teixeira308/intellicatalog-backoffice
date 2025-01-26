@@ -60,11 +60,13 @@ const CriarPedidoModal = ({ isOpen, onClose, onCreate }) => {
     try {
       const filteredData = filterFormData(formData);
       await createPedido(filteredData);
+      window.addToast("Ação realizada com sucesso!", "success");
       resetFormData();
       onClose();
       onCreate();
     } catch (error) {
       console.error("Erro ao criar pedido:", error);
+      window.addToast("Ocorreu um erro ao criar pedido: "+ error, "error");
     }
   };
 

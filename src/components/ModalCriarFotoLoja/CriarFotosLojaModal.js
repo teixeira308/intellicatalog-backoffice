@@ -20,7 +20,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
     if (store) {
       try {
         const fotos = await getFotoByUserId(); // Busca todas as fotos do usuario
-        console.log("fotos por usuario: ", fotos)
+        //console.log("fotos por usuario: ", fotos)
         // Gera URLs para cada imagem junto com o ID
         const fotosUrls = await Promise.all(
           fotos.map(async (foto) => {
@@ -34,6 +34,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
         setLoading(false);
       } catch (error) {
         console.error("Erro ao buscar fotos:", error);
+        window.addToast("Ocorreu um erro ao buscar fotos: "+ error, "error");
       }
     }
   };
@@ -43,7 +44,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
     const fetchFotos = async () => {
       if (isOpen && store) {
         try {
-          console.log("store que entrou no modal:", store.id)
+          //console.log("store que entrou no modal:", store.id)
           const fotos = await getFotoByStoreId(store); // Busca todas as fotos do produto
           // Gera URLs para cada imagem junto com o ID
           const fotosUrls = await Promise.all(
@@ -57,6 +58,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
           setImageStoreUrls(fotosUrls); // Define todas as URLs das imagens
         } catch (error) {
           console.error("Erro ao buscar fotos:", error);
+          window.addToast("Ocorreu um erro ao buscar fotos: "+error, "error");
         }
       }
     };
@@ -100,11 +102,13 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
 
       // Após criar a foto, recarregar as imagens do produto
       loadStoreImages();
-     
+      window.addToast("Ação realizada com sucesso!", "success");
       handleClose();
       onCreate();
     } catch (error) {
       console.error("Erro ao criar foto:", error);
+      window.addToast("Ocorreu um erro ao criar foto: "+error, "error");
+
     }
   };
 
@@ -114,15 +118,16 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
     setLoading(true);
     try {
       // Chame a API para deletar a imagem pelo ID
-      console.log("store-image-id: ", id)
-      console.log("store-id: ", store.id)
+      //console.log("store-image-id: ", id)
+      //console.log("store-id: ", store.id)
       await deleteFotoByStore(store.id, id);
-
+      window.addToast("Ação realizada com sucesso!", "success");
       // Atualize o estado para remover a imagem da interface
       setImageStoreUrls((prevImages) => prevImages.filter((item) => item.id !== id));
       setLoading(false);
     } catch (error) {
       console.error("Erro ao deletar a imagem:", error);
+      window.addToast("Ocorreu um erro ao deletar a imagem: "+ error, "error");
     }
   };
 

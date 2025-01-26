@@ -59,3 +59,10 @@ export const Link = styled.div`
     text-decoration: underline;
   }
 `;
+
+export const LoadingImage = styled.img`
+   width: 50%; /* Largura das imagens */
+  height: 50%; /* Altura das imagens */
+  background-color: #f10f10f10;  /* Cor de fundo leve */
+  justify-content: center;
+`;

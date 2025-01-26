@@ -43,9 +43,11 @@ const EditarLojaModal = ({ isOpen, onClose, categoria, onEdit }) => {
     try {
       const filteredData = filterFormData(formData);
       await updateCategoria(categoria.id, filteredData);
+      window.addToast("Ação realizada com sucesso!", "success");
       onEdit();
     } catch (error) {
       console.error("Erro ao editar categoria:", error);
+      window.addToast("Ocorreu um erro ao editar categoria: "+error, "error");
     }
   };
 

@@ -31,9 +31,12 @@ const DeletarPedidoModal = ({ isOpen, onClose, pedido, onDelete }) => {
     e.preventDefault();
     try {
       const filteredData = filterFormData(formData);
+      
       onDelete();
+      window.addToast("Ação realizada com sucesso!", "success");
     } catch (error) {
       console.error("Erro ao deletar pedido:", error);
+      window.addToast("Ocorreu um erro ao deletar pedido: "+ error, "error");
     }
   };
 

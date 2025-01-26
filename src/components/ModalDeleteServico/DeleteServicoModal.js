@@ -32,8 +32,10 @@ const DeletarServicoModal = ({ isOpen, onClose, servico, onDelete }) => {
     try {
       const filteredData = filterFormData(formData);
       onDelete();
+      window.addToast("Ação realizada com sucesso!", "success");
     } catch (error) {
       console.error("Erro ao deletar servico:", error);
+      window.addToast("Ocorreu um erro ao deletar servico: "+error, "error");
     }
   };
 

@@ -51,9 +51,11 @@ const EditarServicoModal = ({ isOpen, onClose, servico, onEdit }) => {
       const filteredData = filterFormData(formData);
       console.log(servico.id)
       await updateService(servico.id, filteredData);
+      window.addToast("Ação realizada com sucesso!", "success");
       onEdit();
     } catch (error) {
       console.error("Erro ao editar serviço:", error);
+      window.addToast("Ocorreu um erro ao editar serviço: "+error, "error");
     }
   };
 

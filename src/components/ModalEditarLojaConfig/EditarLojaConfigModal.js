@@ -49,7 +49,8 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
 
       return response;
     } catch (error) {
-      console.error("Erro ao editar loja:", error);
+      console.error("Erro ao carregar configuração da loja:", error);
+      window.addToast("Ocorreu um erro ao carregar configuração da loja: "+error, "error");
     }
   }
 
@@ -106,9 +107,11 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
       // Filtra os dados que serão enviados
       const filteredData = filterFormData(transformedData);
       await updateLojaConfig(loja.id, filteredData);
+      window.addToast("Ação realizada com sucesso!", "success");
       onEdit();
     } catch (error) {
       console.error("Erro ao editar loja:", error);
+      window.addToast("Ocorreu um erro ao editar loja: "+error, "error");
     }
   };
 

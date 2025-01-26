@@ -47,11 +47,13 @@ const CriarServicoModal = ({ isOpen, onClose, onCreate }) => {
     try {
       const filteredData = filterFormData(formData);
       await createServices(filteredData);
+      window.addToast("Ação realizada com sucesso!", "success");
       resetFormData();
       onClose();
       onCreate();
     } catch (error) {
       console.error("Erro ao criar serviço:", error);
+      window.addToast("Ocorreu um erro ao realizar a ação: "+error, "error");
     }
   };
 

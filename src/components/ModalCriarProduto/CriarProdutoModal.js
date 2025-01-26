@@ -65,11 +65,13 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
     try {
       const filteredData = filterFormData(formData);
       await createProduto(filteredData,categoria.id);
+      window.addToast("Ação realizada com sucesso!", "success");
       resetFormData();
       onClose();
       onCreate();
     } catch (error) {
       console.error("Erro ao criar produto:", error);
+      window.addToast("Ocorreu um erro ao criar produto: "+error, "error");
     }
   };
 

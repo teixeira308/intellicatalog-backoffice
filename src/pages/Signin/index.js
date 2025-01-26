@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import logo from "../../assets/logo.png";
 import loadingGif from "../../components/loading.gif"
+import * as C from "./styles";
 
 const Signin = () => {
   const { signin } = useAuth();
@@ -103,7 +104,7 @@ const Signin = () => {
         {/* Botão de Entrar */}
        
         {isLoading ? (
-            <img src={loadingGif} alt="Carregando..." style={{ height: "20px" }} />
+            <C.LoadingImage src={loadingGif} alt="Carregando..." />
           ) : (
            <>
             <Button

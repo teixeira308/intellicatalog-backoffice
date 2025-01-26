@@ -81,10 +81,12 @@ const AdicionarItemModal = ({ isOpen, onClose, onCreate, orderId }) => {
 
     try {
       await addItemPedido( items ,orderId.id);
+      window.addToast("Ação realizada com sucesso!", "success");
       onCreate();
       onClose();
     } catch (error) {
       console.error("Erro ao adicionar itens:", error);
+      window.addToast("Ocorreu um erro ao adicionar item ao pedido: "+error, "error");
     }
   };
 

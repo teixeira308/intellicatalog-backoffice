@@ -34,6 +34,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
         setLoading(false)
       } catch (error) {
         console.error("Erro ao buscar fotos:", error);
+        window.addToast("Ocorreu um erro ao buscar fotos: "+error, "error");
       }
     }
   };
@@ -60,6 +61,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
           setLoading(false)
         } catch (error) {
           console.error("Erro ao buscar fotos:", error);
+          window.addToast("Ocorreu um erro ao buscar fotos: "+error, "error");
         }
       }
     };
@@ -102,12 +104,13 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
 
       // Após criar a foto, recarregar as imagens do produto
       loadProductImages();
-
+      window.addToast("Ação realizada com sucesso!", "success");
 
       handleClose();
       onCreate();
     } catch (error) {
       console.error("Erro ao criar foto:", error);
+      window.addToast("Ocorreu um erro ao criar foto: "+error, "error");
     }
   };
 
@@ -124,6 +127,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
       setLoading(false)
     } catch (error) {
       console.error("Erro ao deletar a imagem:", error);
+      window.addToast("Ocorreu um erro ao deletar a imagem: "+ error, "error");
     }
   };
 

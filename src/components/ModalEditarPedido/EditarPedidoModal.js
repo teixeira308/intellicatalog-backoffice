@@ -53,9 +53,11 @@ const EditarPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
     try {
       const filteredData = filterFormData(formData);
       await updatePedido(pedido.id, filteredData);
+      window.addToast("Ação realizada com sucesso!", "success");
       onEdit();
     } catch (error) {
       console.error("Erro ao editar pedido:", error);
+      window.addToast("Ocorreu um erro ao editar pedido: "+error, "error");
     }
   };
 
