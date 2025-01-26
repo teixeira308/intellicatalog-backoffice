@@ -48,7 +48,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
       return response;
     } catch (error) {
       console.error("Erro ao carregar configuração da loja:", error);
-      window.addToast("Ocorreu um erro ao carregar configuração da loja: "+error, "error");
+      window.addToast("Ocorreu um erro ao carregar configuração da loja: " + error, "error");
     }
   }
 
@@ -56,7 +56,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
     const fetchStoreConfigs = async () => {
       if (loja) {
         const storeConfigs = await loadStoreConfigs(loja);
-  
+
         // Converte as strings "true" e "false" em booleanos
         const transformedConfigs = {
           ...storeConfigs,
@@ -64,14 +64,14 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
           usa_Status: storeConfigs.usa_Status === "true", // Se você tiver essa propriedade
           usa_estoque: storeConfigs.usa_estoque === "true" // Se você tiver essa propriedade
         };
-  
+
         setFormData((prev) => ({
           ...prev,
           ...transformedConfigs // Atualiza com dados da loja, mantendo os campos existentes
         }));
       }
     };
-  
+
     fetchStoreConfigs();
   }, [loja]);
 
@@ -97,7 +97,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
         usa_logo_fundo: formData.usa_logo_fundo ? "true" : "false", // Converte booleano de volta para string
         usa_estoque: formData.usa_estoque ? "true" : "false"  // Converte booleano de volta para string
       };
-  
+
       // Filtra os dados que serão enviados
       const filteredData = filterFormData(transformedData);
       await updateLojaConfig(loja.id, filteredData);
@@ -105,7 +105,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
       onEdit();
     } catch (error) {
       console.error("Erro ao editar loja:", error);
-      window.addToast("Ocorreu um erro ao editar loja: "+error, "error");
+      window.addToast("Ocorreu um erro ao editar loja: " + error, "error");
     }
   };
 
@@ -171,17 +171,18 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
               />
             </C.FormColumn>
           </C.FormRow>
-
-          <C.FormColumn>
-            <C.Label htmlFor="usa_logo_fundo">Usa logo como fundo da página</C.Label>
-            <C.Input
-              type="checkbox"
-              name="usa_logo_fundo"
-              id="usa_logo_fundo"
-              checked={formData.usa_logo_fundo}
-              onChange={handleChangeCheckBox}
-            />
-          </C.FormColumn>
+          <C.FormRow>
+            <C.FormColumn>
+              <C.Label htmlFor="usa_logo_fundo">Usa logo como fundo da página</C.Label>
+              <C.Input
+                type="checkbox"
+                name="usa_logo_fundo"
+                id="usa_logo_fundo"
+                checked={formData.usa_logo_fundo}
+                onChange={handleChangeCheckBox}
+              />
+            </C.FormColumn>ß
+          </C.FormRow>
 
           <C.FormRow>
             <C.FormColumn>
