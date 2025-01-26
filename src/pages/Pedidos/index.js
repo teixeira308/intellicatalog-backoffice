@@ -11,6 +11,7 @@ import EditarPedidoModal from "../../components/ModalEditarPedido/EditarPedidoMo
 import DeletarItemPedidoModal from "../../components/ModalDeleteItemPedido/DeleteItemPedidoModal";
 import CriarPedidoModal from "../../components/ModalCriarPedido/CriarPedidoModal";
 import AdicionarItemModal from "../../components/ModalAdicionarItem/AdicionarItemModal";
+import MudarStatusPedidoModal from "../../components/ModalMudarPedidosStatus/MudarStatusPedidosModal";
 
 const Pedidos = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -21,6 +22,7 @@ const Pedidos = () => {
   const [isEditarPedidoModalOpen, setIsEditarPedidoModalOpen] = useState(false);
   const [isCriarPedidoModalOpen, setIsCriarPedidoModalOpen] = useState(false);
   const [isAdicionarItemPedidoModalOpen, setIsAdicionarItemPedidoModalOpen] = useState(false);
+  const [isMudarStatusPedidoModalOpen, setIsMudarStatusPedidoModalOpen] = useState(false);
   const [selectedPedido, setSelectedPedido] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
   const [produtos, setProdutos] = useState([]);
@@ -103,13 +105,18 @@ const Pedidos = () => {
 
   const openAdicionarItemPedidoModal = (pedido) => {
 
-    setSelectedPedido(pedido); 
+    setSelectedPedido(pedido);
     setIsAdicionarItemPedidoModalOpen(true);
   };
 
   const openEditarPedidoModal = (pedido) => {
     setSelectedPedido(pedido);
     setIsEditarPedidoModalOpen(true);
+  }
+
+  const openMudarStatusPedidoModal = (pedido) => {
+    setSelectedPedido(pedido);
+    setIsMudarStatusPedidoModalOpen(true);
   }
 
   const openCriarPedidoModal = () => {
@@ -145,6 +152,12 @@ const Pedidos = () => {
     setIsEditarPedidoModalOpen(false)
   };
 
+  const handleStatusPedidoEdited = async () => {
+    const data = await getPedidos();
+    setPedidos(data);
+    setIsEditarPedidoModalOpen(false)
+  };
+
   return (
     <C.Container>
       <Navbar />
@@ -160,7 +173,7 @@ const Pedidos = () => {
             <C.Card key={pedido.id || index}>
               <C.CardHeader>
                 <C.CardTitle>#{pedido.id}</C.CardTitle>
-                <C.CardStatus>
+                <C.CardStatus onClick={() => { openMudarStatusPedidoModal(pedido); }}>
                   {pedido.status}
                 </C.CardStatus>
               </C.CardHeader>
@@ -290,6 +303,14 @@ const Pedidos = () => {
         onCreate={handleNewPedidoCreated}
         orderId={selectedPedido}
       />
+
+      <MudarStatusPedidoModal
+        isOpen={isMudarStatusPedidoModalOpen}
+        onClose={() => setIsMudarStatusPedidoModalOpen(false)}
+        pedido={selectedPedido}
+        onEdit={handleStatusPedidoEdited}
+      />
+
     </C.Container>
 
   );
