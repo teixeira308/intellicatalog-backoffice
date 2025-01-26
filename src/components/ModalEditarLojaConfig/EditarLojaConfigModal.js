@@ -301,7 +301,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
                 name="usa_estoque"
                 id="usa_estoque"
                 value={formData.usa_estoque}
-                onChange={handleChange}
+                onChange={handleChangeCheckBox}
               />
             </C.FormColumn>
      
