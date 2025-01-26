@@ -3,6 +3,7 @@ import { TextField, Button, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import logo from "../../assets/logo.png";
+import loadingGif from "../../components/loading.gif"
 
 const Signin = () => {
   const { signin } = useAuth();
@@ -11,6 +12,7 @@ const Signin = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -18,18 +20,21 @@ const Signin = () => {
       setError("Preencha todos os campos");
       return;
     }
-
+    setIsLoading(true); // Ativa o estado de carregamento
     signin(email, senha)
-      .then((res) => {
-        if (res) {
-          // Se `res` contém uma mensagem de erro, define no estado de erro
-          setError(res);
-        } else {
-          // Caso contrário, navega para a página de sucesso
-          navigate("/home");
-        }
-      });
-  };
+    .then((res) => {
+      setIsLoading(false); // Desativa o estado de carregamento após a resposta
+      if (res) {
+        setError(res); // Define a mensagem de erro, se houver
+      } else {
+        navigate("/home"); // Redireciona em caso de sucesso
+      }
+    })
+    .catch(() => {
+      setIsLoading(false); // Garante que o estado de carregamento seja desativado
+      setError("Ocorreu um erro inesperado. Tente novamente.");
+    });
+};
 
   return (
     <Box
@@ -96,7 +101,12 @@ const Signin = () => {
         )}
 
         {/* Botão de Entrar */}
-        <Button
+       
+        {isLoading ? (
+            <img src={loadingGif} alt="Carregando..." style={{ height: "20px" }} />
+          ) : (
+           <>
+            <Button
           fullWidth
           variant="contained"
           color="primary"
@@ -105,6 +115,8 @@ const Signin = () => {
         >
           Entrar
         </Button>
+           </>
+          )}
 
         {/* Link para Esqueceu a Senha */}
         <Typography variant="body2" style={{ marginTop: "20px" }}>

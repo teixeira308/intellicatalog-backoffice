@@ -66,7 +66,7 @@ const MudarStatusPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
         <C.ModalForm onSubmit={handleSubmit}>
           <C.FormRow>
             <C.FormColumn>
-              <label htmlFor="status">Status do Pedido</label>
+              <label htmlFor="status">Novo status do Pedido:</label><br/>
               <C.Select
                 name="status"
                 id="status"
