@@ -160,7 +160,23 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
             </C.FormColumn>
 <br/>
  <C.FormRow>
-            <div style={{
+           
+          </C.FormRow>
+            <C.FormColumn>
+              <C.Label htmlFor="cor_botao_secundaria">Botão secundária</C.Label>
+              <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_botao_secundaria, border: '1px solid #000', marginTop: '5px' }} />
+              <C.Input
+                type="color"
+                name="cor_botao_secundaria"
+                id="cor_botao_secundaria"
+                value={formData.cor_botao_secundaria}
+                onChange={handleChange}
+                style={{ marginRight: '10px' }} // Espaço entre o input e o div
+              />
+            </C.FormColumn>
+          </C.FormRow>
+          <C.FormRow>
+          <div style={{
              height: '30px',
              backgroundColor: formData.cor_primaria, 
              borderColor: formData.cor_botao_primaria, 
@@ -175,19 +191,6 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
               <button onClick={(e) =>  e.preventDefault()} style={{ backgroundColor: formData.cor_botao_secundaria, borderColor: formData.cor_botao_secundaria, color: formData.cor_secundaria }}>
                 Finalizar Pedido</button>
             </div>
-          </C.FormRow>
-            <C.FormColumn>
-              <C.Label htmlFor="cor_botao_secundaria">Botão secundária</C.Label>
-              <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_botao_secundaria, border: '1px solid #000', marginTop: '5px' }} />
-              <C.Input
-                type="color"
-                name="cor_botao_secundaria"
-                id="cor_botao_secundaria"
-                value={formData.cor_botao_secundaria}
-                onChange={handleChange}
-                style={{ marginRight: '10px' }} // Espaço entre o input e o div
-              />
-            </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
