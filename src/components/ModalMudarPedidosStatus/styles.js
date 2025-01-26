@@ -108,3 +108,23 @@ export const Button = styled.button`
     background-color: #0056b3;
   }
 `;
+
+export const Select = styled.select`
+  width: 100%;
+  padding: 8px 4px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background: transparent;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+
+  &:focus {
+    border-bottom: 2px solid #007BFF; /* Cor para foco */
+  }
+
+  option {
+    color: #333;
+    background: #fff;
+  }
+`;

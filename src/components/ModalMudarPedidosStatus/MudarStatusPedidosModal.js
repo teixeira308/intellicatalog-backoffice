@@ -43,7 +43,7 @@ const MudarStatusPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
     e.preventDefault();
     try {
       const filteredData = filterFormData(formData);
-      await updatePedido(filteredData);
+      await updatePedido(filteredData.id,filteredData);
       onEdit();
       onClose(); // Fecha o modal após salvar
     } catch (error) {
@@ -64,7 +64,7 @@ const MudarStatusPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
           <C.FormRow>
             <C.FormColumn>
               <label htmlFor="status">Status do Pedido</label>
-              <select
+              <C.Select
                 name="status"
                 id="status"
                 value={formData.status}
@@ -78,7 +78,7 @@ const MudarStatusPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
                     {status}
                   </option>
                 ))}
-              </select>
+              </C.Select>
             </C.FormColumn>
           </C.FormRow>
           <C.Button type="submit">Salvar</C.Button>
