@@ -173,27 +173,27 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="usa_logo_fundo">Usa logo como fundo da página</C.Label>
+              <C.Label htmlFor="usa_logo_fundo">Usar logo como fundo da página
               <C.Input
                 type="checkbox"
                 name="usa_logo_fundo"
                 id="usa_logo_fundo"
                 checked={formData.usa_logo_fundo}
                 onChange={handleChangeCheckBox}
-              />
-            </C.FormColumn>ß
+              /></C.Label>
+            </C.FormColumn>
           </C.FormRow>
 
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="usa_estoque">Usa estoque</C.Label>
+              <C.Label htmlFor="usa_estoque">Usa estoque
               <C.Input
                 type="checkbox"
                 name="usa_estoque"
                 id="usa_estoque"
                 checked={formData.usa_estoque}  // Utilizando `checked` com o valor booleano
                 onChange={handleChangeCheckBox}  // Atualiza o estado ao marcar/desmarcar
-              />
+              /></C.Label>
             </C.FormColumn>
           </C.FormRow>
 
