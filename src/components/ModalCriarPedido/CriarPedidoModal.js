@@ -104,7 +104,7 @@ const CriarPedidoModal = ({ isOpen, onClose, onCreate }) => {
         <C.ModalForm onSubmit={handleSubmit}>
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="phone">Telefone</C.Label>
+              <C.Label htmlFor="phone">Cliente - Telefone</C.Label>
               <C.Input
                 type="text"
                 name="phone"
@@ -138,7 +138,7 @@ const CriarPedidoModal = ({ isOpen, onClose, onCreate }) => {
                 onChange={handleChange}
                 maxLength={500} // Limita a 100 caracteres
                 rows={4} // Define o número de linhas visíveis
-                placeholder="Digite sua descrição aqui..."
+                placeholder="Digite sua observação aqui..."
               />
             </C.FormColumn>
           </C.FormRow>

@@ -36,7 +36,7 @@ const DetalhespedidoModal = ({ isOpen, onClose, pedido }) => {
             </C.FormColumn>
             <C.FormColumn>
               <C.Label>Total do Pedido</C.Label>
-              {pedido.total_amount}
+              R${pedido.total_amount}
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>

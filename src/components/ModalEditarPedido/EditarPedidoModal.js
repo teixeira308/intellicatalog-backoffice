@@ -83,7 +83,7 @@ const EditarPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
               />
             </C.FormColumn>
             <C.FormColumn>
-              <C.Label htmlFor="phone">Telefone</C.Label>
+              <C.Label htmlFor="phone">Cliente - Telefone</C.Label>
               <C.Input
                 type="text"
                 name="phone"
