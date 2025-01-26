@@ -45,10 +45,12 @@ const MudarStatusPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
     try {
       const filteredData = filterFormData(formData);
       await updatePedido(filteredData.id,filteredData);
+      window.addToast("Ação realizada com sucesso!", "success");
       onEdit();
       onClose(); // Fecha o modal após salvar
     } catch (error) {
       console.error("Erro ao editar pedido:", error);
+      window.addToast("Ocorreu um erro ao realizar a ação: "+error, "error");
     }
   };
 
