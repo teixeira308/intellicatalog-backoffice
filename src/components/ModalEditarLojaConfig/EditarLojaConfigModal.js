@@ -262,7 +262,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
                 onChange={handleChange}
               />
             </C.FormColumn>
-          </C.FormRow>
+         
   {/*
 
           <C.FormRow>
@@ -292,7 +292,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
             </C.FormColumn>
 
           
-
+*/}
 
             <C.FormColumn>
               <C.Label htmlFor="usa_estoque">Usa estoque</C.Label>
@@ -305,7 +305,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
               />
             </C.FormColumn>
      
-          </C.FormRow> */}
+          </C.FormRow> 
 
 
           <C.Button type="submit">Salvar</C.Button>
