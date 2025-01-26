@@ -173,9 +173,13 @@ const Pedidos = () => {
             <C.Card key={pedido.id || index}>
               <C.CardHeader>
                 <C.CardTitle>#{pedido.id}</C.CardTitle>
-                <C.CardStatus onClick={() => { openMudarStatusPedidoModal(pedido); }}>
+                <C.CardStatus
+                  status={pedido.status}
+                  onClick={() => openMudarStatusPedidoModal(pedido)}
+                >
                   {pedido.status}
                 </C.CardStatus>
+
               </C.CardHeader>
               <C.CardBody>
                 <C.CardDetail>

@@ -109,14 +109,7 @@ export const CardTitle = styled.h2`
   color: #333;
 `;
 
-export const CardStatus = styled.span`
-  background-color: ${(props) => (props.isActive ? "#4caf50" : "#f44336")};
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: bold;
-`;
+ 
 
 export const CardBody = styled.div`
   display: flex;
@@ -196,4 +189,28 @@ export const Item = styled.div`
   &:last-child {
     border-bottom: none;
   }
+`;
+export const CardStatus = styled.span`
+  background-color: ${(props) => {
+    switch (props.status) {
+      case "pendente":
+        return "#f4b400"; // Amarelo
+      case "confirmada":
+        return "#4caf50"; // Verde
+      case "enviada":
+        return "#2196f3"; // Azul
+      case "finalizada":
+        return "#9c27b0"; // Roxo
+      case "cancelado":
+        return "#f44336"; // Vermelho
+      default:
+        return "#757575"; // Cinza
+    }
+  }};
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: capitalize; /* Deixa o texto com a primeira letra maiúscula */
 `;
