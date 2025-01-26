@@ -13,10 +13,10 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
     facebook: "",
     usa_Status: "",
     chave_pix: "",
-    usa_estoque: "",
+    usa_estoque: false,  // Definido como booleano
     cor_botao_primaria: "",
     cor_botao_secundaria: "",
-    usa_logo_fundo: ""
+    usa_logo_fundo: false
   });
 
   const filterFormData = (data) => {
@@ -44,9 +44,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
 
   const loadStoreConfigs = async (loja) => {
     try {
-
       const response = await getLojaConfig(loja);
-
       return response;
     } catch (error) {
       console.error("Erro ao carregar configuração da loja:", error);
@@ -76,7 +74,6 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
   
     fetchStoreConfigs();
   }, [loja]);
-  
 
   const handleChange = (e) => {
     setFormData({
@@ -85,24 +82,20 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
     });
   };
 
-  
-
   const handleChangeCheckBox = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.checked,
+      [e.target.name]: e.target.checked,  // Manipula o checkbox como booleano
     });
   };
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const transformedData = {
         ...formData,
-        usa_logo_fundo: formData.usa_logo_fundo ? "true" : "false", // Se usa_logo_fundo for true, transforma em "1", caso contrário, "0"
-        usa_estoque: formData.usa_estoque ? "true" : "false", // Se usa_logo_fundo for true, transforma em "1", caso contrário, "0"
+        usa_logo_fundo: formData.usa_logo_fundo ? "true" : "false", // Converte booleano de volta para string
+        usa_estoque: formData.usa_estoque ? "true" : "false"  // Converte booleano de volta para string
       };
   
       // Filtra os dados que serão enviados
@@ -116,15 +109,13 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
     }
   };
 
-
-
   if (!isOpen) return null;
 
   return (
     <C.ModalOverlay>
       <C.ModalContainer>
         <C.ModalHeader>
-          <h2> Configurações da Minha Loja</h2>
+          <h2>Configurações da Minha Loja</h2>
           <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
@@ -156,7 +147,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
               />
             </C.FormColumn>
             <C.FormColumn>
-              <C.Label htmlFor="cor_secundaria">Botão primária</C.Label>
+              <C.Label htmlFor="cor_botao_primaria">Botão primária</C.Label>
               <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_botao_primaria, border: '1px solid #000', marginTop: '5px' }} />
               <C.Input
                 type="color"
@@ -179,38 +170,32 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
                 style={{ marginRight: '10px' }} // Espaço entre o input e o div
               />
             </C.FormColumn>
-
- 
           </C.FormRow>
 
           <C.FormColumn>
-              <C.Label htmlFor="usa_Status">Usa logo como fundo da pagina &nbsp; &nbsp; &nbsp;
+            <C.Label htmlFor="usa_logo_fundo">Usa logo como fundo da página</C.Label>
+            <C.Input
+              type="checkbox"
+              name="usa_logo_fundo"
+              id="usa_logo_fundo"
+              checked={formData.usa_logo_fundo}
+              onChange={handleChangeCheckBox}
+            />
+          </C.FormColumn>
+
+          <C.FormRow>
+            <C.FormColumn>
+              <C.Label htmlFor="usa_estoque">Usa estoque</C.Label>
               <C.Input
                 type="checkbox"
-                name="usa_logo_fundo"
-                id="usa_logo_fundo"
-                checked={formData.usa_logo_fundo}
-                onChange={handleChangeCheckBox}
-              /></C.Label>
+                name="usa_estoque"
+                id="usa_estoque"
+                checked={formData.usa_estoque}  // Utilizando `checked` com o valor booleano
+                onChange={handleChangeCheckBox}  // Atualiza o estado ao marcar/desmarcar
+              />
             </C.FormColumn>
-            <br/>
-          <C.FormRow>
-            <div style={{
-             height: '30px',
-             backgroundColor: formData.cor_primaria, 
-             borderColor: formData.cor_botao_primaria, 
-             color: formData.cor_secundaria,
-             display: 'flex',                // Adiciona o display flex
-             justifyContent: 'center',       // Centraliza os botões horizontalmente
-             alignItems: 'center'            // Centraliza os botões verticalmente
-            }}>
-              <button onClick={(e) =>  e.preventDefault()} style={{ backgroundColor: formData.cor_botao_primaria, borderColor: formData.cor_botao_primaria, color: formData.cor_secundaria , marginRight: '10px'  }}>
-                Meu carrinho</button>
-
-              <button onClick={(e) =>  e.preventDefault()} style={{ backgroundColor: formData.cor_botao_secundaria, borderColor: formData.cor_botao_secundaria, color: formData.cor_secundaria }}>
-                Finalizar Pedido</button>
-            </div>
           </C.FormRow>
+
           <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="taxa_entrega">Taxa de entrega</C.Label>
@@ -222,9 +207,6 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
                 onChange={handleChange}
               />
             </C.FormColumn>
-
-
-
             <C.FormColumn>
               <C.Label htmlFor="numero_whatsapp">Whatsapp</C.Label>
               <C.Input
@@ -239,9 +221,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
 
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="instagram">
-                Instagram
-              </C.Label>
+              <C.Label htmlFor="instagram">Instagram</C.Label>
               <C.Input
                 type="text"
                 name="instagram"
@@ -263,51 +243,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
                 onChange={handleChange}
               />
             </C.FormColumn>
-         
-  {/*
-
-          <C.FormRow>
-            <C.FormColumn>
-              <C.Label htmlFor="chave_pix">Chave Pix</C.Label>
-              <C.Input
-                type="text"
-                name="chave_pix"
-                id="chave_pix"
-                value={formData.chave_pix}
-                onChange={handleChange}
-              />
-            </C.FormColumn>
-
           </C.FormRow>
-         
-        <C.FormRow>
-            <C.FormColumn>
-              <C.Label htmlFor="usa_Status">Usa status da loja</C.Label>
-              <C.Input
-                type="checkbox"
-                name="usa_Status"
-                id="usa_Status"
-                value={formData.usa_Status}
-                onChange={handleChange}
-              />
-            </C.FormColumn>
-
-          
-*/}
-
-            <C.FormColumn>
-              <C.Label htmlFor="usa_estoque">Usa estoque</C.Label>
-              <C.Input
-                type="checkbox"
-                name="usa_estoque"
-                id="usa_estoque"
-                value={formData.usa_estoque}
-                onChange={handleChangeCheckBox}
-              />
-            </C.FormColumn>
-     
-          </C.FormRow> 
-
 
           <C.Button type="submit">Salvar</C.Button>
         </C.ModalForm>
