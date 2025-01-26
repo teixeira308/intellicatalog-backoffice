@@ -102,6 +102,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
       const transformedData = {
         ...formData,
         usa_logo_fundo: formData.usa_logo_fundo ? "true" : "false", // Se usa_logo_fundo for true, transforma em "1", caso contrário, "0"
+        usa_estoque: formData.usa_estoque ? "true" : "false", // Se usa_logo_fundo for true, transforma em "1", caso contrário, "0"
       };
   
       // Filtra os dados que serão enviados
