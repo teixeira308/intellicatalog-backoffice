@@ -15,6 +15,7 @@ const MudarStatusPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
     "enviada",
     "finalizada",
     "cancelado",
+    "produzindo",
   ];
 
   // Filtra os campos permitidos

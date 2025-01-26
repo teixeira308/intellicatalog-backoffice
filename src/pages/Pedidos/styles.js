@@ -203,6 +203,8 @@ export const CardStatus = styled.span`
         return "#9c27b0"; // Roxo
       case "cancelado":
         return "#f44336"; // Vermelho
+      case "produzindo":
+        return "#2196f3"; // Azul
       default:
         return "#757575"; // Cinza
     }
