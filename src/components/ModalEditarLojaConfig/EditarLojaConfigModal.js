@@ -194,7 +194,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="usa_logo_fundo">Usar logo como fundo da página
+              <C.Label htmlFor="usa_logo_fundo">Usar logo como fundo da página{"  "}
               <C.Input
                 type="checkbox"
                 name="usa_logo_fundo"
@@ -207,7 +207,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
 
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="usa_estoque">Usa estoque
+              <C.Label htmlFor="usa_estoque">Usa estoque{"  "}
               <C.Input
                 type="checkbox"
                 name="usa_estoque"
