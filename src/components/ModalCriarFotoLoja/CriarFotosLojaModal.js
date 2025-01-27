@@ -93,24 +93,42 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+  
     try {
       const formDataToSend = new FormData();
-      formDataToSend.append("file", formData.file);
-      formDataToSend.append("description", formData.description);
-
+      
+      // Certifique-se de que `formData.file` e `formData.description` não sejam `undefined` ou `null`
+      if (formData.file) {
+        formDataToSend.append("file", formData.file); // Adiciona o arquivo
+      } else {
+        throw new Error("O arquivo é obrigatório e está ausente.");
+      }
+  
+      if (formData.description) {
+        formDataToSend.append("description", formData.description); // Adiciona a descrição
+      } else {
+        throw new Error("A descrição é obrigatória e está ausente.");
+      }
+  
+      // Faz a chamada para criar a foto
       await createFotoStore(store, formDataToSend);
-
-      // Após criar a foto, recarregar as imagens do produto
+  
+      // Após sucesso, recarregar imagens
       loadStoreImages();
+  
       window.addToast("Ação realizada com sucesso!", "success");
-      handleClose();
-      onCreate();
+      handleClose(); // Fecha o modal
+      onCreate(); // Atualiza a interface com a nova foto
     } catch (error) {
       console.error("Erro ao criar foto:", error);
-      window.addToast("Ocorreu um erro ao criar foto: "+error, "error");
-
+  
+      // Adiciona um toast para informar o erro
+      window.addToast("Ocorreu um erro ao criar a foto: " + error.message, "error");
+    } finally {
+      setLoading(false); // Para o estado de carregamento
     }
   };
+  
 
   if (!isOpen) return null;
 

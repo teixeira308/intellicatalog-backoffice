@@ -94,25 +94,42 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
+  
     try {
       const formDataToSend = new FormData();
+  
+      // Verificar se o arquivo e a descrição estão definidos
+      if (!formData.file) {
+        throw new Error("O arquivo é obrigatório e está ausente.");
+      }
       formDataToSend.append("file", formData.file);
+  
+      if (!formData.description) {
+        throw new Error("A descrição é obrigatória e está ausente.");
+      }
       formDataToSend.append("description", formData.description);
-
+  
+      // Enviar os dados para o backend
       await createFotoProduto(produto, formDataToSend);
-
-      // Após criar a foto, recarregar as imagens do produto
+  
+      // Recarregar imagens e notificar o usuário
       loadProductImages();
       window.addToast("Ação realizada com sucesso!", "success");
-
+  
       handleClose();
       onCreate();
     } catch (error) {
       console.error("Erro ao criar foto:", error);
-      window.addToast("Ocorreu um erro ao criar foto: "+error, "error");
+  
+      // Informar o erro ao usuário
+      window.addToast("Ocorreu um erro ao criar a foto: " + error.message, "error");
+    } finally {
+      // Garantir que o estado de carregamento seja atualizado
+      setLoading(false);
     }
   };
+  
 
   if (!isOpen) return null;
 
