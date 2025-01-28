@@ -82,7 +82,7 @@ const LojaImageApi = () => {
     }
     const getFotoByStore = async (store, store_image_id) => {
 
-        const response = await fetch(`${api_url}/intellicatalog/v1/stores/${store.id}/store_images${store_image_id}`, {
+        const response = await fetch(`${api_url}/intellicatalog/v1/stores/${store.id}/store_images/${store_image_id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
