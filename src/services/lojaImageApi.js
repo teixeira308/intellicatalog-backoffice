@@ -62,7 +62,7 @@ const LojaImageApi = () => {
     }
 
     const getFotoByStoreId = async (store) => {
-        console.log("store de dentro: ",store.id)
+        //console.log("store de dentro: ",store.id)
         const response = await fetch(`${api_url}/intellicatalog/v1/stores/${store.id}/store_images`, {
             method: "GET",
             headers: {
@@ -74,6 +74,11 @@ const LojaImageApi = () => {
             // Redireciona para a tela de login
             navigate('/login');
         }
+
+        if (response.status===403) {
+            return await response.json();
+        }
+
         if (!response.ok) {
             throw new Error("Erro ao buscar imagens da store");
         }
