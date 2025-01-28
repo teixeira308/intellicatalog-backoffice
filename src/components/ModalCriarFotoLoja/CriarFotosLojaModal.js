@@ -44,28 +44,41 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
     const fetchFotos = async () => {
       if (isOpen && store) {
         try {
-          //console.log("store que entrou no modal:", store.id)
+          // console.log("store que entrou no modal:", store.id);
           const fotos = await getFotoByStoreId(store); // Busca todas as fotos do produto
+  
           // Gera URLs para cada imagem junto com o ID
           const fotosUrls = await Promise.all(
             fotos.map(async (foto) => {
-              const arrayBuffer = await getFotoStoreDownload(foto);
-              const blob = new Blob([arrayBuffer], { type: "image/jpeg" });
-              const url = URL.createObjectURL(blob); // Cria a URL a partir do Blob
-              return { id: foto.id, url, store_id: foto.store_id, description: foto.description }; // Retorna um objeto com o ID e a URL
+              try {
+                const arrayBuffer = await getFotoStoreDownload(foto);
+                const blob = new Blob([arrayBuffer], { type: "image/jpeg" });
+                const url = URL.createObjectURL(blob); // Cria a URL a partir do Blob
+                return {
+                  id: foto.id,
+                  url,
+                  store_id: foto.store_id,
+                  description: foto.description,
+                }; // Retorna um objeto com o ID, URL, store_id e descrição
+              } catch (error) {
+                console.warn(`Erro ao carregar a imagem com ID ${foto.id}:`, error);
+                return null; // Retorna `null` em caso de erro
+              }
             })
           );
-          setImageStoreUrls(fotosUrls); // Define todas as URLs das imagens
+  
+          // Remove entradas nulas do array antes de definir no estado
+          setImageStoreUrls(fotosUrls.filter((foto) => foto !== null));
         } catch (error) {
           console.error("Erro ao buscar fotos:", error);
-          window.addToast("Ocorreu um erro ao buscar fotos: "+error, "error");
+          window.addToast("Ocorreu um erro ao buscar fotos: " + error, "error");
         }
       }
     };
-
-
+  
     fetchFotos();
   }, [isOpen, store]);
+  
 
 
 
