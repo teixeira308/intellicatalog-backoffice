@@ -62,29 +62,33 @@ const LojaImageApi = () => {
     }
 
     const getFotoByStoreId = async (store) => {
-        //console.log("store de dentro: ",store.id)
+        // console.log("store de dentro: ", store.id);
         const response = await fetch(`${api_url}/intellicatalog/v1/stores/${store.id}/store_images`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${user?.token}`,
-            },
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
         });
+      
         if (response.status === 401) {
-            // Redireciona para a tela de login
-            navigate('/login');
+          // Redireciona para a tela de login
+          navigate('/login');
         }
-
-        if (response.status===403) {
-            return await response.json();
+      
+        if (response.status === 403) {
+          // Retorna um array vazio quando não há fotos
+          console.warn("Nenhuma foto cadastrada para esta loja.");
+          return [];
         }
-
+      
         if (!response.ok) {
-            throw new Error("Erro ao buscar imagens da store");
+          throw new Error("Erro ao buscar imagens da store");
         }
-
+      
         return await response.json();
-    }
+      };
+      
     const getFotoByStore = async (store, store_image_id) => {
 
         const response = await fetch(`${api_url}/intellicatalog/v1/stores/${store.id}/store_images/${store_image_id}`, {
