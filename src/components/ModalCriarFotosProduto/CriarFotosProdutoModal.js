@@ -42,32 +42,40 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
 
   useEffect(() => {
     const fetchFotos = async () => {
-      setLoading(true)
+      setLoading(true);
       if (isOpen && produto) {
         try {
           const fotos = await getFotoByProduto(produto); // Busca todas as fotos do produto
-
-
+  
           // Gera URLs para cada imagem junto com o ID
           const fotosUrls = await Promise.all(
             fotos.map(async (foto) => {
-              const arrayBuffer = await getFotoProdutoDownload(produto, foto);
-              const blob = new Blob([arrayBuffer], { type: "image/jpeg" });
-              const url = URL.createObjectURL(blob); // Cria a URL a partir do Blob
-              return { id: foto.id, url }; // Retorna um objeto com o ID e a URL
+              try {
+                const arrayBuffer = await getFotoProdutoDownload(produto, foto);
+                const blob = new Blob([arrayBuffer], { type: "image/jpeg" });
+                const url = URL.createObjectURL(blob); // Cria a URL a partir do Blob
+                return { id: foto.id, url }; // Retorna um objeto com o ID e a URL
+              } catch (error) {
+                console.warn(`Erro ao carregar a imagem com ID ${foto.id}:`, error);
+                return null; // Retorna `null` se ocorrer um erro
+              }
             })
           );
-          setImageUrls(fotosUrls); // Define todas as URLs das imagens
-          setLoading(false)
+  
+          // Remove entradas nulas do array antes de definir no estado
+          setImageUrls(fotosUrls.filter((foto) => foto !== null));
+          setLoading(false);
         } catch (error) {
           console.error("Erro ao buscar fotos:", error);
-          window.addToast("Ocorreu um erro ao buscar fotos: "+error, "error");
+          window.addToast("Ocorreu um erro ao buscar fotos: " + error, "error");
+          setLoading(false);
         }
       }
     };
-
+  
     fetchFotos();
   }, [isOpen, produto]);
+  
 
 
 
@@ -105,9 +113,10 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
       }
       formDataToSend.append("file", formData.file);
   
-      if (!formData.description) {
+     /* if (!formData.description) {
         throw new Error("A descrição é obrigatória e está ausente.");
       }
+        */
       formDataToSend.append("description", formData.description);
   
       // Enviar os dados para o backend
