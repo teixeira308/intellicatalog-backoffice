@@ -8,7 +8,6 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
   const [fotos, setFotos] = useState([]);
   const [formData, setFormData] = useState({
     file: null,
-    description: "",
   });
   const [imageUrls, setImageUrls] = useState([]); // Estado para armazenar as URLs das imagens do produto
   const [loading, setLoading] = useState(false);
@@ -82,8 +81,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
 
   const resetFormData = () => {
     setFormData({
-      file: "",
-      description: "",
+      file: "", 
     });
     setImageUrls([]); // Limpa as URLs das imagens ao fechar o modal
   };
@@ -113,11 +111,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
       }
       formDataToSend.append("file", formData.file);
   
-     /* if (!formData.description) {
-        throw new Error("A descrição é obrigatória e está ausente.");
-      }
-        */
-      formDataToSend.append("description", formData.description);
+ 
   
       // Enviar os dados para o backend
       await createFotoProduto(produto, formDataToSend);
@@ -185,18 +179,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
               />
             </C.FormColumn>
           </C.FormRow>
-          <C.FormRow>
-            <C.FormColumn>
-              <C.Label htmlFor="descricao">Descrição</C.Label>
-              <C.Input
-                type="text"
-                name="description"
-                id="description"
-                value={formData.description}
-                onChange={handleChange}
-              />
-            </C.FormColumn>
-          </C.FormRow>
+          
 
           <C.Button type="submit">Salvar</C.Button>
 

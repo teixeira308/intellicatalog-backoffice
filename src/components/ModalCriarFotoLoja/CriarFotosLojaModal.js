@@ -9,8 +9,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
   const [fotos, setFotos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    file: null,
-    description: "",
+    file: null, 
   });
   const [imageStoreUrls, setImageStoreUrls] = useState([]); // Estado para armazenar as URLs das imagens do produto
 
@@ -32,8 +31,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
               return {
                 id: foto.id,
                 url,
-                store_id: foto.store_id,
-                description: foto.description,
+                store_id: foto.store_id
               }; // Retorna um objeto com o ID, URL, store_id e descrição
             } catch (error) {
               console.warn(`Erro ao carregar a imagem com ID ${foto.id}:`, error);
@@ -72,8 +70,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
                 return {
                   id: foto.id,
                   url,
-                  store_id: foto.store_id,
-                  description: foto.description,
+                  store_id: foto.store_id
                 }; // Retorna um objeto com o ID, URL, store_id e descrição
               } catch (error) {
                 console.warn(`Erro ao carregar a imagem com ID ${foto.id}:`, error);
@@ -100,8 +97,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
 
   const resetFormData = () => {
     setFormData({
-      file: "",
-      description: "",
+      file: ""
     });
     setImageStoreUrls([]); // Limpa as URLs das imagens ao fechar o modal
   };
@@ -132,11 +128,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
         throw new Error("O arquivo é obrigatório e está ausente.");
       }
   
-      if (formData.description) {
-        formDataToSend.append("description", formData.description); // Adiciona a descrição
-      } else {
-        //throw new Error("A descrição é obrigatória e está ausente.");
-      }
+      
   
       // Faz a chamada para criar a foto
       await createFotoStore(store, formDataToSend);
@@ -209,7 +201,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
 
                           <C.DeleteButton onClick={() => handleDeleteImage(item.id)}>✖</C.DeleteButton>
                         </C.ImagePreview>
-                        <C.Description>{item.description}</C.Description>
+                       
                       </>
                     ))}
                   </C.ImageGallery>
@@ -231,20 +223,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
               />
             </C.FormColumn>
           </C.FormRow>
-          <C.FormRow>
-            <C.FormColumn>
-              <C.Label htmlFor="description">Descrição</C.Label>
-              <C.Input
-                type="text"
-                name="description"
-                id="description"
-                value={formData.description}
-                onChange={handleChange}
-
-                disabled={imageStoreUrls.length > 0}
-              />
-            </C.FormColumn>
-          </C.FormRow>
+        
 
           <C.Button type="submit">Salvar</C.Button>
 
