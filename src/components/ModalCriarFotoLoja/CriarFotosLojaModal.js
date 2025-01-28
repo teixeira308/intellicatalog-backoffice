@@ -135,7 +135,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
       if (formData.description) {
         formDataToSend.append("description", formData.description); // Adiciona a descrição
       } else {
-        throw new Error("A descrição é obrigatória e está ausente.");
+        //throw new Error("A descrição é obrigatória e está ausente.");
       }
   
       // Faz a chamada para criar a foto
