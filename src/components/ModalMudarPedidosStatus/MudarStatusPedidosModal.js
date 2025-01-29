@@ -3,7 +3,7 @@ import * as C from "./styles";
 import pedidoApi from "../../services/PedidoApi";
 
 const MudarStatusPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
-  const { updatePedido } = pedidoApi();
+  const { updateStatusPedido } = pedidoApi();
   const [formData, setFormData] = useState({
     status: "",
     id: "",
@@ -44,7 +44,7 @@ const MudarStatusPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
     e.preventDefault();
     try {
       const filteredData = filterFormData(formData);
-      await updatePedido(filteredData.id,filteredData);
+      await updateStatusPedido(filteredData.id,filteredData);
       window.addToast("Ação realizada com sucesso!", "success");
       onEdit();
       onClose(); // Fecha o modal após salvar
