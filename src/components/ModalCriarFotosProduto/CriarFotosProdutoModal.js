@@ -100,38 +100,44 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const file = formData.file;
+  
+    if (file) {
+      // Verifique o tipo de arquivo
+      const fileType = file.type;
+      if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
+        alert('Tipo de arquivo não suportado');
+        return;
+      }
+  
+      // Verifique o tamanho do arquivo
+      const fileSize = file.size / 1024 / 1024; // Tamanho em MB
+      if (fileSize > 5) { // Suponha que o limite seja 5MB
+        alert('O arquivo é muito grande. O limite é 5MB');
+        return;
+      }
+    }
+  
     setLoading(true);
   
+    // Enviar o arquivo após validação
+    const formDataToSend = new FormData();
+    formDataToSend.append('file', formData.file);
+  
     try {
-      const formDataToSend = new FormData();
-  
-      // Verificar se o arquivo e a descrição estão definidos
-      if (!formData.file) {
-        throw new Error("O arquivo é obrigatório e está ausente.");
-      }
-      formDataToSend.append("file", formData.file);
-  
- 
-  
-      // Enviar os dados para o backend
       await createFotoProduto(produto, formDataToSend);
-  
-      // Recarregar imagens e notificar o usuário
       loadProductImages();
-      window.addToast("Ação realizada com sucesso!", "success");
-  
+      window.addToast("Foto criada com sucesso!", "success");
       handleClose();
       onCreate();
     } catch (error) {
       console.error("Erro ao criar foto:", error);
-  
-      // Informar o erro ao usuário
       window.addToast("Ocorreu um erro ao criar a foto: " + error.message, "error");
     } finally {
-      // Garantir que o estado de carregamento seja atualizado
       setLoading(false);
     }
   };
+  
   
 
   if (!isOpen) return null;
