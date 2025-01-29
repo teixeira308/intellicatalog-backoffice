@@ -116,20 +116,33 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    const file = formData.file;
   
-    try {
-      const formDataToSend = new FormData();
-      
-      // Certifique-se de que `formData.file` e `formData.description` não sejam `undefined` ou `null`
-      if (formData.file) {
-        formDataToSend.append("file", formData.file); // Adiciona o arquivo
-      } else {
-        throw new Error("O arquivo é obrigatório e está ausente.");
+    if (file) {
+      // Verifique o tipo de arquivo
+      const fileType = file.type;
+      if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
+        alert('Tipo de arquivo não suportado');
+        return;
       }
   
-      
+      // Verifique o tamanho do arquivo
+      const fileSize = file.size / 1024 / 1024; // Tamanho em MB
+      if (fileSize > 5) { // Suponha que o limite seja 5MB
+        alert('O arquivo é muito grande. O limite é 5MB');
+        return;
+      }
+    } else {
+      alert('O arquivo é obrigatório e está ausente.');
+      return;
+    }
   
+    setLoading(true);
+  
+    const formDataToSend = new FormData();
+    formDataToSend.append("file", formData.file); // Adiciona o arquivo
+  
+    try {
       // Faz a chamada para criar a foto
       await createFotoStore(store, formDataToSend);
   
@@ -148,6 +161,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
       setLoading(false); // Para o estado de carregamento
     }
   };
+  
   
 
   if (!isOpen) return null;
