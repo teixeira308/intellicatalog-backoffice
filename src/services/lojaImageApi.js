@@ -16,7 +16,7 @@ const LojaImageApi = () => {
         // 🔍 Log dos dados dentro do FormData
         for (let pair of photo.entries()) {
             console.log(`FormData -> ${pair[0]}:`, pair[1]); // Exibe chave e valor
-            window.addToast(`FormData -> ${pair[0]}:`, pair[1]);
+           // window.addToast(`FormData -> ${pair[0]}:`, pair[1]);
         }
         
       
