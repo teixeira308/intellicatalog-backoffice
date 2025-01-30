@@ -20,7 +20,7 @@ const ProductImageApi = () => {
                     'Access-Control-Allow-Methods': '*',
                     Authorization: `Bearer ${user?.token}`,
                 },
-                body: photo,
+                body: formData,
             });
 
             if (response.status === 403) {
