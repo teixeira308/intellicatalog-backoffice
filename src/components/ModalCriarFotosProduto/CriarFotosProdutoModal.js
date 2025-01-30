@@ -125,6 +125,9 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
     }
     setLoading(true);
   
+    // Enviar o arquivo após validação
+    const formDataToSend = new FormData();
+    formDataToSend.append('file', file);
   
     try {
       await createFotoProduto(produto, formDataToSend);
