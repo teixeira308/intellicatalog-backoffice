@@ -119,15 +119,12 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
   
   
     if (file && file.name.includes("_")) {
-      alert("tem underline")
+     
       const newFileName = file.name.replace(/_/g, "-");
       file = new File([file], newFileName, { type: file.type });
     }
     setLoading(true);
   
-    // Enviar o arquivo após validação
-    const formDataToSend = new FormData();
-    formDataToSend.append('file', formData.file);
   
     try {
       await createFotoProduto(produto, formDataToSend);
