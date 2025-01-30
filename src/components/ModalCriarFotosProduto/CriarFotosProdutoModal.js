@@ -100,7 +100,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const file = formData.file;
+    let file = formData.file;
   
    /* if (file) {
       // Verifique o tipo de arquivo
