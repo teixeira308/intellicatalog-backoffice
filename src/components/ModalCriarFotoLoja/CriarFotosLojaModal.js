@@ -116,12 +116,13 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const file = formData.file;
+    let file = formData.file;
   
-    if (file.name.includes("_")) {
-      console.error("O nome do arquivo não pode conter underline (_).", error);
-      return;
+    if (file && file.name.includes("_")) {
+      const newFileName = file.name.replace(/_/g, "-");
+      file = new File([file], newFileName, { type: file.type });
     }
+  
     /*
     if (file) {
       // Verifique o tipo de arquivo
@@ -140,12 +141,13 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
     } else {
       alert('O arquivo é obrigatório e está ausente.');
       return;
-    }*/
+    }
+    */
   
     setLoading(true);
   
     const formDataToSend = new FormData();
-    formDataToSend.append("file", formData.file); // Adiciona o arquivo
+    formDataToSend.append("file", file); // Adiciona o arquivo corrigido
   
     try {
       // Faz a chamada para criar a foto

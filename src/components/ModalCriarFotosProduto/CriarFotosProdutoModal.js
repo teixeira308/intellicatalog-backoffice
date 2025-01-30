@@ -118,9 +118,9 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
       }*/
     }
   
-    if (file.name.includes("_")) {
-      console.error("O nome do arquivo não pode conter underline (_).", error);
-      return;
+    if (file && file.name.includes("_")) {
+      const newFileName = file.name.replace(/_/g, "-");
+      file = new File([file], newFileName, { type: file.type });
     }
     setLoading(true);
   
