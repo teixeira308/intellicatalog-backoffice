@@ -119,6 +119,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
   
   
     if (file && file.name.includes("_")) {
+      alert("tem underline")
       const newFileName = file.name.replace(/_/g, "-");
       file = new File([file], newFileName, { type: file.type });
     }
