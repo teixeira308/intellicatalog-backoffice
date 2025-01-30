@@ -151,8 +151,9 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
   
     try {
       // Faz a chamada para criar a foto
+      alert('entrou no try')
       await createFotoStore(store, formDataToSend);
-  
+      alert('saiu da chamada da api ')
       // Após sucesso, recarregar imagens
       loadStoreImages();
   
