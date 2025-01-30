@@ -7,21 +7,49 @@ const LojaImageApi = () => {
     const navigate = useNavigate();
     const api_url = process.env.REACT_APP_API;
     
+
+    const compressImage = async (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (event) => {
+                const img = new Image();
+                img.src = event.target.result;
+                img.onload = () => {
+                    const canvas = document.createElement("canvas");
+                    const ctx = canvas.getContext("2d");
+                    const maxWidth = 800;
+                    const scaleSize = maxWidth / img.width;
+                    canvas.width = maxWidth;
+                    canvas.height = img.height * scaleSize;
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    canvas.toBlob(
+                        (blob) => resolve(blob),
+                        "image/webp",
+                        0.7
+                    );
+                };
+            };
+            reader.onerror = (error) => reject(error);
+        });
+    };
+    
     const createFotoStore = async (store, photo) => {
         if (!(photo instanceof FormData)) {
             throw new Error("O parâmetro 'photo' não é um FormData válido.");
         }
     
-        // 🔍 Debug: Exibir os dados do FormData
-        for (let pair of photo.entries()) {
-            console.log(`FormData -> ${pair[0]}:`, pair[1]);
+        const file = photo.get("file");
+        if (file) {
+            const compressedFile = await compressImage(file);
+            photo.set("file", compressedFile, "compressed.webp");
         }
     
         try {
             const response = await fetch(`${api_url}/intellicatalog/v1/stores/${store.id}/store_images/upload`, {
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${user?.token}`, // 🔥 Não definir `Content-Type`, o `fetch` já faz isso para `FormData`
+                    Authorization: `Bearer ${user?.token}`,
                 },
                 body: photo,
             });
@@ -49,7 +77,6 @@ const LojaImageApi = () => {
             throw error;
         }
     };
-    
 
     const deleteFotoByStore = async(storeId,storeImageId) =>{
 

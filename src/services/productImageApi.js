@@ -7,47 +7,84 @@ const ProductImageApi = () => {
     const navigate = useNavigate();
     const api_url = process.env.REACT_APP_API;
 
-    const createFotoProduto = async (product, photo) => {
-        if (!(photo instanceof FormData)) {
-            throw new Error("O parâmetro 'photo' não é um FormData válido.");
+    const compressImage = (file, callback) => {
+        const reader = new FileReader();
+        
+        reader.readAsDataURL(file);
+        reader.onload = (event) => {
+            const img = new Image();
+            img.src = event.target.result;
+            img.onload = () => {
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d");
+    
+                const maxWidth = 800;
+                const scaleSize = maxWidth / img.width;
+                canvas.width = maxWidth;
+                canvas.height = img.height * scaleSize;
+    
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    
+                canvas.toBlob(
+                    (blob) => {
+                        const compressedFile = new File([blob], file.name.replace(/\s/g, "-"), {
+                            type: "image/webp",
+                            lastModified: Date.now(),
+                        });
+                        callback(compressedFile);
+                    },
+                    "image/webp",
+                    0.8
+                );
+            };
+        };
+    };
+    
+    const createFotoProduto = async (product, file) => {
+        if (!(file instanceof File)) {
+            throw new Error("O parâmetro 'file' não é um arquivo válido.");
         }
+        
+        compressImage(file, async (compressedFile) => {
+            const formData = new FormData();
+            formData.append("file", compressedFile);
     
-        // 🔍 Debug: Exibir o FormData no console
-        for (let pair of photo.entries()) {
-            console.log(`FormData -> ${pair[0]}:`, pair[1]); // Exibe chave e valor
-        }
-    
-        try {
-            const response = await fetch(`${api_url}/intellicatalog/v1/products/${product.id}/products_images/upload`, {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${user?.token}`, // 🔥 Não definir `Content-Type`, o `fetch` já faz isso para `FormData`
-                },
-                body: photo,
-            });
-    
-            if (response.status === 403) {
-                navigate('/login');
-                throw new Error("Acesso não autorizado, redirecionando para login.");
+            for (let pair of formData.entries()) {
+                console.log(`FormData -> ${pair[0]}:`, pair[1]);
             }
     
-            const contentType = response.headers.get("content-type");
+            try {
+                const response = await fetch(`${api_url}/intellicatalog/v1/products/${product.id}/products_images/upload`, {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${user?.token}`,
+                    },
+                    body: formData,
+                });
     
-            if (!response.ok) {
-                if (contentType && contentType.includes("application/json")) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.message || "Erro ao criar pessoa");
-                } else {
-                    const errorText = await response.text();
-                    throw new Error(`Erro inesperado: ${errorText}`);
+                if (response.status === 403) {
+                    navigate('/login');
+                    throw new Error("Acesso não autorizado, redirecionando para login.");
                 }
-            }
     
-            return response.json();
-        } catch (error) {
-            console.error("Erro durante o envio do arquivo:", error);
-            throw error;
-        }
+                const contentType = response.headers.get("content-type");
+    
+                if (!response.ok) {
+                    if (contentType && contentType.includes("application/json")) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.message || "Erro ao criar pessoa");
+                    } else {
+                        const errorText = await response.text();
+                        throw new Error(`Erro inesperado: ${errorText}`);
+                    }
+                }
+    
+                return response.json();
+            } catch (error) {
+                console.error("Erro durante o envio do arquivo:", error);
+                throw error;
+            }
+        });
     };
     
 
