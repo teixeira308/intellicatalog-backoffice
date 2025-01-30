@@ -8,10 +8,17 @@ const ProductImageApi = () => {
     const api_url = process.env.REACT_APP_API;
 
     const createFotoProduto = async (product, photo) => {
+
+        if (!(photo instanceof FormData)) {
+            throw new Error("O parâmetro 'photo' não é um FormData válido.");
+        }
+
+        // 🔍 Log dos dados dentro do FormData
+        for (let pair of photo.entries()) {
+            console.log(`FormData -> ${pair[0]}:`, pair[1]); // Exibe chave e valor
+        }
         
         try {
-            const formData = new FormData();
-            formData.append("file", photo.file);
             const response = await fetch(`${api_url}/intellicatalog/v1/products/${product.id}/products_images/upload`, {
                 method: "POST",
                 headers: {
@@ -20,7 +27,7 @@ const ProductImageApi = () => {
                     'Access-Control-Allow-Methods': '*',
                     Authorization: `Bearer ${user?.token}`,
                 },
-                body: formData,
+                body: photo,
             });
 
             if (response.status === 403) {
