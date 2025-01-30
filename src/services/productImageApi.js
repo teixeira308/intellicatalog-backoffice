@@ -40,52 +40,49 @@ const ProductImageApi = () => {
         };
     };
     
-    const createFotoProduto = async (product, file) => {
-        if (!(file instanceof File)) {
-            throw new Error("O parâmetro 'file' não é um arquivo válido.");
+    const createFotoProduto = async (product, photo) => {
+        if (!(photo instanceof FormData)) {
+            throw new Error("O parâmetro 'photo' não é um FormData válido.");
         }
-        
-        compressImage(file, async (compressedFile) => {
-            const formData = new FormData();
-            formData.append("file", compressedFile);
     
-            for (let pair of formData.entries()) {
-                console.log(`FormData -> ${pair[0]}:`, pair[1]);
+        // 🔍 Debug: Exibir os dados do FormData no console
+        for (let pair of photo.entries()) {
+            console.log(`FormData -> ${pair[0]}:`, pair[1]);
+        }
+    
+        try {
+            const response = await fetch(`${api_url}/intellicatalog/v1/products/${product.id}/products_images/upload`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${user?.token}`, // `fetch` define `Content-Type` automaticamente
+                },
+                body: photo,
+            });
+    
+            if (response.status === 403) {
+                navigate('/login');
+                throw new Error("Acesso não autorizado, redirecionando para login.");
             }
     
-            try {
-                const response = await fetch(`${api_url}/intellicatalog/v1/products/${product.id}/products_images/upload`, {
-                    method: "POST",
-                    headers: {
-                        Authorization: `Bearer ${user?.token}`,
-                    },
-                    body: formData,
-                });
+            const contentType = response.headers.get("content-type");
     
-                if (response.status === 403) {
-                    navigate('/login');
-                    throw new Error("Acesso não autorizado, redirecionando para login.");
+            if (!response.ok) {
+                if (contentType && contentType.includes("application/json")) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || "Erro ao criar imagem do produto");
+                } else {
+                    const errorText = await response.text();
+                    throw new Error(`Erro inesperado: ${errorText}`);
                 }
-    
-                const contentType = response.headers.get("content-type");
-    
-                if (!response.ok) {
-                    if (contentType && contentType.includes("application/json")) {
-                        const errorData = await response.json();
-                        throw new Error(errorData.message || "Erro ao criar pessoa");
-                    } else {
-                        const errorText = await response.text();
-                        throw new Error(`Erro inesperado: ${errorText}`);
-                    }
-                }
-    
-                return response.json();
-            } catch (error) {
-                console.error("Erro durante o envio do arquivo:", error);
-                throw error;
             }
-        });
+    
+            return response.json();
+        } catch (error) {
+            console.error("Erro durante o envio do arquivo:", error);
+            throw error;
+        }
     };
+    
     
 
     const getFotoProdutoDownload = async (product, photo) => {
