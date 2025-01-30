@@ -9,8 +9,11 @@ const LojaImageApi = () => {
     
     const createFotoStore = async (store, photo) => {
         
-        try {
+      
 
+        try {
+            const formData = new FormData();
+            formData.append("file", photo);
             const response = await fetch(`${api_url}/intellicatalog/v1/stores/${store.id}/store_images/upload`, {
                 method: "POST",
                 headers: {

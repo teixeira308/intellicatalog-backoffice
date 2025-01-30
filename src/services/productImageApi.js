@@ -10,7 +10,8 @@ const ProductImageApi = () => {
     const createFotoProduto = async (product, photo) => {
         
         try {
-            console.log(photo)
+            const formData = new FormData();
+            formData.append("file", photo);
             const response = await fetch(`${api_url}/intellicatalog/v1/products/${product.id}/products_images/upload`, {
                 method: "POST",
                 headers: {
