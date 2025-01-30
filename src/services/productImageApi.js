@@ -8,46 +8,48 @@ const ProductImageApi = () => {
     const api_url = process.env.REACT_APP_API;
 
     const createFotoProduto = async (product, photo) => {
-
         if (!(photo instanceof FormData)) {
             throw new Error("O parâmetro 'photo' não é um FormData válido.");
         }
-
-        // 🔍 Log dos dados dentro do FormData
+    
+        // 🔍 Debug: Exibir o FormData no console
         for (let pair of photo.entries()) {
             console.log(`FormData -> ${pair[0]}:`, pair[1]); // Exibe chave e valor
-            //window.addToast(`FormData -> ${pair[0]}:`, pair[1]);
         }
-        
+    
         try {
             const response = await fetch(`${api_url}/intellicatalog/v1/products/${product.id}/products_images/upload`, {
                 method: "POST",
                 headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
-                    'Access-Control-Allow-Methods': '*',
-                    Authorization: `Bearer ${user?.token}`,
+                    Authorization: `Bearer ${user?.token}`, // 🔥 Não definir `Content-Type`, o `fetch` já faz isso para `FormData`
                 },
                 body: photo,
             });
-
+    
             if (response.status === 403) {
-                // Redireciona para a tela de login
                 navigate('/login');
+                throw new Error("Acesso não autorizado, redirecionando para login.");
             }
-
+    
+            const contentType = response.headers.get("content-type");
+    
             if (!response.ok) {
-                const errorData = await response.json();
-                console.log(errorData.message);
-                throw new Error(errorData.message || "Erro ao criar pessoa");
+                if (contentType && contentType.includes("application/json")) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || "Erro ao criar pessoa");
+                } else {
+                    const errorText = await response.text();
+                    throw new Error(`Erro inesperado: ${errorText}`);
+                }
             }
-
+    
             return response.json();
         } catch (error) {
-            console.error('Erro durante o envio do arquivo:', error);
+            console.error("Erro durante o envio do arquivo:", error);
             throw error;
         }
-    }
+    };
+    
 
     const getFotoProdutoDownload = async (product, photo) => {
         const response = await fetch(`${api_url}/intellicatalog/v1/products/${product.id}/products_images/download?arquivo=${photo.nomearquivo}`, {
