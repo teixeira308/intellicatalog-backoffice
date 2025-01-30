@@ -116,7 +116,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
         alert('O arquivo é muito grande. O limite é 5MB');
         return;
       }*/
-    }
+  
   
     if (file && file.name.includes("_")) {
       const newFileName = file.name.replace(/_/g, "-");
