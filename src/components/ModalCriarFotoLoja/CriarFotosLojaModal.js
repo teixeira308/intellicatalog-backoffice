@@ -118,6 +118,11 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
     e.preventDefault();
     const file = formData.file;
   
+    if (file.name.includes("_")) {
+      console.error("O nome do arquivo não pode conter underline (_).", error);
+      return;
+    }
+    /*
     if (file) {
       // Verifique o tipo de arquivo
       const fileType = file.type;
@@ -135,7 +140,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
     } else {
       alert('O arquivo é obrigatório e está ausente.');
       return;
-    }
+    }*/
   
     setLoading(true);
   

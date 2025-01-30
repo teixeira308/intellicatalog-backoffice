@@ -102,7 +102,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
     e.preventDefault();
     const file = formData.file;
   
-    if (file) {
+   /* if (file) {
       // Verifique o tipo de arquivo
       const fileType = file.type;
       if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
@@ -115,9 +115,13 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
       if (fileSize > 5) { // Suponha que o limite seja 5MB
         alert('O arquivo é muito grande. O limite é 5MB');
         return;
-      }
+      }*/
     }
   
+    if (file.name.includes("_")) {
+      console.error("O nome do arquivo não pode conter underline (_).", error);
+      return;
+    }
     setLoading(true);
   
     // Enviar o arquivo após validação
