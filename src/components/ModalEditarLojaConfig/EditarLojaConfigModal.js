@@ -158,10 +158,10 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
                 style={{ marginRight: '10px' }} // Espaço entre o input e o div
               />
             </C.FormColumn>
-<br/>
- <C.FormRow>
-           
-          </C.FormRow>
+            <br />
+            <C.FormRow>
+
+            </C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="cor_botao_secundaria">Botão secundária</C.Label>
               <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_botao_secundaria, border: '1px solid #000', marginTop: '5px' }} />
@@ -176,57 +176,69 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
-          <div style={{
-             height: '30px',
-             backgroundColor: formData.cor_primaria, 
-             borderColor: formData.cor_botao_primaria, 
-             color: formData.cor_secundaria,
-             display: 'flex',                // Adiciona o display flex
-             justifyContent: 'center',       // Centraliza os botões horizontalmente
-             alignItems: 'center'            // Centraliza os botões verticalmente
+            <div style={{
+              height: '30px',
+              backgroundColor: formData.cor_primaria,
+              borderColor: formData.cor_botao_primaria,
+              color: formData.cor_secundaria,
+              display: 'flex',                // Adiciona o display flex
+              justifyContent: 'center',       // Centraliza os botões horizontalmente
+              alignItems: 'center'            // Centraliza os botões verticalmente
             }}>
-              <button onClick={(e) =>  e.preventDefault()} style={{ backgroundColor: formData.cor_botao_primaria, borderColor: formData.cor_botao_primaria, color: formData.cor_secundaria , marginRight: '10px'  }}>
+              <button onClick={(e) => e.preventDefault()} style={{ backgroundColor: formData.cor_botao_primaria, borderColor: formData.cor_botao_primaria, color: formData.cor_secundaria, marginRight: '10px' }}>
                 Meu carrinho</button>
 
-              <button onClick={(e) =>  e.preventDefault()} style={{ backgroundColor: formData.cor_botao_secundaria, borderColor: formData.cor_botao_secundaria, color: formData.cor_secundaria }}>
+              <button onClick={(e) => e.preventDefault()} style={{ backgroundColor: formData.cor_botao_secundaria, borderColor: formData.cor_botao_secundaria, color: formData.cor_secundaria }}>
                 Finalizar Pedido</button>
             </div>
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="usa_logo_fundo">Usar logo como fundo da página{"  "}
-              <C.Input
-                type="checkbox"
-                name="usa_logo_fundo"
-                id="usa_logo_fundo"
-                checked={formData.usa_logo_fundo}
-                onChange={handleChangeCheckBox}
-              /></C.Label>
+                <C.Input
+                  type="checkbox"
+                  name="usa_logo_fundo"
+                  id="usa_logo_fundo"
+                  checked={formData.usa_logo_fundo}
+                  onChange={handleChangeCheckBox}
+                /></C.Label>
             </C.FormColumn>
           </C.FormRow>
 
           <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="usa_estoque">Usa estoque{"  "}
-              <C.Input
-                type="checkbox"
-                name="usa_estoque"
-                id="usa_estoque"
-                checked={formData.usa_estoque}  // Utilizando `checked` com o valor booleano
-                onChange={handleChangeCheckBox}  // Atualiza o estado ao marcar/desmarcar
-              /></C.Label>
+                <C.Input
+                  type="checkbox"
+                  name="usa_estoque"
+                  id="usa_estoque"
+                  checked={formData.usa_estoque}  // Utilizando `checked` com o valor booleano
+                  onChange={handleChangeCheckBox}  // Atualiza o estado ao marcar/desmarcar
+                /></C.Label>
             </C.FormColumn>
           </C.FormRow>
 
           <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="taxa_entrega">Taxa de entrega</C.Label>
-              <C.Input
-                type="text"
+          
+              <C.NumericFormat
                 name="taxa_entrega"
                 id="taxa_entrega"
                 value={formData.taxa_entrega}
                 onChange={handleChange}
+                thousandSeparator={true}
+                decimalScale={2}
+                fixedDecimalScale={true}
+                prefix={'R$ '}
+                placeholder="R$ 0,00" // Placeholder para o formato esperado
+                style={{
+                  padding: '8px',
+                  border: '1px solid #ccc',
+                  borderRadius: '4px',
+                  fontSize: '1rem',
+                  width: '100%',
+                }}
               />
             </C.FormColumn>
             <C.FormColumn>

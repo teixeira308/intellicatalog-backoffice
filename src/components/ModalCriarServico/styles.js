@@ -106,3 +106,10 @@ export const Button = styled.button`
     background-color: #0056b3;
   }
 `;
+
+export const NumericFormat = styled.input`
+padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 120;
+`;
