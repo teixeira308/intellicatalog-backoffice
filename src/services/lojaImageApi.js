@@ -35,16 +35,7 @@ const LojaImageApi = () => {
     };
     
     const createFotoStore = async (store, photo) => {
-        if (!(photo instanceof FormData)) {
-            throw new Error("O parâmetro 'photo' não é um FormData válido.");
-        }
-    
-        const file = photo.get("file");
-        if (file) {
-            const compressedFile = await compressImage(file);
-            photo.set("file", compressedFile, "compressed.webp");
-        }
-    
+      
         try {
             const response = await fetch(`${api_url}/intellicatalog/v1/stores/${store.id}/store_images/upload`, {
                 method: "POST",
