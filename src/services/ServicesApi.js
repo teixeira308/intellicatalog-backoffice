@@ -109,6 +109,7 @@ const ServicesApi = () => {
   }
 
   const updateServiceStatus = async (servicoId, updatedServico) => {
+    console.log(updatedServico)
     const response = await fetch(`${api_url}/intellicatalog/v1/services/${servicoId}`, {
       method: "PUT",
       headers: {
