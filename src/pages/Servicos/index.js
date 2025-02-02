@@ -96,7 +96,7 @@ const Servicos = () => {
           ...servico,
           is_active: servico.is_active === 1 ? 0 : 1, // Alterna o status
         };
-  
+        console.log('servico id:', servico.id)
         // Chamada à API para atualizar o status
         await updateServiceStatus(servico.id, updatedServico);
   
