@@ -9,7 +9,7 @@ const CategoriaApi = () => {
 
   const getCategorias = async () => {
 
-    const response = await fetch(`${api_url}/intellicatalog/v1/categories/users/${user.userId}`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/categories`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
