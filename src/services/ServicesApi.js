@@ -116,7 +116,7 @@ const ServicesApi = () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${user?.token}`,
       },
-      body: JSON.stringify(updatedServico.is_active),
+      body: {is_active: updatedServico.is_active},
     });
   
     if (!response.ok) {
