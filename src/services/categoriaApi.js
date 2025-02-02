@@ -9,7 +9,7 @@ const CategoriaApi = () => {
 
   const getCategorias = async () => {
 
-    const response = await fetch(`${api_url}/intellicatalog/v1/categories`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/categories/users/${user.userId}?mode=backoffice`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
