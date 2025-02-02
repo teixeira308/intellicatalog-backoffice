@@ -27,7 +27,7 @@ const ServicesApi = () => {
       }
   
       const data = await response.json(); // Garante que o JSON seja obtido
-      console.log("Resposta da API: ", data); // Verifique o formato retornado aqui
+      //console.log("Resposta da API: ", data); // Verifique o formato retornado aqui
       return data; // Retorna os dados diretamente
     } catch (error) {
       console.error("Erro na requisição getServicesByUser:", error.message);
