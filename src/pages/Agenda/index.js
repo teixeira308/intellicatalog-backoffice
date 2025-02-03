@@ -128,9 +128,9 @@ const Agenda = () => {
 
                 {datasVisiveis[data] && (
                   <C.TimeList>
-                    <C.CreateButton>
+                    <C.CreateAgendaButton>
                       <FaPlusCircle /> Agendamento
-                    </C.CreateButton>
+                    </C.CreateAgendaButton>
                     {agendamentos.map((availability, index) => (
                       <C.Card key={index} status={availability.status}>
                         <p>{availability.start_time} - {availability.end_time}</p>
