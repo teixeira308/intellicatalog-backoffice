@@ -5,7 +5,7 @@ import DisponibilidadeApi from "../../services/disponibilidadeApi";
 import ServicesApi from "../../services/ServicesApi";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
-import { FaChevronLeft, FaChevronRight, FaPlusCircle} from 'react-icons/fa'; // Ícone de lápis
+import { FaChevronLeft, FaChevronRight, FaPlusCircle } from 'react-icons/fa'; // Ícone de lápis
 
 const Agenda = () => {
   dayjs.locale("pt-br");
@@ -92,16 +92,13 @@ const Agenda = () => {
       <C.Container>
         <C.Title>Agenda</C.Title>
         <C.ButtonGroup>
-        <C.CreateButton>
-              <FaPlusCircle /> Disponibilidade
-        </C.CreateButton>
-        <C.CreateButton>
-              <FaPlusCircle /> Agendamento
-        </C.CreateButton>
+          <C.CreateButton>
+            <FaPlusCircle /> Disponibilidade
+          </C.CreateButton>
         </C.ButtonGroup>
         <C.Section>
           {/* Controles de Serviço */}
-          
+
 
           {/* Controles de Mês */}
           <C.Subtitle>{dayjs(mesAtual).format("YYYY")}</C.Subtitle>
@@ -131,6 +128,9 @@ const Agenda = () => {
 
                 {datasVisiveis[data] && (
                   <C.TimeList>
+                    <C.CreateButton>
+                      <FaPlusCircle /> Agendamento
+                    </C.CreateButton>
                     {agendamentos.map((availability, index) => (
                       <C.Card key={index} status={availability.status}>
                         <p>{availability.start_time} - {availability.end_time}</p>
