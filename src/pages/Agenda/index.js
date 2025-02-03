@@ -91,12 +91,14 @@ const Agenda = () => {
       <Navbar />
       <C.Container>
         <C.Title>Agenda</C.Title>
+        <C.Section>
         <C.CreateButton>
               <FaPlusCircle /> Disponibilidade
         </C.CreateButton>
         <C.CreateButton>
               <FaPlusCircle /> Agendamento
         </C.CreateButton>
+        </C.Section>
         <C.Section>
           {/* Controles de Serviço */}
           <C.ServiceControls>
