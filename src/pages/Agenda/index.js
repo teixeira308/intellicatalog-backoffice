@@ -124,10 +124,10 @@ const Agenda = () => {
                 {/* Data é agora um botão que alterna a visibilidade */}
                 <span onClick={() => toggleVisibilidade(data)}>
                   <C.DateTitle>{dayjs(data).format("DD")}</C.DateTitle> {"  "}
-                  <C.CreateAgendaButton>
+                </span>
+                <C.CreateAgendaButton>
                       <FaPlusCircle /> Agendamento
                     </C.CreateAgendaButton>
-                </span>
 
                 {datasVisiveis[data] && (
                   <C.TimeList>
