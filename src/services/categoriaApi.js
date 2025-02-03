@@ -84,7 +84,6 @@ const CategoriaApi = () => {
       user_id: user.userId, // Pega o user_id do objeto `user`
     };
 
-
     const response = await fetch(`${api_url}/intellicatalog/v1/categories`, {
       method: "POST",
       headers: {

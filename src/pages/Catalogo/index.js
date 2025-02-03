@@ -12,7 +12,7 @@ import EditarProdutoModal from "../../components/ModalEditarProduto/EditarProdut
 import CriarFotosProdutoModal from "../../components/ModalCriarFotosProduto/CriarFotosProdutoModal";
 import EditarEstoqueProdutoModal from "../../components/ModalEditarEstoqueProduto/EditarEstoqueProduto";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaEllipsisV, FaRandom, FaPlusCircle,FaBoxOpen} from 'react-icons/fa'; // Ícone de lápis
+import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaEllipsisV, FaRandom, FaPlusCircle, FaBoxOpen } from 'react-icons/fa'; // Ícone de lápis
 import { Menu, MenuItem, IconButton } from "@mui/material";
 
 
@@ -155,7 +155,7 @@ const Catalogo = () => {
       [produtoId]: null,
     }));
   };
-  
+
 
   const handlCriarCategoriaModalClose = () => {
     setIsCriarCategoriaModalOpen(false);
@@ -183,10 +183,12 @@ const Catalogo = () => {
     setIsDeleteCategoriaModalOpen(true);
   };
 
+  /*
   const openEditarCategoriaModal = (categoria) => {
     setSelectedCategoria(categoria);
     setIsEditarCategoriaModalOpen(true);
   };
+  */
 
   const openEditarProdutoModal = (produto, categoria) => {
     setSelectedCategoria(categoria);
@@ -194,7 +196,7 @@ const Catalogo = () => {
     setIsEditarProdutoModalOpen(true);
   };
 
-  const openEditarEstoqueProdutoModal = (produto) =>  {
+  const openEditarEstoqueProdutoModal = (produto) => {
     setSelectedProduto(produto);
     setIsEditarEstoqueProdutoModalOpen(true);
   };
@@ -314,6 +316,24 @@ const Catalogo = () => {
   };
 
 
+  // Função para abrir o menu específico de cada categoria
+  const handleMenuOpen = (event, categoria) => {
+    setSelectedCategoria(categoria);
+    setMenuAnchor(event.currentTarget);
+  };
+
+  // Função para fechar o menu
+  const handleMenuClose = () => {
+    setMenuAnchor(null);
+  };
+
+  // Função para abrir o modal de edição com a categoria correta
+  const openEditarCategoriaModal = () => {
+    setIsEditarCategoriaModalOpen(true);
+    handleMenuClose(); // Fecha o menu antes de abrir o modal
+  };
+
+
 
   return (
     <C.Container>
@@ -374,15 +394,15 @@ const Catalogo = () => {
           categorias
             .sort((a, b) => a.catalog_order - b.catalog_order)
             .map((categoria) => (
-              <C.Card key={categoria.catalog_order}>
+              <C.Card key={categoria.catalog_order} onClick={() => toggleCategoriaExpansion(categoria.id)}>
                 <C.StatusWrapper>
-                  <C.CategoriaLink onClick={() => toggleCategoriaExpansion(categoria.id)}>
+                  <C.CategoriaLink >
                     {categoria.name}
                   </C.CategoriaLink>
 
                   <C.ActionsWrapper>
 
-                    <IconButton onClick={(event) => setMenuAnchor(event.currentTarget)}>
+                  <IconButton onClick={(event) => handleMenuOpen(event, categoria)}>
                       <FaEllipsisV />
                     </IconButton>
 
@@ -391,7 +411,7 @@ const Catalogo = () => {
                       open={Boolean(menuAnchor)}
                       onClose={() => setMenuAnchor(null)}
                     >
-                      <MenuItem onClick={() => { openEditarCategoriaModal(categoria); setMenuAnchor(null); }}>
+                     <MenuItem onClick={openEditarCategoriaModal}>
                         <FaEdit style={{ marginRight: 8 }} /> Editar
                       </MenuItem>
                       <MenuItem onClick={() => { openDeleteCategoriaModal(categoria); setMenuAnchor(null); }}>
@@ -453,7 +473,7 @@ const Catalogo = () => {
                           <C.ProdutoActions key={produto.id}>
                             <C.ProdutoItem>
                               <span>{produto.titulo}</span>
-                              <span><FaBoxOpen/>: {produto.estoque || 0}</span>
+                              <span><FaBoxOpen />: {produto.estoque || 0}</span>
                               <IconButton onClick={(event) => openProductMenu(event, produto.id)}>
                                 <FaEllipsisV />
                               </IconButton>
@@ -462,13 +482,13 @@ const Catalogo = () => {
                                 open={Boolean(menuProdAnchor[produto.id])}
                                 onClose={() => closeProductMenu(produto.id)}
                               >
-                                <MenuItem onClick={() => {     setSelectedProduto(produto);openCriarFotosProdutoModal(produto); closeProductMenu(produto.id); }}>
+                                <MenuItem onClick={() => { setSelectedProduto(produto); openCriarFotosProdutoModal(produto); closeProductMenu(produto.id); }}>
                                   <FaImages style={{ marginRight: 8 }} /> Imagens
                                 </MenuItem>
                                 <MenuItem onClick={() => { console.log(produto); setSelectedProduto(produto); openEditarEstoqueProdutoModal(produto); closeProductMenu(produto.id); }}>
                                   <FaBoxOpen style={{ marginRight: 8 }} /> Estoque
                                 </MenuItem>
-                                <MenuItem onClick={() => {console.log(produto);  setSelectedProduto(produto); openEditarProdutoModal(produto, categoria); closeProductMenu(produto.id);}}>
+                                <MenuItem onClick={() => { console.log(produto); setSelectedProduto(produto); openEditarProdutoModal(produto, categoria); closeProductMenu(produto.id); }}>
                                   <FaEdit style={{ marginRight: 8 }} /> Editar
                                 </MenuItem>
                                 <MenuItem onClick={() => { console.log(produto); setSelectedProduto(produto); openDeleteProdutoModal(produto); closeProductMenu(produto.id); }}>
