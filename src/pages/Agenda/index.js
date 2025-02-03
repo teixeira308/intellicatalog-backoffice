@@ -1,5 +1,5 @@
 import React from "react";
-
+import React, { useEffect, useState } from "react";
 import * as C from "./style";
 import Navbar from "../../components/Navbar/Navbar";
 import DisponibilidadeApi from "../../services/disponibilidadeApi";
