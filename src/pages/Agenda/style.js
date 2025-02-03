@@ -217,3 +217,26 @@ export const ButtonGroup = styled.div`
   margin-top: 10px; /* Espaço superior */
   margin-bottom: 10px;
 `;
+
+export const DateControls = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+
+  button {
+    padding: 8px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+`;
