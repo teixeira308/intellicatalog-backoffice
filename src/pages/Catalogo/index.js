@@ -394,9 +394,9 @@ const Catalogo = () => {
           categorias
             .sort((a, b) => a.catalog_order - b.catalog_order)
             .map((categoria) => (
-              <C.Card key={categoria.catalog_order} onClick={() => toggleCategoriaExpansion(categoria.id)}>
+              <C.Card >
                 <C.StatusWrapper>
-                  <C.CategoriaLink >
+                  <C.CategoriaLink key={categoria.catalog_order} onClick={() => toggleCategoriaExpansion(categoria.id)} >
                     {categoria.name}
                   </C.CategoriaLink>
 
