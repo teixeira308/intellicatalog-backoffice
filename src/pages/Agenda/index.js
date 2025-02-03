@@ -123,9 +123,9 @@ const Agenda = () => {
               <C.Step key={data}>
                 <C.DateControls>
                   {/* Data é agora um botão que alterna a visibilidade */}
-                  <span onClick={() => toggleVisibilidade(data)}>
+                  <C.DateLabel onClick={() => toggleVisibilidade(data)}>
                     <C.DateTitle>{dayjs(data).format("DD")}</C.DateTitle> {"  "}
-                  </span>
+                  </C.DateLabel>
                   <C.CreateAgendaButton>
                     <FaPlusCircle /> Disponibilidade
                   </C.CreateAgendaButton>

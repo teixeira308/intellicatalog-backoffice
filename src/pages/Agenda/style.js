@@ -240,3 +240,9 @@ export const DateControls = styled.div`
     cursor: not-allowed;
   }
 `;
+
+export const DateLabel = styled.p`
+
+width: 30px;
+`;
+
