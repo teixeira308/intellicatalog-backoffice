@@ -200,7 +200,7 @@ export const CreateButton = styled(ActionButton)`
   }
 `;
 
-export const CreateAgendaButton = styled(ActionButton)`
+export const CreateAgendaButton = styled.p`
   background-color: #4caf50; /* Verde para editar */
   color: #fff; /* Texto branco */
   border: none;
