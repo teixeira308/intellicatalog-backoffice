@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as C from "./style";
 import Navbar from "../../components/Navbar/Navbar";
 import DisponibilidadeApi from "../../services/disponibilidadeApi";
-import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp, FaPlusCircle, FaRandom } from 'react-icons/fa'; // Ícone de lápis
+import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
 
 const Agenda = () => {
+  const [disponibilidades, setDisponibilidades] = useState([]);
+  const [mesAtual, setMesAtual] = useState(dayjs().format("YYYY-MM")); // Formato: "2025-01"
 
-const [disponibilidades, setDisponibilidades] = useState([]);
-const { getAvailability  } = DisponibilidadeApi();
+  const { getAvailability } = DisponibilidadeApi();
 
- useEffect(() => {
+  useEffect(() => {
     const fetchAvaliabilities = async () => {
       try {
-        const availabilities = await getAvailability(); // Recebe o objeto completo retornado
-        if (availabilities) {
-          // console.log("Serviços carregados: ", services);
-          setDisponibilidades(availabilities.data); // Define diretamente o retorno, dependendo do formato
+        const availabilities = await getAvailability();
+        if (availabilities && availabilities.data) {
+          setDisponibilidades(availabilities.data);
         }
       } catch (error) {
         console.error("Erro ao carregar disponibilidades: ", error.message);
@@ -25,25 +26,51 @@ const { getAvailability  } = DisponibilidadeApi();
     fetchAvaliabilities();
   }, []);
 
-  return (
+  // Filtrar disponibilidades para o mês atual
+  const disponibilidadesFiltradas = disponibilidades.filter((availability) => 
+    dayjs(availability.date).format("YYYY-MM") === mesAtual
+  );
 
+  // Mudar para o mês anterior
+  const mesAnterior = () => {
+    setMesAtual(dayjs(mesAtual).subtract(1, "month").format("YYYY-MM"));
+  };
+
+  // Mudar para o próximo mês
+  const proximoMes = () => {
+    setMesAtual(dayjs(mesAtual).add(1, "month").format("YYYY-MM"));
+  };
+
+  return (
     <C.Container>
       <Navbar />
       <C.Title>Agenda</C.Title>
       <C.Section>
-       {/*} <C.Subtitle></C.Subtitle> {*/} 
+
+        {/* Controles de Mês */}
+        <C.MonthControls>
+          <button onClick={mesAnterior}>← Mês Anterior</button>
+          <span>{dayjs(mesAtual).format("MMMM YYYY")}</span>
+          <button onClick={proximoMes}>Próximo Mês →</button>
+        </C.MonthControls>
+
         <C.Step>
-        <C.GridContainer>
-          {disponibilidades.map((availability, index) => (
-            <C.Card key={index}>
-              <h1>{availability.date}</h1>
-            </C.Card>
-          ))}
-        </C.GridContainer>
+          <C.GridContainer>
+            {disponibilidadesFiltradas.length > 0 ? (
+              disponibilidadesFiltradas.map((availability, index) => (
+                <C.Card key={index}>
+                  <C.Title>{dayjs(availability.date).format("DD")}</C.Title>
+                </C.Card>
+              ))
+            ) : (
+              <p>Nenhuma disponibilidade para este mês.</p>
+            )}
+          </C.GridContainer>
         </C.Step>
+
       </C.Section>
     </C.Container>
-  )
+  );
 };
 
 export default Agenda;

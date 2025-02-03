@@ -75,3 +75,29 @@ export const Card = styled.div`
     color: #333;
   }
 `;
+
+export const MonthControls = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 10px;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+`;
