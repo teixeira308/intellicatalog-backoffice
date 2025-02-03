@@ -81,6 +81,21 @@ const Agenda = () => {
     return acc;
   }, {});
 
+  const disponibilidadesAgrupadas = disponibilidadesFiltradas.reduce((acc, disponibilidade) => {
+    const { service_id, date } = disponibilidade;
+    const formattedDate = dayjs(date).format("YYYY-MM-DD");
+
+    if (!acc[service_id]) {
+      acc[service_id] = {};
+    }
+
+    if (!acc[service_id][formattedDate]) {
+      acc[service_id][formattedDate] = [];
+    }
+
+    acc[service_id][formattedDate].push(disponibilidade);
+    return acc;
+  }, {});
 
 
   return (
@@ -92,7 +107,7 @@ const Agenda = () => {
         <C.Section>
 
           {/* Controles de Mês */}
-          <span>{dayjs(mesAtual).format("YYYY")}</span>
+          <C.Subtitle>{dayjs(mesAtual).format("YYYY")}</C.Subtitle>
           <C.MonthControls>
             <button onClick={mesAnterior}><FaChevronLeft /></button>
             <span>{dayjs(mesAtual).format("MMMM")}</span>
@@ -101,19 +116,28 @@ const Agenda = () => {
 
           <C.Step>
             <C.GridContainer>
-              {Object.entries(disponibilidadesPorServico).length > 0 ? (
-                Object.entries(disponibilidadesPorServico).map(([service_id, disponibilidades]) => {
-                  const servico = servicosMap[service_id] || {}; // Obtém os detalhes do serviço
+              {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
+                Object.entries(disponibilidadesAgrupadas).map(([service_id, datas]) => {
+                  const servico = servicosMap[service_id] || {};
 
                   return (
                     <C.ServiceGroup key={service_id}>
                       <C.ServiceTitle>{servico.name || "Serviço Desconhecido"}</C.ServiceTitle>
-                      {disponibilidades.map((availability, index) => (
-                        <C.Card key={index} status={availability.status}>
-                          <C.Title>{dayjs(availability.date).format("DD")}</C.Title>
-                          <p>{availability.start_time} - {availability.end_time}</p>
-                        </C.Card>
+
+                      {Object.entries(datas).map(([data, agendamentos]) => (
+                        <C.DateGroup key={data}>
+                          <C.DateTitle>{dayjs(data).format("DD [de] MMMM")}</C.DateTitle>
+
+                          <C.TimeList>
+                            {agendamentos.map((availability, index) => (
+                              <C.Card key={index} status={availability.status}>
+                                <p>{availability.start_time} - {availability.end_time}</p>
+                              </C.Card>
+                            ))}
+                          </C.TimeList>
+                        </C.DateGroup>
                       ))}
+
                     </C.ServiceGroup>
                   );
                 })
@@ -121,6 +145,7 @@ const Agenda = () => {
                 <p>Nenhuma disponibilidade para este mês.</p>
               )}
             </C.GridContainer>
+
 
           </C.Step>
 

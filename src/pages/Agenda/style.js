@@ -116,3 +116,22 @@ export const ServiceTitle = styled.h3`
   margin-bottom: 10px;
   color: #333;
 `;
+
+export const DateGroup = styled.div`
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f1f1f1;
+`;
+
+export const DateTitle = styled.h4`
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+`;
+
+export const TimeList = styled.div`
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+`;
