@@ -8,15 +8,12 @@ import "dayjs/locale/pt-br";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'; // Ícone de lápis
 
 const Agenda = () => {
-
-
   dayjs.locale("pt-br");
   const [disponibilidades, setDisponibilidades] = useState([]);
   const [servicos, setServicos] = useState([]);
   const [servicoAtual, setServicoAtual] = useState(null);
-
-
   const [mesAtual, setMesAtual] = useState(dayjs().format("YYYY-MM")); // Formato: "2025-01"
+  const [datasVisiveis, setDatasVisiveis] = useState({}); // Estado para controle de visibilidade das datas
 
   const { getAvailability } = DisponibilidadeApi();
   const { getServicesByUser, deleteServices, updateServiceOrder, updateServiceStatus } = ServicesApi();
@@ -42,7 +39,6 @@ const Agenda = () => {
     }
   }, [servicos]);
 
-
   useEffect(() => {
     const fetchServices = async () => {
       try {
@@ -58,58 +54,18 @@ const Agenda = () => {
     fetchServices();
   }, []);
 
-
-
-
-  // Mudar para o mês anterior
   const mesAnterior = () => {
     setMesAtual(dayjs(mesAtual).subtract(1, "month").format("YYYY-MM"));
   };
 
-  // Mudar para o próximo mês
   const proximoMes = () => {
     setMesAtual(dayjs(mesAtual).add(1, "month").format("YYYY-MM"));
   };
+
   const disponibilidadesFiltradas = disponibilidades.filter(availability =>
     dayjs(availability.date).format("YYYY-MM") === mesAtual &&
     availability.service_id === servicoAtual
   );
-
-
-
-  const disponibilidadesPorServico = disponibilidadesFiltradas.reduce((acc, disponibilidade) => {
-    const { service_id } = disponibilidade;
-
-    if (!acc[service_id]) {
-      acc[service_id] = [];
-    }
-
-    acc[service_id].push(disponibilidade);
-    return acc;
-  }, {});
-
-  const servicosMap = servicos.reduce((acc, servico) => {
-    acc[servico.id] = servico; // Associa cada service_id ao seu objeto de serviço
-    return acc;
-  }, {});
-
-  
-
-  const servicoAnterior = () => {
-    const index = servicos.findIndex(s => s.id === servicoAtual);
-    if (index > 0) {
-      setServicoAtual(servicos[index - 1].id);
-    }
-  };
-
-  const proximoServico = () => {
-    const index = servicos.findIndex(s => s.id === servicoAtual);
-    if (index < servicos.length - 1) {
-      setServicoAtual(servicos[index + 1].id);
-    }
-  };
-
-
 
   const disponibilidadesAgrupadas = disponibilidadesFiltradas.reduce((acc, disponibilidade) => {
     const formattedDate = dayjs(disponibilidade.date).format("YYYY-MM-DD");
@@ -122,59 +78,68 @@ const Agenda = () => {
     return acc;
   }, {});
 
+  // Função para alternar a visibilidade dos horários de uma data
+  const toggleVisibilidade = (data) => {
+    setDatasVisiveis(prev => ({
+      ...prev,
+      [data]: !prev[data], // Alterna o valor da data
+    }));
+  };
 
   return (
     <>
-    <Navbar />
-    <C.Container>
-      <C.Title>Agenda</C.Title>
-      <C.Section>
+      <Navbar />
+      <C.Container>
+        <C.Title>Agenda</C.Title>
+        <C.Section>
+          {/* Controles de Serviço */}
+          <C.ServiceControls>
+            <button onClick={() => setServicoAtual(servicoAtual - 1)} disabled={servicoAtual === 0}>
+              <FaChevronLeft />
+            </button>
+            <span>{servicos.find(s => s.id === servicoAtual)?.name || "Carregando..."}</span>
+            <button onClick={() => setServicoAtual(servicoAtual + 1)} disabled={servicoAtual === servicos.length - 1}>
+              <FaChevronRight />
+            </button>
+          </C.ServiceControls>
 
-        {/* Controles de Serviço */}
-        <C.ServiceControls>
-          <button onClick={servicoAnterior} disabled={servicos.findIndex(s => s.id === servicoAtual) === 0}>
-            <FaChevronLeft />
-          </button>
-          <span>{servicosMap[servicoAtual]?.name || "Carregando..."}</span>
-          <button onClick={proximoServico} disabled={servicos.findIndex(s => s.id === servicoAtual) === servicos.length - 1}>
-            <FaChevronRight />
-          </button>
-        </C.ServiceControls>
+          {/* Controles de Mês */}
+          <C.Subtitle>{dayjs(mesAtual).format("YYYY")}</C.Subtitle>
+          <C.MonthControls>
+            <button onClick={mesAnterior}><FaChevronLeft /></button>
+            <span>{dayjs(mesAtual).format("MMMM")}</span>
+            <button onClick={proximoMes}><FaChevronRight /></button>
+          </C.MonthControls>
 
-        {/* Controles de Mês */}
-        <C.Subtitle>{dayjs(mesAtual).format("YYYY")}</C.Subtitle>
-        <C.MonthControls>
-          <button onClick={mesAnterior}><FaChevronLeft /></button>
-          <span>{dayjs(mesAtual).format("MMMM")}</span>
-          <button onClick={proximoMes}><FaChevronRight /></button>
-        </C.MonthControls>
-
-        {/* Exibição dos horários disponíveis */}
-        <C.Step>
-          
+          {/* Exibição dos horários disponíveis */}
+          <C.Step>
             {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
               Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
-                <>
-                <C.GridContainer key={data}> </C.GridContainer>
-                  <C.DateTitle>{dayjs(data).format("DD [de] MMMM")}</C.DateTitle>
-                  <C.TimeList>
-                    {agendamentos.map((availability, index) => (
-                      <C.Card key={index} status={availability.status}>
-                        <p>{availability.start_time} - {availability.end_time}</p>
-                      </C.Card>
-                    ))}
-                  </C.TimeList>
-                  </>
+                <C.GridContainer key={data}>
+                  {/* Data é agora um botão que alterna a visibilidade */}
+                  <button onClick={() => toggleVisibilidade(data)}>
+                    <C.DateTitle>{dayjs(data).format("DD [de] MMMM")}</C.DateTitle>
+                  </button>
+
+                  {datasVisiveis[data] && (
+                    <C.TimeList>
+                      {agendamentos.map((availability, index) => (
+                        <C.Card key={index} status={availability.status}>
+                          <p>{availability.start_time} - {availability.end_time}</p>
+                        </C.Card>
+                      ))}
+                    </C.TimeList>
+                  )}
+                </C.GridContainer>
               ))
             ) : (
               <p>Nenhuma disponibilidade para este serviço neste mês.</p>
             )}
-          
-        </C.Step>
-
-      </C.Section>
-    </C.Container>
-  </>);
+          </C.Step>
+        </C.Section>
+      </C.Container>
+    </>
+  );
 };
 
 export default Agenda;
