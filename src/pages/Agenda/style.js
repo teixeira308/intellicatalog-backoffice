@@ -128,7 +128,7 @@ export const DateTitle = styled.h4`
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 5px;
-  width: 160px;
+  width: 200px;
 `;
 
 export const TimeList = styled.div`
