@@ -117,9 +117,9 @@ const Agenda = () => {
               Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
                 <C.GridContainer key={data}>
                   {/* Data é agora um botão que alterna a visibilidade */}
-                  <button onClick={() => toggleVisibilidade(data)}>
-                    <C.DateTitle>{dayjs(data).format("DD [de] MMMM")}</C.DateTitle>
-                  </button>
+                  <span onClick={() => toggleVisibilidade(data)}>
+                    <C.DateTitle>{dayjs(data).format("DD")}</C.DateTitle>
+                  </span>
 
                   {datasVisiveis[data] && (
                     <C.TimeList>
