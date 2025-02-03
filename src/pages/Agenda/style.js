@@ -249,7 +249,7 @@ width: 30px;
 
 
 
-export const ServiceSelect = styled.select`
+export const Select = styled.select`
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -263,6 +263,6 @@ export const ServiceSelect = styled.select`
   }
 `;
 
-export const ServiceOption = styled.option`
+export const Option = styled.option`
   font-size: 16px;
 `;

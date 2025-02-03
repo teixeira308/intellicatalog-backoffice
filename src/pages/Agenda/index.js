@@ -101,7 +101,7 @@ const Agenda = () => {
           {/* Dropdown de Serviços */}
           <C.Select onChange={handleChangeServico} value={servicoAtual}>
             {servicos.map(servico => (
-              <option key={servico.id} value={servico.id}>{servico.name}</option>
+              <C.Option key={servico.id} value={servico.id}>{servico.name}</C.Option>
             ))}
           </C.Select>
 
