@@ -112,10 +112,10 @@ const Agenda = () => {
           </C.MonthControls>
 
           {/* Exibição dos horários disponíveis */}
-          <C.Step>
+           
             {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
               Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
-                <C.GridContainer key={data}>
+                <C.Step key={data}>
                   {/* Data é agora um botão que alterna a visibilidade */}
                   <span onClick={() => toggleVisibilidade(data)}>
                     <C.DateTitle>{dayjs(data).format("DD")}</C.DateTitle>
@@ -130,12 +130,12 @@ const Agenda = () => {
                       ))}
                     </C.TimeList>
                   )}
-                </C.GridContainer>
+                </C.Step>
               ))
             ) : (
               <p>Nenhuma disponibilidade para este serviço neste mês.</p>
             )}
-          </C.Step>
+          
         </C.Section>
       </C.Container>
     </>
