@@ -13,6 +13,8 @@ const Agenda = () => {
   dayjs.locale("pt-br");
   const [disponibilidades, setDisponibilidades] = useState([]);
   const [servicos, setServicos] = useState([]);
+  const [servicoAtual, setServicoAtual] = useState(null);
+
 
   const [mesAtual, setMesAtual] = useState(dayjs().format("YYYY-MM")); // Formato: "2025-01"
 
@@ -35,6 +37,13 @@ const Agenda = () => {
   }, []);
 
   useEffect(() => {
+    if (servicos.length > 0 && servicoAtual === null) {
+      setServicoAtual(servicos[0].id); // Seleciona o primeiro serviço
+    }
+  }, [servicos]);
+
+
+  useEffect(() => {
     const fetchServices = async () => {
       try {
         const services = await getServicesByUser();
@@ -50,10 +59,7 @@ const Agenda = () => {
   }, []);
 
 
-  // Filtrar disponibilidades para o mês atual
-  const disponibilidadesFiltradas = disponibilidades.filter((availability) =>
-    dayjs(availability.date).format("YYYY-MM") === mesAtual
-  );
+
 
   // Mudar para o mês anterior
   const mesAnterior = () => {
@@ -81,77 +87,92 @@ const Agenda = () => {
     return acc;
   }, {});
 
+  const disponibilidadesFiltradas = disponibilidades.filter(availability =>
+    dayjs(availability.date).format("YYYY-MM") === mesAtual &&
+    availability.service_id === servicoAtual
+  );
+
+
+  const servicoAnterior = () => {
+    const index = servicos.findIndex(s => s.id === servicoAtual);
+    if (index > 0) {
+      setServicoAtual(servicos[index - 1].id);
+    }
+  };
+
+  const proximoServico = () => {
+    const index = servicos.findIndex(s => s.id === servicoAtual);
+    if (index < servicos.length - 1) {
+      setServicoAtual(servicos[index + 1].id);
+    }
+  };
+
+
+
   const disponibilidadesAgrupadas = disponibilidadesFiltradas.reduce((acc, disponibilidade) => {
-    const { service_id, date } = disponibilidade;
-    const formattedDate = dayjs(date).format("YYYY-MM-DD");
+    const formattedDate = dayjs(disponibilidade.date).format("YYYY-MM-DD");
 
-    if (!acc[service_id]) {
-      acc[service_id] = {};
+    if (!acc[formattedDate]) {
+      acc[formattedDate] = [];
     }
 
-    if (!acc[service_id][formattedDate]) {
-      acc[service_id][formattedDate] = [];
-    }
-
-    acc[service_id][formattedDate].push(disponibilidade);
+    acc[formattedDate].push(disponibilidade);
     return acc;
   }, {});
 
 
   return (
     <>
-      <Navbar />
-      <C.Container>
+    <Navbar />
+    <C.Container>
+      <C.Title>Agenda</C.Title>
+      <C.Section>
 
-        <C.Title>Agenda</C.Title>
-        <C.Section>
+        {/* Controles de Serviço */}
+        <C.ServiceControls>
+          <button onClick={servicoAnterior} disabled={servicos.findIndex(s => s.id === servicoAtual) === 0}>
+            <FaChevronLeft />
+          </button>
+          <span>{servicosMap[servicoAtual]?.name || "Carregando..."}</span>
+          <button onClick={proximoServico} disabled={servicos.findIndex(s => s.id === servicoAtual) === servicos.length - 1}>
+            <FaChevronRight />
+          </button>
+        </C.ServiceControls>
 
-          {/* Controles de Mês */}
-          <C.Subtitle>{dayjs(mesAtual).format("YYYY")}</C.Subtitle>
-          <C.MonthControls>
-            <button onClick={mesAnterior}><FaChevronLeft /></button>
-            <span>{dayjs(mesAtual).format("MMMM")}</span>
-            <button onClick={proximoMes}><FaChevronRight /></button>
-          </C.MonthControls>
+        {/* Controles de Mês */}
+        <C.Subtitle>{dayjs(mesAtual).format("YYYY")}</C.Subtitle>
+        <C.MonthControls>
+          <button onClick={mesAnterior}><FaChevronLeft /></button>
+          <span>{dayjs(mesAtual).format("MMMM")}</span>
+          <button onClick={proximoMes}><FaChevronRight /></button>
+        </C.MonthControls>
 
-          <C.Step>
-            <C.GridContainer>
-              {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
-                Object.entries(disponibilidadesAgrupadas).map(([service_id, datas]) => {
-                  const servico = servicosMap[service_id] || {};
+        {/* Exibição dos horários disponíveis */}
+        <C.Step>
+          <C.GridContainer>
+            {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
+              Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
+                <C.DateGroup key={data}>
+                  <C.DateTitle>{dayjs(data).format("DD [de] MMMM")}</C.DateTitle>
 
-                  return (
-                    <C.ServiceGroup key={service_id}>
-                      <C.ServiceTitle>{servico.name || "Serviço Desconhecido"}</C.ServiceTitle>
+                  <C.TimeList>
+                    {agendamentos.map((availability, index) => (
+                      <C.Card key={index} status={availability.status}>
+                        <p>{availability.start_time} - {availability.end_time}</p>
+                      </C.Card>
+                    ))}
+                  </C.TimeList>
+                </C.DateGroup>
+              ))
+            ) : (
+              <p>Nenhuma disponibilidade para este serviço neste mês.</p>
+            )}
+          </C.GridContainer>
+        </C.Step>
 
-                      {Object.entries(datas).map(([data, agendamentos]) => (
-                        <C.DateGroup key={data}>
-                          <C.DateTitle>{dayjs(data).format("DD [de] MMMM")}</C.DateTitle>
-
-                          <C.TimeList>
-                            {agendamentos.map((availability, index) => (
-                              <C.Card key={index} status={availability.status}>
-                                <p>{availability.start_time} - {availability.end_time}</p>
-                              </C.Card>
-                            ))}
-                          </C.TimeList>
-                        </C.DateGroup>
-                      ))}
-
-                    </C.ServiceGroup>
-                  );
-                })
-              ) : (
-                <p>Nenhuma disponibilidade para este mês.</p>
-              )}
-            </C.GridContainer>
-
-
-          </C.Step>
-
-        </C.Section>
-      </C.Container>
-    </>);
+      </C.Section>
+    </C.Container>
+  </>);
 };
 
 export default Agenda;

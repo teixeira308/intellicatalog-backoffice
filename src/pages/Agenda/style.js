@@ -111,7 +111,7 @@ export const ServiceGroup = styled.div`
 `;
 
 export const ServiceTitle = styled.h3`
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
   margin-bottom: 10px;
   color: #333;
@@ -134,4 +134,27 @@ export const TimeList = styled.div`
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+`;
+
+export const ServiceControls = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+
+  button {
+    padding: 8px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
 `;
