@@ -206,4 +206,5 @@ export const ButtonGroup = styled.div`
   justify-content: center; /* Centraliza os botões no eixo horizontal */
   align-items: center; /* Alinha os botões verticalmente */
   margin-top: 10px; /* Espaço superior */
+  margin-bottom: 10px;
 `;

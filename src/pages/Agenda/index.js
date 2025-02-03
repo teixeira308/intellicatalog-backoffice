@@ -101,15 +101,7 @@ const Agenda = () => {
         </C.ButtonGroup>
         <C.Section>
           {/* Controles de Serviço */}
-          <C.ServiceControls>
-            <button onClick={() => setServicoAtual(servicoAtual - 1)} disabled={servicoAtual === 0}>
-              <FaChevronLeft />
-            </button>
-            <span>{servicos.find(s => s.id === servicoAtual)?.name || "Carregando..."}</span>
-            <button onClick={() => setServicoAtual(servicoAtual + 1)} disabled={servicoAtual === servicos.length - 1}>
-              <FaChevronRight />
-            </button>
-          </C.ServiceControls>
+          
 
           {/* Controles de Mês */}
           <C.Subtitle>{dayjs(mesAtual).format("YYYY")}</C.Subtitle>
@@ -120,7 +112,15 @@ const Agenda = () => {
           </C.MonthControls>
 
           {/* Exibição dos horários disponíveis */}
-
+          <C.ServiceControls>
+            <button onClick={() => setServicoAtual(servicoAtual - 1)} disabled={servicoAtual === 0}>
+              <FaChevronLeft />
+            </button>
+            <span>{servicos.find(s => s.id === servicoAtual)?.name || "Carregando..."}</span>
+            <button onClick={() => setServicoAtual(servicoAtual + 1)} disabled={servicoAtual === servicos.length - 1}>
+              <FaChevronRight />
+            </button>
+          </C.ServiceControls>
           {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
             Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
               <C.Step key={data}>
