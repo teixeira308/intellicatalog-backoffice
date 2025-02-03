@@ -247,3 +247,22 @@ export const DateLabel = styled.p`
 width: 30px;
 `;
 
+
+
+export const ServiceSelect = styled.select`
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+  outline: none;
+
+  &:focus {
+    border-color: #007bff;
+  }
+`;
+
+export const ServiceOption = styled.option`
+  font-size: 16px;
+`;
