@@ -75,7 +75,7 @@ const Agenda = () => {
     availability.service_id === servicoAtual
   );
 
-  
+
 
   const disponibilidadesPorServico = disponibilidadesFiltradas.reduce((acc, disponibilidade) => {
     const { service_id } = disponibilidade;
@@ -151,10 +151,10 @@ const Agenda = () => {
 
         {/* Exibição dos horários disponíveis */}
         <C.Step>
-          <C.GridContainer>
+          
             {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
               Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
-                <C.DateGroup key={data}>
+                <C.GridContainer key={data}>
                   <C.DateTitle>{dayjs(data).format("DD [de] MMMM")}</C.DateTitle>
 
                   <C.TimeList>
@@ -164,12 +164,12 @@ const Agenda = () => {
                       </C.Card>
                     ))}
                   </C.TimeList>
-                </C.DateGroup>
+                </C.GridContainer>
               ))
             ) : (
               <p>Nenhuma disponibilidade para este serviço neste mês.</p>
             )}
-          </C.GridContainer>
+          
         </C.Step>
 
       </C.Section>
