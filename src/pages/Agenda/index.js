@@ -123,14 +123,15 @@ const Agenda = () => {
               <C.Step key={data}>
                 {/* Data é agora um botão que alterna a visibilidade */}
                 <span onClick={() => toggleVisibilidade(data)}>
-                  <C.DateTitle>{dayjs(data).format("DD")}</C.DateTitle>
+                  <C.DateTitle>{dayjs(data).format("DD")}</C.DateTitle> {"  "}
+                  <C.CreateAgendaButton>
+                      <FaPlusCircle /> Agendamento
+                    </C.CreateAgendaButton>
                 </span>
 
                 {datasVisiveis[data] && (
                   <C.TimeList>
-                    <C.CreateAgendaButton>
-                      <FaPlusCircle /> Agendamento
-                    </C.CreateAgendaButton>
+                    
                     {agendamentos.map((availability, index) => (
                       <C.Card key={index} status={availability.status}>
                         <p>{availability.start_time} - {availability.end_time}</p>

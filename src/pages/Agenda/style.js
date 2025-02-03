@@ -204,7 +204,7 @@ export const CreateAgendaButton = styled.p`
    
   color: #2196f3;
   border: none;
-  font-size: 12px;
+  font-size: 16px;
 
 `;
 
