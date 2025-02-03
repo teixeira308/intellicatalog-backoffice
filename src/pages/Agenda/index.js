@@ -92,9 +92,10 @@ const Agenda = () => {
         <C.Section>
 
           {/* Controles de Mês */}
+          <span>{dayjs(mesAtual).format("YYYY")}</span>
           <C.MonthControls>
             <button onClick={mesAnterior}><FaChevronLeft /></button>
-            <span>{dayjs(mesAtual).format("MMMM YYYY")}</span>
+            <span>{dayjs(mesAtual).format("MMMM")}</span>
             <button onClick={proximoMes}><FaChevronRight /></button>
           </C.MonthControls>
 
