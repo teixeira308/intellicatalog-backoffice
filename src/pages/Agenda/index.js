@@ -5,18 +5,18 @@ import DisponibilidadeApi from "../../services/disponibilidadeApi";
 import ServicesApi from "../../services/ServicesApi";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
-import { FaChevronLeft, FaChevronRight, FaPlusCircle } from 'react-icons/fa'; // Ícone de lápis
+import { FaChevronLeft, FaChevronRight, FaPlusCircle } from 'react-icons/fa';
 
 const Agenda = () => {
   dayjs.locale("pt-br");
   const [disponibilidades, setDisponibilidades] = useState([]);
   const [servicos, setServicos] = useState([]);
   const [servicoAtual, setServicoAtual] = useState(null);
-  const [mesAtual, setMesAtual] = useState(dayjs().format("YYYY-MM")); // Formato: "2025-01"
-  const [datasVisiveis, setDatasVisiveis] = useState({}); // Estado para controle de visibilidade das datas
+  const [mesAtual, setMesAtual] = useState(dayjs().format("YYYY-MM"));
+  const [datasVisiveis, setDatasVisiveis] = useState({});
 
   const { getAvailability } = DisponibilidadeApi();
-  const { getServicesByUser, deleteServices, updateServiceOrder, updateServiceStatus } = ServicesApi();
+  const { getServicesByUser } = ServicesApi();
 
   useEffect(() => {
     const fetchAvaliabilities = async () => {
@@ -31,20 +31,17 @@ const Agenda = () => {
     };
 
     fetchAvaliabilities();
-  }, []);
+  }, [servicoAtual]);
 
   useEffect(() => {
-    if (servicos.length > 0 && servicoAtual === null) {
-      setServicoAtual(servicos[0].id); // Seleciona o primeiro serviço
-    }
-  }, [servicos]);
-
-  useEffect(() => {
-    const fetchServices = async () => { 
+    const fetchServices = async () => {
       try {
         const services = await getServicesByUser();
         if (services) {
           setServicos(services);
+          if (!servicoAtual) {
+            setServicoAtual(services[0]?.id);
+          }
         }
       } catch (error) {
         console.error("Erro ao carregar serviços:", error.message);
@@ -62,9 +59,13 @@ const Agenda = () => {
     setMesAtual(dayjs(mesAtual).add(1, "month").format("YYYY-MM"));
   };
 
+  const handleChangeServico = (event) => {
+    setServicoAtual(event.target.value);
+  };
+
   const disponibilidadesFiltradas = disponibilidades.filter(availability =>
     dayjs(availability.date).format("YYYY-MM") === mesAtual &&
-    availability.service_id === servicoAtual
+    availability.service_id == servicoAtual
   );
 
   const disponibilidadesAgrupadas = disponibilidadesFiltradas.reduce((acc, disponibilidade) => {
@@ -78,11 +79,10 @@ const Agenda = () => {
     return acc;
   }, {});
 
-  // Função para alternar a visibilidade dos horários de uma data
   const toggleVisibilidade = (data) => {
     setDatasVisiveis(prev => ({
       ...prev,
-      [data]: !prev[data], // Alterna o valor da data
+      [data]: !prev[data],
     }));
   };
 
@@ -96,9 +96,14 @@ const Agenda = () => {
             <FaPlusCircle /> Agendamento
           </C.CreateButton>
         </C.ButtonGroup>
-        <C.Section>
-          {/* Controles de Serviço */}
 
+        <C.Section>
+          {/* Dropdown de Serviços */}
+          <C.Select onChange={handleChangeServico} value={servicoAtual}>
+            {servicos.map(servico => (
+              <option key={servico.id} value={servico.id}>{servico.name}</option>
+            ))}
+          </C.Select>
 
           {/* Controles de Mês */}
           <C.Subtitle>{dayjs(mesAtual).format("YYYY")}</C.Subtitle>
@@ -109,22 +114,12 @@ const Agenda = () => {
           </C.MonthControls>
 
           {/* Exibição dos horários disponíveis */}
-          <C.ServiceControls>
-            <button onClick={() => setServicoAtual(servicoAtual - 1)} disabled={servicoAtual === 0}>
-              <FaChevronLeft />
-            </button>
-            <span>{servicos.find(s => s.id === servicoAtual)?.name || "Carregando..."}</span>
-            <button onClick={() => setServicoAtual(servicoAtual + 1)} disabled={servicoAtual === servicos.length - 1}>
-              <FaChevronRight />
-            </button>
-          </C.ServiceControls>
           {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
             Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
               <C.Step key={data}>
                 <C.DateControls>
-                  {/* Data é agora um botão que alterna a visibilidade */}
                   <C.DateLabel onClick={() => toggleVisibilidade(data)}>
-                    <C.DateTitle>{dayjs(data).format("DD")}</C.DateTitle> {"  "}
+                    <C.DateTitle>{dayjs(data).format("DD")}</C.DateTitle>
                   </C.DateLabel>
                   <C.CreateAgendaButton>
                     <FaPlusCircle /> Disponibilidade
@@ -132,7 +127,6 @@ const Agenda = () => {
                 </C.DateControls>
                 {datasVisiveis[data] && (
                   <C.TimeList>
-
                     {agendamentos.map((availability, index) => (
                       <C.Card key={index} status={availability.status}>
                         <p>{availability.start_time} - {availability.end_time}</p>
@@ -145,7 +139,6 @@ const Agenda = () => {
           ) : (
             <p>Nenhuma disponibilidade para este serviço neste mês.</p>
           )}
-
         </C.Section>
       </C.Container>
     </>
