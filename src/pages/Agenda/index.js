@@ -106,11 +106,12 @@ const Agenda = () => {
           </C.Select>
 
           {/* Controles de Mês */}
-          <C.Subtitle>{dayjs(mesAtual).format("YYYY")}</C.Subtitle>
+          
           <C.MonthControls>
             <button onClick={mesAnterior}><FaChevronLeft /></button>
             <span>{dayjs(mesAtual).format("MMMM")}</span>
             <button onClick={proximoMes}><FaChevronRight /></button>
+            <span>{dayjs(mesAtual).format("YYYY")}</span>
           </C.MonthControls>
 
           {/* Exibição dos horários disponíveis */}
