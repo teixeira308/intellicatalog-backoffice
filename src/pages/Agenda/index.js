@@ -5,7 +5,7 @@ import DisponibilidadeApi from "../../services/disponibilidadeApi";
 import ServicesApi from "../../services/ServicesApi";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'; // Ícone de lápis
+import { FaChevronLeft, FaChevronRight, FaPlusCircle} from 'react-icons/fa'; // Ícone de lápis
 
 const Agenda = () => {
   dayjs.locale("pt-br");
