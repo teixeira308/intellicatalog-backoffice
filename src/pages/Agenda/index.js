@@ -27,7 +27,7 @@ const Agenda = () => {
   }, []);
 
   // Filtrar disponibilidades para o mês atual
-  const disponibilidadesFiltradas = disponibilidades.filter((availability) => 
+  const disponibilidadesFiltradas = disponibilidades.filter((availability) =>
     dayjs(availability.date).format("YYYY-MM") === mesAtual
   );
 
@@ -42,35 +42,37 @@ const Agenda = () => {
   };
 
   return (
-    <C.Container>
+    <>
       <Navbar />
-      <C.Title>Agenda</C.Title>
-      <C.Section>
+      <C.Container>
 
-        {/* Controles de Mês */}
-        <C.MonthControls>
-          <button onClick={mesAnterior}>← Mês Anterior</button>
-          <span>{dayjs(mesAtual).format("MMMM YYYY")}</span>
-          <button onClick={proximoMes}>Próximo Mês →</button>
-        </C.MonthControls>
+        <C.Title>Agenda</C.Title>
+        <C.Section>
 
-        <C.Step>
-          <C.GridContainer>
-            {disponibilidadesFiltradas.length > 0 ? (
-              disponibilidadesFiltradas.map((availability, index) => (
-                <C.Card key={index}>
-                  <C.Title>{dayjs(availability.date).format("DD")}</C.Title>
-                </C.Card>
-              ))
-            ) : (
-              <p>Nenhuma disponibilidade para este mês.</p>
-            )}
-          </C.GridContainer>
-        </C.Step>
+          {/* Controles de Mês */}
+          <C.MonthControls>
+            <button onClick={mesAnterior}>← Mês Anterior</button>
+            <span>{dayjs(mesAtual).format("MMMM YYYY")}</span>
+            <button onClick={proximoMes}>Próximo Mês →</button>
+          </C.MonthControls>
 
-      </C.Section>
-    </C.Container>
-  );
+          <C.Step>
+            <C.GridContainer>
+              {disponibilidadesFiltradas.length > 0 ? (
+                disponibilidadesFiltradas.map((availability, index) => (
+                  <C.Card key={index}>
+                    <C.Title>{dayjs(availability.date).format("DD")}</C.Title>
+                  </C.Card>
+                ))
+              ) : (
+                <p>Nenhuma disponibilidade para este mês.</p>
+              )}
+            </C.GridContainer>
+          </C.Step>
+
+        </C.Section>
+      </C.Container>
+    </>);
 };
 
 export default Agenda;
