@@ -50,3 +50,28 @@ export const StepDescription = styled.a`
   font-size: 1rem;
   color: #666;
 `;
+
+
+export const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+  gap: 20px;
+  margin-top: 20px;
+`;
+
+export const Card = styled.div`
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px; /* Tamanho fixo para manter quadrado */
+
+  h1 {
+    font-size: 18px;
+    color: #333;
+  }
+`;
