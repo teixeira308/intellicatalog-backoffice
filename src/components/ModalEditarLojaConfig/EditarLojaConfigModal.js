@@ -223,7 +223,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
             <C.FormColumn>
               <C.Label htmlFor="taxa_entrega">Taxa de entrega</C.Label>
           
-              <C.NumericFormat
+              <NumericFormat
                 name="taxa_entrega"
                 id="taxa_entrega"
                 value={formData.taxa_entrega}
