@@ -5,7 +5,7 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
   height: 100vh;
-  padding-top: 20px;
+  padding-top: 100px;
   padding: 20px;
   background-color: #f4f4f4;
 `;
@@ -83,7 +83,7 @@ export const MonthControls = styled.div`
   margin-bottom: 20px;
 
   button {
-    background-color: #007bff;
+    background-color: rgb(60, 57, 57);;
     color: white;
     border: none;
     padding: 8px 12px;
@@ -92,7 +92,7 @@ export const MonthControls = styled.div`
     margin: 0 10px;
 
     &:hover {
-      background-color: #0056b3;
+      background-color:  rgb(83, 80, 80);;
     }
   }
 
