@@ -93,7 +93,7 @@ const Agenda = () => {
         <C.Title>Agenda</C.Title>
         <C.ButtonGroup>
           <C.CreateButton>
-            <FaPlusCircle /> Disponibilidade
+            <FaPlusCircle /> Agendamento
           </C.CreateButton>
         </C.ButtonGroup>
         <C.Section>
@@ -121,14 +121,15 @@ const Agenda = () => {
           {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
             Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
               <C.Step key={data}>
+                 <C.ServiceControls>
                 {/* Data é agora um botão que alterna a visibilidade */}
                 <span onClick={() => toggleVisibilidade(data)}>
                   <C.DateTitle>{dayjs(data).format("DD")}</C.DateTitle> {"  "}
                 </span>
                 <C.CreateAgendaButton>
-                      <FaPlusCircle /> Agendamento
+                      <FaPlusCircle /> Disponibilidade
                     </C.CreateAgendaButton>
-
+                    </C.ServiceControls>
                 {datasVisiveis[data] && (
                   <C.TimeList>
                     
