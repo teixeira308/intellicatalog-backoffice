@@ -62,11 +62,12 @@ export const GridContainer = styled.div`
  
 
 export const Card = styled.div`
-  background-color: ${({ status }) => (status === "available" ? "#ffffff" : "#ffcccc")}; 
+  background-color: ${({ status }) => (status === "available" ? "#ffffff" : "rgb(51, 222, 36);")}; 
   color: #333;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  color:rgb(51, 222, 36);
   text-align: center;
   transition: background-color 0.3s ease;
 
@@ -100,4 +101,19 @@ export const MonthControls = styled.div`
     font-size: 18px;
     font-weight: bold;
   }
+`;
+
+export const ServiceGroup = styled.div`
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+`;
+
+export const ServiceTitle = styled.h3`
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
 `;
