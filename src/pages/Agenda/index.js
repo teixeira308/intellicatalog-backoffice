@@ -91,6 +91,12 @@ const Agenda = () => {
       <Navbar />
       <C.Container>
         <C.Title>Agenda</C.Title>
+        <C.CreateButton>
+              <FaPlusCircle /> Disponibilidade
+        </C.CreateButton>
+        <C.CreateButton>
+              <FaPlusCircle /> Agendamento
+        </C.CreateButton>
         <C.Section>
           {/* Controles de Serviço */}
           <C.ServiceControls>
@@ -112,30 +118,30 @@ const Agenda = () => {
           </C.MonthControls>
 
           {/* Exibição dos horários disponíveis */}
-           
-            {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
-              Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
-                <C.Step key={data}>
-                  {/* Data é agora um botão que alterna a visibilidade */}
-                  <span onClick={() => toggleVisibilidade(data)}>
-                    <C.DateTitle>{dayjs(data).format("DD")}</C.DateTitle>
-                  </span>
 
-                  {datasVisiveis[data] && (
-                    <C.TimeList>
-                      {agendamentos.map((availability, index) => (
-                        <C.Card key={index} status={availability.status}>
-                          <p>{availability.start_time} - {availability.end_time}</p>
-                        </C.Card>
-                      ))}
-                    </C.TimeList>
-                  )}
-                </C.Step>
-              ))
-            ) : (
-              <p>Nenhuma disponibilidade para este serviço neste mês.</p>
-            )}
-          
+          {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
+            Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
+              <C.Step key={data}>
+                {/* Data é agora um botão que alterna a visibilidade */}
+                <span onClick={() => toggleVisibilidade(data)}>
+                  <C.DateTitle>{dayjs(data).format("DD")}</C.DateTitle>
+                </span>
+
+                {datasVisiveis[data] && (
+                  <C.TimeList>
+                    {agendamentos.map((availability, index) => (
+                      <C.Card key={index} status={availability.status}>
+                        <p>{availability.start_time} - {availability.end_time}</p>
+                      </C.Card>
+                    ))}
+                  </C.TimeList>
+                )}
+              </C.Step>
+            ))
+          ) : (
+            <p>Nenhuma disponibilidade para este serviço neste mês.</p>
+          )}
+
         </C.Section>
       </C.Container>
     </>
