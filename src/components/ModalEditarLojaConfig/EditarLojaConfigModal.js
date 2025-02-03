@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as C from "./styles";
 import lojaApi from "../../services/lojaApi";
+import { NumericFormat } from 'react-number-format';
 
 const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
   const { updateLoja, getLojaConfig, updateLojaConfig } = lojaApi();
