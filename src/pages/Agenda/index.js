@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import DisponibilidadeApi from "../../services/disponibilidadeApi";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
+import { AiOutlineArrowLeft,AiOutlineArrowRight } from 'react-icons/fa'; // Ícone de lápis
 
 const Agenda = () => {
   const [disponibilidades, setDisponibilidades] = useState([]);
@@ -51,9 +52,9 @@ const Agenda = () => {
 
           {/* Controles de Mês */}
           <C.MonthControls>
-            <button onClick={mesAnterior}>← Mês Anterior</button>
+            <button onClick={mesAnterior}><AiOutlineArrowLeft/></button>
             <span>{dayjs(mesAtual).format("MMMM YYYY")}</span>
-            <button onClick={proximoMes}>Próximo Mês →</button>
+            <button onClick={proximoMes}><AiOutlineArrowRight /></button>
           </C.MonthControls>
 
           <C.Step>
