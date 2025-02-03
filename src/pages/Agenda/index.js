@@ -70,6 +70,12 @@ const Agenda = () => {
   const proximoMes = () => {
     setMesAtual(dayjs(mesAtual).add(1, "month").format("YYYY-MM"));
   };
+  const disponibilidadesFiltradas = disponibilidades.filter(availability =>
+    dayjs(availability.date).format("YYYY-MM") === mesAtual &&
+    availability.service_id === servicoAtual
+  );
+
+  
 
   const disponibilidadesPorServico = disponibilidadesFiltradas.reduce((acc, disponibilidade) => {
     const { service_id } = disponibilidade;
@@ -87,11 +93,7 @@ const Agenda = () => {
     return acc;
   }, {});
 
-  const disponibilidadesFiltradas = disponibilidades.filter(availability =>
-    dayjs(availability.date).format("YYYY-MM") === mesAtual &&
-    availability.service_id === servicoAtual
-  );
-
+  
 
   const servicoAnterior = () => {
     const index = servicos.findIndex(s => s.id === servicoAtual);
