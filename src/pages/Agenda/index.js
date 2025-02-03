@@ -36,7 +36,7 @@ const { getAvailability  } = DisponibilidadeApi();
         <C.GridContainer>
           {disponibilidades.map((availability, index) => (
             <C.Card key={index}>
-              <h1>{availability.data}</h1>
+              <h1>{availability.date}</h1>
             </C.Card>
           ))}
         </C.GridContainer>
