@@ -67,10 +67,9 @@ export const Card = styled.div`
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  color:rgb(51, 222, 36);
   text-align: center;
   transition: background-color 0.3s ease;
-
+  margin: 20px;
   &:hover {
     background-color: ${({ status }) => (status === "available" ? "#f9f9f9" : "#ff9999")}; 
   }
