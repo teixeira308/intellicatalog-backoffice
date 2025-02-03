@@ -40,7 +40,7 @@ const Agenda = () => {
   }, [servicos]);
 
   useEffect(() => {
-    const fetchServices = async () => {
+    const fetchServices = async () => { 
       try {
         const services = await getServicesByUser();
         if (services) {
