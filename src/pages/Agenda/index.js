@@ -4,12 +4,12 @@ import Navbar from "../../components/Navbar/Navbar";
 import DisponibilidadeApi from "../../services/disponibilidadeApi";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
-import { FaChevronLeft,FaChevronRight } from 'react-icons/fa'; // Ícone de lápis
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'; // Ícone de lápis
 
 const Agenda = () => {
- 
 
-dayjs.locale("pt-br");
+
+  dayjs.locale("pt-br");
   const [disponibilidades, setDisponibilidades] = useState([]);
   const [mesAtual, setMesAtual] = useState(dayjs().format("YYYY-MM")); // Formato: "2025-01"
 
@@ -55,7 +55,7 @@ dayjs.locale("pt-br");
 
           {/* Controles de Mês */}
           <C.MonthControls>
-            <button onClick={mesAnterior}><FaChevronLeft/></button>
+            <button onClick={mesAnterior}><FaChevronLeft /></button>
             <span>{dayjs(mesAtual).format("MMMM YYYY")}</span>
             <button onClick={proximoMes}><FaChevronRight /></button>
           </C.MonthControls>
@@ -64,8 +64,12 @@ dayjs.locale("pt-br");
             <C.GridContainer>
               {disponibilidadesFiltradas.length > 0 ? (
                 disponibilidadesFiltradas.map((availability, index) => (
-                  <C.Card key={index}>
+                  <C.Card key={index} status={availability.status}>
                     <C.Title>{dayjs(availability.date).format("DD")}</C.Title>
+                    <p>{availability.start_time}</p>
+                    <p>{availability.end_time}</p>
+                    <p>{availability.status}</p>
+                    <p>{availability.service_id}</p>
                   </C.Card>
                 ))
               ) : (

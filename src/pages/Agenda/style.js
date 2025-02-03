@@ -5,7 +5,8 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
   height: 100vh;
-  padding-top: 100px;
+  padding-top: 130px;
+  justify-content: top;
   padding: 20px;
   background-color: #f4f4f4;
 `;
@@ -58,23 +59,22 @@ export const GridContainer = styled.div`
   gap: 20px;
   margin-top: 20px;
 `;
+ 
 
 export const Card = styled.div`
-  background: #fff;
-  border-radius: 10px;
+  background-color: ${({ status }) => (status === "available" ? "#ffffff" : "#ffcccc")}; 
+  color: #333;
   padding: 20px;
-  text-align: center;
+  border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100px; /* Tamanho fixo para manter quadrado */
+  text-align: center;
+  transition: background-color 0.3s ease;
 
-  h1 {
-    font-size: 18px;
-    color: #333;
+  &:hover {
+    background-color: ${({ status }) => (status === "available" ? "#f9f9f9" : "#ff9999")}; 
   }
 `;
+
 
 export const MonthControls = styled.div`
   display: flex;
