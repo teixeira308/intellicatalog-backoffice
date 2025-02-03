@@ -204,7 +204,9 @@ export const CreateAgendaButton = styled(ActionButton)`
   background-color: #4caf50; /* Verde para editar */
   color: #fff; /* Texto branco */
   border: none;
-  font-size: 9px;
+  font-size: 12px;
+  width: 20px;
+  
   &:hover {
     background-color: #45a049; /* Verde mais escuro no hover */
   }
