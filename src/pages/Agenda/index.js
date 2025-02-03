@@ -4,9 +4,12 @@ import Navbar from "../../components/Navbar/Navbar";
 import DisponibilidadeApi from "../../services/disponibilidadeApi";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
-import { AiOutlineArrowLeft,AiOutlineArrowRight } from 'react-icons/fa'; // Ícone de lápis
+import { FaChevronLeft,FaChevronRight } from 'react-icons/fa'; // Ícone de lápis
 
 const Agenda = () => {
+ 
+
+dayjs.locale("pt-br");
   const [disponibilidades, setDisponibilidades] = useState([]);
   const [mesAtual, setMesAtual] = useState(dayjs().format("YYYY-MM")); // Formato: "2025-01"
 
@@ -52,9 +55,9 @@ const Agenda = () => {
 
           {/* Controles de Mês */}
           <C.MonthControls>
-            <button onClick={mesAnterior}><AiOutlineArrowLeft/></button>
+            <button onClick={mesAnterior}><FaChevronLeft/></button>
             <span>{dayjs(mesAtual).format("MMMM YYYY")}</span>
-            <button onClick={proximoMes}><AiOutlineArrowRight /></button>
+            <button onClick={proximoMes}><FaChevronRight /></button>
           </C.MonthControls>
 
           <C.Step>

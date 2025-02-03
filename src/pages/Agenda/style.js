@@ -12,7 +12,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-size: 10px;
+  font-size: 20px;
   margin-bottom: 20px;
   color: #333;
 `;
@@ -69,7 +69,7 @@ export const Card = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 150px; /* Tamanho fixo para manter quadrado */
+  height: 100px; /* Tamanho fixo para manter quadrado */
 
   h1 {
     font-size: 18px;
