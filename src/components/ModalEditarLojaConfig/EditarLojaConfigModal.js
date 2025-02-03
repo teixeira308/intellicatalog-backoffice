@@ -226,7 +226,13 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
                 name="taxa_entrega"
                 id="taxa_entrega"
                 value={formData.taxa_entrega}
-                onChange={handleChange}
+                onValueChange={(values) => {
+                  const { value } = values; // Obtenha o valor numérico
+                  setFormData(prevFormData => ({
+                    ...prevFormData,
+                    taxa_entrega: value // Atualiza o valor no formData
+                  }));
+                }}
                 thousandSeparator={true}
                 decimalScale={2}
                 fixedDecimalScale={true}
