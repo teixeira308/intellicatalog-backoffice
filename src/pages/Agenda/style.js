@@ -199,3 +199,11 @@ export const CreateButton = styled(ActionButton)`
     background-color: #45a049; /* Verde mais escuro no hover */
   }
 `;
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  gap: 10px; /* Espaço entre os botões */
+  justify-content: center; /* Centraliza os botões no eixo horizontal */
+  align-items: center; /* Alinha os botões verticalmente */
+  margin-top: 10px; /* Espaço superior */
+`;
