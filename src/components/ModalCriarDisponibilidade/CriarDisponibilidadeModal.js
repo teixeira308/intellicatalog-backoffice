@@ -9,6 +9,9 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
   const { createAvailability } = avaliabilityApi();
   const [servicoAtual, setServicoAtual] = useState(null);
   const [servicos, setServicos] = useState([]);
+  const [horarioSelecionado, setHorarioSelecionado] = useState("");
+
+
   const [formData, setFormData] = useState({
     service_id: "",
     date: "",
@@ -143,9 +146,9 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
                 name="start_time"
                 id="start_time">
                 {horarios.map((hora) => (
-                  <TimeOption key={hora} value={hora}>
+                  <C.TimeOption key={hora} value={hora}>
                     {hora}
-                  </TimeOption>
+                  </C.TimeOption>
                 ))}
               </C.TimeSelect>
             </C.FormColumn>
@@ -157,9 +160,9 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
                 name="end_time"
                 id="end_time">
                 {horarios.map((hora) => (
-                  <TimeOption key={hora} value={hora}>
+                  <C.TimeOption key={hora} value={hora}>
                     {hora}
-                  </TimeOption>
+                  </C.TimeOption>
                 ))}
               </C.TimeSelect>
             </C.FormColumn>
