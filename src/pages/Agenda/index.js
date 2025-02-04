@@ -113,7 +113,7 @@ const Agenda = () => {
             <span>{dayjs(mesAtual).format("MMMM YYYY")}</span>
             <button onClick={proximoMes}><FaChevronRight /></button>
           </C.MonthControls>
-            <br/>
+           
           {/* Exibição dos horários disponíveis */}
           {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
             Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (

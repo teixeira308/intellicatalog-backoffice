@@ -78,10 +78,10 @@ export const Card = styled.div`
 
 export const MonthControls = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-
+padding: 20px;
   button {
     background-color: rgb(60, 57, 57);;
     color: white;
