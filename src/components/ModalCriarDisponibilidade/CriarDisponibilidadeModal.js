@@ -73,6 +73,7 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
     e.preventDefault();
     try {
       const filteredData = filterFormData(formData);
+      console.log(filteredData)
       await createAvailability(filteredData);
       window.addToast("Ação realizada com sucesso!", "success");
       resetFormData();
