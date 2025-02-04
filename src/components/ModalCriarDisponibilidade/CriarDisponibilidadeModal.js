@@ -2,17 +2,12 @@ import React, { useState, useEffect } from "react";
 import * as C from "./styles";
 import servicesApi from "../../services/ServicesApi";
 import avaliabilityApi from "../../services/disponibilidadeApi";
-import { NumericFormat } from 'react-number-format';
 
 const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
   const { getServicesByUser } = servicesApi();
   const { createAvailability } = avaliabilityApi();
-  const [servicoAtual, setServicoAtual] = useState(null);
+
   const [servicos, setServicos] = useState([]);
-  const [horarioInicialSelecionado, setHorarioInicialSelecionado] = useState("");
-  const [horarioFinalSelecionado, setHorarioFinalSelecionado] = useState("");
-
-
   const [formData, setFormData] = useState({
     service_id: "",
     date: "",
@@ -20,31 +15,16 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
     end_time: ""
   });
 
-  const filterFormData = (data) => {
-    // Campos permitidos
-    const allowedFields = [
-      'service_id',
-      'date',
-      'start_time',
-      'end_time',
-    ];
-
-    // Filtra os dados mantendo apenas os campos permitidos
-    const filteredData = Object.fromEntries(
-      Object.entries(data).filter(([key]) => allowedFields.includes(key))
-    );
-    return filteredData;
-  };
-
   useEffect(() => {
     const fetchServices = async () => {
       try {
         const services = await getServicesByUser();
-        if (services) {
+        if (services && services.length > 0) {
           setServicos(services);
-          if (!servicoAtual) {
-            setServicoAtual(services[0]?.id);
-          }
+          setFormData((prev) => ({
+            ...prev,
+            service_id: services[0].id,
+          }));
         }
       } catch (error) {
         console.error("Erro ao carregar serviços:", error.message);
@@ -61,23 +41,26 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
     });
   };
 
-  const resetFormData = () => {
+  const handleChangeServico = (event) => {
     setFormData({
-      service_id: "",
-      date: "",
-      start_time: "",
-      end_time: ""
+      ...formData,
+      service_id: event.target.value,
+    });
+  };
+
+  const handleChangeHorario = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const filteredData = filterFormData(formData);
-      console.log(filteredData)
-      await createAvailability(filteredData);
+      console.log("Enviando dados:", formData);
+      await createAvailability(formData);
       window.addToast("Ação realizada com sucesso!", "success");
-      resetFormData();
       onClose();
       onCreate();
     } catch (error) {
@@ -88,15 +71,10 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
 
   if (!isOpen) return null;
 
-  const handleChangeServico = (event) => {
-    setServicoAtual(event.target.value);
-  };
-
   const horarios = Array.from({ length: 24 }, (_, i) => {
     const hora = i.toString().padStart(2, "0");
     return `${hora}:00`;
   });
-
 
   return (
     <C.ModalOverlay>
@@ -108,7 +86,7 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
         <C.ModalForm onSubmit={handleSubmit}>
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="name">Data</C.Label>
+              <C.Label htmlFor="date">Data</C.Label>
               <C.Input
                 type="date"
                 name="date"
@@ -122,10 +100,17 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
 
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="name">Serviço</C.Label>
-              <C.Select onChange={handleChangeServico} value={servicoAtual} name="service_id" id="service_id">
+              <C.Label htmlFor="service_id">Serviço</C.Label>
+              <C.Select 
+                onChange={handleChangeServico} 
+                value={formData.service_id} 
+                name="service_id" 
+                id="service_id"
+              >
                 {servicos.map(servico => (
-                  <C.Option key={servico.id} value={servico.id}>{servico.name}</C.Option>
+                  <C.Option key={servico.id} value={servico.id}>
+                    {servico.name}
+                  </C.Option>
                 ))}
               </C.Select>
             </C.FormColumn>
@@ -133,33 +118,40 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
 
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="start_time">Horario inicial</C.Label>
-
-              <C.TimeSelect value={horarioInicialSelecionado} onChange={(e) => setHorarioInicialSelecionado(e.target.value)} 
-                name="start_time"
-                id="start_time">
+              <C.Label htmlFor="start_time">Horário inicial</C.Label>
+              <C.Select 
+                name="start_time" 
+                id="start_time" 
+                value={formData.start_time} 
+                onChange={handleChangeHorario}
+              >
                 {horarios.map((hora) => (
-                  <C.TimeOption key={hora} value={hora}>
+                  <C.Option key={hora} value={hora}>
                     {hora}
-                  </C.TimeOption>
+                  </C.Option>
                 ))}
-              </C.TimeSelect>
+              </C.Select>
             </C.FormColumn>
           </C.FormRow>
+
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="end_time">Horario final</C.Label>
-              <C.TimeSelect value={horarioFinalSelecionado} onChange={(e) => setHorarioFinalSelecionado(e.target.value)} 
-                name="end_time"
-                id="end_time">
+              <C.Label htmlFor="end_time">Horário final</C.Label>
+              <C.Select 
+                name="end_time" 
+                id="end_time" 
+                value={formData.end_time} 
+                onChange={handleChangeHorario}
+              >
                 {horarios.map((hora) => (
-                  <C.TimeOption key={hora} value={hora}>
+                  <C.Option key={hora} value={hora}>
                     {hora}
-                  </C.TimeOption>
+                  </C.Option>
                 ))}
-              </C.TimeSelect>
+              </C.Select>
             </C.FormColumn>
           </C.FormRow>
+
           <C.Button type="submit">Salvar</C.Button>
         </C.ModalForm>
       </C.ModalContainer>
