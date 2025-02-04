@@ -6,6 +6,7 @@ import ServicesApi from "../../services/ServicesApi";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import { FaChevronLeft, FaChevronRight, FaPlusCircle } from 'react-icons/fa';
+import CriarDisponibilidadeModal from "../../components/ModalCriarDisponibilidade/CriarDisponibilidadeModal";
 
 const Agenda = () => {
   dayjs.locale("pt-br");
@@ -14,6 +15,7 @@ const Agenda = () => {
   const [servicoAtual, setServicoAtual] = useState(null);
   const [mesAtual, setMesAtual] = useState(dayjs().format("YYYY-MM"));
   const [datasVisiveis, setDatasVisiveis] = useState({});
+  const [isCriarDisponibilidadeModalOpen, setIsCriarDisponibilidadeModalOpen] = useState(false);
 
   const { getAvailability } = DisponibilidadeApi();
   const { getServicesByUser } = ServicesApi();
@@ -86,6 +88,15 @@ const Agenda = () => {
     }));
   };
 
+  const handlCriarDisponibilidadeModalClose = () => {
+    setIsCriarDisponibilidadeModalOpen(false);
+  };
+
+  const handleNewDisponibilidadeCreated = async () => {
+    const availabilities = await getAvailability();
+    setDisponibilidades(availabilities.data);
+  };
+
   return (
     <>
       <Navbar />
@@ -113,9 +124,9 @@ const Agenda = () => {
             <span>{dayjs(mesAtual).format("MMMM YYYY")}</span>
             <button onClick={proximoMes}><FaChevronRight /></button>
           </C.MonthControls>
-          <C.CreateAgendaButton>
+          <C.CreateAgendaButton onClick={() => setIsCriarDisponibilidadeModalOpen(true)}>
                     <FaPlusCircle /> Disponibilidade
-                  </C.CreateAgendaButton>
+          </C.CreateAgendaButton>
           {/* Exibição dos horários disponíveis */}
           {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
             Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
@@ -141,6 +152,14 @@ const Agenda = () => {
             <p>Nenhuma disponibilidade para este serviço neste mês.</p>
           )}
         </C.Section>
+
+
+        <CriarDisponibilidadeModal
+          isOpen={isCriarDisponibilidadeModalOpen}
+          onClose={handlCriarDisponibilidadeModalClose}
+          onCreate={handleNewDisponibilidadeCreated}
+      />
+
       </C.Container>
     </>
   );

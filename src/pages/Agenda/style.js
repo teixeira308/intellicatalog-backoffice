@@ -206,7 +206,9 @@ export const CreateAgendaButton = styled.p`
   color: #2196f3;
   border: none;
   font-size: 16px;
-
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 `;
 
 
