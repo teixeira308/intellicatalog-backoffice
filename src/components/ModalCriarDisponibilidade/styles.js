@@ -131,3 +131,24 @@ export const Select = styled.select`
 export const Option = styled.option`
   font-size: 16px;
 `;
+
+import styled from "styled-components";
+
+export const TimeSelect = styled.select`
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+  outline: none;
+  width: 100%;
+
+  &:focus {
+    border-color: #007bff;
+  }
+`;
+
+export const TimeOption = styled.option`
+  font-size: 16px;
+`;

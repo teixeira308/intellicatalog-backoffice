@@ -87,6 +87,12 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
     setServicoAtual(event.target.value);
   };
 
+  const horarios = Array.from({ length: 24 }, (_, i) => {
+    const hora = i.toString().padStart(2, "0");
+    return `${hora}:00`;
+  });
+
+
   return (
     <C.ModalOverlay>
       <C.ModalContainer>
@@ -111,7 +117,7 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
 
           <C.FormRow>
             <C.FormColumn>
-            <C.Label htmlFor="name">Data</C.Label>
+              <C.Label htmlFor="name">Data</C.Label>
               <C.Select onChange={handleChangeServico} value={servicoAtual} name="service_id" id="service_id">
                 {servicos.map(servico => (
                   <C.Option key={servico.id} value={servico.id}>{servico.name}</C.Option>
@@ -132,20 +138,30 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
                 placeholder="00:00"
                 required
               />
+
+              <TimeSelect value={horarioSelecionado} onChange={(e) => setHorarioSelecionado(e.target.value)} 
+                name="start_time"
+                id="start_time">
+                {horarios.map((hora) => (
+                  <TimeOption key={hora} value={hora}>
+                    {hora}
+                  </TimeOption>
+                ))}
+              </TimeSelect>
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="end_time">Horario final</C.Label>
-              <C.Input
-                type="text"
+              <TimeSelect value={horarioSelecionado} onChange={(e) => setHorarioSelecionado(e.target.value)} 
                 name="end_time"
-                id="end_time"
-                value={formData.end_time}
-                onChange={handleChange}
-                placeholder="00:00"
-                required
-              />
+                id="end_time">
+                {horarios.map((hora) => (
+                  <TimeOption key={hora} value={hora}>
+                    {hora}
+                  </TimeOption>
+                ))}
+              </TimeSelect>
             </C.FormColumn>
           </C.FormRow>
           <C.Button type="submit">Salvar</C.Button>
