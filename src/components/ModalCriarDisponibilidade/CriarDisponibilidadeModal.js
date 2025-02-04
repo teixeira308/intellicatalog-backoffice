@@ -9,7 +9,8 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
   const { createAvailability } = avaliabilityApi();
   const [servicoAtual, setServicoAtual] = useState(null);
   const [servicos, setServicos] = useState([]);
-  const [horarioSelecionado, setHorarioSelecionado] = useState("");
+  const [horarioInicialSelecionado, setHorarioInicialSelecionado] = useState("");
+  const [horarioFinalSelecionado, setHorarioFinalSelecionado] = useState("");
 
 
   const [formData, setFormData] = useState({
@@ -134,7 +135,7 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
             <C.FormColumn>
               <C.Label htmlFor="start_time">Horario inicial</C.Label>
 
-              <C.TimeSelect value={horarioSelecionado} onChange={(e) => setHorarioSelecionado(e.target.value)} 
+              <C.TimeSelect value={horarioInicialSelecionado} onChange={(e) => setHorarioInicialSelecionado(e.target.value)} 
                 name="start_time"
                 id="start_time">
                 {horarios.map((hora) => (
@@ -148,7 +149,7 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
           <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="end_time">Horario final</C.Label>
-              <C.TimeSelect value={horarioSelecionado} onChange={(e) => setHorarioSelecionado(e.target.value)} 
+              <C.TimeSelect value={horarioFinalSelecionado} onChange={(e) => setHorarioFinalSelecionado(e.target.value)} 
                 name="end_time"
                 id="end_time">
                 {horarios.map((hora) => (
