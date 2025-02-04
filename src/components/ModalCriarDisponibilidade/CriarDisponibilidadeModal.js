@@ -120,7 +120,7 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
 
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="name">Data</C.Label>
+              <C.Label htmlFor="name">Serviço</C.Label>
               <C.Select onChange={handleChangeServico} value={servicoAtual} name="service_id" id="service_id">
                 {servicos.map(servico => (
                   <C.Option key={servico.id} value={servico.id}>{servico.name}</C.Option>
@@ -132,15 +132,6 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
           <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="start_time">Horario inicial</C.Label>
-              <C.Input
-                type="text"
-                name="start_time"
-                id="start_time"
-                value={formData.start_time}
-                onChange={handleChange}
-                placeholder="00:00"
-                required
-              />
 
               <C.TimeSelect value={horarioSelecionado} onChange={(e) => setHorarioSelecionado(e.target.value)} 
                 name="start_time"
