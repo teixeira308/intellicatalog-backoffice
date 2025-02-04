@@ -66,6 +66,12 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formattedData = {
+      ...formData,
+      start_time: formData.start_time || "00:00",
+      end_time: formData.end_time || "00:00",
+    };
     try {
       await createAvailability(formData);
       window.addToast("Ação realizada com sucesso!", "success");
