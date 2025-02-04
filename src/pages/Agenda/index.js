@@ -131,11 +131,8 @@ const Agenda = () => {
           {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
             Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
               <C.Step key={data}>
-                <C.DateControls>
-                  <C.DateLabel onClick={() => toggleVisibilidade(data)}>
-                    <C.DateTitle>{dayjs(data).format("DD")}</C.DateTitle>
-                  </C.DateLabel>
-                  
+                <C.DateControls onClick={() => toggleVisibilidade(data)}>
+                    <C.DateTitle>{dayjs(data).format("DD")}</C.DateTitle>  
                 </C.DateControls>
                 {datasVisiveis[data] && (
                   <C.TimeList>
