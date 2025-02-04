@@ -113,3 +113,21 @@ padding: 8px;
   border-radius: 4px;
   font-size: 120;
 `;
+
+export const Select = styled.select`
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+  outline: none;
+
+  &:focus {
+    border-color: #007bff;
+  }
+`;
+
+export const Option = styled.option`
+  font-size: 16px;
+`;
