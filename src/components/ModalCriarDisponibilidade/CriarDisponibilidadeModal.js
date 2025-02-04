@@ -67,7 +67,6 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Enviando dados:", formData);
       await createAvailability(formData);
       window.addToast("Ação realizada com sucesso!", "success");
       resetFormData();
