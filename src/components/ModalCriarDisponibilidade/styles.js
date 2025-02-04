@@ -132,7 +132,6 @@ export const Option = styled.option`
   font-size: 16px;
 `;
 
-import styled from "styled-components";
 
 export const TimeSelect = styled.select`
   padding: 10px;
