@@ -139,7 +139,7 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
                 required
               />
 
-              <TimeSelect value={horarioSelecionado} onChange={(e) => setHorarioSelecionado(e.target.value)} 
+              <C.TimeSelect value={horarioSelecionado} onChange={(e) => setHorarioSelecionado(e.target.value)} 
                 name="start_time"
                 id="start_time">
                 {horarios.map((hora) => (
@@ -147,13 +147,13 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
                     {hora}
                   </TimeOption>
                 ))}
-              </TimeSelect>
+              </C.TimeSelect>
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="end_time">Horario final</C.Label>
-              <TimeSelect value={horarioSelecionado} onChange={(e) => setHorarioSelecionado(e.target.value)} 
+              <C.TimeSelect value={horarioSelecionado} onChange={(e) => setHorarioSelecionado(e.target.value)} 
                 name="end_time"
                 id="end_time">
                 {horarios.map((hora) => (
@@ -161,7 +161,7 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
                     {hora}
                   </TimeOption>
                 ))}
-              </TimeSelect>
+              </C.TimeSelect>
             </C.FormColumn>
           </C.FormRow>
           <C.Button type="submit">Salvar</C.Button>
