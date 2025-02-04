@@ -79,7 +79,7 @@ export const Card = styled.div`
 export const MonthControls = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+   
   margin-bottom: 20px;
 padding: 20px;
   button {

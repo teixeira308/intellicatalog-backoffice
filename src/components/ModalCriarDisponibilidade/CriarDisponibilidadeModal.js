@@ -15,6 +15,15 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
     end_time: ""
   });
 
+  const resetFormData = () => {
+    setFormData({
+      service_id: "",
+      date: "",
+      start_time: "",
+      end_time: ""
+    });
+  };
+
   useEffect(() => {
     const fetchServices = async () => {
       try {
@@ -61,6 +70,7 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
       console.log("Enviando dados:", formData);
       await createAvailability(formData);
       window.addToast("Ação realizada com sucesso!", "success");
+      resetFormData();
       onClose();
       onCreate();
     } catch (error) {
