@@ -113,7 +113,9 @@ const Agenda = () => {
             <span>{dayjs(mesAtual).format("MMMM YYYY")}</span>
             <button onClick={proximoMes}><FaChevronRight /></button>
           </C.MonthControls>
-           
+          <C.CreateAgendaButton>
+                    <FaPlusCircle /> Disponibilidade
+                  </C.CreateAgendaButton>
           {/* Exibição dos horários disponíveis */}
           {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
             Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
@@ -122,9 +124,7 @@ const Agenda = () => {
                   <C.DateLabel onClick={() => toggleVisibilidade(data)}>
                     <C.DateTitle>{dayjs(data).format("DD")}</C.DateTitle>
                   </C.DateLabel>
-                  <C.CreateAgendaButton>
-                    <FaPlusCircle /> Disponibilidade
-                  </C.CreateAgendaButton>
+                  
                 </C.DateControls>
                 {datasVisiveis[data] && (
                   <C.TimeList>
