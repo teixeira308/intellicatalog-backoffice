@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as C from "./styles";
 import LojaImageApi from "../../services/lojaImageApi";
 import loadingGif from '../loading.gif';
+import { Modal, Box, Typography, TextField, Button } from "@mui/material";
 
 const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
   //const { createFotoProduto, getFotoProdutoDownload, getFotoByProduto, deleteFotoByProduto } = LojaImageApi();
@@ -9,7 +10,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
   const [fotos, setFotos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    file: null, 
+    file: null,
   });
   const [imageStoreUrls, setImageStoreUrls] = useState([]); // Estado para armazenar as URLs das imagens do produto
 
@@ -20,7 +21,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
       try {
         const fotos = await getFotoByUserId(); // Busca todas as fotos do usuário
         // console.log("fotos por usuario: ", fotos);
-  
+
         // Gera URLs para cada imagem junto com o ID
         const fotosUrls = await Promise.all(
           fotos.map(async (foto) => {
@@ -39,7 +40,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
             }
           })
         );
-  
+
         // Remove entradas nulas do array antes de definir no estado
         setImageStoreUrls(fotosUrls.filter((foto) => foto !== null));
         setLoading(false);
@@ -50,7 +51,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
       }
     }
   };
-  
+
 
 
   useEffect(() => {
@@ -59,7 +60,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
         try {
           // console.log("store que entrou no modal:", store.id);
           const fotos = await getFotoByStoreId(store); // Busca todas as fotos do produto
-  
+
           // Gera URLs para cada imagem junto com o ID
           const fotosUrls = await Promise.all(
             fotos.map(async (foto) => {
@@ -78,7 +79,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
               }
             })
           );
-  
+
           // Remove entradas nulas do array antes de definir no estado
           setImageStoreUrls(fotosUrls.filter((foto) => foto !== null));
         } catch (error) {
@@ -87,10 +88,10 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
         }
       }
     };
-  
+
     fetchFotos();
   }, [isOpen, store]);
-  
+
 
 
 
@@ -117,12 +118,12 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let file = formData.file;
-  
+
     if (file && file.name.includes("_")) {
       const newFileName = file.name.replace(/_/g, "-");
       file = new File([file], newFileName, { type: file.type });
     }
-  
+
     /*
     if (file) {
       // Verifique o tipo de arquivo
@@ -143,34 +144,34 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
       return;
     }
     */
-  
+
     setLoading(true);
-  
+
     const formDataToSend = new FormData();
     formDataToSend.append("file", file); // Adiciona o arquivo corrigido
-  
+
     try {
       // Faz a chamada para criar a foto
-    
+
       await createFotoStore(store, formDataToSend);
-      
+
       // Após sucesso, recarregar imagens
       loadStoreImages();
-  
+
       window.addToast("Ação realizada com sucesso!", "success");
       handleClose(); // Fecha o modal
       onCreate(); // Atualiza a interface com a nova foto
     } catch (error) {
       console.error("Erro ao criar foto:", error);
-  
+
       // Adiciona um toast para informar o erro
       window.addToast("Ocorreu um erro ao criar a foto: " + error.message, "error");
     } finally {
       setLoading(false); // Para o estado de carregamento
     }
   };
-  
-  
+
+
 
   if (!isOpen) return null;
 
@@ -187,25 +188,42 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
       setLoading(false);
     } catch (error) {
       console.error("Erro ao deletar a imagem:", error);
-      window.addToast("Ocorreu um erro ao deletar a imagem: "+ error, "error");
+      window.addToast("Ocorreu um erro ao deletar a imagem: " + error, "error");
     }
   };
 
 
   return (
-    <C.ModalOverlay>
-      <C.ModalContainer>
+    <Modal open={isOpen} onClose={onClose}>
+      <Box sx={{
+        width: 400,
+        margin: 'auto',
+        padding: 3,
+        backgroundColor: 'white',
+        borderRadius: 2,
+        boxShadow: 24,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)'
+      }}>
         <C.ModalHeader>
-          <h2>Fotos da Loja</h2>
-          <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
+          <Typography variant="h6" mb={2}>Foto da Loja</Typography>
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
           <C.FormRow>
             <C.FormColumn>
-              <C.Label>Loja: {store.namestore}</C.Label>
+              <Typography variant="subtitle1" mb={2}>Loja: {store.namestore}</Typography>
+
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
+
+
             {/* Exibir todas as imagens do produto */}
             {loading ? (
               <>
@@ -223,7 +241,7 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
 
                           <C.DeleteButton onClick={() => handleDeleteImage(item.id)}>✖</C.DeleteButton>
                         </C.ImagePreview>
-                       
+
                       </>
                     ))}
                   </C.ImageGallery>
@@ -231,28 +249,43 @@ const CriarFotosLojaModal = ({ isOpen, onClose, store, onCreate }) => {
               </>)}
           </C.FormRow>
           <C.FormRow>
-            <C.Label htmlFor="file">Escolha a foto:</C.Label>
-          </C.FormRow>
-          <C.FormRow>
             <C.FormColumn>
-              <C.Input
+              <Typography variant="subtitle1" mb={2}>Escolha a foto: </Typography>
+              <TextField
+
+                type="file"
+                name="file"
+                id="file"
+                onChange={handleChange}
+                required
+                fullWidth
+                disabled={imageStoreUrls.length > 0}
+              />
+
+              {/*}  <C.Input
                 type="file"
                 name="file"
                 id="file"
                 onChange={handleChange}
                 required
                 disabled={imageStoreUrls.length > 0}
-              />
+              />{*/}
             </C.FormColumn>
           </C.FormRow>
-        
 
-          <C.Button type="submit">Salvar</C.Button>
+          <C.FormRow>
+            <C.FormColumn>
+              <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Fechar</Button>
+            </C.FormColumn>
+            <C.FormColumn>
+              <Button type="submit" color="success" variant="contained">Adicionar</Button>
+            </C.FormColumn>
+          </C.FormRow>
 
 
         </C.ModalForm>
-      </C.ModalContainer>
-    </C.ModalOverlay>
+      </Box>
+    </Modal>
   );
 };
 
