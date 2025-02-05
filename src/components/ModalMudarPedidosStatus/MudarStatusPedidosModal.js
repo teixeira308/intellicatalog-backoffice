@@ -79,10 +79,10 @@ const MudarStatusPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
         </FormControl>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="secondary">
+        <Button onClick={onClose} color="secondary" variant="outlined">
           Cancelar
         </Button>
-        <Button onClick={handleSubmit} color="primary">
+        <Button onClick={handleSubmit} color="sucess" variant="contained">
           Salvar
         </Button>
       </DialogActions>
