@@ -114,7 +114,7 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
   if (!isOpen) return null;
 
   return (
-    <Modal>
+    <Modal open={isOpen} onClose={onClose}>
       <Box sx={{
         width: 400,
         margin: 'auto',
