@@ -4,7 +4,7 @@ import lojaApi from "../../services/lojaApi";
 import { NumericFormat } from 'react-number-format';
 import { Modal, Box, Typography, TextField, Button, Checkbox, FormControlLabel } from "@mui/material";
 
-const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
+const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
   const { updateLoja, getLojaConfig, updateLojaConfig } = lojaApi();
   const [formData, setFormData] = useState({
     cor_primaria: "",
@@ -391,4 +391,4 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
   );
 };
 
-export default EditarLojaModal;
+export default EditarLojaConfigModal;
