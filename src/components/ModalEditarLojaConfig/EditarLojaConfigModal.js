@@ -132,8 +132,8 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
         transform: 'translate(-50%, -50%)'
       }}>
         <C.ModalHeader>
-          <h2>Configurações da Minha Loja</h2>
 
+          <Typography variant="h6" mb={2}>Configurações da Minha Loja</Typography>
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
           Cores: <br /><br />
