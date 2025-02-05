@@ -118,7 +118,7 @@ const Agenda = () => {
     <>
       <Navbar />
       <Container>
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h6" gutterBottom>
           Agenda
         </Typography>
 

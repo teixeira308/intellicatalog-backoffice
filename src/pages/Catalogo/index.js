@@ -341,7 +341,7 @@ const Catalogo = () => {
      
     <Container maxWidth="md">
       <Navbar />
-      <Typography variant="h4" sx={{ textAlign: "center", my: 3 }}>Meu Catálogo</Typography>
+      <Typography variant="h6" sx={{ textAlign: "center", my: 3 }}>Meu Catálogo</Typography>
 
 
       <Box display="flex" justifyContent="center" gap={2} my={2}>
