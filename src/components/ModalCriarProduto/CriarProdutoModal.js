@@ -131,7 +131,7 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
 
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="name">Título</C.Label>
+              {/*} <C.Label htmlFor="name">Título</C.Label>
               <C.Input
                 type="text"
                 name="titulo"
@@ -139,7 +139,7 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
                 value={formData.titulo}
                 onChange={handleChange}
                 required
-              />
+              /> {*/}
               <TextField
                 label="Titulo"
                 name="titulo"
@@ -155,14 +155,14 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
 
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="brand">Marca</C.Label>
+              {/*} <C.Label htmlFor="brand">Marca</C.Label>
               <C.Input
                 type="text"
                 name="brand"
                 id="brand"
                 value={formData.brand}
                 onChange={handleChange}
-              />
+              />{*/}
               <TextField
                 label="Marca"
                 name="brand"
@@ -176,6 +176,7 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
+              {/*}
               <C.Label htmlFor="description">Descrição</C.Label>
               <C.Textarea
                 name="description"
@@ -186,10 +187,26 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
                 rows={4} // Define o número de linhas visíveis
                 placeholder="Digite sua descrição aqui..."
               />
+              {*/}
+              <TextField
+                label="Descrição"
+                name="description"
+                id="description"
+                value={formData.description}
+                onChange={handleChange}
+                multiline
+                rows={4} // Define a altura inicial
+                inputProps={{ maxLength: 500 }} // Limita a 500 caracteres
+                placeholder="Digite sua descrição aqui..."
+                fullWidth
+                sx={{ mb: 2 }} // Adiciona margem inferior para espaçamento
+              />
+
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
+            {/*}
               <C.Label htmlFor="price">Preço</C.Label>
               <NumericFormat
                 name="price"
@@ -214,7 +231,31 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
                   fontSize: '1rem',
                   width: '100%',
                 }}
+              /> {*/}
+              <NumericFormat
+                customInput={TextField}
+                label="Preço"
+                name="price"
+                id="price"
+                value={formData.price}
+                onValueChange={(values) => {
+                  const { value } = values; // Obtém o valor numérico
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    price: value, // Atualiza o valor no formData
+                  }));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                decimalScale={2}
+                fixedDecimalScale
+                prefix="R$ "
+                placeholder="R$ 0,00"
+                fullWidth
+                sx={{ mb: 2 }} // Espaçamento inferior
               />
+
+
             </C.FormColumn>
             <C.FormColumn>
               <C.Label htmlFor="price">Preço promocional</C.Label>
