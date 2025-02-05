@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as C from "./styles";
 import productApi from "../../services/productApi";
 import { NumericFormat } from 'react-number-format';
+import { Modal, Box, Typography, TextField, Button } from "@mui/material";
 
 const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
   const { createProduto } = productApi();
@@ -103,10 +104,25 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
   
 
   return (
-    <C.ModalOverlay>
-      <C.ModalContainer>
+    <Modal open={isOpen} onClose={onClose}>
+      <Box sx={{
+              width: 400,
+              margin: 'auto',
+              padding: 3,
+              backgroundColor: 'white',
+              borderRadius: 2,
+              boxShadow: 24,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)'
+            }}>
         <C.ModalHeader>
-          <h2>Novo Produto</h2>
+          <Typography variant="h6" mb={2}>Novo Produto</Typography>
           <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
@@ -237,8 +253,8 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
             </C.FormRow> {*/}
           <C.Button type="submit">Salvar</C.Button>
         </C.ModalForm>
-      </C.ModalContainer>
-    </C.ModalOverlay>
+      </Box>
+    </Modal>
   );
 };
 
