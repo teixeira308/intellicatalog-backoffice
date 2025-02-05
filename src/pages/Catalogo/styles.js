@@ -175,6 +175,7 @@ export const CategoriaLink = styled.span`
   &:hover {
     color: #1769aa;
   }
+    text-decoration: none;
 `;
 
 
