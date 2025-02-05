@@ -3,7 +3,7 @@ import * as C from "./styles";
 import categoriaApi from "../../services/categoriaApi";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography } from "@mui/material";
 
-const EditarLojaModal = ({ isOpen, onClose, categoria, onDelete }) => {
+const DeleteCategoriaModal = ({ isOpen, onClose, categoria, onDelete }) => {
   const { updateCategoria } = categoriaApi();
   const [formData, setFormData] = useState({
     name: "",
@@ -68,4 +68,4 @@ const EditarLojaModal = ({ isOpen, onClose, categoria, onDelete }) => {
   );
 };
 
-export default EditarLojaModal;
+export default DeleteCategoriaModal;
