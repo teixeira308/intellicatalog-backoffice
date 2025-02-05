@@ -166,22 +166,22 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
 
   return (
     <Modal open={isOpen} onClose={onClose}>
-       <Box sx={{
-              width: 400,
-              margin: 'auto',
-              padding: 3,
-              backgroundColor: 'white',
-              borderRadius: 2,
-              boxShadow: 24,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)'
-            }}>
+      <Box sx={{
+        width: 400,
+        margin: 'auto',
+        padding: 3,
+        backgroundColor: 'white',
+        borderRadius: 2,
+        boxShadow: 24,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)'
+      }}>
         <C.ModalHeader>
           <Typography variant="h6" mb={2}>Fotos do Produto</Typography>
 
@@ -190,19 +190,13 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
         <C.ModalForm onSubmit={handleSubmit}>
           <C.FormRow>
             <C.FormColumn>
-              
               <Typography variant="subtitle1" mb={2}>Produto: {produto.titulo}</Typography>
-              
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
-             
-            <Typography variant="subtitle1" mb={2}>Escolha a foto: </Typography>
-            
-          </C.FormRow>
-          <C.FormRow>
             <C.FormColumn>
-           {/*}   <C.Input
+              <Typography variant="subtitle1" mb={2}>Escolha a foto: </Typography>
+              {/*}   <C.Input
                 type="file"
                 name="file"
                 id="file"
@@ -210,7 +204,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
                 required
               /> {*/}
               <TextField
-              
+
                 type="file"
                 name="file"
                 id="file"
@@ -220,8 +214,13 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
               />
             </C.FormColumn>
           </C.FormRow>
-          <Button type="submit" color="success" variant="contained">Salvar</Button>
-          <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Cancelar</Button>
+          <C.FormRow> 
+            <C.FormColumn><Button type="submit" color="success" variant="contained">Salvar</Button>
+            </C.FormColumn>
+            <C.FormColumn>
+              <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Cancelar</Button>
+            </C.FormColumn>
+          </C.FormRow>
           {/* Exibir todas as imagens do produto */}
           {loading ? (
             <>

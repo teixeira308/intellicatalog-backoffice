@@ -83,7 +83,7 @@ const EditarCategoriaModal = ({ isOpen, onClose, categoria, onEdit }) => {
             sx={{ mb: 2 }}
           />
           <Box display="flex" justifyContent="flex-end">
-            <Button onClick={onClose} variant="outlined" sx={{ mr: 2 }}>Cancelar</Button>
+            <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Cancelar</Button>
             <Button type="submit" color="success" variant="contained">Salvar</Button>
           </Box>
         </form>
