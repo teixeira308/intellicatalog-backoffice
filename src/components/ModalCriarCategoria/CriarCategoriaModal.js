@@ -86,7 +86,7 @@ const CriarCategoriaModal = ({ isOpen, onClose, onCreate }) => {
           />
           <Box display="flex" justifyContent="flex-end">
             <Button onClick={onClose}  variant="outlined" color="error" sx={{ mr: 2 }}>Cancelar</Button>
-            <Button type="submit" color="success">Salvar</Button>
+            <Button type="submit" color="success" variant="contained">Salvar</Button>
           </Box>
         </form>
       </Box>
