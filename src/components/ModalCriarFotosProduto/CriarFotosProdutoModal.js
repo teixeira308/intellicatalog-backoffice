@@ -166,7 +166,22 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
 
   return (
     <Modal open={isOpen} onClose={onClose}>
-      <C.ModalContainer>
+       <Box sx={{
+              width: 400,
+              margin: 'auto',
+              padding: 3,
+              backgroundColor: 'white',
+              borderRadius: 2,
+              boxShadow: 24,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)'
+            }}>
         <C.ModalHeader>
           <Typography variant="h6" mb={2}>Fotos do Produto</Typography>
 
@@ -195,7 +210,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
                 required
               /> {*/}
               <TextField
-              label="Selecione a imagem"
+              
                 type="file"
                 name="file"
                 id="file"
@@ -231,7 +246,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
         <C.InfoText> {/* Estilize conforme necessário */}
           A primaira imagem será a capa que aparecerá na lista de produtos.
         </C.InfoText>
-      </C.ModalContainer>
+      </Box>
     </Modal>
   );
 };
