@@ -140,7 +140,7 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
           <C.FormRow>
             <C.FormColumn style={{ flex: 1 }}>
               <C.Label htmlFor="cor_primaria">Tela</C.Label>
-              <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_primaria, border: '1px solid #000', marginTop: '5px' }} />
+              {/*}<div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_primaria, border: '1px solid #000', marginTop: '5px' }} /> {*/}
               {/*} <C.Input
                 type="color"
                 name="cor_primaria"
@@ -165,7 +165,7 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
             </C.FormColumn>
             <C.FormColumn>
               <C.Label htmlFor="cor_secundaria">Fonte</C.Label>
-              <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_secundaria, border: '1px solid #000', marginTop: '5px' }} />
+             {/*} <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_secundaria, border: '1px solid #000', marginTop: '5px' }} /> {*/}
               {/*} <C.Input
                 type="color"
                 name="cor_secundaria"
@@ -187,14 +187,16 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
             </C.FormColumn>
             <C.FormColumn>
               <C.Label htmlFor="cor_botao_primaria">Botão primária</C.Label>
-              <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_botao_primaria, border: '1px solid #000', marginTop: '5px' }} />
-              <C.Input
+             {/*} <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_botao_primaria, border: '1px solid #000', marginTop: '5px' }} /> {*/}
+              
+              <TextField
                 type="color"
                 name="cor_botao_primaria"
                 id="cor_botao_primaria"
                 value={formData.cor_botao_primaria}
                 onChange={handleChange}
-                style={{ marginRight: '10px' }} // Espaço entre o input e o div
+                fullWidth
+                sx={{ marginRight: '10px' }}
               />
             </C.FormColumn>
             <br />
@@ -203,14 +205,16 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
             </C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="cor_botao_secundaria">Botão secundária</C.Label>
-              <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_botao_secundaria, border: '1px solid #000', marginTop: '5px' }} />
-              <C.Input
+            {/*}  <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_botao_secundaria, border: '1px solid #000', marginTop: '5px' }} /> {*/}
+               
+              <TextField
                 type="color"
                 name="cor_botao_secundaria"
                 id="cor_botao_secundaria"
                 value={formData.cor_botao_secundaria}
                 onChange={handleChange}
-                style={{ marginRight: '10px' }} // Espaço entre o input e o div
+                fullWidth
+                sx={{ marginRight: '10px' }}
               />
             </C.FormColumn>
           </C.FormRow>
@@ -256,9 +260,7 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
                 label="Usar logo de fundo"
               />
             </C.FormColumn>
-          </C.FormRow>
-
-          <C.FormRow>
+          
             <C.FormColumn>
               {/*} <C.Label htmlFor="usa_estoque">Usa estoque{"  "}
                 <C.Input
