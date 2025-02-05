@@ -337,26 +337,20 @@ const Catalogo = () => {
 
 
   return (
+    <C.Container>
+     
     <Container maxWidth="md">
       <Navbar />
       <Typography variant="h4" sx={{ textAlign: "center", my: 3 }}>Meu Catálogo</Typography>
 
 
-
-
-
-
-
-
-
-
       <Box display="flex" justifyContent="center" gap={2} my={2}>
         {!isReorderMode && (
-          <Button size="medium" variant="contained" startIcon={<AddCircle />} onClick={() => setIsCriarCategoriaModalOpen(true)}>
+          <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => setIsCriarCategoriaModalOpen(true)}>
             Nova Categoria
           </Button>
         )}
-        <Button size="medium" variant="outlined" startIcon={<Shuffle />} onClick={() => setIsReorderMode(!isReorderMode)}>
+        <Button size="medium" variant="outlined" endIcon={<Shuffle />} onClick={() => setIsReorderMode(!isReorderMode)}>
           {isReorderMode ? "Salvar Ordem" : "Reordenar Categorias"}
         </Button>
       </Box>
@@ -516,7 +510,7 @@ const Catalogo = () => {
                       {!isReorderProductMode && 
                         <Button color="success" size="small" variant="contained" onClick={() => openCriarProdutoModal(categoria)} startIcon={<AddCircle />}> Novo Produto</Button>
                       }
-                      <Button size="small" onClick={() => setIsReorderProductMode(!isReorderProductMode)} startIcon={<Shuffle />}>
+                      <Button size="small" onClick={() => setIsReorderProductMode(!isReorderProductMode)} endIcon={<Shuffle />}>
                         {isReorderProductMode ? "Salvar Ordem" : "Reordenar produtos"}
                       </Button>
                     </div>
@@ -588,6 +582,7 @@ const Catalogo = () => {
       />
 
     </Container>
+    </C.Container>
   );
 };
 
