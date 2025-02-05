@@ -206,7 +206,7 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
-            {/*}
+              {/*}
               <C.Label htmlFor="price">Preço</C.Label>
               <NumericFormat
                 name="price"
@@ -258,6 +258,7 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
 
             </C.FormColumn>
             <C.FormColumn>
+              {/*}
               <C.Label htmlFor="price">Preço promocional</C.Label>
               <NumericFormat
                 name="promocional_price"
@@ -282,6 +283,29 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
                   fontSize: '1rem',
                   width: '100%',
                 }}
+              /> {*/}
+
+              <NumericFormat
+                customInput={TextField}
+                label="Preço promocional"
+                name="promocional_price"
+                id="promocional_price"
+                value={formData.promocional_price}
+                onValueChange={(values) => {
+                  const { value } = values; // Obtém o valor numérico
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    promocional_price: value, // Atualiza o valor no formData
+                  }));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                decimalScale={2}
+                fixedDecimalScale
+                prefix="R$ "
+                placeholder="R$ 0,00"
+                fullWidth
+                sx={{ mb: 2 }} // Espaçamento inferior
               />
             </C.FormColumn>
           </C.FormRow>
