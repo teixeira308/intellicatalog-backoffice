@@ -49,7 +49,7 @@ const DeleteCategoriaModal = ({ isOpen, onClose, categoria, onDelete }) => {
       <DialogTitle>Deletar Categoria</DialogTitle>
       <DialogContent>
         <Typography variant="body1">
-          Deseja realmente excluir a categoria {formData.name}?
+          Deseja realmente excluir a categoria  <strong>{formData.name}</strong>?
         </Typography>
       </DialogContent>
       <DialogActions>

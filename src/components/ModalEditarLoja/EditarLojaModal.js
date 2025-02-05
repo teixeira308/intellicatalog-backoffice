@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as C from "./styles";
 import lojaApi from "../../services/lojaApi";
+import { Modal, Box, Typography, TextField, Button } from "@mui/material";
 
 const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
   const { updateLoja } = lojaApi();
@@ -12,7 +13,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
     address: "",
     phone: "",
     email: "",
-    delivery_fee:""
+    delivery_fee: ""
   });
 
   const filterFormData = (data) => {
@@ -59,27 +60,27 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
       onEdit();
     } catch (error) {
       console.error("Erro ao editar loja:", error);
-      window.addToast("Ocorreu um erro ao editar loja: "+ error, "error");
+      window.addToast("Ocorreu um erro ao editar loja: " + error, "error");
     }
   };
 
   const handlePriceChange = (e) => {
     let value = e.target.value;
-  
+
     // Permite apenas números e um único ponto decimal
     value = value.replace(/[^0-9.]/g, '');
-  
+
     // Garante que haja no máximo um ponto decimal
     const parts = value.split('.');
     if (parts.length > 2) {
       value = parts[0] + '.' + parts[1]; // Remove pontos extras
     }
-  
+
     // Limita a quantidade de casas decimais a duas
     if (parts[1] && parts[1].length > 2) {
       value = `${parts[0]}.${parts[1].slice(0, 2)}`;
     }
-  
+
     // Atualiza o valor no formData
     setFormData(prevFormData => ({
       ...prevFormData,
@@ -90,16 +91,30 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
   if (!isOpen) return null;
 
   return (
-    <C.ModalOverlay>
-      <C.ModalContainer>
+    <Modal open={isOpen} onClose={onClose}>
+      <Box sx={{
+        width: 400,
+        margin: 'auto',
+        padding: 3,
+        backgroundColor: 'white',
+        borderRadius: 2,
+        boxShadow: 24,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)'
+      }}>
         <C.ModalHeader>
-          <h2>Editar Minha Loja</h2>
-          <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
+          <Typography variant="h6" mb={2}>Editar Minha Loja</Typography>
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="namestore">Nome</C.Label>
+              {/*}<C.Label htmlFor="namestore">Nome</C.Label>
               <C.Input
                 type="text"
                 name="namestore"
@@ -107,13 +122,23 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
                 value={formData.namestore}
                 onChange={handleChange}
                 required
+              />{*/}
+
+              <TextField
+                label="Nome"
+                name="namestore"
+                id="namestore"
+                value={formData.namestore}
+                onChange={handleChange}
+                fullWidth
+                sx={{ mb: 2 }}
               />
             </C.FormColumn>
           </C.FormRow>
 
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="opening_hours">Horario Abertura</C.Label>
+              {/*} <C.Label htmlFor="opening_hours">Horario Abertura</C.Label>
               <C.Input
                 type="text"
                 name="opening_hours"
@@ -121,36 +146,69 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
                 value={formData.opening_hours}
                 onChange={handleChange}
               />
+{*/}
+
+              <TextField
+                label="Horario Abertura"
+                name="opening_hours"
+                id="opening_hours"
+                value={formData.opening_hours}
+                onChange={handleChange}
+                fullWidth
+                sx={{ mb: 2 }}
+              />
             </C.FormColumn>
 
             <C.FormColumn>
-              <C.Label htmlFor="rg">Horario fechamento</C.Label>
+              {/*}  <C.Label htmlFor="rg">Horario fechamento</C.Label>
               <C.Input
                 type="text"
                 name="closing_hours"
                 id="closing_hours"
                 value={formData.closing_hours}
                 onChange={handleChange}
+              />{*/}
+
+              <TextField
+                label="Horario fechamento"
+                name="closing_hours"
+                id="closing_hours"
+                value={formData.closing_hours}
+                onChange={handleChange}
+                fullWidth
+                sx={{ mb: 2 }}
               />
+
             </C.FormColumn>
           </C.FormRow>
 
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="identificadorexterno">Identificador Externo</C.Label>
+              {/*} <C.Label htmlFor="identificadorexterno">Identificador Externo</C.Label>
               <C.Input
                 type="text"
                 name="identificadorexterno"
                 id="identificadorexterno"
                 value={formData.identificadorexterno}
                 onChange={handleChange}
+              />{*/}
+
+              <TextField
+                label="Identificador Externo"
+                name="identificadorexterno"
+                id="identificadorexterno"
+                value={formData.identificadorexterno}
+                onChange={handleChange}
+                fullWidth
+                sx={{ mb: 2 }}
               />
+
             </C.FormColumn>
           </C.FormRow>
 
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="address">
+              {/*} <C.Label htmlFor="address">
                 Endereço
               </C.Label>
               <C.Input
@@ -159,37 +217,66 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
                 id="address"
                 value={formData.address}
                 onChange={handleChange}
+              />{*/}
+              <TextField
+                label="Identificador Externo"
+                name="address"
+                id="address"
+                value={formData.address}
+                onChange={handleChange}
+                fullWidth
+                sx={{ mb: 2 }}
               />
             </C.FormColumn>
           </C.FormRow>
 
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="email">E-mail</C.Label>
+               {/*}<C.Label htmlFor="email">E-mail</C.Label>
               <C.Input
                 type="email"
                 name="email"
                 id="email"
                 value={formData.email}
                 onChange={handleChange}
+              />{*/}
+              <TextField
+                label="E-mail"
+                name="email"
+                id="email"
+                value={formData.email}
+                onChange={handleChange}
+                fullWidth
+                sx={{ mb: 2 }}
               />
             </C.FormColumn>
           </C.FormRow>
 
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="phone">Telefone</C.Label>
+              {/*} <C.Label htmlFor="phone">Telefone</C.Label>
               <C.Input
                 type="text"
                 name="phone"
                 id="phone"
                 value={formData.phone}
                 onChange={handleChange}
+              />{*/}
+
+<TextField
+                label="Telefone"
+                name="phone"
+                id="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                fullWidth
+                sx={{ mb: 2 }}
               />
+
             </C.FormColumn>
 
           </C.FormRow>
-         {/*} <C.FormRow>
+          {/*} <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="delivery_fee">Taxa de entrega</C.Label>
               <C.Input
@@ -205,10 +292,13 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
 
 
 
-          <C.Button type="submit">Salvar</C.Button>
+          <Box display="flex" justifyContent="flex-end">
+            <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Cancelar</Button>
+            <Button type="submit" color="success" variant="contained">Salvar</Button>
+          </Box>
         </C.ModalForm>
-      </C.ModalContainer>
-    </C.ModalOverlay>
+      </Box>
+    </Modal>
   );
 };
 

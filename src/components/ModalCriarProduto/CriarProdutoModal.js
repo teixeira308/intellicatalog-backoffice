@@ -155,7 +155,7 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
 
           <C.FormRow>
             <C.FormColumn>
-              {/*} <C.Label htmlFor="brand">Marca</C.Label>
+               {/*}<C.Label htmlFor="brand">Marca</C.Label>
               <C.Input
                 type="text"
                 name="brand"
