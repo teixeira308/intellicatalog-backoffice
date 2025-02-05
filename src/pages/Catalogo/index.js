@@ -18,7 +18,6 @@ import { AddCircle, MoreVert, Edit, Delete, Image, Inventory,Shuffle } from "@mu
 
 
 
-
 const Catalogo = () => {
   const [categorias, setCategorias] = useState([]);
   const [produtos, setProdutos] = useState([]);
@@ -49,18 +48,26 @@ const Catalogo = () => {
 
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchCategorias = async () => {
       try {
-        const [categoriasData, produtosData] = await Promise.all([getCategorias(), getProducts()]);
-        setCategorias(categoriasData.data);
-        setProdutos(produtosData.data);
+        const data = await getCategorias();
+        setCategorias(data.data);
       } catch (error) {
-        console.error("Erro ao carregar dados:", error);
+        console.error("Erro ao carregar categorias:", error);
       }
     };
-    fetchData();
+
+    const fetchProdutos = async () => {
+      try {
+        const data = await getProducts();
+        setProdutos(data.data);
+      } catch (error) {
+        console.error("Erro ao carregar produtos:", error);
+      }
+    };
+    fetchCategorias();
+    fetchProdutos();
   }, []);
-  
 
   // Função para alternar o status de uma categoria específica
   const toggleCategoriaStatus = async (categoriaId) => {
@@ -330,14 +337,22 @@ const Catalogo = () => {
 
 
   return (
-    <>
- <Container maxWidth="md">
+    <C.Container>
       <Navbar />
-      <Typography variant="h4" sx={{ textAlign: "center", my: 3 }}>Meu Catálogo</Typography>
+      <C.Title>Meu catálogo</C.Title>
+
       
+         
+        
+
+       
+        
+      
+
+
       <Box display="flex" justifyContent="center" gap={2} my={2}>
         {!isReorderMode && (
-          <Button variant="contained" startIcon={<AddCircle />} onClick={() => {}}>
+          <Button variant="contained" startIcon={<AddCircle />} onClick={() => setIsCriarCategoriaModalOpen(true)}>
             Nova Categoria
           </Button>
         )}
@@ -346,45 +361,171 @@ const Catalogo = () => {
         </Button>
       </Box>
 
-      {isReorderMode ? (
-        <DragDropContext onDragEnd={() => {}}>
-          <Droppable droppableId="categorias">
-            {(provided) => (
-              <Box ref={provided.innerRef} {...provided.droppableProps}>
-                {categorias.map((categoria, index) => (
-                  <Draggable key={categoria.id} draggableId={String(categoria.id)} index={index}>
-                    {(provided) => (
-                      <Card ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} sx={{ my: 1, p: 2 }}>
-                        <Typography variant="h6">{categoria.name}</Typography>
-                      </Card>
+
+      {
+        isReorderMode ? (
+          <DragDropContext onDragEnd={handleOnDragEnd}>
+            <Droppable droppableId="categorias">
+              {(provided) => (
+                <C.CategoriaList {...provided.droppableProps} ref={provided.innerRef}>
+                  {categorias
+                    .sort((a, b) => (a.catalog_order || 0) - (b.catalog_order || 0))
+                    .map((categoria, index) => (
+                      <Draggable key={categoria.id} draggableId={String(categoria.catalog_order || index)} index={index}>
+                        {(provided) => (
+                          <C.Card
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <C.StatusWrapper>
+                              <C.CategoriaLink>{categoria.name}</C.CategoriaLink>
+                              <C.ActionsWrapper>
+                                <FaArrowsAlt style={{ color: "blue" }} />
+                              </C.ActionsWrapper>
+                            </C.StatusWrapper>
+                          </C.Card>
+                        )}
+                      </Draggable>
+                    ))}
+
+                  {provided.placeholder}
+                </C.CategoriaList>
+              )}
+            </Droppable>
+          </DragDropContext>
+        ) : (
+          categorias
+            .sort((a, b) => a.catalog_order - b.catalog_order)
+            .map((categoria) => (
+              <C.Card >
+                <C.StatusWrapper>
+                  <C.CategoriaLink key={categoria.catalog_order} onClick={() => toggleCategoriaExpansion(categoria.id)} >
+                    {categoria.name}
+                  </C.CategoriaLink>
+
+                  <C.ActionsWrapper>
+
+                  <IconButton onClick={(event) => handleMenuOpen(event, categoria)}>
+                      <FaEllipsisV />
+                    </IconButton>
+
+                    <Menu
+                      anchorEl={menuAnchor}
+                      open={Boolean(menuAnchor)}
+                      onClose={() => setMenuAnchor(null)}
+                    >
+                     <MenuItem onClick={openEditarCategoriaModal}>
+                        <FaEdit style={{ marginRight: 8 }} /> Editar
+                      </MenuItem>
+                      <MenuItem onClick={() => { openDeleteCategoriaModal(categoria); setMenuAnchor(null); }}>
+                        <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
+                      </MenuItem>
+                    </Menu>
+                    <C.ToggleSwitch>
+                      <input
+                        type="checkbox"
+                        checked={categoria.status === "ativo"}
+                        onChange={() => toggleCategoriaStatus(categoria.id)}
+                      />
+                      <C.Slider />
+                    </C.ToggleSwitch>
+                  </C.ActionsWrapper>
+                </C.StatusWrapper>
+
+                {expandedCategorias.includes(categoria.id) && (
+                  <C.ProdutoList>
+                    {isReorderProductMode ? (
+                      <DragDropContext onDragEnd={(result) => handleProductOnDragEnd(result, categoria.id)}>
+                        <Droppable droppableId={`produtos-${categoria.id}`}>
+                          {(provided) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.droppableProps}
+                              className="product-list"
+                            >
+                              {getProdutosByCategoria(categoria.id)
+                                .sort((a, b) => (a.product_order || 0) - (b.product_order || 0))
+                                .map((produto, index) => (
+                                  <Draggable
+                                    key={produto.id}
+                                    draggableId={`produto-${produto.id}`}
+                                    index={index}
+                                  >
+                                    {(provided) => (
+                                      <C.ProdutoActions
+                                        ref={provided.innerRef}
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                      >
+                                        <C.ProdutoItemOrderChange>
+                                          {produto.titulo}
+                                          <FaArrowsAlt style={{ color: "blue" }} />
+                                        </C.ProdutoItemOrderChange>
+                                      </C.ProdutoActions>
+                                    )}
+                                  </Draggable>
+                                ))}
+                              {provided.placeholder}
+                            </div>
+                          )}
+                        </Droppable>
+                      </DragDropContext>
+                    ) : (
+                      getProdutosByCategoria(categoria.id)
+                        .map((produto) => (
+                          <C.ProdutoActions key={produto.id}>
+                            <C.ProdutoItem>
+                              <span>{produto.titulo}</span>
+                              <span><FaBoxOpen />: {produto.estoque || 0}</span>
+                              <IconButton onClick={(event) => openProductMenu(event, produto.id)}>
+                                <FaEllipsisV />
+                              </IconButton>
+                              <Menu
+                                anchorEl={menuProdAnchor[produto.id]}
+                                open={Boolean(menuProdAnchor[produto.id])}
+                                onClose={() => closeProductMenu(produto.id)}
+                              >
+                                <MenuItem onClick={() => { setSelectedProduto(produto); openCriarFotosProdutoModal(produto); closeProductMenu(produto.id); }}>
+                                  <FaImages style={{ marginRight: 8 }} /> Imagens
+                                </MenuItem>
+                                <MenuItem onClick={() => { console.log(produto); setSelectedProduto(produto); openEditarEstoqueProdutoModal(produto); closeProductMenu(produto.id); }}>
+                                  <FaBoxOpen style={{ marginRight: 8 }} /> Estoque
+                                </MenuItem>
+                                <MenuItem onClick={() => { console.log(produto); setSelectedProduto(produto); openEditarProdutoModal(produto, categoria); closeProductMenu(produto.id); }}>
+                                  <FaEdit style={{ marginRight: 8 }} /> Editar
+                                </MenuItem>
+                                <MenuItem onClick={() => { console.log(produto); setSelectedProduto(produto); openDeleteProdutoModal(produto); closeProductMenu(produto.id); }}>
+                                  <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
+                                </MenuItem>
+                              </Menu>
+                              <C.ToggleSwitch>
+                                <input
+                                  type="checkbox"
+                                  checked={produto.status === "ativo"}
+                                  onChange={() => toggleProdutoStatus(produto.id)}
+                                />
+                                <C.Slider />
+                              </C.ToggleSwitch>
+                            </C.ProdutoItem>
+                          </C.ProdutoActions>
+                        ))
                     )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </Box>
-            )}
-          </Droppable>
-        </DragDropContext>
-      ) : (
-        categorias.map((categoria) => (
-          <Card key={categoria.id} sx={{ my: 1, p: 2 }}>
-            <Box display="flex" justifyContent="space-between" alignItems="center">
-              <Typography variant="h6">{categoria.name}</Typography>
-              <Box>
-                <IconButton onClick={(event) => handleMenuOpen(event, categoria)}>
-                  <MoreVert />
-                </IconButton>
-                <Menu anchorEl={menuAnchor} open={Boolean(menuAnchor)} onClose={handleMenuClose}>
-                  <MenuItem onClick={() => {}}><Edit sx={{ mr: 1 }} /> Editar</MenuItem>
-                  <MenuItem onClick={() => {}}><Delete sx={{ mr: 1 }} /> Excluir</MenuItem>
-                </Menu>
-                <Switch checked={categoria.status === "ativo"} onChange={() => {}} />
-              </Box>
-            </Box>
-          </Card>
-        ))
-      )}
-    
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                      <C.CreateButton onClick={() => openCriarProdutoModal(categoria)}> <FaPlusCircle /> &nbsp;Novo Produto</C.CreateButton> <br />
+                      <C.ReorderButton onClick={() => setIsReorderProductMode(!isReorderProductMode)}>
+                        {isReorderProductMode ? "Salvar Ordem" : <><FaRandom /> Reordenar produtos</>}
+                      </C.ReorderButton>
+                    </div>
+                  </C.ProdutoList>
+                )}
+
+
+
+              </C.Card>
+            ))
+        )}
+
 
       <EditCategoriaModal
         isOpen={isEditarCategoriaModalOpen}
@@ -443,8 +584,7 @@ const Catalogo = () => {
         onCreate={handleNewFotoProdutoCreated}
       />
 
-</Container>
-</>
+    </C.Container>
   );
 };
 
