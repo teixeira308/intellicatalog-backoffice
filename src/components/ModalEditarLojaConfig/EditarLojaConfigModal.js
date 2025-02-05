@@ -153,8 +153,8 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
 
               <TextField
                 type="color"
-                name={cor_primaria}
-                id={cor_primaria}
+                name="cor_primaria"
+                id="cor_primaria"
                 value={formData.cor_primaria}
                 onChange={handleChange}
                 fullWidth
@@ -177,8 +177,8 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
 
               <TextField
                 type="color"
-                name={cor_secundaria}
-                id={cor_secundaria}
+                name="cor_secundaria"
+                id="cor_secundaria"
                 value={formData.cor_secundaria}
                 onChange={handleChange}
                 fullWidth
