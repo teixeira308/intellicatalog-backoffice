@@ -59,7 +59,7 @@ const MudarStatusPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
     <Dialog open={isOpen} onClose={onClose} fullWidth>
       <DialogTitle>Avançar Status do Pedido #{formData.id}</DialogTitle>
       <DialogContent>
-        <FormControl fullWidth>
+        <FormControl fullWidth sx={{ mt: 2 }}>
           <InputLabel>Selecionar Status</InputLabel>
           <Select
             name="status"
