@@ -394,12 +394,11 @@ const Catalogo = () => {
           categorias
             .sort((a, b) => a.catalog_order - b.catalog_order)
             .map((categoria) => (
-              <Card >
+              <C.Card >
                 <C.StatusWrapper>
                   <C.CategoriaLink key={categoria.catalog_order} onClick={() => toggleCategoriaExpansion(categoria.id)} >
-                  <Typography variant="h6">{categoria.name}</Typography>
+                    {categoria.name}
                   </C.CategoriaLink>
-                  
 
                   <C.ActionsWrapper>
 
@@ -425,7 +424,6 @@ const Catalogo = () => {
                         checked={categoria.status === "ativo"}
                         onChange={() => toggleCategoriaStatus(categoria.id)}
                       />
-                      <Switch checked={categoria.status === "ativo"} onChange={() => toggleCategoriaStatus(categoria.id)} />
                       <C.Slider />
                     </C.ToggleSwitch>
                   </C.ActionsWrapper>
@@ -503,7 +501,6 @@ const Catalogo = () => {
                                   checked={produto.status === "ativo"}
                                   onChange={() => toggleProdutoStatus(produto.id)}
                                 />
-                                <Switch checked={produto.status === "ativo"} onChange={() => toggleProdutoStatus(produto.id)}/>
                                 <C.Slider />
                               </C.ToggleSwitch>
                             </C.ProdutoItem>
@@ -511,14 +508,22 @@ const Catalogo = () => {
                         ))
                     )}
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <Button variant="contained" onClick={() => openCriarProdutoModal(categoria)} startIcon={<AddCircle />}> Novo Produto</Button> 
+                     {/*} <C.CreateButton onClick={() => openCriarProdutoModal(categoria)}> <FaPlusCircle /> &nbsp;Novo Produto</C.CreateButton> <br />
+                      <C.ReorderButton onClick={() => setIsReorderProductMode(!isReorderProductMode)}>
+                        {isReorderProductMode ? "Salvar Ordem" : <><FaRandom /> Reordenar produtos</>}
+                      </C.ReorderButton>
+                      {*/}
+                       <Button variant="contained" onClick={() => openCriarProdutoModal(categoria)} startIcon={<AddCircle />}> Novo Produto</Button> 
                       <Button onClick={() => setIsReorderProductMode(!isReorderProductMode)} startIcon={<Shuffle />}>
                         {isReorderProductMode ? "Salvar Ordem" : "Reordenar produtos"}
                       </Button>
                     </div>
                   </C.ProdutoList>
                 )}
-              </Card>
+
+
+
+              </C.Card>
             ))
         )}
 
