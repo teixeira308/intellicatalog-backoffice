@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as C from "./styles";
 import lojaApi from "../../services/lojaApi";
 import { NumericFormat } from 'react-number-format';
-import { Modal, Box, Typography, TextField, Button, Checkbox, FormControlLabel } from "@mui/material";
+import { Modal, Box, Typography, TextField, Button, Checkbox, FormControlLabel,InputAdornment } from "@mui/material";
 
 const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
   const { updateLoja, getLojaConfig, updateLojaConfig } = lojaApi();
@@ -363,6 +363,11 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
                 onChange={handleChange}
                 fullWidth
                 sx={{ mb: 2 }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">www.instagram.com/</InputAdornment>
+                  ),
+                }}
               />
 
             </C.FormColumn>
@@ -379,6 +384,11 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
                 onChange={handleChange}
                 fullWidth
                 sx={{ mb: 2 }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">www.facebook.com/</InputAdornment>
+                  ),
+                }}
               />
             </C.FormColumn>
           </C.FormRow>
