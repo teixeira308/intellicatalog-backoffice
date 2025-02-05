@@ -7,7 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
   height: 100vh;
   gap: 20px;
-  margin-top:120px;
+  margin-top:90px;
 `;
 
 
