@@ -127,13 +127,16 @@ const Agenda = () => {
           <IconButton onClick={mesAnterior}>
             <FaChevronLeft />
           </IconButton>
-          <Typography variant="h6">
-            {dayjs(mesAtual).format("MMMM YYYY")}
-          </Typography>
+          <Box minWidth={120} textAlign="center">
+            <Typography variant="h6">
+              {dayjs(mesAtual).format("MMMM YYYY")}
+            </Typography>
+          </Box>
           <IconButton onClick={proximoMes}>
             <FaChevronRight />
           </IconButton>
         </Stack>
+
 
         {/* Seleção de Serviço */}
         <Typography variant="body1">Serviço:</Typography>
