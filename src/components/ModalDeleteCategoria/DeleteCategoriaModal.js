@@ -58,8 +58,7 @@ const DeleteCategoriaModal = ({ isOpen, onClose, categoria, onDelete }) => {
         </Button>
         <Button 
           onClick={handleSubmit} 
-          color="secondary" 
-          variant="contained"
+          color="error" variant="contained" 
         >
           Excluir
         </Button>

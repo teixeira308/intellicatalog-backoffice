@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import * as C from "./styles";
+import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography } from "@mui/material";
 
 const DeletarServicoModal = ({ isOpen, onClose, servico, onDelete }) => {
 
@@ -19,13 +19,11 @@ const DeletarServicoModal = ({ isOpen, onClose, servico, onDelete }) => {
     );
   };
 
-
   useEffect(() => {
     if (servico) {
       setFormData(servico);
     }
   }, [servico]);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,36 +32,35 @@ const DeletarServicoModal = ({ isOpen, onClose, servico, onDelete }) => {
       onDelete();
       window.addToast("Ação realizada com sucesso!", "success");
     } catch (error) {
-      console.error("Erro ao deletar servico:", error);
-      window.addToast("Ocorreu um erro ao deletar servico: "+error, "error");
+      console.error("Erro ao deletar serviço:", error);
+      window.addToast("Ocorreu um erro ao deletar serviço: " + error, "error");
     }
   };
 
   if (!isOpen) return null;
 
   return (
-    <C.ModalOverlay>
-      <C.ModalContainer>
-        <C.ModalHeader>
-          <h2>Deletar Serviço</h2>
-          <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
-        </C.ModalHeader>
-        <C.ModalForm onSubmit={handleSubmit}>
-          <C.FormRow>
-            <C.FormColumn>
-              <p>Deseja realmente excluir o serviço <br/><C.Label> {formData.name} </C.Label>?</p>
-              
-            </C.FormColumn>
-          </C.FormRow>
-
-          
-            <C.FormRow>
-          <C.Button type="submit">Excluir</C.Button>
-          <C.CancelButton onClick={onClose}>Cancelar</C.CancelButton>
-          </C.FormRow>
-        </C.ModalForm>
-      </C.ModalContainer>
-    </C.ModalOverlay>
+    <Dialog open={isOpen} onClose={onClose}>
+      <DialogTitle>Deletar Serviço</DialogTitle>
+      <DialogContent>
+        <Typography variant="body1">
+          Deseja realmente excluir o serviço <br />
+          <strong>{formData.name}</strong>?
+        </Typography>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="primary">
+          Cancelar
+        </Button>
+        <Button 
+          onClick={handleSubmit} 
+          color="secondary" 
+          variant="contained"
+        >
+          Excluir
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 

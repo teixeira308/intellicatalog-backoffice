@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import * as C from "./styles";
+import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography } from "@mui/material";
 
 const DeletarProdutoModal = ({ isOpen, onClose, produto, onDelete }) => {
 
@@ -19,13 +19,11 @@ const DeletarProdutoModal = ({ isOpen, onClose, produto, onDelete }) => {
     );
   };
 
-
   useEffect(() => {
     if (produto) {
       setFormData(produto);
     }
   }, [produto]);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,35 +33,34 @@ const DeletarProdutoModal = ({ isOpen, onClose, produto, onDelete }) => {
       window.addToast("Ação realizada com sucesso!", "success");
     } catch (error) {
       console.error("Erro ao deletar produto:", error);
-      window.addToast("Ocorreu um erro ao deletar produto: "+ error, "error");
+      window.addToast("Ocorreu um erro ao deletar produto: " + error, "error");
     }
   };
 
   if (!isOpen) return null;
 
   return (
-    <C.ModalOverlay>
-      <C.ModalContainer>
-        <C.ModalHeader>
-          <h2>Deletar Produto</h2>
-          <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
-        </C.ModalHeader>
-        <C.ModalForm onSubmit={handleSubmit}>
-          <C.FormRow>
-            <C.FormColumn>
-              <p>Deseja realmente excluir o produto <br/><C.Label> {formData.titulo} </C.Label>?</p>
-              
-            </C.FormColumn>
-          </C.FormRow>
-
-          
-            <C.FormRow>
-          <C.Button type="submit">Excluir</C.Button>
-          <C.CancelButton onClick={onClose}>Cancelar</C.CancelButton>
-          </C.FormRow>
-        </C.ModalForm>
-      </C.ModalContainer>
-    </C.ModalOverlay>
+    <Dialog open={isOpen} onClose={onClose}>
+      <DialogTitle>Deletar Produto</DialogTitle>
+      <DialogContent>
+        <Typography variant="body1">
+          Deseja realmente excluir o produto <br />
+          <strong>{formData.titulo}</strong>?
+        </Typography>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="primary">
+          Cancelar
+        </Button>
+        <Button 
+          onClick={handleSubmit} 
+          color="secondary" 
+          variant="contained"
+        >
+          Excluir
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 

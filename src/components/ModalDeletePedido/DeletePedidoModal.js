@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import * as C from "./styles";
+import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography } from "@mui/material";
 
 const DeletarPedidoModal = ({ isOpen, onClose, pedido, onDelete }) => {
 
@@ -19,13 +19,11 @@ const DeletarPedidoModal = ({ isOpen, onClose, pedido, onDelete }) => {
     );
   };
 
-
   useEffect(() => {
     if (pedido) {
       setFormData(pedido);
     }
   }, [pedido]);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,28 +41,27 @@ const DeletarPedidoModal = ({ isOpen, onClose, pedido, onDelete }) => {
   if (!isOpen) return null;
 
   return (
-    <C.ModalOverlay>
-      <C.ModalContainer>
-        <C.ModalHeader>
-          <h2>Deletar Pedido</h2>
-          <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
-        </C.ModalHeader>
-        <C.ModalForm onSubmit={handleSubmit}>
-          <C.FormRow>
-            <C.FormColumn>
-              <p>Deseja realmente excluir o pedido <br/><C.Label> {formData.id} </C.Label>?</p>
-              
-            </C.FormColumn>
-          </C.FormRow>
-
-          
-            <C.FormRow>
-          <C.Button type="submit">Excluir</C.Button>
-          <C.CancelButton onClick={onClose}>Cancelar</C.CancelButton>
-          </C.FormRow>
-        </C.ModalForm>
-      </C.ModalContainer>
-    </C.ModalOverlay>
+    <Dialog open={isOpen} onClose={onClose}>
+      <DialogTitle>Deletar Pedido</DialogTitle>
+      <DialogContent>
+        <Typography variant="body1">
+          Deseja realmente excluir o pedido <br />
+          <strong>{formData.id}</strong>?
+        </Typography>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="primary">
+          Cancelar
+        </Button>
+        <Button 
+          onClick={handleSubmit} 
+          color="secondary" 
+          variant="contained"
+        >
+          Excluir
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 
