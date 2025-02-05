@@ -123,19 +123,22 @@ const Agenda = () => {
         </Typography>
 
         {/* Controles do Mês */}
-        <Stack direction="row" alignItems="center" spacing={2} mb={3}>
-          <IconButton onClick={mesAnterior}>
-            <FaChevronLeft />
-          </IconButton>
-          <Box minWidth={120} textAlign="center">
-            <Typography variant="h6">
-              {dayjs(mesAtual).format("MMMM YYYY")}
-            </Typography>
-          </Box>
-          <IconButton onClick={proximoMes}>
-            <FaChevronRight />
-          </IconButton>
-        </Stack>
+        <Box display="flex" justifyContent="center" alignItems="center" width="100%">
+          <Stack direction="row" alignItems="center" spacing={2} mb={3}>
+            <IconButton onClick={mesAnterior}>
+              <FaChevronLeft />
+            </IconButton>
+            <Box minWidth={120} textAlign="center">
+              <Typography variant="h6">
+                {dayjs(mesAtual).format("MMMM YYYY")}
+              </Typography>
+            </Box>
+            <IconButton onClick={proximoMes}>
+              <FaChevronRight />
+            </IconButton>
+          </Stack>
+        </Box>
+
 
 
         {/* Seleção de Serviço */}
