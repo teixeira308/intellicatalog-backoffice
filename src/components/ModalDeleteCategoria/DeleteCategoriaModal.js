@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as C from "./styles";
 import categoriaApi from "../../services/categoriaApi";
+import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography } from "@mui/material";
 
 const EditarLojaModal = ({ isOpen, onClose, categoria, onDelete }) => {
   const { updateCategoria } = categoriaApi();
@@ -22,13 +23,11 @@ const EditarLojaModal = ({ isOpen, onClose, categoria, onDelete }) => {
     );
   };
 
-
   useEffect(() => {
     if (categoria) {
       setFormData(categoria);
     }
   }, [categoria]);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,28 +45,26 @@ const EditarLojaModal = ({ isOpen, onClose, categoria, onDelete }) => {
   if (!isOpen) return null;
 
   return (
-    <C.ModalOverlay>
-      <C.ModalContainer>
-        <C.ModalHeader>
-          <h2>Deletar Categoria</h2>
-          <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
-        </C.ModalHeader>
-        <C.ModalForm onSubmit={handleSubmit}>
-          <C.FormRow>
-            <C.FormColumn>
-              <C.Label>Deseja realmente excluir a categoria {formData.name}? </C.Label>
-              
-            </C.FormColumn>
-          </C.FormRow>
-
-          
-            <C.FormRow>
-          <C.Button type="submit">Excluir</C.Button>
-          <C.CancelButton onClick={onClose}>Cancelar</C.CancelButton>
-          </C.FormRow>
-        </C.ModalForm>
-      </C.ModalContainer>
-    </C.ModalOverlay>
+    <Dialog open={isOpen} onClose={onClose}>
+      <DialogTitle>Deletar Categoria</DialogTitle>
+      <DialogContent>
+        <Typography variant="body1">
+          Deseja realmente excluir a categoria {formData.name}?
+        </Typography>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="primary">
+          Cancelar
+        </Button>
+        <Button 
+          onClick={handleSubmit} 
+          color="secondary" 
+          variant="contained"
+        >
+          Excluir
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 
