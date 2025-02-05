@@ -125,12 +125,9 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
           <Typography variant="h6" mb={2}>Novo Produto</Typography>
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
-          <C.FormRow>
-            <C.FormColumn>
-              <C.Label>Categoria: {categoria.name} </C.Label>
-
-            </C.FormColumn>
-          </C.FormRow>
+        <Typography variant="h6" mb={2}>Categoria: {categoria.name}</Typography>
+          
+          
 
           <C.FormRow>
             <C.FormColumn>
