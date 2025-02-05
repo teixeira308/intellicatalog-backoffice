@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as C from "./styles";
 import productImageApi from "../../services/productImageApi";
 import loadingGif from '../loading.gif';
+import { Modal, Box, Typography, TextField, Button } from "@mui/material";
 
 const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
   const { createFotoProduto, getFotoProdutoDownload, getFotoByProduto, deleteFotoByProduto } = productImageApi();
@@ -33,7 +34,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
         setLoading(false)
       } catch (error) {
         console.error("Erro ao buscar fotos:", error);
-        window.addToast("Ocorreu um erro ao buscar fotos: "+error, "error");
+        window.addToast("Ocorreu um erro ao buscar fotos: " + error, "error");
       }
     }
   };
@@ -45,7 +46,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
       if (isOpen && produto) {
         try {
           const fotos = await getFotoByProduto(produto); // Busca todas as fotos do produto
-  
+
           // Gera URLs para cada imagem junto com o ID
           const fotosUrls = await Promise.all(
             fotos.map(async (foto) => {
@@ -60,7 +61,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
               }
             })
           );
-  
+
           // Remove entradas nulas do array antes de definir no estado
           setImageUrls(fotosUrls.filter((foto) => foto !== null));
           setLoading(false);
@@ -71,17 +72,17 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
         }
       }
     };
-  
+
     fetchFotos();
   }, [isOpen, produto]);
-  
+
 
 
 
 
   const resetFormData = () => {
     setFormData({
-      file: "", 
+      file: "",
     });
     setImageUrls([]); // Limpa as URLs das imagens ao fechar o modal
   };
@@ -101,34 +102,34 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let file = formData.file;
-  
-   /* if (file) {
-      // Verifique o tipo de arquivo
-      const fileType = file.type;
-      if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
-        alert('Tipo de arquivo não suportado');
-        return;
-      }
-  
-      // Verifique o tamanho do arquivo
-      const fileSize = file.size / 1024 / 1024; // Tamanho em MB
-      if (fileSize > 5) { // Suponha que o limite seja 5MB
-        alert('O arquivo é muito grande. O limite é 5MB');
-        return;
-      }*/
-  
-  
+
+    /* if (file) {
+       // Verifique o tipo de arquivo
+       const fileType = file.type;
+       if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
+         alert('Tipo de arquivo não suportado');
+         return;
+       }
+   
+       // Verifique o tamanho do arquivo
+       const fileSize = file.size / 1024 / 1024; // Tamanho em MB
+       if (fileSize > 5) { // Suponha que o limite seja 5MB
+         alert('O arquivo é muito grande. O limite é 5MB');
+         return;
+       }*/
+
+
     if (file && file.name.includes("_")) {
-     
+
       const newFileName = file.name.replace(/_/g, "-");
       file = new File([file], newFileName, { type: file.type });
     }
     setLoading(true);
-  
+
     // Enviar o arquivo após validação
     const formDataToSend = new FormData();
     formDataToSend.append('file', file);
-  
+
     try {
       await createFotoProduto(produto, formDataToSend);
       loadProductImages();
@@ -142,8 +143,8 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
       setLoading(false);
     }
   };
-  
-  
+
+
 
   if (!isOpen) return null;
 
@@ -158,42 +159,54 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
       setLoading(false)
     } catch (error) {
       console.error("Erro ao deletar a imagem:", error);
-      window.addToast("Ocorreu um erro ao deletar a imagem: "+ error, "error");
+      window.addToast("Ocorreu um erro ao deletar a imagem: " + error, "error");
     }
   };
 
 
   return (
-    <C.ModalOverlay>
+    <Modal open={isOpen} onClose={onClose}>
       <C.ModalContainer>
         <C.ModalHeader>
-          <h2>Fotos do Produto</h2>
-          <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
+          <Typography variant="h6" mb={2}>Fotos do Produto</Typography>
+
+
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
           <C.FormRow>
             <C.FormColumn>
-              <C.Label>Produto: {produto.titulo}</C.Label>
+              
+              <Typography variant="subtitle1" mb={2}>Produto: {produto.titulo}</Typography>
+              
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
-            <C.Label htmlFor="file">Escolha a foto:</C.Label>
+             
+            <Typography variant="subtitle1" mb={2}>Escolha a foto: </Typography>
+            
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
-              <C.Input
+           {/*}   <C.Input
                 type="file"
                 name="file"
                 id="file"
                 onChange={handleChange}
                 required
+              /> {*/}
+              <TextField
+              label="Selecione a imagem"
+                type="file"
+                name="file"
+                id="file"
+                onChange={handleChange}
+                required
+                fullWidth
               />
             </C.FormColumn>
           </C.FormRow>
-          
-
-          <C.Button type="submit">Salvar</C.Button>
-
+          <Button type="submit" color="success" variant="contained">Salvar</Button>
+          <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Cancelar</Button>
           {/* Exibir todas as imagens do produto */}
           {loading ? (
             <>
@@ -219,7 +232,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
           A primaira imagem será a capa que aparecerá na lista de produtos.
         </C.InfoText>
       </C.ModalContainer>
-    </C.ModalOverlay>
+    </Modal>
   );
 };
 

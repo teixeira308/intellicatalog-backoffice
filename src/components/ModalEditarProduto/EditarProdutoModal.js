@@ -94,7 +94,7 @@ const EditarLojaModal = ({ isOpen, onClose, produto, categoria, onEdit }) => {
       }}>
         <C.ModalHeader>
           <Typography variant="h6" mb={2}>Editar Produto</Typography>
-          <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
+        
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
           <C.FormRow>
@@ -264,7 +264,7 @@ const EditarLojaModal = ({ isOpen, onClose, produto, categoria, onEdit }) => {
             </C.FormColumn>
           </C.FormRow>
           <Box display="flex" justifyContent="flex-end">
-            <Button onClick={onClose} variant="outlined" sx={{ mr: 2 }}>Cancelar</Button>
+            <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Cancelar</Button>
             <Button type="submit" color="success" variant="contained">Salvar</Button>
           </Box>
         </C.ModalForm>

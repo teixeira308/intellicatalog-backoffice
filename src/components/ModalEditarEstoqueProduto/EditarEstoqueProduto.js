@@ -99,7 +99,9 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
       <DialogActions>
        
         <Button onClick={handleSubmit}   color="success" variant="contained" >Salvar</Button>
-        <Button onClick={onClose}  variant="outlined" >Cancelar</Button>
+        
+        <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Cancelar</Button>
+                    
       </DialogActions>
     </Dialog>
   );
