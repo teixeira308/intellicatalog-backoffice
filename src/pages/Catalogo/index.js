@@ -508,7 +508,7 @@ const Catalogo = () => {
                       </C.ReorderButton>
                       {*/}
                       {!isReorderProductMode && 
-                        <Button color="success" size="small" variant="contained" onClick={() => openCriarProdutoModal(categoria)} startIcon={<AddCircle />}> Novo</Button>
+                        <Button color="success" size="small" variant="contained" onClick={() => openCriarProdutoModal(categoria)} startIcon={<AddCircle />}> Novo Produto</Button>
                       }
                       <Button size="small" onClick={() => setIsReorderProductMode(!isReorderProductMode)} endIcon={<Shuffle />}>
                         {isReorderProductMode ? "Salvar Ordem" : "Reordenar"}

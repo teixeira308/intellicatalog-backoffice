@@ -83,7 +83,7 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
       <DialogContent>
         <Typography variant="body1">Produto: {produto.titulo}</Typography>
         <div style={{ display: "flex", alignItems: "center", marginTop: "1rem" }}>
-          <Button variant="outlined" onClick={increaseQuantity} style={{ marginRight: "1rem" }}>+</Button>
+          <Button variant="contained" onClick={increaseQuantity} style={{ marginRight: "1rem" }}>+</Button>
           <TextField
             type="text"
             name="estoque"
@@ -93,12 +93,12 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
             variant="outlined"
             inputProps={{ style: { textAlign: 'center' } }}
           />
-          <Button variant="outlined" onClick={decreaseQuantity} style={{ marginLeft: "1rem" }}>-</Button>
+          <Button variant="contained" onClick={decreaseQuantity} style={{ marginLeft: "1rem" }}>-</Button>
         </div>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="secondary">Cancelar</Button>
-        <Button onClick={handleSubmit} color="primary">Salvar</Button>
+        <Button onClick={handleSubmit}   color="success">Salvar</Button>
       </DialogActions>
     </Dialog>
   );
