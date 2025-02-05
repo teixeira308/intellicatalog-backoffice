@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from "react";
-import * as C from "./style";
+import {
+  Container,
+  Typography,
+  Button,
+  Select,
+  MenuItem,
+  IconButton,
+  Card,
+  CardContent,
+  Box,
+  Stack,
+  Paper,
+} from "@mui/material";
+import { FaChevronLeft, FaChevronRight, FaPlusCircle } from "react-icons/fa";
 import Navbar from "../../components/Navbar/Navbar";
 import DisponibilidadeApi from "../../services/disponibilidadeApi";
 import ServicesApi from "../../services/ServicesApi";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
-import { FaChevronLeft, FaChevronRight, FaPlusCircle } from 'react-icons/fa';
 import CriarDisponibilidadeModal from "../../components/ModalCriarDisponibilidade/CriarDisponibilidadeModal";
 
 const Agenda = () => {
@@ -15,7 +27,8 @@ const Agenda = () => {
   const [servicoAtual, setServicoAtual] = useState(null);
   const [mesAtual, setMesAtual] = useState(dayjs().format("YYYY-MM"));
   const [datasVisiveis, setDatasVisiveis] = useState({});
-  const [isCriarDisponibilidadeModalOpen, setIsCriarDisponibilidadeModalOpen] = useState(false);
+  const [isCriarDisponibilidadeModalOpen, setIsCriarDisponibilidadeModalOpen] =
+    useState(false);
 
   const { getAvailability } = DisponibilidadeApi();
   const { getServicesByUser } = ServicesApi();
@@ -24,7 +37,7 @@ const Agenda = () => {
     const fetchAvaliabilities = async () => {
       try {
         const availabilities = await getAvailability();
-        if (availabilities && availabilities.data) {
+        if (availabilities?.data) {
           setDisponibilidades(availabilities.data);
         }
       } catch (error) {
@@ -65,30 +78,34 @@ const Agenda = () => {
     setServicoAtual(event.target.value);
   };
 
-  const disponibilidadesFiltradas = disponibilidades.filter(availability =>
-    dayjs(availability.date).format("YYYY-MM") === mesAtual &&
-    availability.service_id == servicoAtual
+  const disponibilidadesFiltradas = disponibilidades.filter(
+    (availability) =>
+      dayjs(availability.date).format("YYYY-MM") === mesAtual &&
+      availability.service_id == servicoAtual
   );
 
-  const disponibilidadesAgrupadas = disponibilidadesFiltradas.reduce((acc, disponibilidade) => {
-    const formattedDate = dayjs(disponibilidade.date).format("YYYY-MM-DD");
+  const disponibilidadesAgrupadas = disponibilidadesFiltradas.reduce(
+    (acc, disponibilidade) => {
+      const formattedDate = dayjs(disponibilidade.date).format("YYYY-MM-DD");
 
-    if (!acc[formattedDate]) {
-      acc[formattedDate] = [];
-    }
+      if (!acc[formattedDate]) {
+        acc[formattedDate] = [];
+      }
 
-    acc[formattedDate].push(disponibilidade);
-    return acc;
-  }, {});
+      acc[formattedDate].push(disponibilidade);
+      return acc;
+    },
+    {}
+  );
 
   const toggleVisibilidade = (data) => {
-    setDatasVisiveis(prev => ({
+    setDatasVisiveis((prev) => ({
       ...prev,
       [data]: !prev[data],
     }));
   };
 
-  const handlCriarDisponibilidadeModalClose = () => {
+  const handleCriarDisponibilidadeModalClose = () => {
     setIsCriarDisponibilidadeModalOpen(false);
   };
 
@@ -100,64 +117,80 @@ const Agenda = () => {
   return (
     <>
       <Navbar />
-      <C.Container>
-        <C.Title>Agenda</C.Title>
-        <C.ButtonGroup>
-          <C.CreateButton>
-            <FaPlusCircle /> Agendamento
-          </C.CreateButton>
-        </C.ButtonGroup>
+      <Container>
+        <Typography variant="h4" gutterBottom>
+          Agenda
+        </Typography>
 
-        <C.Section>
-          {/* Dropdown de Serviços */}
-          <p>Serviço:</p> 
-          <C.Select onChange={handleChangeServico} value={servicoAtual}>
-            {servicos.map(servico => (
-              <C.Option key={servico.id} value={servico.id}>{servico.name}</C.Option>
-            ))}
-          </C.Select>
+        {/* Controles do Mês */}
+        <Stack direction="row" alignItems="center" spacing={2} mb={3}>
+          <IconButton onClick={mesAnterior}>
+            <FaChevronLeft />
+          </IconButton>
+          <Typography variant="h6">
+            {dayjs(mesAtual).format("MMMM YYYY")}
+          </Typography>
+          <IconButton onClick={proximoMes}>
+            <FaChevronRight />
+          </IconButton>
+        </Stack>
 
-          {/* Controles de Mês */}
-          
-          <C.MonthControls>
-            <button onClick={mesAnterior}><FaChevronLeft /></button>
-            <span>{dayjs(mesAtual).format("MMMM YYYY")}</span>
-            <button onClick={proximoMes}><FaChevronRight /></button>
-          </C.MonthControls>
-          <C.CreateAgendaButton onClick={() => setIsCriarDisponibilidadeModalOpen(true)}>
-                    <FaPlusCircle /> Disponibilidade
-          </C.CreateAgendaButton>
-          {/* Exibição dos horários disponíveis */}
-          {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
-            Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
-              <C.Step key={data}>
-                <C.DateControls onClick={() => toggleVisibilidade(data)}>
-                    <C.DateTitle>{dayjs(data).format("DD")}</C.DateTitle>  
-                </C.DateControls>
-                {datasVisiveis[data] && (
-                  <C.TimeList>
-                    {agendamentos.map((availability, index) => (
-                      <C.Card key={index} status={availability.status}>
-                        <p>{availability.start_time} - {availability.end_time}</p>
-                      </C.Card>
-                    ))}
-                  </C.TimeList>
-                )}
-              </C.Step>
-            ))
-          ) : (
-            <p>Nenhuma disponibilidade para este serviço neste mês.</p>
-          )}
-        </C.Section>
+        {/* Seleção de Serviço */}
+        <Typography variant="body1">Serviço:</Typography>
+        <Select value={servicoAtual} onChange={handleChangeServico} fullWidth>
+          {servicos.map((servico) => (
+            <MenuItem key={servico.id} value={servico.id}>
+              {servico.name}
+            </MenuItem>
+          ))}
+        </Select>
 
+        {/* Botão Criar Disponibilidade */}
+        <Stack direction="row" justifyContent="end" my={2}>
+          <Button
+            variant="contained"
+            startIcon={<FaPlusCircle />}
+            onClick={() => setIsCriarDisponibilidadeModalOpen(true)}
+          >
+            Disponibilidade
+          </Button>
+        </Stack>
 
+        {/* Lista de Disponibilidades */}
+        {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
+          Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
+            <Paper key={data} sx={{ mb: 2, p: 2 }}>
+              <Box onClick={() => toggleVisibilidade(data)} sx={{ cursor: "pointer" }}>
+                <Typography variant="h6">{dayjs(data).format("DD MMMM YYYY")}</Typography>
+              </Box>
+              {datasVisiveis[data] && (
+                <Stack spacing={1} mt={1}>
+                  {agendamentos.map((availability, index) => (
+                    <Card key={index} sx={{ bgcolor: availability.status === "booked" ? "error.light" : "success.light" }}>
+                      <CardContent>
+                        <Typography>
+                          {availability.start_time} - {availability.end_time}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </Stack>
+              )}
+            </Paper>
+          ))
+        ) : (
+          <Typography mt={2} color="textSecondary">
+            Nenhuma disponibilidade para este serviço neste mês.
+          </Typography>
+        )}
+
+        {/* Modal de Criação */}
         <CriarDisponibilidadeModal
           isOpen={isCriarDisponibilidadeModalOpen}
-          onClose={handlCriarDisponibilidadeModalClose}
+          onClose={handleCriarDisponibilidadeModalClose}
           onCreate={handleNewDisponibilidadeCreated}
-      />
-
-      </C.Container>
+        />
+      </Container>
     </>
   );
 };
