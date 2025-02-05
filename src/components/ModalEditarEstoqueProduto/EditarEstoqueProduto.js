@@ -97,8 +97,9 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
         </div>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="secondary">Cancelar</Button>
-        <Button onClick={handleSubmit}   color="success">Salvar</Button>
+       
+        <Button onClick={handleSubmit}   color="success" variant="contained" >Salvar</Button>
+        <Button onClick={onClose} color="secondary" variant="outlined" >Cancelar</Button>
       </DialogActions>
     </Dialog>
   );
