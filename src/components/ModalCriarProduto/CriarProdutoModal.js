@@ -125,9 +125,9 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
           <Typography variant="h6" mb={2}>Novo Produto</Typography>
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
-        <Typography variant="h6" mb={2}>Categoria: {categoria.name}</Typography>
-          
-          
+          <Typography variant="h6" mb={2}>Categoria: {categoria.name}</Typography>
+
+
 
           <C.FormRow>
             <C.FormColumn>
@@ -140,18 +140,37 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
                 onChange={handleChange}
                 required
               />
+              <TextField
+                label="Titulo"
+                name="titulo"
+                id="titulo"
+                value={formData.titulo}
+                onChange={handleChange}
+                fullWidth
+                required
+                sx={{ mb: 2 }}
+              />
             </C.FormColumn>
           </C.FormRow>
 
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="description">Marca</C.Label>
+              <C.Label htmlFor="brand">Marca</C.Label>
               <C.Input
                 type="text"
                 name="brand"
                 id="brand"
                 value={formData.brand}
                 onChange={handleChange}
+              />
+              <TextField
+                label="Marca"
+                name="brand"
+                id="brand"
+                value={formData.brand}
+                onChange={handleChange}
+                fullWidth
+                sx={{ mb: 2 }}
               />
             </C.FormColumn>
           </C.FormRow>
