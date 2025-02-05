@@ -215,10 +215,10 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow> 
-            <C.FormColumn><Button type="submit" color="success" variant="contained">Salvar</Button>
+            <C.FormColumn><Button type="submit" color="success" variant="contained">Adicionar</Button>
             </C.FormColumn>
             <C.FormColumn>
-              <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Cancelar</Button>
+              <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Fechar</Button>
             </C.FormColumn>
           </C.FormRow>
           {/* Exibir todas as imagens do produto */}
