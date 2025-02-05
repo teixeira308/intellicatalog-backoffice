@@ -360,7 +360,12 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
                 name="instagram"
                 id="instagram"
                 value={formData.instagram}
-                onChange={handleChange}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    instagram: `www.instagram.com/${e.target.value.replace("www.instagram.com/", "")}`,
+                  })
+                }
                 fullWidth
                 sx={{ mb: 2 }}
                 InputProps={{
@@ -381,7 +386,12 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
                 name="facebook"
                 id="facebook"
                 value={formData.facebook}
-                onChange={handleChange}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    facebook: `www.facebook.com/${e.target.value.replace("www.facebook.com/", "")}`,
+                  })
+                }
                 fullWidth
                 sx={{ mb: 2 }}
                 InputProps={{
