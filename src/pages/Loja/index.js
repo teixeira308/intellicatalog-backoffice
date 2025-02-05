@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import LojaApi from "../../services/lojaApi";
 import EditLojaModal from "../../components/ModalEditarLoja/EditarLojaModal";
 import CriarFotosLojaModal from "../../components/ModalCriarFotoLoja/CriarFotosLojaModal";
-import EditLojaConfigModal from "../../components/ModalEditarLojaConfig/EditarLojaConfigModal";
+import EditarLojaConfigModal from "../../components/ModalEditarLojaConfig/EditarLojaConfigModal";
 
 import { FaEdit, FaImages, FaCog, FaRegWindowRestore } from 'react-icons/fa'; // Importa o ícone de lápis
 import LojaImageApi from "../../services/lojaImageApi";
@@ -221,7 +221,7 @@ const Loja = () => {
         onCreate={handleNewFotoLojaCreated}
       />
 
-      <EditLojaConfigModal
+      <EditarLojaConfigModal
         isOpen={isEditarLojaConfigModalOpen}
         onClose={handleEditarLojaConfigModalClose}
         loja={selectedLoja}
