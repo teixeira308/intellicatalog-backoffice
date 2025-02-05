@@ -9,12 +9,12 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
   const [formData, setFormData] = useState({
     titulo: "",
     brand: "",
-    description:"",
-    price:"",
-    unit:"",
-    unitquantity:"",
-    promocional_price:""
-   
+    description: "",
+    price: "",
+    unit: "",
+    unitquantity: "",
+    promocional_price: ""
+
   });
 
   const filterFormData = (data) => {
@@ -28,20 +28,20 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
       'unitquantity',
       'promocional_price'
     ];
-  
+
     // Filtra os dados mantendo apenas os campos permitidos
     const filteredData = Object.fromEntries(
       Object.entries(data).filter(([key]) => allowedFields.includes(key))
     );
-  
+
     // Verifica se promocional_price é uma string vazia e a redefine para null
     if (filteredData.promocional_price === '') {
       filteredData.promocional_price = null;
     }
-  
+
     return filteredData;
   };
-  
+
 
   const handleChange = (e) => {
     setFormData({
@@ -54,10 +54,10 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
     setFormData({
       titulo: "",
       brand: "",
-      description:"",
-      price:"",
-      unit:"",
-      unitquantity:"",
+      description: "",
+      price: "",
+      unit: "",
+      unitquantity: "",
     });
   };
 
@@ -65,14 +65,14 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
     e.preventDefault();
     try {
       const filteredData = filterFormData(formData);
-      await createProduto(filteredData,categoria.id);
+      await createProduto(filteredData, categoria.id);
       window.addToast("Ação realizada com sucesso!", "success");
       resetFormData();
       onClose();
       onCreate();
     } catch (error) {
       console.error("Erro ao criar produto:", error);
-      window.addToast("Ocorreu um erro ao criar produto: "+error, "error");
+      window.addToast("Ocorreu um erro ao criar produto: " + error, "error");
     }
   };
 
@@ -80,56 +80,55 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
 
   const handlePriceChange = (e) => {
     let value = e.target.value;
-  
+
     // Permite apenas números e um único ponto decimal
     value = value.replace(/[^0-9.]/g, '');
-  
+
     // Garante que haja no máximo um ponto decimal
     const parts = value.split('.');
     if (parts.length > 2) {
       value = parts[0] + '.' + parts[1]; // Remove pontos extras
     }
-  
+
     // Limita a quantidade de casas decimais a duas
     if (parts[1] && parts[1].length > 2) {
       value = `${parts[0]}.${parts[1].slice(0, 2)}`;
     }
-  
+
     // Atualiza o valor no formData
     setFormData(prevFormData => ({
       ...prevFormData,
       price: value
     }));
   };
-  
+
 
   return (
     <Modal open={isOpen} onClose={onClose}>
       <Box sx={{
-              width: 400,
-              margin: 'auto',
-              padding: 3,
-              backgroundColor: 'white',
-              borderRadius: 2,
-              boxShadow: 24,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)'
-            }}>
+        width: 400,
+        margin: 'auto',
+        padding: 3,
+        backgroundColor: 'white',
+        borderRadius: 2,
+        boxShadow: 24,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)'
+      }}>
         <C.ModalHeader>
           <Typography variant="h6" mb={2}>Novo Produto</Typography>
-          <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
-        <C.FormRow>
+          <C.FormRow>
             <C.FormColumn>
               <C.Label>Categoria: {categoria.name} </C.Label>
-              
+
             </C.FormColumn>
           </C.FormRow>
 
@@ -158,8 +157,8 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
                 onChange={handleChange}
               />
             </C.FormColumn>
-            </C.FormRow>
-            <C.FormRow>
+          </C.FormRow>
+          <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="description">Descrição</C.Label>
               <C.Textarea
@@ -172,8 +171,8 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
                 placeholder="Digite sua descrição aqui..."
               />
             </C.FormColumn>
-            </C.FormRow>
-            <C.FormRow>
+          </C.FormRow>
+          <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="price">Preço</C.Label>
               <NumericFormat
@@ -228,8 +227,8 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
                 }}
               />
             </C.FormColumn>
-            </C.FormRow>
-           {/*} <C.FormRow>
+          </C.FormRow>
+          {/*} <C.FormRow>
             <C.FormColumn>
               <C.Label htmlFor="unit">Unidade</C.Label>
               <C.Input
@@ -251,7 +250,10 @@ const CriarProdutoModal = ({ isOpen, onClose, onCreate, categoria }) => {
               />
             </C.FormColumn>
             </C.FormRow> {*/}
-          <C.Button type="submit">Salvar</C.Button>
+          <Box display="flex" justifyContent="flex-end">
+            <Button onClick={onClose} variant="outlined" sx={{ mr: 2 }}>Cancelar</Button>
+            <Button type="submit" color="success" variant="contained">Salvar</Button>
+          </Box>
         </C.ModalForm>
       </Box>
     </Modal>
