@@ -14,7 +14,7 @@ import EditarEstoqueProdutoModal from "../../components/ModalEditarEstoqueProdut
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaEllipsisV, FaRandom, FaPlusCircle, FaBoxOpen } from 'react-icons/fa'; // Ícone de lápis
 import { Container, Button, Card, CardContent, Typography, IconButton, Switch, Menu, MenuItem, Box } from "@mui/material";
-import { AddCircle, MoreVert, Edit, Delete, Image, Inventory,Shuffle } from "@mui/icons-material";
+import { AddCircle, MoreVert, Edit, Delete, Image, Inventory, Shuffle } from "@mui/icons-material";
 
 
 
@@ -341,13 +341,13 @@ const Catalogo = () => {
       <Navbar />
       <Typography variant="h4" sx={{ textAlign: "center", my: 3 }}>Meu Catálogo</Typography>
 
-      
-         
-        
 
-       
-        
-      
+
+
+
+
+
+
 
 
       <Box display="flex" justifyContent="center" gap={2} my={2}>
@@ -373,18 +373,14 @@ const Catalogo = () => {
                     .map((categoria, index) => (
                       <Draggable key={categoria.id} draggableId={String(categoria.catalog_order || index)} index={index}>
                         {(provided) => (
-                          <C.Card
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                          >
+                          
                             <Card ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} sx={{ my: 1, p: 2 }}>
-                            <Typography variant="h6">{categoria.name}</Typography>
+                              <Typography variant="h6">{categoria.name}</Typography>
                               <C.ActionsWrapper>
                                 <FaArrowsAlt style={{ color: "blue" }} />
                               </C.ActionsWrapper>
-                              </Card>
-                          </C.Card>
+                            </Card>
+                           
                         )}
                       </Draggable>
                     ))}
@@ -406,7 +402,7 @@ const Catalogo = () => {
 
                   <C.ActionsWrapper>
 
-                  <IconButton onClick={(event) => handleMenuOpen(event, categoria)}>
+                    <IconButton onClick={(event) => handleMenuOpen(event, categoria)}>
                       <FaEllipsisV />
                     </IconButton>
 
@@ -415,7 +411,7 @@ const Catalogo = () => {
                       open={Boolean(menuAnchor)}
                       onClose={() => setMenuAnchor(null)}
                     >
-                     <MenuItem onClick={openEditarCategoriaModal}>
+                      <MenuItem onClick={openEditarCategoriaModal}>
                         <FaEdit style={{ marginRight: 8 }} /> Editar
                       </MenuItem>
                       <MenuItem onClick={() => { openDeleteCategoriaModal(categoria); setMenuAnchor(null); }}>
