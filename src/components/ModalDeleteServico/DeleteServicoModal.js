@@ -49,12 +49,12 @@ const DeletarServicoModal = ({ isOpen, onClose, servico, onDelete }) => {
         </Typography>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="primary">
+        <Button onClick={onClose} variant="outlined">
           Cancelar
         </Button>
         <Button 
           onClick={handleSubmit} 
-          color="secondary" 
+          color="error" 
           variant="contained"
         >
           Excluir
