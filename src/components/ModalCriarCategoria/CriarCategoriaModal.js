@@ -54,7 +54,15 @@ const CriarCategoriaModal = ({ isOpen, onClose, onCreate }) => {
         padding: 3,
         backgroundColor: 'white',
         borderRadius: 2,
-        boxShadow: 24
+        boxShadow: 24,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)'
       }}>
         <Typography variant="h6" mb={2}>Nova Categoria</Typography>
 
