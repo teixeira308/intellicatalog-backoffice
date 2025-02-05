@@ -347,11 +347,11 @@ const Catalogo = () => {
       <Box display="flex" justifyContent="center" gap={2} my={2}>
         {!isReorderMode && (
           <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => setIsCriarCategoriaModalOpen(true)}>
-            Nova Categoria
+            Categoria
           </Button>
         )}
         <Button size="medium" variant="outlined" endIcon={<Shuffle />} onClick={() => setIsReorderMode(!isReorderMode)}>
-          {isReorderMode ? "Salvar Ordem" : "Reordenar Categorias"}
+          {isReorderMode ? "Salvar Ordem" : "Reordenar"}
         </Button>
       </Box>
 
@@ -508,10 +508,10 @@ const Catalogo = () => {
                       </C.ReorderButton>
                       {*/}
                       {!isReorderProductMode && 
-                        <Button color="success" size="small" variant="contained" onClick={() => openCriarProdutoModal(categoria)} startIcon={<AddCircle />}> Novo Produto</Button>
+                        <Button color="success" size="small" variant="contained" onClick={() => openCriarProdutoModal(categoria)} startIcon={<AddCircle />}> Novo</Button>
                       }
                       <Button size="small" onClick={() => setIsReorderProductMode(!isReorderProductMode)} endIcon={<Shuffle />}>
-                        {isReorderProductMode ? "Salvar Ordem" : "Reordenar produtos"}
+                        {isReorderProductMode ? "Salvar Ordem" : "Reordenar"}
                       </Button>
                     </div>
                   </C.ProdutoList>

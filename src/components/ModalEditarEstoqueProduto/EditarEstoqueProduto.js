@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import * as C from "./styles";
 import productApi from "../../services/productApi";
 import { NumericFormat } from 'react-number-format';
-import "./styles.css"
+import { Button, TextField, Typography, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import "./styles.css";
 
 const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
   const { updateEstoqueProduto } = productApi();
@@ -14,7 +15,6 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
       });
     }
   }, [produto]);
-
 
   const [formData, setFormData] = useState({
     estoque: "",
@@ -31,12 +31,8 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
       Object.entries(data).filter(([key]) => allowedFields.includes(key))
     );
 
-
-
     return filteredData;
   };
-
-
 
   useEffect(() => {
     if (produto) {
@@ -52,9 +48,6 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
     }));
   };
 
-
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -64,7 +57,7 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
       onEdit();
     } catch (error) {
       console.error("Erro ao editar estoque produto:", error);
-      window.addToast("Ocorreu um erro ao editar estoque produto: "+error, "error");
+      window.addToast("Ocorreu um erro ao editar estoque produto: " + error, "error");
     }
   };
 
@@ -82,42 +75,32 @@ const EditarEstoqueProduto = ({ isOpen, onClose, produto, onEdit }) => {
     }));
   };
 
-
-
   if (!isOpen) return null;
 
   return (
-    <C.ModalOverlay>
-      <C.ModalContainer>
-        <C.ModalHeader>
-          <h2>Atualizar Estoque</h2>
-          <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
-        </C.ModalHeader>
-        <C.ModalForm onSubmit={handleSubmit}>
-          <C.FormRow>
-            <C.FormColumn>
-              <C.Label>Produto: {produto.titulo} </C.Label>
-            </C.FormColumn>
-          </C.FormRow>
-          <C.FormRow>
-            <C.FormColumn>
-              <C.Button type="button" variant="outline-secondary" onClick={increaseQuantity}>+</C.Button>
-              <C.Input
-                type="text"
-                name="estoque"
-                id="estoque"
-                value={formData.estoque || "0"} // Garante que seja string (usa "0" como fallback)
-                onChange={handleChange}
-                required
-              />
-              <C.Button type="button" variant="outline-secondary" onClick={decreaseQuantity}>-</C.Button>
-
-            </C.FormColumn>
-          </C.FormRow>
-          <C.Button type="submit">Salvar</C.Button>
-        </C.ModalForm>
-      </C.ModalContainer>
-    </C.ModalOverlay>
+    <Dialog open={isOpen} onClose={onClose}>
+      <DialogTitle>Atualizar Estoque</DialogTitle>
+      <DialogContent>
+        <Typography variant="body1">Produto: {produto.titulo}</Typography>
+        <div style={{ display: "flex", alignItems: "center", marginTop: "1rem" }}>
+          <Button variant="outlined" onClick={increaseQuantity} style={{ marginRight: "1rem" }}>+</Button>
+          <TextField
+            type="text"
+            name="estoque"
+            value={formData.estoque || "0"} // Garante que seja string
+            onChange={handleChange}
+            required
+            variant="outlined"
+            inputProps={{ style: { textAlign: 'center' } }}
+          />
+          <Button variant="outlined" onClick={decreaseQuantity} style={{ marginLeft: "1rem" }}>-</Button>
+        </div>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="secondary">Cancelar</Button>
+        <Button onClick={handleSubmit} color="primary">Salvar</Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 
