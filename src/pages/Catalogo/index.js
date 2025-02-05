@@ -337,9 +337,9 @@ const Catalogo = () => {
 
 
   return (
-    <C.Container>
+    <Container maxWidth="md">
       <Navbar />
-      <C.Title>Meu catálogo</C.Title>
+      <Typography variant="h4" sx={{ textAlign: "center", my: 3 }}>Meu Catálogo</Typography>
 
       
          
@@ -367,7 +367,7 @@ const Catalogo = () => {
           <DragDropContext onDragEnd={handleOnDragEnd}>
             <Droppable droppableId="categorias">
               {(provided) => (
-                <C.CategoriaList {...provided.droppableProps} ref={provided.innerRef}>
+                <Box {...provided.droppableProps} ref={provided.innerRef}>
                   {categorias
                     .sort((a, b) => (a.catalog_order || 0) - (b.catalog_order || 0))
                     .map((categoria, index) => (
@@ -378,19 +378,19 @@ const Catalogo = () => {
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                           >
-                            <C.StatusWrapper>
-                              <C.CategoriaLink>{categoria.name}</C.CategoriaLink>
+                            <Card ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} sx={{ my: 1, p: 2 }}>
+                            <Typography variant="h6">{categoria.name}</Typography>
                               <C.ActionsWrapper>
                                 <FaArrowsAlt style={{ color: "blue" }} />
                               </C.ActionsWrapper>
-                            </C.StatusWrapper>
+                              </Card>
                           </C.Card>
                         )}
                       </Draggable>
                     ))}
 
                   {provided.placeholder}
-                </C.CategoriaList>
+                </Box>
               )}
             </Droppable>
           </DragDropContext>
@@ -584,7 +584,7 @@ const Catalogo = () => {
         onCreate={handleNewFotoProdutoCreated}
       />
 
-    </C.Container>
+    </Container>
   );
 };
 
