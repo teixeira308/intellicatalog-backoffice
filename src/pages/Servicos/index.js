@@ -7,10 +7,13 @@ import DeleteServiceModal from "../../components/ModalDeleteServico/DeleteServic
 import CriarServicoModal from "../../components/ModalCriarServico/CriarServicoModal";
 import EditarServicoModal from "../../components/ModalEditarServico/EditarServicoModal";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Container, Button, Card, CardContent, Typography, IconButton, Switch, Menu, MenuItem, Box } from "@mui/material";
+import { AddCircle, MoreVert, Edit, Delete, Image, Inventory, Shuffle } from "@mui/icons-material";
+
 
 const Servicos = () => {
   const [servicos, setServicos] = useState([]);
-  const { getServicesByUser, deleteServices, updateServiceOrder, updateServiceStatus  } = ServicesApi();
+  const { getServicesByUser, deleteServices, updateServiceOrder, updateServiceStatus } = ServicesApi();
   const [isDeleteServicoModalOpen, setIsDeleteServicoModalOpen] = useState(false);
   const [isCriarServicoModalOpen, setIsCriarServicoModalOpen] = useState(false);
   const [selectedServico, setSelectedServico] = useState(null);
@@ -99,7 +102,7 @@ const Servicos = () => {
         console.log('servico id:', servico.id)
         // Chamada à API para atualizar o status
         await updateServiceStatus(servico.id, updatedServico);
-  
+
         // Atualiza a lista de serviços no estado
         setServicos((prevServicos) =>
           prevServicos.map((s) =>
@@ -111,7 +114,7 @@ const Servicos = () => {
       console.error("Erro ao mudar o status do serviço:", error);
     }
   };
-  
+
 
   const handleOnDragEnd = async (result) => {
     if (!result.destination) return;
@@ -159,11 +162,14 @@ const Servicos = () => {
 
   return (
     <>
-      <C.PageWrapper>
-        <Navbar />
-        <C.MainContent>
-          <C.Title>Serviços</C.Title>
-          <C.ButtonGroup>
+      <C.Container>
+        <Container maxWidth="md">
+          <Navbar />
+          <Typography variant="h6" sx={{ textAlign: "center", my: 3 }}>Serviços</Typography>
+
+
+
+          {/*}<C.ButtonGroup>
             <C.CreateButton onClick={() => openCriarProdutoModal()}>
               <FaPlusCircle /> Novo Serviço
             </C.CreateButton>
@@ -171,48 +177,58 @@ const Servicos = () => {
               <FaRandom /> Reordenar
             </C.ReordButton>
           </C.ButtonGroup>
-          <C.Section>
+           {*/}
 
-            {
-              isReorderMode ? (
-                <DragDropContext onDragEnd={handleOnDragEnd}>
-                  <Droppable droppableId="servicos">
-                    {(provided) => (
-                      <C.ServicoList {...provided.droppableProps} ref={provided.innerRef}>
-                        {servicos
-                          .sort((a, b) => (a.servico_order || 0) - (b.servico_order || 0))
-                          .map((servico, index) => (
-                            <Draggable key={servico.id} draggableId={String(servico.servico_order || index)} index={index}>
-                              {(provided) => (
-                                <C.Card
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                >
-                                  <C.StatusWrapper>
-                                    <C.CardDetail>{servico.name}</C.CardDetail>
-                                    <C.ActionsWrapper>
-                                      <FaArrowsAlt style={{ color: "blue" }} />
-                                    </C.ActionsWrapper>
-                                  </C.StatusWrapper>
-                                </C.Card>
-                              )}
-                            </Draggable>
-                          ))}
+          <Box display="flex" justifyContent="center" gap={2} my={2}>
+            {!isReorderMode && (
+              <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openCriarProdutoModal()}>
+                Serviço
+              </Button>
+            )}
+            <Button size="medium" variant="outlined" endIcon={<Shuffle />} onClick={() => setIsReorderMode(!isReorderMode)}>
+              {isReorderMode ? "Salvar Ordem" : "Reordenar"}
+            </Button>
+          </Box> 
+          {
+            isReorderMode ? (
+              <DragDropContext onDragEnd={handleOnDragEnd}>
+                <Droppable droppableId="servicos">
+                  {(provided) => (
+                    <Box {...provided.droppableProps} ref={provided.innerRef}>
+                      {servicos
+                        .sort((a, b) => (a.servico_order || 0) - (b.servico_order || 0))
+                        .map((servico, index) => (
+                          <Draggable key={servico.id} draggableId={String(servico.servico_order || index)} index={index}>
+                            {(provided) => (
+                              <Card
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <C.StatusWrapper>
+                                  <Typography variant="h6">{servico.name}</Typography>
+                                  <C.ActionsWrapper>
+                                    <FaArrowsAlt style={{ color: "blue" }} />
+                                  </C.ActionsWrapper>
+                                </C.StatusWrapper>
+                              </Card>
+                            )}
+                          </Draggable>
+                        ))}
 
-                        {provided.placeholder}
-                      </C.ServicoList>
-                    )}
-                  </Droppable>
-                </DragDropContext>
-              ) : (
-                servicos
+                      {provided.placeholder}
+                    </Box>
+                  )}
+                </Droppable>
+              </DragDropContext>
+            ) : (
+              servicos
                 .sort((a, b) => a.servico_order - b.servico_order)
                 .map((servico) => (
                   <C.Card key={servico.servico_order}>
                     <C.CardHeader>
                       <C.CardTitle>{servico.name}</C.CardTitle>
-                      <C.CardStatus onClick={() => {handleChangeStatusServico(servico);}}>
+                      <C.CardStatus onClick={() => { handleChangeStatusServico(servico); }}>
                         {servico.is_active ? "Ativo" : "Inativo"}
                       </C.CardStatus>
                     </C.CardHeader>
@@ -241,11 +257,10 @@ const Servicos = () => {
                   </C.Card>
                 )
                 )
-              )
-            }
-          </C.Section>
-        </C.MainContent>
-      </C.PageWrapper>
+            )
+          }
+        </Container>
+      </C.Container>
 
       <CriarServicoModal
         isOpen={isCriarServicoModalOpen}
