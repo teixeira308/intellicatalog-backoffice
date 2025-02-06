@@ -227,7 +227,9 @@ const Servicos = () => {
                 .map((servico) => (
                   <C.Card key={servico.servico_order}>
                     <C.CardHeader>
-                      <C.CardTitle>{servico.name}</C.CardTitle>
+                       
+                      <Typography variant="h6" sx={{ textAlign: "center", my: 3 }}>{servico.name}</Typography>
+                     
                       <C.CardStatus onClick={() => { handleChangeStatusServico(servico); }}>
                         {servico.is_active ? "Ativo" : "Inativo"}
                       </C.CardStatus>
@@ -245,10 +247,10 @@ const Servicos = () => {
                       </C.CardDetail>
                       <C.CardDetail>
                         <C.ButtonGroup>
-                          <Button size="medium" color="success" variant="contained" onClick={() => openEditarServicoModal(servico)}>
+                          <Button size="small" color="success" variant="contained" onClick={() => openEditarServicoModal(servico)}>
                             <Edit   /> Editar
                           </Button>
-                          <Button size="medium" variant="outlined" color="error" onClick={() => openDeleteServiceModal(servico)}>
+                          <Button size="small" variant="outlined" color="error" onClick={() => openDeleteServiceModal(servico)}>
                             <Delete   /> Excluir
                           </Button>
                         </C.ButtonGroup>
