@@ -1,14 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 100vh;
-  padding: 20px;
-  padding-top: 220px; /* Adiciona espaço abaixo do Navbar */
-  background-color: #f4f4f4;
+  padding-top: 90px; /* Adiciona espaço abaixo do Navbar */
+  
 `;
 
 export const PageWrapper = styled.div`

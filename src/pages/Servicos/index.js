@@ -245,12 +245,12 @@ const Servicos = () => {
                       </C.CardDetail>
                       <C.CardDetail>
                         <C.ButtonGroup>
-                          <C.EditButton onClick={() => openEditarServicoModal(servico)}>
-                            <FaEdit /> Editar
-                          </C.EditButton>
-                          <C.TrashButton onClick={() => openDeleteServiceModal(servico)}>
-                            <FaTrashAlt /> Excluir
-                          </C.TrashButton>
+                          <Button size="medium" color="success" variant="contained" onClick={() => openEditarServicoModal(servico)}>
+                            <Edit sx={{ color: pink[500] }} /> Editar
+                          </Button>
+                          <Button size="medium" variant="outlined" color="error" onClick={() => openDeleteServiceModal(servico)}>
+                            <Delete sx={{ color: pink[500] }} /> Excluir
+                          </Button>
                         </C.ButtonGroup>
                       </C.CardDetail>
                     </C.CardBody>
