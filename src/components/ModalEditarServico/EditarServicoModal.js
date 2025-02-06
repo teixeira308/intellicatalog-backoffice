@@ -3,6 +3,7 @@ import * as C from "./styles";
 import servicesApi from "../../services/ServicesApi";
 import { NumericFormat } from 'react-number-format';
 import "./styles.css"
+import { Modal, Box, Typography, TextField, Button } from "@mui/material";
 
 const EditarServicoModal = ({ isOpen, onClose, servico, onEdit }) => {
   const { updateService } = servicesApi();
@@ -19,15 +20,15 @@ const EditarServicoModal = ({ isOpen, onClose, servico, onEdit }) => {
       'description',
       'price'
     ];
-  
+
     // Filtra os dados mantendo apenas os campos permitidos
     const filteredData = Object.fromEntries(
       Object.entries(data).filter(([key]) => allowedFields.includes(key))
     );
-  
+
     return filteredData;
   };
-  
+
 
 
   useEffect(() => {
@@ -55,7 +56,7 @@ const EditarServicoModal = ({ isOpen, onClose, servico, onEdit }) => {
       onEdit();
     } catch (error) {
       console.error("Erro ao editar serviço:", error);
-      window.addToast("Ocorreu um erro ao editar serviço: "+error, "error");
+      window.addToast("Ocorreu um erro ao editar serviço: " + error, "error");
     }
   };
 
@@ -86,16 +87,32 @@ const EditarServicoModal = ({ isOpen, onClose, servico, onEdit }) => {
   };
 
   return (
-    <C.ModalOverlay>
-      <C.ModalContainer>
+    <Modal open={isOpen} onClose={onClose}>
+      <Box sx={{
+        width: 400,
+        margin: 'auto',
+        padding: 3,
+        backgroundColor: 'white',
+        borderRadius: 2,
+        boxShadow: 24,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)'
+      }}>
         <C.ModalHeader>
-          <h2>Editar Serviço</h2>
-          <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
+
+          <Typography variant="h6" mb={2}>Editar Serviço</Typography>
+
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="name">Nome</C.Label>
+              {/*} <C.Label htmlFor="name">Nome</C.Label>
               <C.Input
                 type="text"
                 name="name"
@@ -103,25 +120,45 @@ const EditarServicoModal = ({ isOpen, onClose, servico, onEdit }) => {
                 value={formData.name}
                 onChange={handleChange}
                 required
+              />{*/}
+              <TextField
+                label="Nome"
+                name="name"
+                id="name"
+                value={formData.name}
+                onChange={handleChange}
+                fullWidth
+                required
+                sx={{ mb: 2 }}
               />
             </C.FormColumn>
           </C.FormRow>
 
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="description">Descrição</C.Label>
+             {/*}  <C.Label htmlFor="description">Descrição</C.Label>
               <C.Input
                 type="text"
                 name="description"
                 id="description"
                 value={formData.description}
                 onChange={handleChange}
+              /> {*/}
+                <TextField
+                label="Descrição"
+                name="description"
+                id="description"
+                value={formData.description}
+                onChange={handleChange}
+                fullWidth
+                required
+                sx={{ mb: 2 }}
               />
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="price">Preço</C.Label>
+               {/*}<C.Label htmlFor="price">Preço</C.Label>
               <NumericFormat
                 className="NumericFormat"
                 name="price"
@@ -136,7 +173,29 @@ const EditarServicoModal = ({ isOpen, onClose, servico, onEdit }) => {
                 fixedDecimalScale={true}
                 prefix={'R$ '}
                 placeholder="0,00" // Placeholder para o formato esperado
-              />
+              />{*/}
+               <NumericFormat
+                              customInput={TextField}
+                              label="Preço"
+                              name="price"
+                              id="price"
+                              value={formData.price}
+                              onValueChange={(values) => {
+                                const { value } = values; // Obtém o valor numérico
+                                setFormData((prevFormData) => ({
+                                  ...prevFormData,
+                                  price: value, // Atualiza o valor no formData
+                                }));
+                              }}
+                              thousandSeparator="."
+                              decimalSeparator=","
+                              decimalScale={2}
+                              fixedDecimalScale
+                              prefix="R$ "
+                              placeholder="R$ 0,00"
+                              fullWidth
+                              sx={{ mb: 2 }} // Espaçamento inferior
+                            />
             </C.FormColumn>
           </C.FormRow>
           {/*} <C.FormRow>
@@ -161,10 +220,13 @@ const EditarServicoModal = ({ isOpen, onClose, servico, onEdit }) => {
               />
             </C.FormColumn>
             </C.FormRow>{*/}
-          <C.Button type="submit">Salvar</C.Button>
+          <Box display="flex" justifyContent="flex-end">
+                      <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Cancelar</Button>
+                      <Button type="submit" color="success" variant="contained">Salvar</Button>
+                    </Box>
         </C.ModalForm>
-      </C.ModalContainer>
-    </C.ModalOverlay>
+      </Box>
+    </Modal>
   );
 };
 
