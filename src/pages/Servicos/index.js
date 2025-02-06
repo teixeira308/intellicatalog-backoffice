@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as C from "./style";
 import Navbar from "../../components/Navbar/Navbar";
 import ServicesApi from "../../services/ServicesApi";
-import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaWhatsapp, FaPlusCircle, FaRandom } from 'react-icons/fa'; // Ícone de lápis
+import { FaTrashAlt, FaArrowsAlt, FaEdit,FaEllipsisV } from 'react-icons/fa'; // Ícone de lápis
 import DeleteServiceModal from "../../components/ModalDeleteServico/DeleteServicoModal";
 import CriarServicoModal from "../../components/ModalCriarServico/CriarServicoModal";
 import EditarServicoModal from "../../components/ModalEditarServico/EditarServicoModal";
@@ -238,7 +238,7 @@ const Servicos = () => {
                       <C.CardStatus onClick={() => { handleChangeStatusServico(servico); }}>
                         {servico.is_active ? "Ativo" : "Inativo"}
                       </C.CardStatus>
-                      <IconButton onClick={(event) => handleMenuOpen(event, categoria)}>
+                      <IconButton onClick={(event) => handleMenuOpen(event, servico)}>
                         <FaEllipsisV />
                       </IconButton>
 
@@ -247,7 +247,7 @@ const Servicos = () => {
                         open={Boolean(menuAnchor)}
                         onClose={() => setMenuAnchor(null)}
                       >
-                        <MenuItem onClick={() => openEditarServicoModal(servico)}>
+                        <MenuItem onClick={() => {openEditarServicoModal(servico)}}>
                           <FaEdit style={{ marginRight: 8 }} /> Editar
                         </MenuItem>
                         <MenuItem onClick={() => { () => openDeleteServiceModal(servico); setMenuAnchor(null); }}>
