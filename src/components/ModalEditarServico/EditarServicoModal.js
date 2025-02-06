@@ -150,6 +150,9 @@ const EditarServicoModal = ({ isOpen, onClose, servico, onEdit }) => {
                 id="description"
                 value={formData.description}
                 onChange={handleChange}
+                multiline
+                rows={4} // Define a altura inicial
+                inputProps={{ maxLength: 500 }} // Limita a 500 caracteres
                 fullWidth
                 required
                 sx={{ mb: 2 }}
