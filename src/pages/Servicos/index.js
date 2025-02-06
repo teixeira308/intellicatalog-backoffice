@@ -247,7 +247,7 @@ const Servicos = () => {
                         open={Boolean(menuAnchor)}
                         onClose={() => setMenuAnchor(null)}
                       >
-                        <MenuItem onClick={() => {openEditarServicoModal(servico)}}>
+                        <MenuItem onClick={() => {openEditarServicoModal(servico);setMenuAnchor(null);}}>
                           <FaEdit style={{ marginRight: 8 }} /> Editar
                         </MenuItem>
                         <MenuItem onClick={() => {  openDeleteServiceModal(servico); setMenuAnchor(null); }}>
