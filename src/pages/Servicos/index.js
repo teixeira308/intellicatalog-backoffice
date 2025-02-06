@@ -18,7 +18,7 @@ const Servicos = () => {
   const [isCriarServicoModalOpen, setIsCriarServicoModalOpen] = useState(false);
   const [selectedServico, setSelectedServico] = useState(null);
   const [isEditarServicoModalOpen, setIsEditarServicoModalOpen] = useState(null);
-
+  const [menuAnchor, setMenuAnchor] = useState(null);
   const [isReorderMode, setIsReorderMode] = useState(false); // Estado para o modo de reordenação
   const [isReorderProductMode, setIsReorderProductMode] = useState(false); // Estado para o modo de reordenação
 
@@ -159,6 +159,11 @@ const Servicos = () => {
   //UPDATE STATUS
 
 
+  //Menu 3 pontos
+  const handleMenuOpen = (event, servico) => {
+    setSelectedServico(servico);
+    setMenuAnchor(event.currentTarget);
+  };
 
   return (
     <>
@@ -188,7 +193,7 @@ const Servicos = () => {
             <Button size="medium" variant="outlined" endIcon={<Shuffle />} onClick={() => setIsReorderMode(!isReorderMode)}>
               {isReorderMode ? "Salvar Ordem" : "Reordenar"}
             </Button>
-          </Box> 
+          </Box>
           {
             isReorderMode ? (
               <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -227,12 +232,28 @@ const Servicos = () => {
                 .map((servico) => (
                   <C.Card key={servico.servico_order}>
                     <C.CardHeader>
-                       
+
                       <Typography variant="h6" sx={{ textAlign: "center", my: 3 }}>{servico.name}</Typography>
-                     
+
                       <C.CardStatus onClick={() => { handleChangeStatusServico(servico); }}>
                         {servico.is_active ? "Ativo" : "Inativo"}
                       </C.CardStatus>
+                      <IconButton onClick={(event) => handleMenuOpen(event, categoria)}>
+                        <FaEllipsisV />
+                      </IconButton>
+
+                      <Menu
+                        anchorEl={menuAnchor}
+                        open={Boolean(menuAnchor)}
+                        onClose={() => setMenuAnchor(null)}
+                      >
+                        <MenuItem onClick={() => openEditarServicoModal(servico)}>
+                          <FaEdit style={{ marginRight: 8 }} /> Editar
+                        </MenuItem>
+                        <MenuItem onClick={() => { () => openDeleteServiceModal(servico); setMenuAnchor(null); }}>
+                          <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
+                        </MenuItem>
+                      </Menu>
                     </C.CardHeader>
                     <C.CardBody>
                       <C.CardDetail>
@@ -248,10 +269,10 @@ const Servicos = () => {
                       <C.CardDetail>
                         <C.ButtonGroup>
                           <Button size="small" color="success" variant="contained" onClick={() => openEditarServicoModal(servico)}>
-                            <Edit   /> Editar
+                            <Edit /> Editar
                           </Button>
                           <Button size="small" variant="outlined" color="error" onClick={() => openDeleteServiceModal(servico)}>
-                            <Delete   /> Excluir
+                            <Delete /> Excluir
                           </Button>
                         </C.ButtonGroup>
                       </C.CardDetail>
