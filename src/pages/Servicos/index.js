@@ -233,8 +233,8 @@ const Servicos = () => {
                   <C.Card key={servico.servico_order}>
                     <C.CardHeader>
 
-                      <Typography variant="h6" sx={{ textAlign: "center", my: 3 }}>{servico.name}</Typography>
-
+                      <C.CardTitle><Typography variant="h6" sx={{ textAlign: "center" }}>{servico.name}</Typography>
+                      </C.CardTitle>
                       <C.CardStatus onClick={() => { handleChangeStatusServico(servico); }}>
                         {servico.is_active ? "Ativo" : "Inativo"}
                       </C.CardStatus>
