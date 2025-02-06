@@ -246,10 +246,10 @@ const Servicos = () => {
                       <C.CardDetail>
                         <C.ButtonGroup>
                           <Button size="medium" color="success" variant="contained" onClick={() => openEditarServicoModal(servico)}>
-                            <Edit sx={{ color: pink[500] }} /> Editar
+                            <Edit   /> Editar
                           </Button>
                           <Button size="medium" variant="outlined" color="error" onClick={() => openDeleteServiceModal(servico)}>
-                            <Delete sx={{ color: pink[500] }} /> Excluir
+                            <Delete   /> Excluir
                           </Button>
                         </C.ButtonGroup>
                       </C.CardDetail>
