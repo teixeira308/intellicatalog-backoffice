@@ -144,7 +144,19 @@ const EditarServicoModal = ({ isOpen, onClose, servico, onEdit }) => {
                 value={formData.description}
                 onChange={handleChange}
               /> {*/}
-               
+                <TextField
+                label="Descrição"
+                name="description"
+                id="description"
+                value={formData.description}
+                onChange={handleChange}
+                multiline
+                rows={4} // Define a altura inicial
+                inputProps={{ maxLength: 500 }} // Limita a 500 caracteres
+                placeholder="Digite sua descrição aqui..."
+                fullWidth
+                sx={{ mb: 2 }}
+              />
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>

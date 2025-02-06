@@ -266,16 +266,7 @@ const Servicos = () => {
                           ? `R$ ${parseFloat(servico.price).toFixed(2)}`
                           : "Preço não informado"}
                       </C.CardDetail>
-                      <C.CardDetail>
-                        <C.ButtonGroup>
-                          <Button size="small" color="success" variant="contained" onClick={() => openEditarServicoModal(servico)}>
-                            <Edit /> Editar
-                          </Button>
-                          <Button size="small" variant="outlined" color="error" onClick={() => openDeleteServiceModal(servico)}>
-                            <Delete /> Excluir
-                          </Button>
-                        </C.ButtonGroup>
-                      </C.CardDetail>
+                      
                     </C.CardBody>
                   </C.Card>
                 )
