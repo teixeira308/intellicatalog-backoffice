@@ -153,8 +153,8 @@ const EditarServicoModal = ({ isOpen, onClose, servico, onEdit }) => {
                 multiline
                 rows={4} // Define a altura inicial
                 inputProps={{ maxLength: 500 }} // Limita a 500 caracteres
+                placeholder="Digite sua descrição aqui..."
                 fullWidth
-                required
                 sx={{ mb: 2 }}
               />
             </C.FormColumn>
