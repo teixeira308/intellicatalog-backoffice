@@ -250,7 +250,7 @@ const Servicos = () => {
                         <MenuItem onClick={() => {openEditarServicoModal(servico)}}>
                           <FaEdit style={{ marginRight: 8 }} /> Editar
                         </MenuItem>
-                        <MenuItem onClick={() => { () => openDeleteServiceModal(servico); setMenuAnchor(null); }}>
+                        <MenuItem onClick={() => {  openDeleteServiceModal(servico); setMenuAnchor(null); }}>
                           <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
                         </MenuItem>
                       </Menu>
