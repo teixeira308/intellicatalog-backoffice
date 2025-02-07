@@ -169,11 +169,11 @@ const Pedidos = () => {
         <Typography variant="h6" sx={{ textAlign: "center", my: 3 }}>Pedidos</Typography>
 
         <Box display="flex" justifyContent="center" gap={2} my={2}>
-          {!isReorderMode && (
+          
             <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openCriarPedidoModal()}>
               Novo Pedido
             </Button>
-          )}
+         
 
         </Box>
 
