@@ -13,7 +13,8 @@ const EditarPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
     phone: "",
     delivery_address: "",
     notes: "",
-    id: ""
+    id: "",
+    data_entrega:""
   });
 
   const filterFormData = (data) => {
@@ -23,7 +24,8 @@ const EditarPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
       'phone',
       'delivery_address',
       'notes',
-      'id'
+      'id',
+      'data_entrega'
     ];
 
     // Filtra os dados mantendo apenas os campos permitidos
@@ -156,6 +158,22 @@ const EditarPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
                 sx={{ marginRight: '10px' }}
               />
             </C.FormColumn>
+          </C.FormRow>
+          <C.FormRow>
+          <C.FormColumn>
+              <TextField
+                            label="Data da entrega"
+                            type="date"
+                            name="data_entrega"
+                            value={formData.data_entrega}
+                            onChange={handleChange}
+                            fullWidth
+                            required
+                            InputLabelProps={{ shrink: true }}
+                            sx={{ mb: 2 }}
+                          />
+         
+         </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>

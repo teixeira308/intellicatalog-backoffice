@@ -11,7 +11,7 @@ const CriarPedidoModal = ({ isOpen, onClose, onCreate }) => {
     notes: "",
     payment_method: "",
     items: "",
-
+    data_entrega: ""
   });
 
   const filterFormData = (data) => {
@@ -22,6 +22,7 @@ const CriarPedidoModal = ({ isOpen, onClose, onCreate }) => {
       'notes',
       'payment_method',
       'items',
+      'data_entrega'
     ];
 
     // Filtra os dados mantendo apenas os campos permitidos
@@ -178,20 +179,18 @@ const CriarPedidoModal = ({ isOpen, onClose, onCreate }) => {
                 rows={4} // Define o número de linhas visíveis
                 placeholder="Digite sua observação aqui..."
               /> {*/}
-
               <TextField
-                label="Observação"
-                name="notes"
-                id="notes"
-                value={formData.notes}
+                label="Data da entrega"
+                type="date"
+                name="data_entrega"
+                value={formData.data_entrega}
                 onChange={handleChange}
-                multiline
-                rows={4} // Define a altura inicial
-                inputProps={{ maxLength: 500 }} // Limita a 500 caracteres
-                placeholder="Digite sua observação aqui..."
                 fullWidth
-                sx={{ mb: 2 }} // Adiciona margem inferior para espaçamento
+                required
+                InputLabelProps={{ shrink: true }}
+                sx={{ mb: 2 }}
               />
+             
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
@@ -239,6 +238,23 @@ const CriarPedidoModal = ({ isOpen, onClose, onCreate }) => {
               />
             </C.FormColumn>
             </C.FormRow> {*/}
+            <C.FormRow>
+              <C.FormColumn>
+              <TextField
+                label="Observação"
+                name="notes"
+                id="notes"
+                value={formData.notes}
+                onChange={handleChange}
+                multiline
+                rows={4} // Define a altura inicial
+                inputProps={{ maxLength: 500 }} // Limita a 500 caracteres
+                placeholder="Digite sua observação aqui..."
+                fullWidth
+                sx={{ mb: 2 }} // Adiciona margem inferior para espaçamento
+              />
+              </C.FormColumn>
+            </C.FormRow>
           <Box display="flex" justifyContent="flex-end">
             <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Cancelar</Button>
             <Button type="submit" color="success" variant="contained">Salvar</Button>
