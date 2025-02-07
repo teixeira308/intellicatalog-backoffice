@@ -14,6 +14,9 @@ const DetalhespedidoModal = ({ isOpen, onClose, pedido }) => {
           <strong>Data do Pedido:</strong> {new Date(pedido.order_date).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })}
         </Typography>
         <Typography variant="body1">
+          <strong>Data da Entrega:</strong> {new Date(pedido.data_entrega).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })}
+        </Typography>
+        <Typography variant="body1">
           <strong>Telefone:</strong> {pedido.phone}
         </Typography>
         <Typography variant="body1">
