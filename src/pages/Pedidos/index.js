@@ -245,9 +245,13 @@ const Pedidos = () => {
                   </C.CardDetail>
                   {expandedPedidoId === pedido.id && (
                     <>
-                      <C.CreateButton onClick={() => { openAdicionarItemPedidoModal(pedido); }}>
+                    {/*}  <C.CreateButton onClick={() => { openAdicionarItemPedidoModal(pedido); }}>
                         <FaPlusCircle /> Produto
-                      </C.CreateButton>
+                      </C.CreateButton>{*/}
+                      <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openAdicionarItemPedidoModal(pedido)}>
+                        Novo Pedido
+                      </Button>
+
                       {pedido.items.map((item, idx) => {
                         const produto = getProdutoDetalhes(item.product_id);
                         return (
@@ -272,9 +276,12 @@ const Pedidos = () => {
                                     thousandSeparator
                                     prefix="R$ "
                                   /></C.CardDetail>
-                                <C.TrashButton onClick={() => { openDeletarItemPedidoModal(pedido, produto); }}>
+                                {/*} <C.TrashButton onClick={() => { openDeletarItemPedidoModal(pedido, produto); }}>
                                   <FaTrashAlt />
-                                </C.TrashButton>
+                                </C.TrashButton> {*/}
+                                <Button size="small" color="error" variant="contained" startIcon={<Delete />} onClick={() => openDeletarItemPedidoModal(pedido, produto)}>
+                                  Deletar
+                                </Button>
                               </C.CardBody>
                             ) : (
                               <p>Pedido sem produtos.</p>
