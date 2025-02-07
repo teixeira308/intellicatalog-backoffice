@@ -164,8 +164,9 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
                 ))}
               </C.Select> {*/}
 
-
+              <InputLabel id="service">Serviço</InputLabel>
               <Select
+                labelId="service"
                 value={formData.service_id}
                 onChange={handleChange}
                 name="service_id"
