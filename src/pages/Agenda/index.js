@@ -117,12 +117,22 @@ const Agenda = () => {
 
   return (
     <C.Container>
-     
-      <Container>
-      <Navbar />
-        <Typography variant="h6"  justifyContent="center"  gutterBottom>
+
+      <Container maxWidth="md">
+        <Navbar />
+        <Typography variant="h6" justifyContent="center" gutterBottom>
           Agenda
         </Typography>
+
+        {/* Seleção de Serviço */}
+        <Typography variant="body1">Serviço:</Typography>
+        <Select value={servicoAtual} onChange={handleChangeServico} fullWidth>
+          {servicos.map((servico) => (
+            <MenuItem key={servico.id} value={servico.id}>
+              {servico.name}
+            </MenuItem>
+          ))}
+        </Select>
 
         {/* Controles do Mês */}
         <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
@@ -143,15 +153,7 @@ const Agenda = () => {
 
 
 
-        {/* Seleção de Serviço */}
-        <Typography variant="body1">Serviço:</Typography>
-        <Select value={servicoAtual} onChange={handleChangeServico} fullWidth>
-          {servicos.map((servico) => (
-            <MenuItem key={servico.id} value={servico.id}>
-              {servico.name}
-            </MenuItem>
-          ))}
-        </Select>
+
 
         {/* Botão Criar Disponibilidade */}
         <Stack direction="row" justifyContent="end" my={2}>
@@ -174,13 +176,13 @@ const Agenda = () => {
               {datasVisiveis[data] && (
                 <Stack spacing={1} mt={1}>
                   {agendamentos.map((availability, index) => (
-                    <Card key={index} sx={{ bgcolor: availability.status === "booked" ? "error.light" : "success.light" }}>
-                      <CardContent>
-                        <Typography>
+                    <C.Card key={index} >
+                      <C.CardContent>
+                        
                           {availability.start_time} - {availability.end_time}
-                        </Typography>
-                      </CardContent>
-                    </Card>
+                         
+                      </C.CardContent>
+                    </C.Card>
                   ))}
                 </Stack>
               )}
