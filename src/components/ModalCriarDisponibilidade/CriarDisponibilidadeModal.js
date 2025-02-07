@@ -2,19 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as C from "./styles";
 import servicesApi from "../../services/ServicesApi";
 import avaliabilityApi from "../../services/disponibilidadeApi";
-import {
-  Container,
-  Typography,
-  Button,
-  Select,
-  MenuItem,
-  IconButton,
-  Card,
-  CardContent,
-  Box,
-  Stack,
-  Paper,
-} from "@mui/material";
+import { Modal, Box, Typography, TextField, Button } from "@mui/material";
 
 const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
   const { getServicesByUser } = servicesApi();
