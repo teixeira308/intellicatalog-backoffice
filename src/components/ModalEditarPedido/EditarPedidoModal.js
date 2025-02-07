@@ -85,7 +85,7 @@ const EditarPedidoModal = ({ isOpen, onClose, pedido, onEdit }) => {
       }}>
         <C.ModalHeader>
           <Typography variant="h6" mb={2}>Editar Pedido #{formData.id}</Typography>
-          <C.CloseButton onClick={onClose}>&times;</C.CloseButton>
+         
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
 

@@ -163,168 +163,180 @@ const Pedidos = () => {
 
   return (
     <C.Container>
-          <Container maxWidth="md">
-      <Navbar />
-       
-      <Typography variant="h6" sx={{ textAlign: "center", my: 3 }}>Pedidos</Typography>
-      
-      <Box display="flex" justifyContent="center" gap={2} my={2}>
-              {!isReorderMode && (
-                <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openCriarPedidoModal()}>
-                  Novo Pedido
-                </Button>
-              )}
-               
-            </Box>
+      <Container maxWidth="md">
+        <Navbar />
 
-      <C.Section>
-        {pedidos.length > 0 ? (
-          pedidos.map((pedido, index) => (
-            <C.Card key={pedido.id || index}>
-              <C.CardHeader>
-                <C.CardTitle>#{pedido.id}</C.CardTitle>
-                <C.CardStatus
-                  status={pedido.status}
-                  onClick={() => openMudarStatusPedidoModal(pedido)}
-                >
-                  {pedido.status}
-                </C.CardStatus>
+        <Typography variant="h6" sx={{ textAlign: "center", my: 3 }}>Pedidos</Typography>
 
-              </C.CardHeader>
-              <C.CardBody>
-                <C.CardDetail>
-                  <strong>Cliente:</strong>{" "}
-                  {pedido.phone}
-                </C.CardDetail>
-                <C.CardDetail>
-                  <strong>Criado em:</strong> {new Intl.DateTimeFormat("pt-BR", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    second: "2-digit",
-                    hour12: false,
-                  }).format(new Date(pedido.order_date))}
-                </C.CardDetail>
-                <C.CardDetail>
-                  <strong>Total:</strong>{" "}
-                  R${pedido.total_amount}
-                </C.CardDetail>
-                <C.CardDetail>
-                  <C.ButtonGroup>
-                    <C.ReordButton onClick={() => togglePedidoItems(pedido.id)}>
+        <Box display="flex" justifyContent="center" gap={2} my={2}>
+          {!isReorderMode && (
+            <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openCriarPedidoModal()}>
+              Novo Pedido
+            </Button>
+          )}
+
+        </Box>
+
+        <C.Section>
+          {pedidos.length > 0 ? (
+            pedidos.map((pedido, index) => (
+              <C.Card key={pedido.id || index}>
+                <C.CardHeader>
+                  <C.CardTitle>#{pedido.id}</C.CardTitle>
+                  <C.CardStatus
+                    status={pedido.status}
+                    onClick={() => openMudarStatusPedidoModal(pedido)}
+                  >
+                    {pedido.status}
+                  </C.CardStatus>
+
+                </C.CardHeader>
+                <C.CardBody>
+                  <C.CardDetail>
+                    <strong>Cliente:</strong>{" "}
+                    {pedido.phone}
+                  </C.CardDetail>
+                  <C.CardDetail>
+                    <strong>Criado em:</strong> {new Intl.DateTimeFormat("pt-BR", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      hour12: false,
+                    }).format(new Date(pedido.order_date))}
+                  </C.CardDetail>
+                  <C.CardDetail>
+                    <strong>Total:</strong>{" "}
+                    R${pedido.total_amount}
+                  </C.CardDetail>
+                  <C.CardDetail>
+                    <C.ButtonGroup>
+                     {/*} <C.ReordButton onClick={() => togglePedidoItems(pedido.id)}>
+                        {expandedPedidoId === pedido.id ? "Ocultar Itens" : "Ver Itens"}
+                      </C.ReordButton>{*/}
+                      <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => togglePedidoItems(pedido.id)}>
                       {expandedPedidoId === pedido.id ? "Ocultar Itens" : "Ver Itens"}
-                    </C.ReordButton>
-                    <C.ReordButton onClick={() => { openDetalhesPedidoModal(pedido); }} >
-                      <FaSearch /> Detalhes
-                    </C.ReordButton>
-                    <C.EditButton onClick={() => { openEditarPedidoModal(pedido); }} >
-                      <FaEdit /> Editar
-                    </C.EditButton>
-                    <C.TrashButton onClick={() => { openDeletarPedidoModal(pedido); }} >
-                      <FaTrashAlt /> Excluir
-                    </C.TrashButton>
-                  </C.ButtonGroup>
-                </C.CardDetail>
-                {expandedPedidoId === pedido.id && (
-                  <>
-                    <C.CreateButton onClick={() => { openAdicionarItemPedidoModal(pedido); }}>
-                      <FaPlusCircle /> Produto
-                    </C.CreateButton>
-                    {pedido.items.map((item, idx) => {
-                      const produto = getProdutoDetalhes(item.product_id);
-                      return (
-                        <C.Card key={idx}>
-                          {produto ? (
-                            <C.CardBody>
-                              <C.CardDetail> <strong>Produto:</strong> {produto.titulo}</C.CardDetail>
-                              <C.CardDetail> <strong>Marca:</strong> {produto.brand}</C.CardDetail>
-                              <C.CardDetail><strong>Quantidade:</strong> {item.quantity} </C.CardDetail>
-                              <C.CardDetail> <strong>Preço Unitário:</strong>{" "}
-                                <NumericFormat
-                                  value={item.unit_price}
-                                  displayType="text"
-                                  thousandSeparator
-                                  prefix="R$ "
-                                />
-                              </C.CardDetail>
-                              <C.CardDetail> <strong>Total:</strong>{" "}
-                                <NumericFormat
-                                  value={item.total_price}
-                                  displayType="text"
-                                  thousandSeparator
-                                  prefix="R$ "
-                                /></C.CardDetail>
-                              <C.TrashButton onClick={() => { openDeletarItemPedidoModal(pedido, produto); }}>
-                                <FaTrashAlt />
-                              </C.TrashButton>
-                            </C.CardBody>
-                          ) : (
-                            <p>Pedido sem produtos.</p>
-                          )}
-                        </C.Card>
-                      );
-                    })}
-                  </>
-                )}
-              </C.CardBody>
+                      </Button>
+                     {/*} <C.ReordButton onClick={() => { openDetalhesPedidoModal(pedido); }} >
+                        <FaSearch /> Detalhes
+                      </C.ReordButton>{*/}
+                      <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openDetalhesPedidoModal(pedido)}>
+                        Detalhes
+                      </Button>
+                     {/*} <C.EditButton onClick={() => { openEditarPedidoModal(pedido); }} >
+                        <FaEdit /> Editar
+                      </C.EditButton>{*/}
+                      <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openEditarPedidoModal(pedido)}>
+                      Editar
+                      </Button>
+                     {/*}  <C.TrashButton onClick={() => { openDeletarPedidoModal(pedido); }} >
+                        <FaTrashAlt /> Excluir
+                      </C.TrashButton>{*/}
+                      <Button size="medium" color="error" variant="contained" startIcon={<AddCircle />} onClick={() => openEditarPedidoModal(pedido)}>
+                      Editar
+                      </Button>
+                    </C.ButtonGroup>
+                  </C.CardDetail>
+                  {expandedPedidoId === pedido.id && (
+                    <>
+                      <C.CreateButton onClick={() => { openAdicionarItemPedidoModal(pedido); }}>
+                        <FaPlusCircle /> Produto
+                      </C.CreateButton>
+                      {pedido.items.map((item, idx) => {
+                        const produto = getProdutoDetalhes(item.product_id);
+                        return (
+                          <C.Card key={idx}>
+                            {produto ? (
+                              <C.CardBody>
+                                <C.CardDetail> <strong>Produto:</strong> {produto.titulo}</C.CardDetail>
+                                <C.CardDetail> <strong>Marca:</strong> {produto.brand}</C.CardDetail>
+                                <C.CardDetail><strong>Quantidade:</strong> {item.quantity} </C.CardDetail>
+                                <C.CardDetail> <strong>Preço Unitário:</strong>{" "}
+                                  <NumericFormat
+                                    value={item.unit_price}
+                                    displayType="text"
+                                    thousandSeparator
+                                    prefix="R$ "
+                                  />
+                                </C.CardDetail>
+                                <C.CardDetail> <strong>Total:</strong>{" "}
+                                  <NumericFormat
+                                    value={item.total_price}
+                                    displayType="text"
+                                    thousandSeparator
+                                    prefix="R$ "
+                                  /></C.CardDetail>
+                                <C.TrashButton onClick={() => { openDeletarItemPedidoModal(pedido, produto); }}>
+                                  <FaTrashAlt />
+                                </C.TrashButton>
+                              </C.CardBody>
+                            ) : (
+                              <p>Pedido sem produtos.</p>
+                            )}
+                          </C.Card>
+                        );
+                      })}
+                    </>
+                  )}
+                </C.CardBody>
 
-            </C.Card>
-          ))
-        ) : (
-          <p>Nenhum pedido encontrado.</p>
-        )}
-      </C.Section>
-      <DetalhesPedidoModal
-        isOpen={isDetalhesPedidoModalOpen}
-        onClose={() => setIsDetalhesPedidoModalOpen(false)}
-        pedido={selectedPedido}
-      />
+              </C.Card>
+            ))
+          ) : (
+            <p>Nenhum pedido encontrado.</p>
+          )}
+        </C.Section>
+        <DetalhesPedidoModal
+          isOpen={isDetalhesPedidoModalOpen}
+          onClose={() => setIsDetalhesPedidoModalOpen(false)}
+          pedido={selectedPedido}
+        />
 
 
-      <DeletarPedidoModal
-        isOpen={isDeletarPedidoModalOpen}
-        onClose={handleDeletarPedidoModalClose}
-        onDelete={handleDeletarPedido}
-        pedido={selectedPedido}
-      />
+        <DeletarPedidoModal
+          isOpen={isDeletarPedidoModalOpen}
+          onClose={handleDeletarPedidoModalClose}
+          onDelete={handleDeletarPedido}
+          pedido={selectedPedido}
+        />
 
-      <EditarPedidoModal
-        isOpen={isEditarPedidoModalOpen}
-        onClose={() => setIsEditarPedidoModalOpen(false)}
-        pedido={selectedPedido}
-        onEdit={handlePedidoEdited}
-      />
+        <EditarPedidoModal
+          isOpen={isEditarPedidoModalOpen}
+          onClose={() => setIsEditarPedidoModalOpen(false)}
+          pedido={selectedPedido}
+          onEdit={handlePedidoEdited}
+        />
 
-      <DeletarItemPedidoModal
-        isOpen={isDeletarItemPedidoModalOpen}
-        onClose={handleDeletarItemPedidoModalClose}
-        onDelete={handleDeletarItemPedido}
-        pedido={selectedPedido}
-        item={selectedItem}
-      />
+        <DeletarItemPedidoModal
+          isOpen={isDeletarItemPedidoModalOpen}
+          onClose={handleDeletarItemPedidoModalClose}
+          onDelete={handleDeletarItemPedido}
+          pedido={selectedPedido}
+          item={selectedItem}
+        />
 
-      <CriarPedidoModal
-        isOpen={isCriarPedidoModalOpen}
-        onClose={handlCriarPedidoModalClose}
-        onCreate={handleNewPedidoCreated}
-      />
+        <CriarPedidoModal
+          isOpen={isCriarPedidoModalOpen}
+          onClose={handlCriarPedidoModalClose}
+          onCreate={handleNewPedidoCreated}
+        />
 
-      <AdicionarItemModal
-        isOpen={isAdicionarItemPedidoModalOpen}
-        onClose={handleAdicionarItemPedidoModalClose}
-        onCreate={handleNewPedidoCreated}
-        orderId={selectedPedido}
-      />
+        <AdicionarItemModal
+          isOpen={isAdicionarItemPedidoModalOpen}
+          onClose={handleAdicionarItemPedidoModalClose}
+          onCreate={handleNewPedidoCreated}
+          orderId={selectedPedido}
+        />
 
-      <MudarStatusPedidoModal
-        isOpen={isMudarStatusPedidoModalOpen}
-        onClose={() => setIsMudarStatusPedidoModalOpen(false)}
-        pedido={selectedPedido}
-        onEdit={handleStatusPedidoEdited}
-      />
-</Container>
+        <MudarStatusPedidoModal
+          isOpen={isMudarStatusPedidoModalOpen}
+          onClose={() => setIsMudarStatusPedidoModalOpen(false)}
+          pedido={selectedPedido}
+          onEdit={handleStatusPedidoEdited}
+        />
+      </Container>
     </C.Container>
 
   );
