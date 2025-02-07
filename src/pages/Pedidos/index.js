@@ -285,13 +285,15 @@ const Pedidos = () => {
                             )}
                             
                           </C.Card>
+                          
                         );
                       })}
-                    </>
-                  )}
-                   <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openAdicionarItemPedidoModal(pedido)}>
+                      <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openAdicionarItemPedidoModal(pedido)}>
                         Item
                       </Button>
+                    </>
+                  )}
+                   
                 </C.CardBody>
 
               </C.Card>
