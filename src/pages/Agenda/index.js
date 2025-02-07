@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import * as C from "./styles";
+import * as C from "./style";
 import {
   Container,
   Typography,
