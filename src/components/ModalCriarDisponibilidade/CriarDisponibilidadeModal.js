@@ -197,6 +197,7 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
               </C.Select>{*/}
 
               <Select
+              label="Horario inicial"
             name="start_time"
             value={formData.start_time}
             onChange={handleChange}
@@ -208,9 +209,7 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
             ))}
           </Select>
             </C.FormColumn>
-          </C.FormRow>
-
-          <C.FormRow>
+          
             <C.FormColumn>
             {/*}  <C.Label htmlFor="end_time">Horário final</C.Label>
               <C.Select
@@ -228,6 +227,7 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
  {*/} 
               <Select
             name="end_time"
+             label="Horario final"
             value={formData.end_time}
             onChange={handleChange}
             fullWidth
