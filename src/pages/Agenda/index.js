@@ -177,11 +177,11 @@ const Agenda = () => {
                 <Stack spacing={1} mt={1}>
                   {agendamentos.map((availability, index) => (
                     <C.Card key={index} >
-                      <C.CardContent>
+                      <CardContent>
                         
                           {availability.start_time} - {availability.end_time}
                          
-                      </C.CardContent>
+                      </CardContent>
                     </C.Card>
                   ))}
                 </Stack>
