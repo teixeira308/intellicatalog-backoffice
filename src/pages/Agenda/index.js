@@ -115,7 +115,7 @@ const Agenda = () => {
   };
 
   return (
-    <>
+    <C.Container>
       <Navbar />
       <Container>
         <Typography variant="h6" gutterBottom>
@@ -197,7 +197,7 @@ const Agenda = () => {
           onCreate={handleNewDisponibilidadeCreated}
         />
       </Container>
-    </>
+    </ C.Container>
   );
 };
 
