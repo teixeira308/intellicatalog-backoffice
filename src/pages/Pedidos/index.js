@@ -231,7 +231,7 @@ const Pedidos = () => {
                       {/*}  <C.TrashButton onClick={() => { openDeletarPedidoModal(pedido); }} >
                         <FaTrashAlt /> Excluir
                       </C.TrashButton>{*/}
-                      <Button size="small" color="error" variant="contained" startIcon={<Delete />} onClick={() => openEditarPedidoModal(pedido)}>
+                      <Button size="small" color="error" variant="contained" startIcon={<Delete />} onClick={() => openDeletarPedidoModal(pedido)}>
                         Deletar
                       </Button>
                     </C.ButtonGroup>

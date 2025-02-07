@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding-top: 70px; /* Adiciona espaço abaixo do Navbar */
+ margin-top:70px;
   
 `;
 
