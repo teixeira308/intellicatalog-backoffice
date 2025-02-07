@@ -222,19 +222,19 @@ const Pedidos = () => {
                      {/*} <C.ReordButton onClick={() => { openDetalhesPedidoModal(pedido); }} >
                         <FaSearch /> Detalhes
                       </C.ReordButton>{*/}
-                      <Button size="small" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openDetalhesPedidoModal(pedido)}>
+                      <Button size="small" color="success" variant="contained" startIcon={<FaSearch />} onClick={() => openDetalhesPedidoModal(pedido)}>
                         Detalhes
                       </Button>
                      {/*} <C.EditButton onClick={() => { openEditarPedidoModal(pedido); }} >
                         <FaEdit /> Editar
                       </C.EditButton>{*/}
-                      <Button size="small" color="primary" variant="contained" startIcon={<AddCircle />} onClick={() => openEditarPedidoModal(pedido)}>
+                      <Button size="small" color="primary" variant="contained" startIcon={<FaEdit />} onClick={() => openEditarPedidoModal(pedido)}>
                       Editar
                       </Button>
                      {/*}  <C.TrashButton onClick={() => { openDeletarPedidoModal(pedido); }} >
                         <FaTrashAlt /> Excluir
                       </C.TrashButton>{*/}
-                      <Button size="small" color="error" variant="contained" startIcon={<AddCircle />} onClick={() => openEditarPedidoModal(pedido)}>
+                      <Button size="small" color="error" variant="contained" startIcon={<Delete />} onClick={() => openEditarPedidoModal(pedido)}>
                       Deletar
                       </Button>
                     </C.ButtonGroup>
