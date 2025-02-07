@@ -216,7 +216,7 @@ const Pedidos = () => {
                      {/*} <C.ReordButton onClick={() => togglePedidoItems(pedido.id)}>
                         {expandedPedidoId === pedido.id ? "Ocultar Itens" : "Ver Itens"}
                       </C.ReordButton>{*/}
-                      <Button size="medium" color="primary" variant="contained" startIcon={<AddCircle />} onClick={() => togglePedidoItems(pedido.id)}>
+                      <Button size="medium" color="primary" variant="contained"  onClick={() => togglePedidoItems(pedido.id)}>
                       {expandedPedidoId === pedido.id ? "Ocultar Itens" : "Ver Itens"}
                       </Button>
                      {/*} <C.ReordButton onClick={() => { openDetalhesPedidoModal(pedido); }} >
