@@ -16,7 +16,7 @@ import {
   Paper,
   Modal,
   TextField
-} from "@mui/material"; 
+} from "@mui/material";
 
 
 const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
@@ -133,23 +133,23 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
         <C.ModalForm onSubmit={handleSubmit}>
           <C.FormRow>
             <C.FormColumn>
-            <TextField
-            label="Data"
-            type="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-            fullWidth
-            required
-            InputLabelProps={{ shrink: true }}
-            sx={{ mb: 2 }}
-          />
+              <TextField
+                label="Data"
+                type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
+                fullWidth
+                required
+                InputLabelProps={{ shrink: true }}
+                sx={{ mb: 2 }}
+              />
             </C.FormColumn>
           </C.FormRow>
 
           <C.FormRow>
             <C.FormColumn>
-            {/*}  <C.Label htmlFor="service_id">Serviço</C.Label>
+              {/*}  <C.Label htmlFor="service_id">Serviço</C.Label>
               <C.Select
                 onChange={handleChangeServico}
                 value={formData.service_id}
@@ -161,28 +161,28 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
                     {servico.name}
                   </C.Option>
                 ))}
-              </C.Select> {*/} 
+              </C.Select> {*/}
 
 
               <Select
-            value={formData.service_id}
-            onChange={handleChange}
-            name="service_id"
-            fullWidth
-            sx={{ mb: 2 }}
-          >
-            {servicos.map(servico => (
-              <MenuItem key={servico.id} value={servico.id}>
-                {servico.name}
-              </MenuItem>
-            ))}
-          </Select>
+                value={formData.service_id}
+                onChange={handleChange}
+                name="service_id"
+                fullWidth
+                sx={{ mb: 2 }}
+              >
+                {servicos.map(servico => (
+                  <MenuItem key={servico.id} value={servico.id}>
+                    {servico.name}
+                  </MenuItem>
+                ))}
+              </Select>
             </C.FormColumn>
           </C.FormRow>
 
           <C.FormRow>
             <C.FormColumn>
-            {/*}  <C.Label htmlFor="start_time">Horário inicial</C.Label>
+              {/*}  <C.Label htmlFor="start_time">Horário inicial</C.Label>
               <C.Select
                 name="start_time"
                 id="start_time"
@@ -195,23 +195,24 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
                   </C.Option>
                 ))}
               </C.Select>{*/}
-
+ <InputLabel id="label-horario-inicial">Inicio</InputLabel>
               <Select
-              label="Horario inicial"
-            name="start_time"
-            value={formData.start_time}
-            onChange={handleChange}
-            fullWidth
-            sx={{ mb: 2 }}
-          >
-            {horarios.map((hora) => (
-              <MenuItem key={hora} value={hora}>{hora}</MenuItem>
-            ))}
-          </Select>
+              labelId="label-horario-inicial"
+                
+                name="start_time"
+                value={formData.start_time}
+                onChange={handleChange}
+                fullWidth
+                sx={{ mb: 2 }}
+              >
+                {horarios.map((hora) => (
+                  <MenuItem key={hora} value={hora}>{hora}</MenuItem>
+                ))}
+              </Select>
             </C.FormColumn>
-          
+
             <C.FormColumn>
-            {/*}  <C.Label htmlFor="end_time">Horário final</C.Label>
+              {/*}  <C.Label htmlFor="end_time">Horário final</C.Label>
               <C.Select
                 name="end_time"
                 id="end_time"
@@ -224,19 +225,21 @@ const CriarDisponibilidadeModal = ({ isOpen, onClose, onCreate }) => {
                   </C.Option>
                 ))}
               </C.Select>
- {*/} 
+ {*/}
+              <InputLabel id="label-horario">Fim</InputLabel>
               <Select
-            name="end_time"
-             label="Horario final"
-            value={formData.end_time}
-            onChange={handleChange}
-            fullWidth
-            sx={{ mb: 2 }}
-          >
-            {horarios.map((hora) => (
-              <MenuItem key={hora} value={hora}>{hora}</MenuItem>
-            ))}
-          </Select>
+                labelId="label-horario-final"
+                name="end_time"
+
+                value={formData.end_time}
+                onChange={handleChange}
+                fullWidth
+                sx={{ mb: 2 }}
+              >
+                {horarios.map((hora) => (
+                  <MenuItem key={hora} value={hora}>{hora}</MenuItem>
+                ))}
+              </Select>
             </C.FormColumn>
           </C.FormRow>
 
