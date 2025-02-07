@@ -12,6 +12,9 @@ import DeletarItemPedidoModal from "../../components/ModalDeleteItemPedido/Delet
 import CriarPedidoModal from "../../components/ModalCriarPedido/CriarPedidoModal";
 import AdicionarItemModal from "../../components/ModalAdicionarItem/AdicionarItemModal";
 import MudarStatusPedidoModal from "../../components/ModalMudarPedidosStatus/MudarStatusPedidosModal";
+import { Container, Button, Card, CardContent, Typography, IconButton, Switch, Menu, MenuItem, Box } from "@mui/material";
+import { AddCircle, MoreVert, Edit, Delete, Image, Inventory, Shuffle } from "@mui/icons-material";
+
 
 const Pedidos = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -160,13 +163,20 @@ const Pedidos = () => {
 
   return (
     <C.Container>
+          <Container maxWidth="md">
       <Navbar />
-      <C.Title>Pedidos</C.Title>
-      <C.ButtonGroup>
-        <C.CreateButton onClick={() => openCriarPedidoModal()}>
-          <FaPlusCircle /> Novo Pedido
-        </C.CreateButton>
-      </C.ButtonGroup>
+       
+      <Typography variant="h6" sx={{ textAlign: "center", my: 3 }}>Pedidos</Typography>
+      
+      <Box display="flex" justifyContent="center" gap={2} my={2}>
+              {!isReorderMode && (
+                <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openCriarPedidoModal()}>
+                  Novo Pedido
+                </Button>
+              )}
+               
+            </Box>
+
       <C.Section>
         {pedidos.length > 0 ? (
           pedidos.map((pedido, index) => (
@@ -314,7 +324,7 @@ const Pedidos = () => {
         pedido={selectedPedido}
         onEdit={handleStatusPedidoEdited}
       />
-
+</Container>
     </C.Container>
 
   );
