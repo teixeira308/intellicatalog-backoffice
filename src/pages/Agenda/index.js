@@ -117,14 +117,15 @@ const Agenda = () => {
 
   return (
     <C.Container>
-      <Navbar />
+     
       <Container>
-        <Typography variant="h6" gutterBottom>
+      <Navbar />
+        <Typography variant="h6"  justifyContent="center"  gutterBottom>
           Agenda
         </Typography>
 
         {/* Controles do Mês */}
-        <Box display="flex" justifyContent="center" alignItems="center" width="100%">
+        <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
           <Stack direction="row" alignItems="center" spacing={2} mb={3}>
             <IconButton onClick={mesAnterior}>
               <FaChevronLeft />
