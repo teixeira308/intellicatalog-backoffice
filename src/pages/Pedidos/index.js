@@ -212,7 +212,7 @@ const Pedidos = () => {
                     R${pedido.total_amount}
                   </C.CardDetail>
                   <C.CardDetail>
-
+                   
                     <C.ButtonGroup>
 
 
@@ -235,21 +235,21 @@ const Pedidos = () => {
                         Deletar
                       </Button>
                     </C.ButtonGroup>
-                    <C.CardDetail>
+                    <C.ButtonGroup>
                       {/*} <C.ReordButton onClick={() => togglePedidoItems(pedido.id)}>
                         {expandedPedidoId === pedido.id ? "Ocultar Itens" : "Ver Itens"}
                       </C.ReordButton>{*/}
                       <Button size="small" color="primary" variant="contained" onClick={() => togglePedidoItems(pedido.id)}>
                         {expandedPedidoId === pedido.id ? "Ocultar Itens" : "Ver Itens"}
                       </Button>
-                    </C.CardDetail>
+                    </C.ButtonGroup>
                   </C.CardDetail>
                   {expandedPedidoId === pedido.id && (
                     <>
-                      {/*}  <C.CreateButton onClick={() => { openAdicionarItemPedidoModal(pedido); }}>
+                    {/*}  <C.CreateButton onClick={() => { openAdicionarItemPedidoModal(pedido); }}>
                         <FaPlusCircle /> Produto
                       </C.CreateButton>{*/}
-
+                     
 
                       {pedido.items.map((item, idx) => {
                         const produto = getProdutoDetalhes(item.product_id);
@@ -283,14 +283,15 @@ const Pedidos = () => {
                             ) : (
                               <p>Pedido sem produtos.</p>
                             )}
-                            <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openAdicionarItemPedidoModal(pedido)}>
-                              Item
-                            </Button>ß
+                            
                           </C.Card>
                         );
                       })}
                     </>
                   )}
+                   <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openAdicionarItemPedidoModal(pedido)}>
+                        Item
+                      </Button>
                 </C.CardBody>
 
               </C.Card>
