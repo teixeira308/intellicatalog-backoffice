@@ -57,12 +57,11 @@ export const GridContainer = styled.div`
 export const Card = styled.div`
   background-color: ${({ status }) => (status === "available" ? "#ffffff" : "rgb(51, 222, 36);")}; 
   color: #333;
-  padding: 10px;
+ 
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: background-color 0.3s ease;
-  margin: 5px;
   &:hover {
     background-color: ${({ status }) => (status === "available" ? "#f9f9f9" : "#ff9999")}; 
   }

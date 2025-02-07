@@ -139,7 +139,7 @@ const Agenda = () => {
               {datasVisiveis[data] && (
                 <Stack spacing={1} mt={1} alignItems="center">
                   {agendamentos.map((availability, index) => (
-                    <C.Card key={index} sx={{ display: "inline-block", px: 2, py: 1, minWidth: "fit-content" }}>
+                    <C.Card key={index}>
                       <CardContent>{availability.start_time} - {availability.end_time}</CardContent>
                     </C.Card>
                   ))}
