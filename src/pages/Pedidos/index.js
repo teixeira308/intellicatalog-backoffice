@@ -169,11 +169,11 @@ const Pedidos = () => {
         <Typography variant="h6" sx={{ textAlign: "center", my: 3 }}>Pedidos</Typography>
 
         <Box display="flex" justifyContent="center" gap={2} my={2}>
-          
-            <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openCriarPedidoModal()}>
-              Novo Pedido
-            </Button>
-         
+
+          <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openCriarPedidoModal()}>
+            Novo Pedido
+          </Button>
+
 
         </Box>
 
@@ -213,29 +213,33 @@ const Pedidos = () => {
                   </C.CardDetail>
                   <C.CardDetail>
                     <C.ButtonGroup>
-                     {/*} <C.ReordButton onClick={() => togglePedidoItems(pedido.id)}>
+                      {/*} <C.ReordButton onClick={() => togglePedidoItems(pedido.id)}>
                         {expandedPedidoId === pedido.id ? "Ocultar Itens" : "Ver Itens"}
                       </C.ReordButton>{*/}
-                      <Button size="medium" color="primary" variant="contained"  onClick={() => togglePedidoItems(pedido.id)}>
-                      {expandedPedidoId === pedido.id ? "Ocultar Itens" : "Ver Itens"}
+                      <Button size="small" color="primary" variant="contained" onClick={() => togglePedidoItems(pedido.id)}>
+                        {expandedPedidoId === pedido.id ? "Ocultar Itens" : "Ver Itens"}
                       </Button>
-                     {/*} <C.ReordButton onClick={() => { openDetalhesPedidoModal(pedido); }} >
+                    </C.ButtonGroup>
+                    <C.ButtonGroup>
+
+
+                      {/*} <C.ReordButton onClick={() => { openDetalhesPedidoModal(pedido); }} >
                         <FaSearch /> Detalhes
                       </C.ReordButton>{*/}
                       <Button size="small" color="success" variant="contained" startIcon={<FaSearch />} onClick={() => openDetalhesPedidoModal(pedido)}>
                         Detalhes
                       </Button>
-                     {/*} <C.EditButton onClick={() => { openEditarPedidoModal(pedido); }} >
+                      {/*} <C.EditButton onClick={() => { openEditarPedidoModal(pedido); }} >
                         <FaEdit /> Editar
                       </C.EditButton>{*/}
                       <Button size="small" color="primary" variant="contained" startIcon={<FaEdit />} onClick={() => openEditarPedidoModal(pedido)}>
-                      Editar
+                        Editar
                       </Button>
-                     {/*}  <C.TrashButton onClick={() => { openDeletarPedidoModal(pedido); }} >
+                      {/*}  <C.TrashButton onClick={() => { openDeletarPedidoModal(pedido); }} >
                         <FaTrashAlt /> Excluir
                       </C.TrashButton>{*/}
                       <Button size="small" color="error" variant="contained" startIcon={<Delete />} onClick={() => openEditarPedidoModal(pedido)}>
-                      Deletar
+                        Deletar
                       </Button>
                     </C.ButtonGroup>
                   </C.CardDetail>
