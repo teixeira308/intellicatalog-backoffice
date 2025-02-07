@@ -212,14 +212,7 @@ const Pedidos = () => {
                     R${pedido.total_amount}
                   </C.CardDetail>
                   <C.CardDetail>
-                    <C.ButtonGroup>
-                      {/*} <C.ReordButton onClick={() => togglePedidoItems(pedido.id)}>
-                        {expandedPedidoId === pedido.id ? "Ocultar Itens" : "Ver Itens"}
-                      </C.ReordButton>{*/}
-                      <Button size="small" color="primary" variant="contained" onClick={() => togglePedidoItems(pedido.id)}>
-                        {expandedPedidoId === pedido.id ? "Ocultar Itens" : "Ver Itens"}
-                      </Button>
-                    </C.ButtonGroup>
+                   
                     <C.ButtonGroup>
 
 
@@ -240,6 +233,14 @@ const Pedidos = () => {
                       </C.TrashButton>{*/}
                       <Button size="small" color="error" variant="contained" startIcon={<Delete />} onClick={() => openEditarPedidoModal(pedido)}>
                         Deletar
+                      </Button>
+                    </C.ButtonGroup>
+                    <C.ButtonGroup>
+                      {/*} <C.ReordButton onClick={() => togglePedidoItems(pedido.id)}>
+                        {expandedPedidoId === pedido.id ? "Ocultar Itens" : "Ver Itens"}
+                      </C.ReordButton>{*/}
+                      <Button size="small" color="primary" variant="contained" onClick={() => togglePedidoItems(pedido.id)}>
+                        {expandedPedidoId === pedido.id ? "Ocultar Itens" : "Ver Itens"}
                       </Button>
                     </C.ButtonGroup>
                   </C.CardDetail>
