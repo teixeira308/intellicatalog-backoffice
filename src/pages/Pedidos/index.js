@@ -216,26 +216,26 @@ const Pedidos = () => {
                      {/*} <C.ReordButton onClick={() => togglePedidoItems(pedido.id)}>
                         {expandedPedidoId === pedido.id ? "Ocultar Itens" : "Ver Itens"}
                       </C.ReordButton>{*/}
-                      <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => togglePedidoItems(pedido.id)}>
+                      <Button size="medium" color="primary" variant="contained" startIcon={<AddCircle />} onClick={() => togglePedidoItems(pedido.id)}>
                       {expandedPedidoId === pedido.id ? "Ocultar Itens" : "Ver Itens"}
                       </Button>
                      {/*} <C.ReordButton onClick={() => { openDetalhesPedidoModal(pedido); }} >
                         <FaSearch /> Detalhes
                       </C.ReordButton>{*/}
-                      <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openDetalhesPedidoModal(pedido)}>
+                      <Button size="small" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openDetalhesPedidoModal(pedido)}>
                         Detalhes
                       </Button>
                      {/*} <C.EditButton onClick={() => { openEditarPedidoModal(pedido); }} >
                         <FaEdit /> Editar
                       </C.EditButton>{*/}
-                      <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openEditarPedidoModal(pedido)}>
+                      <Button size="small" color="primary" variant="contained" startIcon={<AddCircle />} onClick={() => openEditarPedidoModal(pedido)}>
                       Editar
                       </Button>
                      {/*}  <C.TrashButton onClick={() => { openDeletarPedidoModal(pedido); }} >
                         <FaTrashAlt /> Excluir
                       </C.TrashButton>{*/}
-                      <Button size="medium" color="error" variant="contained" startIcon={<AddCircle />} onClick={() => openEditarPedidoModal(pedido)}>
-                      Editar
+                      <Button size="small" color="error" variant="contained" startIcon={<AddCircle />} onClick={() => openEditarPedidoModal(pedido)}>
+                      Deletar
                       </Button>
                     </C.ButtonGroup>
                   </C.CardDetail>
