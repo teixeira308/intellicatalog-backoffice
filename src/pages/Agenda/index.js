@@ -18,7 +18,6 @@ import { FaChevronLeft, FaChevronRight, FaPlusCircle } from "react-icons/fa";
 import Navbar from "../../components/Navbar/Navbar";
 import DisponibilidadeApi from "../../services/disponibilidadeApi";
 import ServicesApi from "../../services/ServicesApi";
-import AppointmentApi from "../../services/agendamentoApi"
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import CriarDisponibilidadeModal from "../../components/ModalCriarDisponibilidade/CriarDisponibilidadeModal";
@@ -32,14 +31,13 @@ const Agenda = () => {
   const [servicoAtual, setServicoAtual] = useState(null);
   const [mesAtual, setMesAtual] = useState(dayjs().format("YYYY-MM"));
   const [datasVisiveis, setDatasVisiveis] = useState({});
-  const [isCriarDisponibilidadeModalOpen, setIsCriarDisponibilidadeModalOpen] = useState(false); 
-  const [agendamentosPorDisponibilidade, setAgendamentosPorDisponibilidade] = useState({});
-
-  const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [isCriarDisponibilidadeModalOpen, setIsCriarDisponibilidadeModalOpen] = useState(false);
+  const [isDetalheAgendamentoeModalOpen, setIsDetalheAgendamentoeModalOpen]= useState(false);
+  const [selectedAppointment, setSelectedeAppointment] = useState(null);
 
   const { getAvailability } = DisponibilidadeApi();
   const { getServicesByUser } = ServicesApi();
-  const { getAppointmentByAvaliability } = AppointmentApi();
+ 
 
   useEffect(() => {
     const fetchAvaliabilities = async () => {
@@ -72,10 +70,19 @@ const Agenda = () => {
     fetchServices();
   }, []);
 
-  const handleCardClick = (agendamento) => {
-    setSelectedAppointment(agendamento);  // Armazena o agendamento selecionado
-  };
-  
+  useEffect(() => {
+    const fetchAgendamentos = async () => {
+      try {
+        const agendamentos = await getAppointment();
+        if (agendamentos) {
+          setAgendamentos(agendamentos);
+        }
+      } catch (error) {
+        console.error("Erro ao carregar agendamentos:", error.message);
+      }
+    };
+    fetchAgendamentos();
+  }, []);
 
   const mesAnterior = () => {
     setMesAtual(dayjs(mesAtual).subtract(1, "month").format("YYYY-MM"));
@@ -102,41 +109,16 @@ const Agenda = () => {
     return acc;
   }, {});
 
-  const toggleVisibilidade = async (data) => {
+  const toggleVisibilidade = (data) => {
     setDatasVisiveis((prev) => ({ ...prev, [data]: !prev[data] }));
-  
-    if (!agendamentosPorDisponibilidade[data]) {
-      try {
-        const agendamentosPorDia = {};
-  
-        await Promise.all(disponibilidadesAgrupadas[data].map(async (disponibilidade) => {
-          const response = await getAppointmentByAvaliability(disponibilidade.id);
-          console.log(response)
-          agendamentosPorDia[disponibilidade.id] = response?.data || [];
-        }));
-  
-        setAgendamentosPorDisponibilidade((prev) => ({
-          ...prev,
-          [data]: agendamentosPorDia,
-        }));
-      } catch (error) {
-        console.error("Erro ao carregar agendamentos:", error.message);
-      }
-    }
-  };
-  
-  const getCardColor = (status) => {
-    switch (status) {
-      case "pending": return "yellow";       // Pendente
-      case "confirmed": return "lightgreen"; // Confirmado
-      case "cancelled": return "red";        // Cancelado
-      default: return "lightgray";           // Completado ou sem agendamento
-    }
   };
 
-  
   const handleCriarDisponibilidadeModalClose = () => {
     setIsCriarDisponibilidadeModalOpen(false);
+  };
+
+  const handleDetalheAgendamentoModalClose = () => {
+    setIsDetalheAgendamentoeModalOpen(false);
   };
 
   const handleNewDisponibilidadeCreated = async () => {
@@ -151,26 +133,26 @@ const Agenda = () => {
         <Typography variant="h6" gutterBottom>
           Agenda
         </Typography>
-  
+
         <Typography variant="body1">Serviço:</Typography>
         <Select value={servicoAtual} onChange={handleChangeServico} fullWidth>
           {servicos.map((servico) => (
             <MenuItem key={servico.id} value={servico.id}>{servico.name}</MenuItem>
           ))}
         </Select>
-  
+
         <Box display="flex" justifyContent="space-between" alignItems="center" my={2}>
           <IconButton onClick={mesAnterior}><FaChevronLeft /></IconButton>
           <Typography variant="h6">{dayjs(mesAtual).format("MMMM YYYY")}</Typography>
           <IconButton onClick={proximoMes}><FaChevronRight /></IconButton>
         </Box>
-  
+
         <Stack direction="row" justifyContent="center" my={2}>
           <Button variant="contained" startIcon={<FaPlusCircle />} onClick={() => setIsCriarDisponibilidadeModalOpen(true)}>
             Disponibilidade
           </Button>
         </Stack>
-  
+
         {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
           Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
             <Paper key={data} sx={{ mb: 2, p: 2, textAlign: "center" }}>
@@ -179,26 +161,15 @@ const Agenda = () => {
               </Box>
               {datasVisiveis[data] && (
                 <Grid container spacing={1} justifyContent="center" mt={1}>
-                  {agendamentos.map((availability, index) => {
-                    const agendamentosDoHorario = agendamentosPorDisponibilidade[data]?.[availability.id] || [];
-                    
-                    const cardColor = agendamentosDoHorario.length > 0 
-                      ? getCardColor(agendamentosDoHorario[0].status) 
-                      : "lightgray";
-                
-                    return (
-                      <Grid item xs={4} key={index}>
-                        <C.Card 
-                          sx={{ textAlign: "center", padding: "8px", backgroundColor: cardColor }} 
-                          onClick={() => handleCardClick(agendamentosDoHorario[0])}  // Define o agendamento selecionado ao clicar
-                        >
-                          <CardContent>
-                            {availability.start_time.slice(0, 5)} - {availability.end_time.slice(0, 5)}
-                          </CardContent>
-                        </C.Card>
-                      </Grid>
-                    );
-                  })}
+                  {agendamentos.map((availability, index) => (
+                    <Grid item xs={4} key={index}> {/* Cada item ocupará 4 colunas em um grid de 12 (3 por linha) */}
+                      <C.Card sx={{ textAlign: "center", padding: "8px" }} onClick={() => {setIsDetalheAgendamentoeModalOpen(true); setSelectedeAppointment(availability)}}>
+                        <CardContent>
+                        {availability.start_time.slice(0, 5)} - {availability.end_time.slice(0, 5)}
+                        </CardContent>
+                      </C.Card>
+                    </Grid>
+                  ))}
                 </Grid>
               )}
             </Paper>
@@ -208,18 +179,17 @@ const Agenda = () => {
             Nenhuma disponibilidade para este serviço neste mês.
           </Typography>
         )}
-  
+
+
         <CriarDisponibilidadeModal
           isOpen={isCriarDisponibilidadeModalOpen}
           onClose={handleCriarDisponibilidadeModalClose}
           onCreate={handleNewDisponibilidadeCreated}
         />
-        
-        {/* Modal de Detalhes de Agendamento */}
         <DetalhesAgendamentoModal
-          isOpen={selectedAppointment !== null}  // Modal aberto se um agendamento for selecionado
-          onClose={() => setSelectedAppointment(null)}  // Fecha o modal
-          agendamento={selectedAppointment}  // Passa os detalhes do agendamento para o modal
+          isOpen={isDetalheAgendamentoeModalOpen}
+          onClose={handleDetalheAgendamentoModalClose}
+          agendamento={selectedAppointment}
         />
       </Container>
     </C.Container>

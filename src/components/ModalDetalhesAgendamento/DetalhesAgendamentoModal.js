@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography } from "@mui/material";
 
-const DetalhesAgendamentoModal = ({ isOpen, onClose, agendamento }) => {
+import AppointmentApi from "../../services/agendamentoApi"
+
+
+const DetalhesAgendamentoModal = ({ isOpen, onClose, appointment }) => {
+
+  const { getAppoointmentByAvaliability } = AppointmentApi();
+  const [agendamento, setAgendamento] = useState([])
+
+   useEffect(() => {
+       const fetchAppointment = async () => {
+         try {
+           const appointment = await getAppoointmentByAvaliability(appointment.avaliability_id);
+           if (appointment) {
+             setAgendamento(appointment);
+           }
+         } catch (error) {
+           console.error("Erro ao carregar serviços:", error.message);
+         }
+       };
+       fetchAppointment();
+     }, []);
 
   if (!isOpen) return null;
 
