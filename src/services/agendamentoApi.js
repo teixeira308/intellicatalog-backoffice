@@ -39,8 +39,50 @@ const AgendamentoApis = () => {
 
   }
 
+  const getAppoointment = async() =>
+  {
+    const response = await fetch(`${api_url}/intellicatalog/v1/appointments`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?.token}`,
+      },
+    });
+    if (response.status === 401) {
+      // Redireciona para a tela de login
+      navigate('/login');
+    }
+    if (!response.ok) {
+      throw new Error("Erro ao buscar disponibilidade");
+    }
+
+    return await response.json();
+  }
+
+  const getAppointmentByAvaliability = async(avaliability_id) =>
+    {
+      const response = await fetch(`${api_url}/intellicatalog/v1/appointments/availability/${avaliability_id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.token}`,
+        },
+      });
+      if (response.status === 401) {
+        // Redireciona para a tela de login
+        navigate('/login');
+      }
+      if (!response.ok) {
+        throw new Error("Erro ao buscar disponibilidade");
+      }
+  
+      return await response.json();
+    }
+
 return {
     createAppointment,
+    getAppoointment,
+    getAppointmentByAvaliability
 
   };
 }

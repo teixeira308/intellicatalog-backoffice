@@ -18,22 +18,27 @@ import { FaChevronLeft, FaChevronRight, FaPlusCircle } from "react-icons/fa";
 import Navbar from "../../components/Navbar/Navbar";
 import DisponibilidadeApi from "../../services/disponibilidadeApi";
 import ServicesApi from "../../services/ServicesApi";
+import AppointmentApi from "../../services/agendamentoApi"
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import CriarDisponibilidadeModal from "../../components/ModalCriarDisponibilidade/CriarDisponibilidadeModal";
+import DetalhesAgendamentoModal from "../../components/ModalDetalhesAgendamento/DetalhesAgendamentoModal"
 
 dayjs.locale("pt-br");
 
 const Agenda = () => {
   const [disponibilidades, setDisponibilidades] = useState([]);
-  const [servicos, setServicos] = useState([]);
+  const [servicos, setServicos] = useState([]); 
   const [servicoAtual, setServicoAtual] = useState(null);
   const [mesAtual, setMesAtual] = useState(dayjs().format("YYYY-MM"));
   const [datasVisiveis, setDatasVisiveis] = useState({});
-  const [isCriarDisponibilidadeModalOpen, setIsCriarDisponibilidadeModalOpen] = useState(false);
+  const [isCriarDisponibilidadeModalOpen, setIsCriarDisponibilidadeModalOpen] = useState(false); 
+  const [agendamentosPorDisponibilidade, setAgendamentosPorDisponibilidade] = useState({});
+
 
   const { getAvailability } = DisponibilidadeApi();
   const { getServicesByUser } = ServicesApi();
+  const { getAppointmentByAvaliability } = AppointmentApi();
 
   useEffect(() => {
     const fetchAvaliabilities = async () => {
@@ -66,6 +71,8 @@ const Agenda = () => {
     fetchServices();
   }, []);
 
+  
+
   const mesAnterior = () => {
     setMesAtual(dayjs(mesAtual).subtract(1, "month").format("YYYY-MM"));
   };
@@ -91,10 +98,38 @@ const Agenda = () => {
     return acc;
   }, {});
 
-  const toggleVisibilidade = (data) => {
+  const toggleVisibilidade = async (data) => {
     setDatasVisiveis((prev) => ({ ...prev, [data]: !prev[data] }));
+  
+    if (!agendamentosPorDisponibilidade[data]) {
+      try {
+        const agendamentosPorDia = {};
+  
+        await Promise.all(disponibilidadesAgrupadas[data].map(async (disponibilidade) => {
+          const response = await getAppointmentByAvaliability(disponibilidade.id);
+          agendamentosPorDia[disponibilidade.id] = response?.data || [];
+        }));
+  
+        setAgendamentosPorDisponibilidade((prev) => ({
+          ...prev,
+          [data]: agendamentosPorDia,
+        }));
+      } catch (error) {
+        console.error("Erro ao carregar agendamentos:", error.message);
+      }
+    }
+  };
+  
+  const getCardColor = (status) => {
+    switch (status) {
+      case "pending": return "yellow";       // Pendente
+      case "confirmed": return "lightgreen"; // Confirmado
+      case "cancelled": return "red";        // Cancelado
+      default: return "lightgray";           // Completado ou sem agendamento
+    }
   };
 
+  
   const handleCriarDisponibilidadeModalClose = () => {
     setIsCriarDisponibilidadeModalOpen(false);
   };
@@ -139,16 +174,26 @@ const Agenda = () => {
               </Box>
               {datasVisiveis[data] && (
                 <Grid container spacing={1} justifyContent="center" mt={1}>
-                  {agendamentos.map((availability, index) => (
-                    <Grid item xs={4} key={index}> {/* Cada item ocupará 4 colunas em um grid de 12 (3 por linha) */}
-                      <C.Card sx={{ textAlign: "center", padding: "8px" }}>
+                {agendamentos.map((availability, index) => {
+                  const agendamentosDoHorario = agendamentosPorDisponibilidade[data]?.[availability.id] || [];
+                  
+                  // Se houver agendamentos, pega a cor do primeiro (ou pode fazer lógica para múltiplos)
+                  const cardColor = agendamentosDoHorario.length > 0 
+                    ? getCardColor(agendamentosDoHorario[0].status) 
+                    : "lightgray";
+              
+                  return (
+                    <Grid item xs={4} key={index}>
+                      <C.Card sx={{ textAlign: "center", padding: "8px", backgroundColor: cardColor }}>
                         <CardContent>
-                        {availability.start_time.slice(0, 5)} - {availability.end_time.slice(0, 5)}
+                          {availability.start_time.slice(0, 5)} - {availability.end_time.slice(0, 5)}
                         </CardContent>
                       </C.Card>
                     </Grid>
-                  ))}
-                </Grid>
+                  );
+                })}
+              </Grid>
+              
               )}
             </Paper>
           ))
@@ -163,6 +208,11 @@ const Agenda = () => {
           isOpen={isCriarDisponibilidadeModalOpen}
           onClose={handleCriarDisponibilidadeModalClose}
           onCreate={handleNewDisponibilidadeCreated}
+        />
+        <DetalhesAgendamentoModal
+          isOpen={isCriarDisponibilidadeModalOpen}
+          onClose={handleCriarDisponibilidadeModalClose}
+          agendamento={selectedAppointment}
         />
       </Container>
     </C.Container>
