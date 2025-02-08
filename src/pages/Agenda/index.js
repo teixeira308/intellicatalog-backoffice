@@ -35,6 +35,7 @@ const Agenda = () => {
   const [isCriarDisponibilidadeModalOpen, setIsCriarDisponibilidadeModalOpen] = useState(false); 
   const [agendamentosPorDisponibilidade, setAgendamentosPorDisponibilidade] = useState({});
 
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
 
   const { getAvailability } = DisponibilidadeApi();
   const { getServicesByUser } = ServicesApi();
@@ -71,6 +72,9 @@ const Agenda = () => {
     fetchServices();
   }, []);
 
+  const handleCardClick = (agendamento) => {
+    setSelectedAppointment(agendamento);  // Armazena o agendamento selecionado
+  };
   
 
   const mesAnterior = () => {
@@ -146,26 +150,26 @@ const Agenda = () => {
         <Typography variant="h6" gutterBottom>
           Agenda
         </Typography>
-
+  
         <Typography variant="body1">Serviço:</Typography>
         <Select value={servicoAtual} onChange={handleChangeServico} fullWidth>
           {servicos.map((servico) => (
             <MenuItem key={servico.id} value={servico.id}>{servico.name}</MenuItem>
           ))}
         </Select>
-
+  
         <Box display="flex" justifyContent="space-between" alignItems="center" my={2}>
           <IconButton onClick={mesAnterior}><FaChevronLeft /></IconButton>
           <Typography variant="h6">{dayjs(mesAtual).format("MMMM YYYY")}</Typography>
           <IconButton onClick={proximoMes}><FaChevronRight /></IconButton>
         </Box>
-
+  
         <Stack direction="row" justifyContent="center" my={2}>
           <Button variant="contained" startIcon={<FaPlusCircle />} onClick={() => setIsCriarDisponibilidadeModalOpen(true)}>
             Disponibilidade
           </Button>
         </Stack>
-
+  
         {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
           Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
             <Paper key={data} sx={{ mb: 2, p: 2, textAlign: "center" }}>
@@ -174,26 +178,27 @@ const Agenda = () => {
               </Box>
               {datasVisiveis[data] && (
                 <Grid container spacing={1} justifyContent="center" mt={1}>
-                {agendamentos.map((availability, index) => {
-                  const agendamentosDoHorario = agendamentosPorDisponibilidade[data]?.[availability.id] || [];
-                  
-                  // Se houver agendamentos, pega a cor do primeiro (ou pode fazer lógica para múltiplos)
-                  const cardColor = agendamentosDoHorario.length > 0 
-                    ? getCardColor(agendamentosDoHorario[0].status) 
-                    : "lightgray";
-              
-                  return (
-                    <Grid item xs={4} key={index}>
-                      <C.Card sx={{ textAlign: "center", padding: "8px", backgroundColor: cardColor }}>
-                        <CardContent>
-                          {availability.start_time.slice(0, 5)} - {availability.end_time.slice(0, 5)}
-                        </CardContent>
-                      </C.Card>
-                    </Grid>
-                  );
-                })}
-              </Grid>
-              
+                  {agendamentos.map((availability, index) => {
+                    const agendamentosDoHorario = agendamentosPorDisponibilidade[data]?.[availability.id] || [];
+                    
+                    const cardColor = agendamentosDoHorario.length > 0 
+                      ? getCardColor(agendamentosDoHorario[0].status) 
+                      : "lightgray";
+                
+                    return (
+                      <Grid item xs={4} key={index}>
+                        <C.Card 
+                          sx={{ textAlign: "center", padding: "8px", backgroundColor: cardColor }} 
+                          onClick={() => handleCardClick(agendamentosDoHorario[0])}  // Define o agendamento selecionado ao clicar
+                        >
+                          <CardContent>
+                            {availability.start_time.slice(0, 5)} - {availability.end_time.slice(0, 5)}
+                          </CardContent>
+                        </C.Card>
+                      </Grid>
+                    );
+                  })}
+                </Grid>
               )}
             </Paper>
           ))
@@ -202,17 +207,18 @@ const Agenda = () => {
             Nenhuma disponibilidade para este serviço neste mês.
           </Typography>
         )}
-
-
+  
         <CriarDisponibilidadeModal
           isOpen={isCriarDisponibilidadeModalOpen}
           onClose={handleCriarDisponibilidadeModalClose}
           onCreate={handleNewDisponibilidadeCreated}
         />
+        
+        {/* Modal de Detalhes de Agendamento */}
         <DetalhesAgendamentoModal
-          isOpen={isCriarDisponibilidadeModalOpen}
-          onClose={handleCriarDisponibilidadeModalClose}
-          agendamento={selectedAppointment}
+          isOpen={selectedAppointment !== null}  // Modal aberto se um agendamento for selecionado
+          onClose={() => setSelectedAppointment(null)}  // Fecha o modal
+          agendamento={selectedAppointment}  // Passa os detalhes do agendamento para o modal
         />
       </Container>
     </C.Container>
