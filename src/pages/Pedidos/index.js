@@ -208,6 +208,17 @@ const Pedidos = () => {
                     }).format(new Date(pedido.order_date))}
                   </C.CardDetail>
                   <C.CardDetail>
+                    <strong>Entrega em:</strong> {new Intl.DateTimeFormat("pt-BR", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      hour12: false,
+                    }).format(new Date(pedido.data_entrega))}
+                  </C.CardDetail>
+                  <C.CardDetail>
                     <strong>Total:</strong>{" "}
                     R${pedido.total_amount}
                   </C.CardDetail>
