@@ -110,40 +110,44 @@ const Agenda = () => {
         <Typography variant="h6" gutterBottom>
           Agenda
         </Typography>
-        
+
         <Typography variant="body1">Serviço:</Typography>
         <Select value={servicoAtual} onChange={handleChangeServico} fullWidth>
           {servicos.map((servico) => (
             <MenuItem key={servico.id} value={servico.id}>{servico.name}</MenuItem>
           ))}
         </Select>
-        
+
         <Box display="flex" justifyContent="space-between" alignItems="center" my={2}>
           <IconButton onClick={mesAnterior}><FaChevronLeft /></IconButton>
           <Typography variant="h6">{dayjs(mesAtual).format("MMMM YYYY")}</Typography>
           <IconButton onClick={proximoMes}><FaChevronRight /></IconButton>
         </Box>
-        
+
         <Stack direction="row" justifyContent="end" my={2}>
           <Button variant="contained" startIcon={<FaPlusCircle />} onClick={() => setIsCriarDisponibilidadeModalOpen(true)}>
             Disponibilidade
           </Button>
         </Stack>
-        
+
         {Object.entries(disponibilidadesAgrupadas).length > 0 ? (
           Object.entries(disponibilidadesAgrupadas).map(([data, agendamentos]) => (
             <Paper key={data} sx={{ mb: 2, p: 2, textAlign: "center" }}>
               <Box onClick={() => toggleVisibilidade(data)} sx={{ cursor: "pointer" }}>
-                <Typography variant="h6">{dayjs(data).format("DD MMMM YYYY")}</Typography>
+                <Typography variant="subtitle1">{dayjs(data).format("DD MMMM YYYY")}</Typography>
               </Box>
               {datasVisiveis[data] && (
-                <Stack spacing={1} mt={1} alignItems="center">
+                <Grid container spacing={1} justifyContent="center" mt={1}>
                   {agendamentos.map((availability, index) => (
-                    <C.Card key={index}>
-                      <CardContent>{availability.start_time} - {availability.end_time}</CardContent>
-                    </C.Card>
+                    <Grid item xs={4} key={index}> {/* Cada item ocupará 4 colunas em um grid de 12 (3 por linha) */}
+                      <C.Card sx={{ textAlign: "center", padding: "8px" }}>
+                        <CardContent>
+                          {dayjs(availability.start_time, "HH:mm:ss").format("HH:mm")} - {dayjs(availability.end_time, "HH:mm:ss").format("HH:mm")}
+                        </CardContent>
+                      </C.Card>
+                    </Grid>
                   ))}
-                </Stack>
+                </Grid>
               )}
             </Paper>
           ))
@@ -152,7 +156,8 @@ const Agenda = () => {
             Nenhuma disponibilidade para este serviço neste mês.
           </Typography>
         )}
-        
+
+
         <CriarDisponibilidadeModal
           isOpen={isCriarDisponibilidadeModalOpen}
           onClose={handleCriarDisponibilidadeModalClose}
