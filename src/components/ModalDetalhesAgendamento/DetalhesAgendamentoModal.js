@@ -1,33 +1,42 @@
 import React from "react";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography } from "@mui/material";
 
-const DetalhesAgendamentoModal = ({ isOpen, onClose, a }) => {
+const DetalhesAgendamentoModal = ({ isOpen, onClose, agendamento }) => {
 
   if (!isOpen) return null;
 
+  // Formatação de horários
+  const startTime = agendamento ? agendamento.start_time.slice(0, 5) : "";
+  const endTime = agendamento ? agendamento.end_time.slice(0, 5) : "";
+
   return (
     <Dialog open={isOpen} onClose={onClose} fullWidth>
-      <DialogTitle>Pedido #{pedido.id}</DialogTitle>
+      <DialogTitle>Detalhes do Agendamento</DialogTitle>
       <DialogContent>
-        {/* Informações do Pedido */}
-        <Typography variant="body1">
-          <strong>Data do Pedido:</strong> {new Date(pedido.order_date).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })}
-        </Typography>
-        <Typography variant="body1">
-          <strong>Data da Entrega:</strong> {new Date(pedido.data_entrega).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })}
-        </Typography>
-        <Typography variant="body1">
-          <strong>Telefone:</strong> {pedido.phone}
-        </Typography>
-        <Typography variant="body1">
-          <strong>Endereço de Entrega:</strong> {pedido.delivery_address}
-        </Typography>
-        <Typography variant="body1">
-          <strong>Total do Pedido:</strong> R${pedido.total_amount}
-        </Typography>
-        <Typography variant="body1">
-          <strong>Notas:</strong> {pedido.notes || "Nenhuma nota"}
-        </Typography>
+        {agendamento ? (
+          <>
+            <Typography variant="body1">
+              <strong>Serviço:</strong> {agendamento.service_name}
+            </Typography>
+            <Typography variant="body1">
+              <strong>Data:</strong> {new Date(agendamento.date).toLocaleString("pt-BR", { dateStyle: "short" })}
+            </Typography>
+            <Typography variant="body1">
+              <strong>Horário:</strong> {startTime} - {endTime}
+            </Typography>
+            <Typography variant="body1">
+              <strong>Cliente:</strong> {agendamento.client_name}
+            </Typography>
+            <Typography variant="body1">
+              <strong>Status:</strong> {agendamento.status}
+            </Typography>
+            <Typography variant="body1">
+              <strong>Observações:</strong> {agendamento.notes || "Sem observações"}
+            </Typography>
+          </>
+        ) : (
+          <Typography variant="body1" color="error">Nenhum agendamento encontrado.</Typography>
+        )}
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="primary" variant="contained">Fechar</Button>
