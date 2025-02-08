@@ -12,6 +12,7 @@ import {
   Box,
   Stack,
   Paper,
+  Grid
 } from "@mui/material";
 import { FaChevronLeft, FaChevronRight, FaPlusCircle } from "react-icons/fa";
 import Navbar from "../../components/Navbar/Navbar";
