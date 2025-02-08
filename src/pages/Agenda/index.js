@@ -125,7 +125,7 @@ const Agenda = () => {
           <IconButton onClick={proximoMes}><FaChevronRight /></IconButton>
         </Box>
 
-        <Stack direction="row" justifyContent="end" my={2}>
+        <Stack direction="row" justifyContent="center" my={2}>
           <Button variant="contained" startIcon={<FaPlusCircle />} onClick={() => setIsCriarDisponibilidadeModalOpen(true)}>
             Disponibilidade
           </Button>
@@ -143,7 +143,7 @@ const Agenda = () => {
                     <Grid item xs={4} key={index}> {/* Cada item ocupará 4 colunas em um grid de 12 (3 por linha) */}
                       <C.Card sx={{ textAlign: "center", padding: "8px" }}>
                         <CardContent>
-                          {dayjs(availability.start_time, "HH:mm:ss").format("HH:mm")} - {dayjs(availability.end_time, "HH:mm:ss").format("HH:mm")}
+                        {availability.start_time.slice(0, 5)} - {availability.end_time.slice(0, 5)}
                         </CardContent>
                       </C.Card>
                     </Grid>
