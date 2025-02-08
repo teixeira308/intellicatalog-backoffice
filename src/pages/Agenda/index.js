@@ -111,6 +111,7 @@ const Agenda = () => {
   
         await Promise.all(disponibilidadesAgrupadas[data].map(async (disponibilidade) => {
           const response = await getAppointmentByAvaliability(disponibilidade.id);
+          console.log(response)
           agendamentosPorDia[disponibilidade.id] = response?.data || [];
         }));
   
