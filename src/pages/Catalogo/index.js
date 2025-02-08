@@ -179,8 +179,8 @@ const Catalogo = () => {
     }
   };
 
-  const openDeleteCategoriaModal = (categoria) => {
-    setSelectedCategoria(categoria);
+  const openDeleteCategoriaModal = () => {
+    
     setIsDeleteCategoriaModalOpen(true);
   };
 
@@ -408,7 +408,7 @@ const Catalogo = () => {
                       <MenuItem onClick={openEditarCategoriaModal}>
                         <FaEdit style={{ marginRight: 8 }} /> Editar
                       </MenuItem>
-                      <MenuItem onClick={() => { openDeleteCategoriaModal(categoria); setMenuAnchor(null); }}>
+                      <MenuItem onClick={() => { openDeleteCategoriaModal(); setMenuAnchor(null); }}>
                         <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
                       </MenuItem>
                     </Menu>
