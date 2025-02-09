@@ -39,12 +39,13 @@ const Navbar = () => {
       <ListItem button onClick={() => handleNavigate("/pedidos")}>
         <ListItemText primary="Pedidos" />
       </ListItem>
-      <ListItem button onClick={() => handleNavigate("/servicos")}>
+     {/*} <ListItem button onClick={() => handleNavigate("/servicos")}>
         <ListItemText primary="Serviços" />
       </ListItem>
       <ListItem button onClick={() => handleNavigate("/agenda")}>
         <ListItemText primary="Agenda" />
       </ListItem>
+          {*/}
       <ListItem button onClick={() => handleNavigate("/tutorial")}>
         <ListItemText primary="Tutorial" />
       </ListItem>
@@ -85,9 +86,9 @@ const Navbar = () => {
           <C.Link onClick={() => handleNavigate("/home")}>Início</C.Link>
           <C.Link onClick={() => handleNavigate("/minhaloja")}>Minha Loja</C.Link>
           <C.Link onClick={() => handleNavigate("/catalogo")}>Catálogo</C.Link>
-          <C.Link onClick={() => handleNavigate("/servicos")}>Serviços</C.Link>
+        {/*}  <C.Link onClick={() => handleNavigate("/servicos")}>Serviços</C.Link>{*/}
           <C.Link onClick={() => handleNavigate("/pedidos")}>Pedidos</C.Link>
-          <C.Link onClick={() => handleNavigate("/agenda")}>Agenda</C.Link>
+         {/*}   <C.Link onClick={() => handleNavigate("/agenda")}>Agenda</C.Link>{*/}
           <C.Link onClick={() => handleNavigate("/tutorial")}>Tutorial</C.Link>
           <C.Link onClick={() => handleNavigate("/demonstracao")}>Demonstração</C.Link>
           <C.Link onClick={() => handleNavigate("/suporte")}>Suporte</C.Link>
