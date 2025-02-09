@@ -4,15 +4,20 @@ import AgendamentoApi from "../../services/agendamentoApi";
 
 const DetalhesAgendamentoModal = ({ isOpen, onClose, disponibilidade }) => {
   const [agendamento, setAgendamento] = useState(null);
-  const { getAppointmentByAvailabilityId } = AgendamentoApi(); // Supondo que você tenha esse método na API
+  const { getAppointmentByAvailabilityId } = AgendamentoApi();
 
   useEffect(() => {
     const fetchAgendamento = async () => {
       if (disponibilidade && disponibilidade.id) {
         try {
           const response = await getAppointmentByAvailabilityId(disponibilidade.id);
-          if (response && response.length > 0) {
-            setAgendamento(response[0]); // Pegando o primeiro agendamento, se houver
+          console.log(response); // Verifique o formato da resposta
+
+          // Verifica se a resposta contém dados
+          if (Array.isArray(response) && response.length > 0) {
+            setAgendamento(response[0]); // Supondo que a resposta seja um array de agendamentos
+          } else {
+            setAgendamento(null); // Caso não haja agendamento, setar null
           }
         } catch (error) {
           console.error("Erro ao carregar agendamento:", error.message);
