@@ -149,7 +149,7 @@ const Agenda = () => {
                 <Grid container spacing={1} justifyContent="center" mt={1}>
                   {agendamentos.map((availability, index) => (
                     <Grid item xs={4} key={index}> {/* Cada item ocupará 4 colunas em um grid de 12 (3 por linha) */}
-                      <C.Card sx={{ textAlign: "center", padding: "8px" }} onClick={() => {setIsDetalheAgendamentoeModalOpen(true); setSelectedeAppointment(availability)}}>
+                      <C.Card sx={{ textAlign: "center", padding: "8px" }} onClick={() => { setSelectedeAppointment(availability); setIsDetalheAgendamentoeModalOpen(true);}}>
                         <CardContent>
                         {availability.start_time.slice(0, 5)} - {availability.end_time.slice(0, 5)}
                         </CardContent>
