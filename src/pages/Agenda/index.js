@@ -43,6 +43,7 @@ const Agenda = () => {
     const fetchAvaliabilities = async () => {
       try {
         const availabilities = await getAvailability();
+        console.log(availabilities)
         if (availabilities?.data) {
           setDisponibilidades(availabilities.data);
         }
