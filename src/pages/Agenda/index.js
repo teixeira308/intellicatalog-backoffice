@@ -70,20 +70,6 @@ const Agenda = () => {
     fetchServices();
   }, []);
 
-  useEffect(() => {
-    const fetchAgendamentos = async () => {
-      try {
-        const agendamentos = await getAppointment();
-        if (agendamentos) {
-          setAgendamentos(agendamentos);
-        }
-      } catch (error) {
-        console.error("Erro ao carregar agendamentos:", error.message);
-      }
-    };
-    fetchAgendamentos();
-  }, []);
-
   const mesAnterior = () => {
     setMesAtual(dayjs(mesAtual).subtract(1, "month").format("YYYY-MM"));
   };
