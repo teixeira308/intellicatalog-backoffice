@@ -4,7 +4,7 @@ import AgendamentoApi from "../../services/agendamentoApi";
 
 const DetalhesAgendamentoModal = ({ isOpen, onClose, disponibilidade }) => {
   const [agendamento, setAgendamento] = useState(null);
-  const { getAppointmentByAvailabilityId } = AgendamentoApi();
+  const { getAppointmentByAvaliability } = AgendamentoApi();
 
   useEffect(() => {
     const fetchAgendamento = async () => {
