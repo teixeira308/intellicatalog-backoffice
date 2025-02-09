@@ -25,7 +25,8 @@ const Loja = () => {
   const { getStores, changeStatus } = LojaApi();
   const { getFotoStoreDownload, getFotoByUserId } = LojaImageApi();
 
-  const store_site = process.env.REACT_APP_STORE_SITE;
+  //const store_site = process.env.REACT_APP_STORE_SITE;
+  const store_site = "localhost/c"
 
   // Use effect para buscar as lojas
   useEffect(() => {
