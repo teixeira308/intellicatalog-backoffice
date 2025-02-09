@@ -358,19 +358,10 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
                 name="instagram"
                 id="instagram"
                 value={formData.instagram}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    instagram: `www.instagram.com/${e.target.value.replace("www.instagram.com/", "")}`,
-                  })
-                }
+                onChange={handleChange}
                 fullWidth
                 sx={{ mb: 2 }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">www.instagram.com/</InputAdornment>
-                  ),
-                }}
+                
               />
 
             </C.FormColumn>
@@ -384,19 +375,11 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
                 name="facebook"
                 id="facebook"
                 value={formData.facebook}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    facebook: `www.facebook.com/${e.target.value.replace("www.facebook.com/", "")}`,
-                  })
+                onChange={handleChange
                 }
                 fullWidth
                 sx={{ mb: 2 }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">www.facebook.com/</InputAdornment>
-                  ),
-                }}
+               
               />
             </C.FormColumn>
           </C.FormRow>
