@@ -11,6 +11,7 @@ const DetalhesAgendamentoModal = ({ isOpen, onClose, disponibilidade }) => {
 
    useEffect(() => {
        const fetchAppointment = async () => {
+        console.log(disponibilidade)
          try {
            const appointment = await getAppoointmentByAvaliability(disponibilidade.id);
            if (appointment) {
