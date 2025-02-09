@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography } from "@mui/material";
 
 import AppointmentApi from "../../services/agendamentoApi"
