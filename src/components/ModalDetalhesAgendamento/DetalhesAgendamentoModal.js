@@ -4,7 +4,7 @@ import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography }
 import AppointmentApi from "../../services/agendamentoApi"
 
 
-const DetalhesAgendamentoModal = ({ isOpen, onClose, agendamento }) => {
+const DetalhesAgendamentoModal = ({ isOpen, onClose, disponibilidade }) => {
 
   const { getAppoointmentByAvaliability } = AppointmentApi();
   const [agendamento, setAgendamento] = useState([])
@@ -12,7 +12,7 @@ const DetalhesAgendamentoModal = ({ isOpen, onClose, agendamento }) => {
    useEffect(() => {
        const fetchAppointment = async () => {
          try {
-           const appointment = await getAppoointmentByAvaliability(agendamento.avaliability_id);
+           const appointment = await getAppoointmentByAvaliability(disponibilidade.id);
            if (appointment) {
              setAgendamento(appointment);
            }
