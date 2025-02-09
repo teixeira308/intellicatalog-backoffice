@@ -175,7 +175,7 @@ const Agenda = () => {
         <DetalhesAgendamentoModal
           isOpen={isDetalheAgendamentoeModalOpen}
           onClose={handleDetalheAgendamentoModalClose}
-          agendamento={selectedAppointment}
+          disponibilidade={selectedAppointment}
         />
       </Container>
     </C.Container>
