@@ -33,7 +33,7 @@ const Agenda = () => {
   const [datasVisiveis, setDatasVisiveis] = useState({});
   const [isCriarDisponibilidadeModalOpen, setIsCriarDisponibilidadeModalOpen] = useState(false);
   const [isDetalheAgendamentoeModalOpen, setIsDetalheAgendamentoeModalOpen]= useState(false);
-  const [selectedAppointment, setSelectedeAppointment] = useState(null);
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
 
   const { getAvailability } = DisponibilidadeApi();
   const { getServicesByUser } = ServicesApi();
@@ -150,7 +150,7 @@ const Agenda = () => {
                 <Grid container spacing={1} justifyContent="center" mt={1}>
                   {agendamentos.map((availability, index) => (
                     <Grid item xs={4} key={index}> {/* Cada item ocupará 4 colunas em um grid de 12 (3 por linha) */}
-                      <C.Card sx={{ textAlign: "center", padding: "8px" }} onClick={() => { setSelectedeAppointment(availability); setIsDetalheAgendamentoeModalOpen(true);}}>
+                      <C.Card sx={{ textAlign: "center", padding: "8px" }} onClick={() => { console.log(availability); setSelectedAppointment(availability); setIsDetalheAgendamentoeModalOpen(true);}}>
                         <CardContent>
                         {availability.start_time.slice(0, 5)} - {availability.end_time.slice(0, 5)}
                         </CardContent>
