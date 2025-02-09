@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 const LojaApi = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  //const api_url = process.env.REACT_APP_API;
-  const api_url = 'http://localhost/api'
+  const api_url = process.env.REACT_APP_API;
+  //const api_url = 'http://localhost/api'
 
   const getStores = async () => {
     const response = await fetch(`${api_url}/intellicatalog/v1/stores/`, {

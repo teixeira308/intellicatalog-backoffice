@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 const AgendamentoApis = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  //const api_url = process.env.REACT_APP_API;
-  const api_url = 'http://localhost/api'
+  const api_url = process.env.REACT_APP_API;
+    //const api_url = 'http://localhost/api'
 
 
   const createAppointment = async (appointment) => {

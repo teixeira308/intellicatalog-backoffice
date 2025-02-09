@@ -4,8 +4,8 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  //const api_url = process.env.REACT_APP_API;
-  const api_url = 'http://localhost/api';
+  const api_url = process.env.REACT_APP_API;
+  //const api_url = 'http://localhost/api';
 
   // Carregar o usuário do localStorage quando o componente monta
   useEffect(() => {
