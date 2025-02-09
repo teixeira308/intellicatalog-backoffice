@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts/auth";
 import { useNavigate } from 'react-router-dom';
 
-const AgendamentoApis = () => {
+const AgendamentoApi = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const api_url = process.env.REACT_APP_API;
@@ -88,4 +88,4 @@ return {
   };
 }
 
-export default AgendamentoApis;
+export default AgendamentoApi;
