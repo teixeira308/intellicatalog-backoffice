@@ -10,7 +10,7 @@ const DetalhesAgendamentoModal = ({ isOpen, onClose, disponibilidade }) => {
     const fetchAgendamento = async () => {
       if (disponibilidade && disponibilidade.id) {
         try {
-          const response = await getAppointmentByAvailabilityId(disponibilidade.id);
+          const response = await getAppointmentByAvaliability(disponibilidade.id);
           console.log(response); // Verifique o formato da resposta
 
           // Verifica se a resposta contém dados
