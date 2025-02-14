@@ -132,7 +132,6 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
         transform: 'translate(-50%, -50%)'
       }}>
         <C.ModalHeader>
-
           <Typography variant="h6" mb={2}>Configurações da Minha Loja</Typography>
         </C.ModalHeader>
         <C.ModalForm onSubmit={handleSubmit}>
@@ -140,18 +139,7 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
           <C.FormRow>
             <C.FormColumn style={{ flex: 1 }}>
               <C.Label htmlFor="cor_primaria">Tela</C.Label>
-              {/*}<div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_primaria, border: '1px solid #000', marginTop: '5px' }} /> {*/}
-              {/*} <C.Input
-                type="color"
-                name="cor_primaria"
-                id="cor_primaria"
-                value={formData.cor_primaria}
-                onChange={handleChange}
-                required
-                style={{ marginRight: '10px' }} // Espaço entre o input e o div
-              /> {*/}
-
-              <TextField
+               <TextField
                 type="color"
                 name="cor_primaria"
                 id="cor_primaria"
@@ -165,16 +153,6 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
             </C.FormColumn>
             <C.FormColumn>
               <C.Label htmlFor="cor_secundaria">Fonte</C.Label>
-              {/*} <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_secundaria, border: '1px solid #000', marginTop: '5px' }} /> {*/}
-              {/*} <C.Input
-                type="color"
-                name="cor_secundaria"
-                id="cor_secundaria"
-                value={formData.cor_secundaria}
-                onChange={handleChange}
-                style={{ marginRight: '10px' }} // Espaço entre o input e o div
-              /> {*/}
-
               <TextField
                 type="color"
                 name="cor_secundaria"
@@ -188,8 +166,6 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
             <C.FormRow>
               <C.FormColumn>
                 <C.Label htmlFor="cor_botao_primaria">Botão primária</C.Label>
-                {/*} <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_botao_primaria, border: '1px solid #000', marginTop: '5px' }} /> {*/}
-
                 <TextField
                   type="color"
                   name="cor_botao_primaria"
@@ -202,8 +178,6 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
               </C.FormColumn>
               <C.FormColumn>
                 <C.Label htmlFor="cor_botao_secundaria">Botão secundária</C.Label>
-                {/*}  <div style={{ width: '30px', height: '30px', backgroundColor: formData.cor_botao_secundaria, border: '1px solid #000', marginTop: '5px' }} /> {*/}
-
                 <TextField
                   type="color"
                   name="cor_botao_secundaria"
@@ -235,17 +209,6 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
-              {/*} <C.Label htmlFor="usa_logo_fundo">Usar logo como fundo da página{"  "}
-                <C.Input
-                  type="checkbox"
-                  name="usa_logo_fundo"
-                  id="usa_logo_fundo"
-                  checked={formData.usa_logo_fundo}
-                  onChange={handleChangeCheckBox}
-                />
-                
-                </C.Label>
- {*/}
               <FormControlLabel
                 control={
                   <Checkbox
@@ -258,17 +221,7 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
                 label="Usar logo de fundo"
               />
             </C.FormColumn>
-
             <C.FormColumn>
-              {/*} <C.Label htmlFor="usa_estoque">Usa estoque{"  "}
-                <C.Input
-                  type="checkbox"
-                  name="usa_estoque"
-                  id="usa_estoque"
-                  checked={formData.usa_estoque}  // Utilizando `checked` com o valor booleano
-                  onChange={handleChangeCheckBox}  // Atualiza o estado ao marcar/desmarcar
-                /></C.Label>
-    {*/}
               <FormControlLabel
                 control={
                   <Checkbox
@@ -282,35 +235,8 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
               />
             </C.FormColumn>
           </C.FormRow>
-
           <C.FormRow>
             <C.FormColumn>
-              {/*}  <C.Label htmlFor="taxa_entrega">Taxa de entrega</C.Label>
-
-              <NumericFormat
-                name="taxa_entrega"
-                id="taxa_entrega"
-                value={formData.taxa_entrega}
-                onValueChange={(values) => {
-                  const { value } = values; // Obtenha o valor numérico
-                  setFormData(prevFormData => ({
-                    ...prevFormData,
-                    taxa_entrega: value // Atualiza o valor no formData
-                  }));
-                }}
-                thousandSeparator={true}
-                decimalScale={2}
-                fixedDecimalScale={true}
-                prefix={'R$ '}
-                placeholder="R$ 0,00" // Placeholder para o formato esperado
-                style={{
-                  padding: '8px',
-                  border: '1px solid #ccc',
-                  borderRadius: '4px',
-                  fontSize: '1rem',
-                  width: '100%',
-                }}/>
-{*/}
               <NumericFormat
                 customInput={TextField}
                 label="Taxa de entrega"
@@ -321,7 +247,7 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
                   const { value } = values; // Obtém o valor numérico
                   setFormData((prevFormData) => ({
                     ...prevFormData,
-                    price: value, // Atualiza o valor no formData
+                    taxa_entrega: value, // Atualiza o valor no formData
                   }));
                 }}
                 thousandSeparator="."
@@ -333,11 +259,8 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
                 fullWidth
                 sx={{ mb: 2 }} // Espaçamento inferior
               />
-
             </C.FormColumn>
             <C.FormColumn>
-
-
               <TextField
                 label="Whatsapp"
                 name="numero_whatsapp"
@@ -349,10 +272,8 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
               />
             </C.FormColumn>
           </C.FormRow>
-
           <C.FormRow>
             <C.FormColumn>
-
               <TextField
                 label="Instagram"
                 name="instagram"
@@ -361,29 +282,22 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
                 onChange={handleChange}
                 fullWidth
                 sx={{ mb: 2 }}
-                
               />
-
             </C.FormColumn>
           </C.FormRow>
-
           <C.FormRow>
             <C.FormColumn>
-
               <TextField
                 label="Facebook"
                 name="facebook"
                 id="facebook"
                 value={formData.facebook}
-                onChange={handleChange
-                }
+                onChange={handleChange}
                 fullWidth
                 sx={{ mb: 2 }}
-               
               />
             </C.FormColumn>
           </C.FormRow>
-
           <Box display="flex" justifyContent="flex-end">
             <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Cancelar</Button>
             <Button type="submit" color="success" variant="contained">Salvar</Button>
