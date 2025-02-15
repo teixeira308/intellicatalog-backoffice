@@ -40,7 +40,6 @@ const RoutesApp = () => {
           <Route exact path="/pedidos" element={<Private Item={Pedidos} />} /> 
           <Route exact path="/servicos" element={<Private Item={Servicos} />} /> 
           <Route path="/esquecisenha" element={<EsqueciSenha/>} />
-          <Route path="/configloja" element={<Private Item={ConfigLoja} />} /> 
           <Route path="/" element={<Signin />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route path="*" element={<Signin />} />
