@@ -238,9 +238,10 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
                R$10,00
               </span>
               &nbsp;
-              <span style={{ color: 'green' }}>
+              <span style={{ color: 'green', fontSize: '10px' }}>
                 50% de desconto
               </span>
+              <br/><br/>
               <span style={{ textDecoration: 'line-through', color: formData.cor_preco, fontSize: '10px' }}>
                 R$10.00
               </span>
