@@ -137,7 +137,9 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
         position: 'absolute',
         top: '50%',
         left: '50%',
-        transform: 'translate(-50%, -50%)'
+        transform: 'translate(-50%, -50%)',
+        maxHeight: '90vh', // Garante que o modal não ultrapasse a altura da tela
+        overflowY: 'auto', // Adiciona a barra de rolagem vertical quando necessário
       }}>
         <C.ModalHeader>
           <Typography variant="h6" mb={2}>Configurações da Minha Loja</Typography>
