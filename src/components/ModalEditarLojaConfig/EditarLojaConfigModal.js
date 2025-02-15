@@ -230,19 +230,23 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
               textAlign: 'center',
               borderBottom: '1px solid #ddd'
             }}>
-              <span style={{ textDecoration: 'line-through', color: formData.cor_preco, fontSize: '10px' }}>
+              <span style={{ textDecoration: 'line-through', color: 'red', fontSize: '10px' }}>
                 R$20.00
               </span>
               <br />
-              <span>
+              <span style={{ textDecoration: 'line-through', color: formData.cor_preco_promocional, fontSize: '10px' }}>
                R$10,00
               </span>
               &nbsp;
-              <span style={{ color: formData.cor_preco_promocional }}>
+              <span style={{ color: 'green' }}>
                 50% de desconto
               </span>
-            <p>R$10.00</p>
+              <span style={{ textDecoration: 'line-through', color: formData.cor_preco, fontSize: '10px' }}>
+                R$10.00
+              </span>
           </div>
+          </C.FormRow>
+          <C.FormRow>
           <div style={{
             height: '30px',
             backgroundColor: formData.cor_primaria,
