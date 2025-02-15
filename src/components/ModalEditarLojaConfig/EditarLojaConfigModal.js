@@ -105,6 +105,7 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
         ...formData,
         usa_logo_fundo: formData.usa_logo_fundo ? "true" : "false", // Converte booleano de volta para string
         usa_estoque: formData.usa_estoque ? "true" : "false"  // Converte booleano de volta para string
+        calcula_taxa_entrega_posterior: formData.calcula_taxa_entrega_posterior ? "true" : "false"  // Converte booleano de volta para string
       };
 
       // Filtra os dados que serão enviados
@@ -155,8 +156,6 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
                 fullWidth
                 sx={{ marginRight: '10px' }}
               />
-
-
             </C.FormColumn>
             <C.FormColumn>
               <C.Label htmlFor="cor_secundaria">Fonte</C.Label>
@@ -199,7 +198,7 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
           </C.FormRow>
           <C.FormRow>
             <C.FormColumn>
-              <C.Label htmlFor="cor_botao_primaria">Preço</C.Label>
+              <C.Label htmlFor="cor_botao_primaria">Cor do Preço</C.Label>
               <TextField
                 type="color"
                 name="cor_preco"
@@ -211,7 +210,7 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
               />
             </C.FormColumn>
             <C.FormColumn>
-              <C.Label htmlFor="cor_botao_secundaria">Preço Promocional</C.Label>
+              <C.Label htmlFor="cor_botao_secundaria">Cor do Preço Promocional</C.Label>
               <TextField
                 type="color"
                 name="cor_preco_promocional"
@@ -228,7 +227,8 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
               backgroundColor: 'white',
               padding: '5px',
               textAlign: 'center',
-              borderBottom: '1px solid #ddd'
+              borderBottom: '1px solid #ddd',
+              border: '1px'
             }}>
               <span style={{ textDecoration: 'line-through', color: 'red', fontSize: '10px' }}>
                 R$20.00
@@ -241,7 +241,7 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
               <span style={{ color: 'green', fontSize: '10px' }}>
                 50% de desconto
               </span>
-              <br/><br/>
+              <br/>
               <span style={{ textDecoration: 'line-through', color: formData.cor_preco, fontSize: '10px' }}>
                 R$10.00
               </span>
