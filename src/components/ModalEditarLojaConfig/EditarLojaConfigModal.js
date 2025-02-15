@@ -104,7 +104,7 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
       const transformedData = {
         ...formData,
         usa_logo_fundo: formData.usa_logo_fundo ? "true" : "false", // Converte booleano de volta para string
-        usa_estoque: formData.usa_estoque ? "true" : "false"  // Converte booleano de volta para string
+        usa_estoque: formData.usa_estoque ? "true" : "false",  // Converte booleano de volta para string
         calcula_taxa_entrega_posterior: formData.calcula_taxa_entrega_posterior ? "true" : "false"  // Converte booleano de volta para string
       };
 
