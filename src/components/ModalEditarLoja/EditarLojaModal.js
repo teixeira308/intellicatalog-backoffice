@@ -114,8 +114,6 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
         <C.ModalForm onSubmit={handleSubmit}>
           <C.FormRow>
             <C.FormColumn>
-            
-
               <TextField
                 label="Nome"
                 name="namestore"
@@ -124,6 +122,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
                 onChange={handleChange}
                 fullWidth
                 sx={{ mb: 2 }}
+                required
               />
             </C.FormColumn>
           </C.FormRow>
@@ -168,6 +167,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
                 onChange={handleChange}
                 fullWidth
                 sx={{ mb: 2 }}
+                required
               />
 
             </C.FormColumn>
@@ -205,15 +205,15 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
           <C.FormRow>
             <C.FormColumn>
              
-
-<TextField
-                label="Telefone"
+          <TextField
+                label="Telefone/Whatsapp contato"
                 name="phone"
                 id="phone"
                 value={formData.phone}
                 onChange={handleChange}
                 fullWidth
                 sx={{ mb: 2 }}
+                required
               />
 
             </C.FormColumn>

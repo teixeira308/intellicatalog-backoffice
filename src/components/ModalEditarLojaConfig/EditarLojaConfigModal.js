@@ -337,13 +337,14 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
           </C.FormColumn>
           <C.FormColumn>
             <TextField
-              label="Whatsapp"
+              label="Whatsapp para receber pedidos"
               name="numero_whatsapp"
               id="numero_whatsapp"
               value={formData.numero_whatsapp}
               onChange={handleChange}
               fullWidth
               sx={{ mb: 2 }}
+              required
             />
           </C.FormColumn>
         </C.FormRow>
