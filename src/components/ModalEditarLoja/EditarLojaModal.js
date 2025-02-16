@@ -114,15 +114,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
         <C.ModalForm onSubmit={handleSubmit}>
           <C.FormRow>
             <C.FormColumn>
-              {/*}<C.Label htmlFor="namestore">Nome</C.Label>
-              <C.Input
-                type="text"
-                name="namestore"
-                id="namestore"
-                value={formData.namestore}
-                onChange={handleChange}
-                required
-              />{*/}
+            
 
               <TextField
                 label="Nome"
@@ -138,15 +130,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
 
           <C.FormRow>
             <C.FormColumn>
-              {/*} <C.Label htmlFor="opening_hours">Horario Abertura</C.Label>
-              <C.Input
-                type="text"
-                name="opening_hours"
-                id="opening_hours"
-                value={formData.opening_hours}
-                onChange={handleChange}
-              />
-{*/}
+      
 
               <TextField
                 label="Horario Abertura"
@@ -160,14 +144,6 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
             </C.FormColumn>
 
             <C.FormColumn>
-              {/*}  <C.Label htmlFor="rg">Horario fechamento</C.Label>
-              <C.Input
-                type="text"
-                name="closing_hours"
-                id="closing_hours"
-                value={formData.closing_hours}
-                onChange={handleChange}
-              />{*/}
 
               <TextField
                 label="Horario fechamento"
@@ -184,15 +160,6 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
 
           <C.FormRow>
             <C.FormColumn>
-              {/*} <C.Label htmlFor="identificadorexterno">Identificador Externo</C.Label>
-              <C.Input
-                type="text"
-                name="identificadorexterno"
-                id="identificadorexterno"
-                value={formData.identificadorexterno}
-                onChange={handleChange}
-              />{*/}
-
               <TextField
                 label="Identificador Externo"
                 name="identificadorexterno"
@@ -208,18 +175,9 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
 
           <C.FormRow>
             <C.FormColumn>
-              {/*} <C.Label htmlFor="address">
-                Endereço
-              </C.Label>
-              <C.Input
-                type="text"
-                name="address"
-                id="address"
-                value={formData.address}
-                onChange={handleChange}
-              />{*/}
+              
               <TextField
-                label="Identificador Externo"
+                label="Endereço"
                 name="address"
                 id="address"
                 value={formData.address}
@@ -232,14 +190,6 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
 
           <C.FormRow>
             <C.FormColumn>
-               {/*}<C.Label htmlFor="email">E-mail</C.Label>
-              <C.Input
-                type="email"
-                name="email"
-                id="email"
-                value={formData.email}
-                onChange={handleChange}
-              />{*/}
               <TextField
                 label="E-mail"
                 name="email"
@@ -254,14 +204,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
 
           <C.FormRow>
             <C.FormColumn>
-              {/*} <C.Label htmlFor="phone">Telefone</C.Label>
-              <C.Input
-                type="text"
-                name="phone"
-                id="phone"
-                value={formData.phone}
-                onChange={handleChange}
-              />{*/}
+             
 
 <TextField
                 label="Telefone"
@@ -276,23 +219,7 @@ const EditarLojaModal = ({ isOpen, onClose, loja, onEdit }) => {
             </C.FormColumn>
 
           </C.FormRow>
-          {/*} <C.FormRow>
-            <C.FormColumn>
-              <C.Label htmlFor="delivery_fee">Taxa de entrega</C.Label>
-              <C.Input
-                type="text"
-                name="delivery_fee"
-                id="delivery_fee"
-                value={formData.delivery_fee}
-                onChange={handlePriceChange}
-              />
-            </C.FormColumn>
-
-          </C.FormRow>{*/}
-
-
-
-          <Box display="flex" justifyContent="flex-end">
+           <Box display="flex" justifyContent="flex-end">
             <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Cancelar</Button>
             <Button type="submit" color="success" variant="contained">Salvar</Button>
           </Box>
