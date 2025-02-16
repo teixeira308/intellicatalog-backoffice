@@ -306,7 +306,7 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
                   onChange={handleChangeCheckBox}
                 />
               }
-              label="Calcula estoque posteriormente"
+              label="Calcula envio posteriormente"
             />
           </C.FormColumn>
         </C.FormRow>
