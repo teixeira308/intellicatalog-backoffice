@@ -34,7 +34,6 @@ const EditarLoja = () => {
         try {
           const data = await getStoreByIdentificador(identificadorexterno);
           setStore(data);
-          loadStoreImages();
         } catch (error) {
           console.error("Erro ao carregar stores:", error);
         }
