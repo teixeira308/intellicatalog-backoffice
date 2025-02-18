@@ -397,6 +397,7 @@ const ConfigLoja = () => {
           </C.FormRow>
         </C.ModalForm>
       </Container>
+      <br/><br/><br/><br/>
     </C.Container >
   );
 };
