@@ -158,6 +158,7 @@ const Loja = () => {
         <>
           <C.Card key={store.id}>
           <C.Title>{store.namestore}</C.Title>
+          <br/><br/><br/>
             {imageStoreUrls
               .filter((item) => item.store_id === store.id)
               .map((item, index) => (
