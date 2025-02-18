@@ -1,13 +1,13 @@
-import React from "react";
-import * as C from "./styles";
+import { useParams,Link } from "react-router-dom";
 
-
- 
 const ConfigLoja = () => {
- 
-    
+  const { id } = useParams();
+
   return (
-   <>oi</>
+    <div>
+      <h1>Configurações da Loja {id}</h1>
+      <Link to="/">Voltar</Link>
+    </div>
   );
 };
 
