@@ -42,7 +42,7 @@ const RoutesApp = () => {
           <Route exact path="/servicos" element={<Private Item={Servicos} />} /> 
           <Route path="/esquecisenha" element={<EsqueciSenha/>} />
           <Route path="/loja/:id/config" element={<Private Item={ConfigLoja} />} />
-          <Route path="/loja/:id/edit" element={<Private Item={EditarLoja} />} />
+          <Route path="/loja/:identificadorexterno/edit" element={<Private Item={EditarLoja} />} />
           <Route path="/" element={<Signin />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route path="*" element={<Signin />} />

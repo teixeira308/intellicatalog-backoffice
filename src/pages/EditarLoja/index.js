@@ -25,9 +25,22 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 const EditarLoja = () => {
   const { identificadorexterno } = useParams();
   const navigate = useNavigate();
-
   const { getStoreByIdentificador, updateLoja } = LojaApi();
+  const {store,setStore} = useState([]);
   
+
+    useEffect(() => {
+      const fetchStores = async () => {
+        try {
+          const data = await getStoreByIdentificador(identificadorexterno);
+          setStore(data);
+          loadStoreImages();
+        } catch (error) {
+          console.error("Erro ao carregar stores:", error);
+        }
+      };
+      fetchStores();
+    }, [identificadorexterno]);
 
   if (!identificadorexterno) return <p>Carregando...</p>;
 
@@ -41,7 +54,7 @@ const EditarLoja = () => {
             <ArrowBackIcon />
           </IconButton>
           <Typography variant="h6" gutterBottom sx={{ flexGrow: 1, textAlign: "center" }}>
-            Editar Loja
+            Editar Loja {store.namestore}
           </Typography>
         </Box>
 
