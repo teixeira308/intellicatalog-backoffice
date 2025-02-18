@@ -110,14 +110,14 @@ const EditarLoja = () => {
         </Box>
 
         <Stack spacing={2}>
-          <TextField label="Nome da Loja" name="namestore" fullWidth value={store.namestore ?? ""} onChange={handleChange} required />
-          <TextField label="Horário de Abertura" name="opening_hours" fullWidth value={store.opening_hours ?? ""} onChange={handleChange} />
-          <TextField label="Horário de Fechamento" name="closing_hours" fullWidth value={store.closing_hours ?? ""} onChange={handleChange} />
-          <TextField label="Identificador Externo" name="identificadorexterno" fullWidth value={store.identificadorexterno ?? ""} onChange={handleChange} required />
-          <TextField label="Endereço" name="address" fullWidth value={store.address ?? ""} onChange={handleChange} />
-          <TextField label="Telefone" name="phone" fullWidth value={store.phone ?? ""} onChange={handleChange} required />
-          <TextField label="E-mail" name="email" fullWidth value={store.email ?? ""} onChange={handleChange} />
-          <TextField label="Taxa de Entrega" name="delivery_fee" fullWidth type="text" value={store.delivery_fee ?? ""} onChange={handlePriceChange} />
+          <TextField label="Nome da Loja" name="namestore" fullWidth value={store.namestore} onChange={handleChange} required />
+          <TextField label="Horário de Abertura" name="opening_hours" fullWidth value={store.opening_hours} onChange={handleChange} />
+          <TextField label="Horário de Fechamento" name="closing_hours" fullWidth value={store.closing_hours} onChange={handleChange} />
+          <TextField label="Identificador Externo" name="identificadorexterno" fullWidth value={store.identificadorexterno} onChange={handleChange} required />
+          <TextField label="Endereço" name="address" fullWidth value={store.address} onChange={handleChange} />
+          <TextField label="Telefone" name="phone" fullWidth value={store.phone} onChange={handleChange} required />
+          <TextField label="E-mail" name="email" fullWidth value={store.email} onChange={handleChange} />
+          <TextField label="Taxa de Entrega" name="delivery_fee" fullWidth type="text" value={store.delivery_fee} onChange={handlePriceChange} />
         </Stack>
         
         <Box display="flex" justifyContent="flex-end" sx={{ mt: 2 }}>
