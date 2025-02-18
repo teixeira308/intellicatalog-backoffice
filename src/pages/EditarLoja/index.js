@@ -84,10 +84,10 @@ const EditarLoja = () => {
         setLoading(false);
       }
     };
-  
+
     fetchStore();
   }, [identificadorexterno]);
-  
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -136,14 +136,28 @@ const EditarLoja = () => {
 
         <Stack spacing={2}>
           <TextField label="Nome da Loja" name="namestore" fullWidth value={formData.namestore} onChange={handleChange} required />
-          <TextField label="Horário de Abertura" name="opening_hours"  value={formData.opening_hours} onChange={handleChange} />
-          <TextField label="Horário de Fechamento" name="closing_hours"  value={formData.closing_hours} onChange={handleChange} />
+          <Stack direction="row" spacing={2}>
+            <TextField
+              label="Horário de Abertura"
+              name="opening_hours"
+              value={formData.opening_hours}
+              onChange={handleChange}
+              sx={{ flex: 1 }}  // Controla a largura
+            />
+            <TextField
+              label="Horário de Fechamento"
+              name="closing_hours"
+              value={formData.closing_hours}
+              onChange={handleChange}
+              sx={{ flex: 1 }}  // Controla a largura
+            />
+          </Stack>
           <TextField label="Identificador Externo" name="identificadorexterno" fullWidth value={formData.identificadorexterno} onChange={handleChange} required />
           <TextField label="Endereço" name="address" fullWidth value={formData.address} onChange={handleChange} />
           <TextField label="Telefone" name="phone" fullWidth value={formData.phone} onChange={handleChange} required />
           <TextField label="E-mail" name="email" fullWidth value={formData.email} onChange={handleChange} />
-       </Stack>
-        
+        </Stack>
+
         <Box display="flex" justifyContent="center" sx={{ mt: 2 }}>
           <Button variant="contained" color="success" onClick={handleSubmit}>Salvar</Button>
         </Box>
