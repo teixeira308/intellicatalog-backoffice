@@ -138,7 +138,7 @@ const ConfigLoja = () => {
       navigate(-1); // Volta para a página anterior
     } catch (error) {
       console.error("Erro ao editar loja:", error);
-      window.addToast("Ocorreu um erro ao editar loja: " + error, "error");
+      window.addToast("Ocorreu um erro ao editar configurações da loja: " + error, "error");
     }
   };
 

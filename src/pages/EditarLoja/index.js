@@ -110,10 +110,11 @@ const EditarLoja = () => {
     try {
       const filteredData = filterFormData(formData);
       await updateLoja(filteredData.id, filteredData);
-      alert("Loja atualizada com sucesso!");
+      window.addToast("Ação realizada com sucesso!", "success");
       navigate(-1);
     } catch (error) {
       console.error("Erro ao atualizar loja:", error);
+      window.addToast("Ocorreu um erro ao editar loja: " + error, "error");
     }
   };
 
