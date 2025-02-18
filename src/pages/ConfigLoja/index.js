@@ -142,7 +142,7 @@ const ConfigLoja = () => {
   };
 
 
-  if (!loja) return <p>Carregando...</p>;
+  if (!id) return <p>Carregando...</p>;
 
   return (
 
