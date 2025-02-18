@@ -156,9 +156,8 @@ const Loja = () => {
 
       {stores.map((store) => (
         <>
-          <C.Title>{store.namestore}</C.Title>
-
           <C.Card key={store.id}>
+          <C.Title>{store.namestore}</C.Title>
             {imageStoreUrls
               .filter((item) => item.store_id === store.id)
               .map((item, index) => (

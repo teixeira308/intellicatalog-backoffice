@@ -130,7 +130,7 @@ const EditarLoja = () => {
             <ArrowBackIcon />
           </IconButton>
           <Typography variant="h6" gutterBottom sx={{ flexGrow: 1, textAlign: "center" }}>
-            Editar Loja {store.namestore}
+            Editar Loja
           </Typography>
         </Box>
 
