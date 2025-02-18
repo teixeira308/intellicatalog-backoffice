@@ -132,7 +132,7 @@ const ConfigLoja = () => {
 
       // Filtra os dados que serão enviados
       const filteredData = filterFormData(transformedData);
-      await updateLojaConfig(loja.id, filteredData);
+      await updateLojaConfig(id, filteredData);
       window.addToast("Ação realizada com sucesso!", "success");
      
     } catch (error) {
