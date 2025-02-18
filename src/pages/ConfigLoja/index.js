@@ -150,7 +150,7 @@ const ConfigLoja = () => {
     <C.Container>
       <Container maxWidth="md" sx={{ textAlign: "center" }}>
         <Navbar />
-        <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
+        <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
           <IconButton onClick={() => navigate(-1)} sx={{ marginRight: "8px" }}>
             <ArrowBackIcon />
           </IconButton>
