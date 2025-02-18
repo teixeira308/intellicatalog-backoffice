@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as C from "./styles";
 import lojaApi from "../../services/lojaApi";
 import { NumericFormat } from 'react-number-format';
-import { Modal, Box, Typography, TextField, Button, Checkbox, FormControlLabel, InputAdornment, Container } from "@mui/material";
+import { Modal, Box, Typography, TextField, Button, Checkbox, FormControlLabel, InputAdornment } from "@mui/material";
 
 const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
   const { updateLoja, getLojaConfig, updateLojaConfig } = lojaApi();
@@ -122,9 +122,25 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
   if (!isOpen) return null;
 
   return (
-    <C.Container>
-      <Container maxWidth="md">
-
+    <Modal open={isOpen} onClose={onClose}>
+      <Box sx={{
+        width: 400,
+        margin: 'auto',
+        padding: 3,
+        backgroundColor: 'white',
+        borderRadius: 2,
+        boxShadow: 24,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        maxHeight: '90vh', // Garante que o modal não ultrapasse a altura da tela
+        overflowY: 'auto', // Adiciona a barra de rolagem vertical quando necessário
+      }}>
         <C.ModalHeader>
           <Typography variant="h6" mb={2}>Configurações da Minha Loja</Typography>
         </C.ModalHeader>
@@ -221,150 +237,150 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
               </span>
               <br />
               Preço promocional <span style={{ color: formData.cor_preco_promocional, fontSize: '15px' }}>
-                R$10,00
+               R$10,00
               </span>
               &nbsp;
               <span style={{ color: 'green', fontSize: '15px' }}>
                 50% de desconto
               </span>
-              <br />
-              <span style={{ color: formData.cor_preco, fontSize: '15px' }}>
-                Preço R$10.00
+              <br/>
+              <span style={{  color: formData.cor_preco, fontSize: '15px' }}>
+               Preço R$10.00
               </span>
-            </div>
+          </div>
           </C.FormRow>
           <C.FormRow>
-            <div style={{
-              height: '30px',
-              backgroundColor: formData.cor_primaria,
-              borderColor: formData.cor_botao_primaria,
-              color: formData.cor_secundaria,
-              display: 'flex',                // Adiciona o display flex
-              justifyContent: 'center',       // Centraliza os botões horizontalmente
-              alignItems: 'center'            // Centraliza os botões verticalmente
-            }}>
-              <button onClick={(e) => e.preventDefault()} style={{ backgroundColor: formData.cor_botao_primaria, borderColor: formData.cor_botao_primaria, color: formData.cor_secundaria, marginRight: '10px' }}>
-                Meu carrinho</button>
+          <div style={{
+            height: '30px',
+            backgroundColor: formData.cor_primaria,
+            borderColor: formData.cor_botao_primaria,
+            color: formData.cor_secundaria,
+            display: 'flex',                // Adiciona o display flex
+            justifyContent: 'center',       // Centraliza os botões horizontalmente
+            alignItems: 'center'            // Centraliza os botões verticalmente
+          }}>
+            <button onClick={(e) => e.preventDefault()} style={{ backgroundColor: formData.cor_botao_primaria, borderColor: formData.cor_botao_primaria, color: formData.cor_secundaria, marginRight: '10px' }}>
+              Meu carrinho</button>
 
-              <button onClick={(e) => e.preventDefault()} style={{ backgroundColor: formData.cor_botao_secundaria, borderColor: formData.cor_botao_secundaria, color: formData.cor_secundaria }}>
-                Finalizar Pedido</button>
-            </div>
-          </C.FormRow>
-          <C.FormRow>
-            <C.FormColumn>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    name="usa_logo_fundo"
-                    id="usa_logo_fundo"
-                    checked={formData.usa_logo_fundo}
-                    onChange={handleChangeCheckBox}
-                  />
-                }
-                label="Usar logo de fundo"
-              />
-            </C.FormColumn>
-            <C.FormColumn>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    name="usa_estoque"
-                    id="usa_estoque"
-                    checked={formData.usa_estoque}
-                    onChange={handleChangeCheckBox}
-                  />
-                }
-                label="Usa estoque"
-              />
-            </C.FormColumn>
+            <button onClick={(e) => e.preventDefault()} style={{ backgroundColor: formData.cor_botao_secundaria, borderColor: formData.cor_botao_secundaria, color: formData.cor_secundaria }}>
+              Finalizar Pedido</button>
+          </div>
+        </C.FormRow>
+        <C.FormRow>
+          <C.FormColumn>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="usa_logo_fundo"
+                  id="usa_logo_fundo"
+                  checked={formData.usa_logo_fundo}
+                  onChange={handleChangeCheckBox}
+                />
+              }
+              label="Usar logo de fundo"
+            />
+          </C.FormColumn>
+          <C.FormColumn>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="usa_estoque"
+                  id="usa_estoque"
+                  checked={formData.usa_estoque}
+                  onChange={handleChangeCheckBox}
+                />
+              }
+              label="Usa estoque"
+            />
+          </C.FormColumn>
 
-          </C.FormRow>
-          <C.FormRow>
-            <C.FormColumn>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    name="calcula_taxa_entrega_posterior"
-                    id="calcula_taxa_entrega_posterior"
-                    checked={formData.calcula_taxa_entrega_posterior}
-                    onChange={handleChangeCheckBox}
-                  />
-                }
-                label="Calcula envio posteriormente"
-              />
-            </C.FormColumn>
-          </C.FormRow>
-          <C.FormRow>
-            <C.FormColumn>
-              <NumericFormat
-                customInput={TextField}
-                label="Taxa de entrega"
-                name="taxa_entrega"
-                id="taxa_entrega"
-                value={formData.taxa_entrega}
-                onValueChange={(values) => {
-                  const { value } = values; // Obtém o valor numérico
-                  setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    taxa_entrega: value, // Atualiza o valor no formData
-                  }));
-                }}
-                thousandSeparator="."
-                decimalSeparator=","
-                decimalScale={2}
-                fixedDecimalScale
-                prefix="R$ "
-                placeholder="R$ 0,00"
-                fullWidth
-                sx={{ mb: 2 }} // Espaçamento inferior
-              />
-            </C.FormColumn>
-            <C.FormColumn>
-              <TextField
-                label="Whatsapp para receber pedidos"
-                name="numero_whatsapp"
-                id="numero_whatsapp"
-                value={formData.numero_whatsapp}
-                onChange={handleChange}
-                fullWidth
-                sx={{ mb: 2 }}
-                required
-              />
-            </C.FormColumn>
-          </C.FormRow>
-          <C.FormRow>
-            <C.FormColumn>
-              <TextField
-                label="Instagram"
-                name="instagram"
-                id="instagram"
-                value={formData.instagram}
-                onChange={handleChange}
-                fullWidth
-                sx={{ mb: 2 }}
-              />
-            </C.FormColumn>
-          </C.FormRow>
-          <C.FormRow>
-            <C.FormColumn>
-              <TextField
-                label="Facebook"
-                name="facebook"
-                id="facebook"
-                value={formData.facebook}
-                onChange={handleChange}
-                fullWidth
-                sx={{ mb: 2 }}
-              />
-            </C.FormColumn>
-          </C.FormRow>
-          <Box display="flex" justifyContent="flex-end">
-            <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Cancelar</Button>
-            <Button type="submit" color="success" variant="contained">Salvar</Button>
-          </Box>
-        </C.ModalForm>
-      </Container>
-    </C.Container>
+        </C.FormRow>
+        <C.FormRow>
+          <C.FormColumn>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="calcula_taxa_entrega_posterior"
+                  id="calcula_taxa_entrega_posterior"
+                  checked={formData.calcula_taxa_entrega_posterior}
+                  onChange={handleChangeCheckBox}
+                />
+              }
+              label="Calcula envio posteriormente"
+            />
+          </C.FormColumn>
+        </C.FormRow>
+        <C.FormRow>
+          <C.FormColumn>
+            <NumericFormat
+              customInput={TextField}
+              label="Taxa de entrega"
+              name="taxa_entrega"
+              id="taxa_entrega"
+              value={formData.taxa_entrega}
+              onValueChange={(values) => {
+                const { value } = values; // Obtém o valor numérico
+                setFormData((prevFormData) => ({
+                  ...prevFormData,
+                  taxa_entrega: value, // Atualiza o valor no formData
+                }));
+              }}
+              thousandSeparator="."
+              decimalSeparator=","
+              decimalScale={2}
+              fixedDecimalScale
+              prefix="R$ "
+              placeholder="R$ 0,00"
+              fullWidth
+              sx={{ mb: 2 }} // Espaçamento inferior
+            />
+          </C.FormColumn>
+          <C.FormColumn>
+            <TextField
+              label="Whatsapp para receber pedidos"
+              name="numero_whatsapp"
+              id="numero_whatsapp"
+              value={formData.numero_whatsapp}
+              onChange={handleChange}
+              fullWidth
+              sx={{ mb: 2 }}
+              required
+            />
+          </C.FormColumn>
+        </C.FormRow>
+        <C.FormRow>
+          <C.FormColumn>
+            <TextField
+              label="Instagram"
+              name="instagram"
+              id="instagram"
+              value={formData.instagram}
+              onChange={handleChange}
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+          </C.FormColumn>
+        </C.FormRow>
+        <C.FormRow>
+          <C.FormColumn>
+            <TextField
+              label="Facebook"
+              name="facebook"
+              id="facebook"
+              value={formData.facebook}
+              onChange={handleChange}
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+          </C.FormColumn>
+        </C.FormRow>
+        <Box display="flex" justifyContent="flex-end">
+          <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Cancelar</Button>
+          <Button type="submit" color="success" variant="contained">Salvar</Button>
+        </Box>
+      </C.ModalForm>
+    </Box >
+    </Modal >
   );
 };
 
