@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LojaApi from "../../services/lojaApi";
 import Navbar from "../../components/Navbar/Navbar";
@@ -20,10 +20,11 @@ import {
   FormControlLabel,
   Checkbox
 } from "@mui/material";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const ConfigLoja = () => {
   const { id } = useParams();
-
+  const navigate = useNavigate();
 
   const { getLojaConfig, updateLojaConfig } = LojaApi();
   const [formData, setFormData] = useState({
@@ -134,7 +135,7 @@ const ConfigLoja = () => {
       const filteredData = filterFormData(transformedData);
       await updateLojaConfig(id, filteredData);
       window.addToast("Ação realizada com sucesso!", "success");
-     
+      navigate(-1); // Volta para a página anterior
     } catch (error) {
       console.error("Erro ao editar loja:", error);
       window.addToast("Ocorreu um erro ao editar loja: " + error, "error");
@@ -149,9 +150,14 @@ const ConfigLoja = () => {
     <C.Container>
       <Container maxWidth="md" sx={{ textAlign: "center" }}>
         <Navbar />
-        <Typography variant="h6" gutterBottom>
-          Configurações da Loja 
-        </Typography>
+        <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
+          <IconButton onClick={() => navigate(-1)} sx={{ marginRight: "8px" }}>
+            <ArrowBackIcon />
+          </IconButton>
+          <Typography variant="h6" gutterBottom>
+            Configurações da Loja
+          </Typography>
+        </Box>
 
         <C.ModalForm onSubmit={handleSubmit}>
           Cores: <br /><br />
@@ -384,7 +390,7 @@ const ConfigLoja = () => {
             </C.FormColumn>
           </C.FormRow>
           <Box display="flex" justifyContent="flex-end">
-           
+
             <Button type="submit" color="success" variant="contained">Salvar</Button>
           </Box>
         </C.ModalForm>
