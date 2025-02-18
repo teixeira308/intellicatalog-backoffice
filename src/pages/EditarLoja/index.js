@@ -63,16 +63,27 @@ const EditarLoja = () => {
       try {
         const data = await getStoreByIdentificador(identificadorexterno);
         setStore(data);
-
+        // Atualize formData após setStore ser chamado
+        setFormData({
+          namestore: data.namestore,
+          opening_hours: data.opening_hours,
+          closing_hours: data.closing_hours,
+          identificadorexterno: data.identificadorexterno,
+          address: data.address,
+          phone: data.phone,
+          email: data.email,
+          delivery_fee: data.delivery_fee,
+        });
       } catch (error) {
         console.error("Erro ao carregar loja:", error);
       } finally {
         setLoading(false);
       }
-      setFormData(store);
     };
-      fetchStore();  
+  
+    fetchStore();
   }, [identificadorexterno]);
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
