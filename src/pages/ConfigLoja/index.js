@@ -82,7 +82,9 @@ const ConfigLoja = () => {
 
   useEffect(() => {
     const fetchStoreConfigs = async () => {
+      console.log(id)
       if (id) {
+
         const storeConfigs = await loadStoreConfigs(id);
 
         // Converte as strings "true" e "false" em booleanos
