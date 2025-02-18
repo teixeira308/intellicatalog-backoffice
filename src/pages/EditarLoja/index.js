@@ -21,6 +21,7 @@ const EditarLoja = () => {
   const navigate = useNavigate();
   const { getStoreByIdentificador, updateLoja } = LojaApi();
   const [store, setStore] = useState({
+    id: "",
     namestore: "",
     opening_hours: "",
     closing_hours: "",
@@ -31,6 +32,7 @@ const EditarLoja = () => {
     delivery_fee: "",
   });
   const [formData, setFormData] = useState({
+    id: "",
     namestore: "",
     opening_hours: "",
     closing_hours: "",
@@ -44,6 +46,7 @@ const EditarLoja = () => {
 
   const filterFormData = (data) => {
     const allowedFields = [
+      "id",
       "namestore",
       "opening_hours",
       "closing_hours",
@@ -65,6 +68,7 @@ const EditarLoja = () => {
         setStore(data);
         // Atualize formData após setStore ser chamado
         setFormData({
+          id: data.id,
           namestore: data.namestore,
           opening_hours: data.opening_hours,
           closing_hours: data.closing_hours,
