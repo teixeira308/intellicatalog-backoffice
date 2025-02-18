@@ -189,15 +189,15 @@ const Loja = () => {
                   <br />
                   Foto de perfil
                 </C.EditButton>
-                <C.EditButton onClick={() => openEditarLojaModal(store)}>
+               {/*}  <C.EditButton onClick={() => openEditarLojaModal(store)}>
                   <FaEdit />
                   <br />
-                  Informações
-                </C.EditButton>
+                  Informações old
+                </C.EditButton>{*/}
                 <C.EditButton as={Link} to={`/loja/${store.identificadorexterno}/edit`} sx={{ textDecoration: 'none' }}>
                   <FaEdit />
                   <br />
-                  Informações v2
+                  Informações 
                 </C.EditButton>
                 {/*}<C.EditButton onClick={() => openEditarLojaConfigModal(store)}>
                   <FaCog />
