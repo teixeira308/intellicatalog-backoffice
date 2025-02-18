@@ -20,7 +20,16 @@ const EditarLoja = () => {
   const { identificadorexterno } = useParams();
   const navigate = useNavigate();
   const { getStoreByIdentificador, updateLoja } = LojaApi();
-  const [store, setStore] = useState({});
+  const [store, setStore] = useState({
+    namestore: "",
+    opening_hours: "",
+    closing_hours: "",
+    status: "Aberta",
+    address: "",
+    phone: "",
+    email: "",
+    delivery_fee: "",
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -41,7 +50,8 @@ const EditarLoja = () => {
   }, [identificadorexterno, getStoreByIdentificador]);
 
   const handleChange = (e) => {
-    setStore(prevStore => ({ ...prevStore, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setStore((prevStore) => ({ ...prevStore, [name]: value }));
   };
 
   const handleSubmit = async () => {
@@ -71,17 +81,17 @@ const EditarLoja = () => {
         </Box>
 
         <Stack spacing={2}>
-          <TextField label="Nome da Loja" name="namestore" fullWidth value={store.namestore || ""} onChange={handleChange} />
-          <TextField label="Horário de Abertura" name="opening_hours" fullWidth value={store.opening_hours || ""} onChange={handleChange} />
-          <TextField label="Horário de Fechamento" name="closing_hours" fullWidth value={store.closing_hours || ""} onChange={handleChange} />
-          <Select name="status" value={store.status || "Aberta"} onChange={handleChange} fullWidth>
+          <TextField label="Nome da Loja" name="namestore" fullWidth value={store.namestore ?? ""} onChange={handleChange} />
+          <TextField label="Horário de Abertura" name="opening_hours" fullWidth value={store.opening_hours ?? ""} onChange={handleChange} />
+          <TextField label="Horário de Fechamento" name="closing_hours" fullWidth value={store.closing_hours ?? ""} onChange={handleChange} />
+          <Select name="status" value={store.status ?? "Aberta"} onChange={handleChange} fullWidth>
             <MenuItem value="Aberta">Aberta</MenuItem>
             <MenuItem value="Fechada">Fechada</MenuItem>
           </Select>
-          <TextField label="Endereço" name="address" fullWidth value={store.address || ""} onChange={handleChange} />
-          <TextField label="Telefone" name="phone" fullWidth value={store.phone || ""} onChange={handleChange} />
-          <TextField label="E-mail" name="email" fullWidth value={store.email || ""} onChange={handleChange} />
-          <TextField label="Taxa de Entrega" name="delivery_fee" fullWidth type="number" value={store.delivery_fee || ""} onChange={handleChange} />
+          <TextField label="Endereço" name="address" fullWidth value={store.address ?? ""} onChange={handleChange} />
+          <TextField label="Telefone" name="phone" fullWidth value={store.phone ?? ""} onChange={handleChange} />
+          <TextField label="E-mail" name="email" fullWidth value={store.email ?? ""} onChange={handleChange} />
+          <TextField label="Taxa de Entrega" name="delivery_fee" fullWidth type="number" value={store.delivery_fee ?? ""} onChange={handleChange} />
         </Stack>
         
         <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={handleSubmit}>
