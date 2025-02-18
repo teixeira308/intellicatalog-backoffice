@@ -23,9 +23,9 @@ import {
 
 const ConfigLoja = () => {
   const { id } = useParams();
-  const [loja, setLoja] = useState(null);
 
-  const { updateLoja, getLojaConfig, updateLojaConfig } = LojaApi();
+
+  const { getLojaConfig, updateLojaConfig } = LojaApi();
   const [formData, setFormData] = useState({
     cor_primaria: "",
     cor_secundaria: "",
@@ -150,7 +150,7 @@ const ConfigLoja = () => {
       <Container maxWidth="md" sx={{ textAlign: "center" }}>
         <Navbar />
         <Typography variant="h6" gutterBottom>
-          Configurações da Loja {loja.namestore}
+          Configurações da Loja 
         </Typography>
 
         <C.ModalForm onSubmit={handleSubmit}>
