@@ -26,7 +26,8 @@ const EditarLoja = () => {
   const { identificadorexterno } = useParams();
   const navigate = useNavigate();
   const { getStoreByIdentificador, updateLoja } = LojaApi();
-  const {store,setStore} = useState([]);
+  const [store, setStore] = useState([]);
+
   
 
     useEffect(() => {
@@ -54,12 +55,9 @@ const EditarLoja = () => {
             <ArrowBackIcon />
           </IconButton>
           <Typography variant="h6" gutterBottom sx={{ flexGrow: 1, textAlign: "center" }}>
-            Editar Loja  {identificadorexterno}
+            Editar Loja  {store.namestore}
           </Typography>
         </Box>
-
-
-     
       </Container>
     </C.Container >
   );
