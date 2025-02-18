@@ -15,6 +15,7 @@ import EsqueciSenha from "../pages/EsqueciSenha";
 import Servicos from "../pages/Servicos";
 import Pedidos from "../pages/Pedidos";
 import ConfigLoja from "../pages/ConfigLoja";
+import EditarLoja from "../pages/EditarLoja";
 
 const Private = ({ Item }) => {
   const { signed } = useAuth();
@@ -41,6 +42,7 @@ const RoutesApp = () => {
           <Route exact path="/servicos" element={<Private Item={Servicos} />} /> 
           <Route path="/esquecisenha" element={<EsqueciSenha/>} />
           <Route path="/loja/:id/config" element={<Private Item={ConfigLoja} />} />
+          <Route path="/loja/:id/edit" element={<Private Item={EditarLoja} />} />
           <Route path="/" element={<Signin />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route path="*" element={<Signin />} />

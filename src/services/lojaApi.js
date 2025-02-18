@@ -8,6 +8,26 @@ const LojaApi = () => {
   const api_url = process.env.REACT_APP_API;
   //const api_url = 'http://localhost/api'
 
+
+  const getStoreByIdentificador = async (identificadorexterno) => {
+    const response = await fetch(`${api_url}/intellicatalog/v1/stores/${identificadorexterno}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?.token}`,
+      },
+    });
+    if (response.status === 401) {
+      // Redireciona para a tela de login
+      navigate('/login');
+    }
+    if (!response.ok) {
+      throw new Error("Erro ao buscar pessoas");
+    }
+
+    return await response.json();
+  };
+
   const getStores = async () => {
     const response = await fetch(`${api_url}/intellicatalog/v1/stores/`, {
       method: "GET",
@@ -121,6 +141,7 @@ const LojaApi = () => {
   }
 
   return {
+    getStoreByIdentificador,
     getStores,
     changeStatus,
     updateLoja,

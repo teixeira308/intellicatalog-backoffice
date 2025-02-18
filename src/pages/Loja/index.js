@@ -194,6 +194,11 @@ const Loja = () => {
                   <br />
                   Informações
                 </C.EditButton>
+                <C.EditButton as={Link} to={`/loja/${store.identificadorexterno}/edit`} sx={{ textDecoration: 'none' }}>
+                  <FaEdit />
+                  <br />
+                  Informações v2
+                </C.EditButton>
                 {/*}<C.EditButton onClick={() => openEditarLojaConfigModal(store)}>
                   <FaCog />
                   <br />
