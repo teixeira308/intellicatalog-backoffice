@@ -51,6 +51,7 @@ export const CloseButton = styled.button`
 export const ModalForm = styled.form`
   display: flex;
   flex-direction: column;
+  
 `;
 
 // Estilos para cada linha do formulário
