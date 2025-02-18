@@ -194,15 +194,15 @@ const Loja = () => {
                   <br />
                   Informações
                 </C.EditButton>
-                <C.EditButton onClick={() => openEditarLojaConfigModal(store)}>
+                {/*}<C.EditButton onClick={() => openEditarLojaConfigModal(store)}>
+                  <FaCog />
+                  <br />
+                  Configurações old em modal
+                </C.EditButton>{*/}
+                <C.EditButton as={Link} to={`/loja/${store.id}/config`} sx={{ textDecoration: 'none' }}>
                   <FaCog />
                   <br />
                   Configurações
-                </C.EditButton>
-                <C.EditButton as={Link} to={`/loja/${store.id}/config`}>
-                  <FaCog />
-                  <br />
-                  Configurações v2
                 </C.EditButton>
                 <C.EditButton onClick={() => openStoreSite(store)}>
                   <FaRegWindowRestore />
