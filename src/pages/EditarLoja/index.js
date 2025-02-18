@@ -34,7 +34,6 @@ const EditarLoja = () => {
 
   const filterFormData = (data) => {
     const allowedFields = [
-      "id",
       "namestore",
       "opening_hours",
       "closing_hours",
