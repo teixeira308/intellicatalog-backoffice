@@ -34,6 +34,7 @@ const EditarLoja = () => {
         try {
           const data = await getStoreByIdentificador(identificadorexterno);
           setStore(data);
+          console.log(data)
         } catch (error) {
           console.error("Erro ao carregar stores:", error);
         }
@@ -53,7 +54,7 @@ const EditarLoja = () => {
             <ArrowBackIcon />
           </IconButton>
           <Typography variant="h6" gutterBottom sx={{ flexGrow: 1, textAlign: "center" }}>
-            Editar Loja {store.namestore}
+            Editar Loja 
           </Typography>
         </Box>
 
