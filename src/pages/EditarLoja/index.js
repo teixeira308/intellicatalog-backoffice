@@ -136,14 +136,13 @@ const EditarLoja = () => {
 
         <Stack spacing={2}>
           <TextField label="Nome da Loja" name="namestore" fullWidth value={formData.namestore} onChange={handleChange} required />
-          <TextField label="Horário de Abertura" name="opening_hours" fullWidth value={formData.opening_hours} onChange={handleChange} />
-          <TextField label="Horário de Fechamento" name="closing_hours" fullWidth value={formData.closing_hours} onChange={handleChange} />
+          <TextField label="Horário de Abertura" name="opening_hours"  value={formData.opening_hours} onChange={handleChange} />
+          <TextField label="Horário de Fechamento" name="closing_hours"  value={formData.closing_hours} onChange={handleChange} />
           <TextField label="Identificador Externo" name="identificadorexterno" fullWidth value={formData.identificadorexterno} onChange={handleChange} required />
           <TextField label="Endereço" name="address" fullWidth value={formData.address} onChange={handleChange} />
           <TextField label="Telefone" name="phone" fullWidth value={formData.phone} onChange={handleChange} required />
           <TextField label="E-mail" name="email" fullWidth value={formData.email} onChange={handleChange} />
-          <TextField label="Taxa de Entrega" name="delivery_fee" fullWidth type="text" value={formData.delivery_fee} onChange={handlePriceChange} />
-        </Stack>
+       </Stack>
         
         <Box display="flex" justifyContent="flex-end" sx={{ mt: 2 }}>
           <Button onClick={() => navigate(-1)} variant="outlined" color="error" sx={{ mr: 2 }}>Cancelar</Button>
