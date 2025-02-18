@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+
+  margin-top:70px;
+`;
+
+
 // Estilos para o overlay do modal
 export const ModalOverlay = styled.div`
   position: fixed;

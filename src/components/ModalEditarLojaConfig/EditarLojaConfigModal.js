@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as C from "./styles";
 import lojaApi from "../../services/lojaApi";
 import { NumericFormat } from 'react-number-format';
-import { Modal, Box, Typography, TextField, Button, Checkbox, FormControlLabel, InputAdornment } from "@mui/material";
+import { Modal, Box, Typography, TextField, Button, Checkbox, FormControlLabel, InputAdornment,Container } from "@mui/material";
 
 const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
   const { updateLoja, getLojaConfig, updateLojaConfig } = lojaApi();
@@ -122,7 +122,8 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
   if (!isOpen) return null;
 
   return (
-    <Modal open={isOpen} onClose={onClose}>
+    <C.Container>
+      <Container maxWidth="md">
       <Box sx={{
         width: 400,
         margin: 'auto',
@@ -380,7 +381,9 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
         </Box>
       </C.ModalForm>
     </Box >
-    </Modal >
+    
+    </Container>
+    </C.Container>
   );
 };
 
