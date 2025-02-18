@@ -389,9 +389,8 @@ const ConfigLoja = () => {
               />
             </C.FormColumn>
           </C.FormRow>
-          <Box display="flex" justifyContent="flex-end">
-
-            <Button type="submit" color="success" variant="contained">Salvar</Button>
+          <Box display="flex" justifyContent="center">
+            <Button type="submit" color="success" size="large" variant="contained">Salvar</Button>
           </Box>
         </C.ModalForm>
 
