@@ -30,6 +30,16 @@ const EditarLoja = () => {
     email: "",
     delivery_fee: "",
   });
+  const [formData, setFormData] = useState({
+    namestore: "",
+    opening_hours: "",
+    closing_hours: "",
+    identificadorexterno: "",
+    address: "",
+    phone: "",
+    email: "",
+    delivery_fee: "",
+  });
   const [loading, setLoading] = useState(true);
 
   const filterFormData = (data) => {
@@ -52,22 +62,21 @@ const EditarLoja = () => {
     const fetchStore = async () => {
       try {
         const data = await getStoreByIdentificador(identificadorexterno);
-        setStore(data || {});
+        setStore(data);
+
       } catch (error) {
         console.error("Erro ao carregar loja:", error);
       } finally {
         setLoading(false);
       }
+      setFormData(store);
     };
-    
-    if (identificadorexterno) {
-      fetchStore();
-    }
-  }, [identificadorexterno, getStoreByIdentificador]);
+      fetchStore();  
+  }, [identificadorexterno]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setStore((prevStore) => ({ ...prevStore, [name]: value }));
+    setFormData((prevStore) => ({ ...prevStore, [name]: value }));
   };
 
   const handlePriceChange = (e) => {
@@ -84,7 +93,7 @@ const EditarLoja = () => {
 
   const handleSubmit = async () => {
     try {
-      const filteredData = filterFormData(store);
+      const filteredData = filterFormData(formData);
       await updateLoja(filteredData.id, filteredData);
       alert("Loja atualizada com sucesso!");
       navigate(-1);
@@ -110,14 +119,14 @@ const EditarLoja = () => {
         </Box>
 
         <Stack spacing={2}>
-          <TextField label="Nome da Loja" name="namestore" fullWidth value={store.namestore} onChange={handleChange} required />
-          <TextField label="Horário de Abertura" name="opening_hours" fullWidth value={store.opening_hours} onChange={handleChange} />
-          <TextField label="Horário de Fechamento" name="closing_hours" fullWidth value={store.closing_hours} onChange={handleChange} />
-          <TextField label="Identificador Externo" name="identificadorexterno" fullWidth value={store.identificadorexterno} onChange={handleChange} required />
-          <TextField label="Endereço" name="address" fullWidth value={store.address} onChange={handleChange} />
-          <TextField label="Telefone" name="phone" fullWidth value={store.phone} onChange={handleChange} required />
-          <TextField label="E-mail" name="email" fullWidth value={store.email} onChange={handleChange} />
-          <TextField label="Taxa de Entrega" name="delivery_fee" fullWidth type="text" value={store.delivery_fee} onChange={handlePriceChange} />
+          <TextField label="Nome da Loja" name="namestore" fullWidth value={formData.namestore} onChange={handleChange} required />
+          <TextField label="Horário de Abertura" name="opening_hours" fullWidth value={formData.opening_hours} onChange={handleChange} />
+          <TextField label="Horário de Fechamento" name="closing_hours" fullWidth value={formData.closing_hours} onChange={handleChange} />
+          <TextField label="Identificador Externo" name="identificadorexterno" fullWidth value={formData.identificadorexterno} onChange={handleChange} required />
+          <TextField label="Endereço" name="address" fullWidth value={formData.address} onChange={handleChange} />
+          <TextField label="Telefone" name="phone" fullWidth value={formData.phone} onChange={handleChange} required />
+          <TextField label="E-mail" name="email" fullWidth value={formData.email} onChange={handleChange} />
+          <TextField label="Taxa de Entrega" name="delivery_fee" fullWidth type="text" value={formData.delivery_fee} onChange={handlePriceChange} />
         </Stack>
         
         <Box display="flex" justifyContent="flex-end" sx={{ mt: 2 }}>
