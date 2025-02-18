@@ -30,7 +30,7 @@ const EditarLoja = () => {
   
 
     useEffect(() => {
-      const fetchStores = async () => {
+      const fetchStores = async (identificadorexterno) => {
         try {
           const data = await getStoreByIdentificador(identificadorexterno);
           setStore(data);
@@ -39,7 +39,7 @@ const EditarLoja = () => {
           console.error("Erro ao carregar stores:", error);
         }
       };
-      fetchStores();
+      fetchStores(identificadorexterno);
     }, [identificadorexterno]);
 
   if (!identificadorexterno) return <p>Carregando...</p>;
@@ -54,7 +54,7 @@ const EditarLoja = () => {
             <ArrowBackIcon />
           </IconButton>
           <Typography variant="h6" gutterBottom sx={{ flexGrow: 1, textAlign: "center" }}>
-            Editar Loja 
+            Editar Loja  {identificadorexterno}
           </Typography>
         </Box>
 
