@@ -264,7 +264,8 @@ const ConfigLoja = () => {
                 Preço R$10.00
               </span>
             </div>
-
+            </C.FormRow>
+            <C.FormRow>
             <div style={{
               height: '30px',
               backgroundColor: formData.cor_primaria,
