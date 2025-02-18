@@ -144,8 +144,7 @@ const EditarLoja = () => {
           <TextField label="E-mail" name="email" fullWidth value={formData.email} onChange={handleChange} />
        </Stack>
         
-        <Box display="flex" justifyContent="flex-end" sx={{ mt: 2 }}>
-          <Button onClick={() => navigate(-1)} variant="outlined" color="error" sx={{ mr: 2 }}>Cancelar</Button>
+        <Box display="flex" justifyContent="center" sx={{ mt: 2 }}>
           <Button variant="contained" color="success" onClick={handleSubmit}>Salvar</Button>
         </Box>
       </Container>
