@@ -77,8 +77,8 @@ const LojaApi = () => {
     return await response.json();
   }
 
-  const getLojaConfig = async (store) => {
-    const response = await fetch(`${api_url}/intellicatalog/v1/stores/${store.id}/config`, {
+  const getLojaConfig = async (storeId) => {
+    const response = await fetch(`${api_url}/intellicatalog/v1/stores/${storeId}/config`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

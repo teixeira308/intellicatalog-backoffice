@@ -3,260 +3,109 @@ import styled from "styled-components";
 export const Container = styled.div`
   margin-top:70px;
 `;
+ 
+ 
 
-export const Title = styled.h2`
-  font-size: 20px;
+// Estilos para o overlay do modal
+export const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+// Estilos para o container do modal
+export const ModalContainer = styled.div`
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+`;
+
+// Estilos para o cabeçalho do modal
+export const ModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
+`;
+
+// Estilos para o botão de fechar
+export const CloseButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
   color: #333;
 `;
 
-export const Section = styled.div`
+// Estilos para o formulário do modal
+export const ModalForm = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  max-width: 800px;
-  width: 100%;
 `;
 
-export const Subtitle = styled.p`
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  color: #555;
-`;
-
-export const Step = styled.div`
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 10px 0;
-  width: 100%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-export const StepTitle = styled.h4`
-  font-size: 1.25rem;
-  margin-bottom: 10px;
-  color: #333;
-`;
-
-export const StepDescription = styled.a`
-  font-size: 1rem;
-  color: #666;
-`;
-
-
-export const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 colunas */
-  gap: 20px;
-  margin-top: 20px;
-`;
- 
-
-export const Card = styled.div`
-  background-color: ${({ status }) => (status === "available" ? "#ffffff" : "rgb(51, 222, 36);")}; 
-  color: #333;
- 
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: background-color 0.3s ease;
-  &:hover {
-    background-color: ${({ status }) => (status === "available" ? "#f9f9f9" : "#ff9999")}; 
-  }
-`;
-
-
-export const MonthControls = styled.div`
+// Estilos para cada linha do formulário
+export const FormRow = styled.div`
   display: flex;
   justify-content: space-between;
-   
-  margin-bottom: 20px;
-padding: 20px;
-  button {
-    background-color: rgb(60, 57, 57);;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin: 0 10px;
+  margin-bottom: 15px;
 
-    &:hover {
-      background-color:  rgb(83, 80, 80);;
+  & > div {
+    flex: 1;
+    &:first-child {
+      margin-right: 10px;
     }
   }
-
-  span {
-    font-size: 18px;
-    font-weight: bold;
-  }
 `;
 
-export const ServiceGroup = styled.div`
-  margin-bottom: 20px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+// Estilos para as colunas do formulário
+export const FormColumn = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
-export const ServiceTitle = styled.h3`
-  font-size: 15px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #333;
-`;
-
-export const DateGroup = styled.div`
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 8px;
-  background-color: #f1f1f1;
-`;
-
-export const DateTitle = styled.h4`
-  font-size: 16px;
+// Estilos para os rótulos dos inputs
+export const Label = styled.label`
   font-weight: bold;
   margin-bottom: 5px;
-  width: 200px;
 `;
 
-export const TimeList = styled.div`
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-`;
-
-export const ServiceControls = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 15px;
-
-  button {
-    padding: 8px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-
-  button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-`;
-export const ActionButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px; /* Espaço entre o ícone e o texto */
-  background-color: #f4f4f4; /* Cor de fundo padrão */
-  border: 1px solid #ddd; /* Borda leve */
-  border-radius: 50px; /* Forma arredondada */
-  padding: 8px 12px; /* Espaço interno do botão */
-  font-size: 14px; /* Tamanho da fonte */
-  color: #333; /* Cor do texto */
-  cursor: pointer; /* Muda o cursor ao passar o mouse */
-  transition: all 0.3s ease; /* Transições suaves */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra leve */
-
-  &:hover {
-    background-color: #e0e0e0; /* Cor ao passar o mouse */
-    border-color: #bbb; /* Cor da borda ao passar o mouse */
-    color: #000; /* Texto mais escuro no hover */
-  }
-
-  &:active {
-    transform: scale(0.98); /* Leve redução ao clicar */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Ajuste da sombra ao clicar */
-  }
-
-  svg {
-    font-size: 16px; /* Tamanho do ícone */
-  }
-`;
-
-
-export const CreateButton = styled(ActionButton)`
-  background-color: #4caf50; /* Verde para editar */
-  color: #fff; /* Texto branco */
-  border: none;
-
-  &:hover {
-    background-color: #45a049; /* Verde mais escuro no hover */
-  }
-`;
-
-export const CreateAgendaButton = styled.p`
-   
-  color: #2196f3;
-  border: none;
-  font-size: 16px;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-`;
-
-
-export const ButtonGroup = styled.div`
-  display: flex;
-  gap: 10px; /* Espaço entre os botões */
-  justify-content: center; /* Centraliza os botões no eixo horizontal */
-  align-items: center; /* Alinha os botões verticalmente */
-  margin-top: 10px; /* Espaço superior */
-  margin-bottom: 10px;
-`;
-
-export const DateControls = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 15px;
-
-  button {
-    padding: 8px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-
-  button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-`;
-
-export const DateLabel = styled.p`
-
-width: 30px;
-`;
-
-
-
-export const Select = styled.select`
-  padding: 10px;
-  font-size: 16px;
+// Estilos para os inputs
+export const Input = styled.input`
+  padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  background: white;
-  cursor: pointer;
-  outline: none;
+  border-radius: 4px;
+  font-size: 1rem;
+`;
 
-  &:focus {
-    border-color: #007bff;
+// Estilos para o botão de submit
+export const Button = styled.button`
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+
+  &:hover {
+    background-color: #0056b3;
   }
 `;
 
-export const Option = styled.option`
-  font-size: 16px;
+// Estilos para os inputs
+export const NumericFormat = styled.input`
+padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 120;
 `;

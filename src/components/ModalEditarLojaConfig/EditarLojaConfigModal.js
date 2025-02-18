@@ -52,7 +52,7 @@ const EditarLojaConfigModal = ({ isOpen, onClose, loja, onEdit }) => {
 
   const loadStoreConfigs = async (loja) => {
     try {
-      const response = await getLojaConfig(loja);
+      const response = await getLojaConfig(loja.id);
       return response;
     } catch (error) {
       console.error("Erro ao carregar configuração da loja:", error);
