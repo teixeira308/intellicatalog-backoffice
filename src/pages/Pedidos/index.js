@@ -207,23 +207,27 @@ const Pedidos = () => {
                       hour12: false,
                     }).format(new Date(pedido.order_date))}
                   </C.CardDetail>
-                  <C.CardDetail>
-                    <strong>Entrega em:</strong> {new Intl.DateTimeFormat("pt-BR", {
-                      day: "2-digit",
-                      month: "2-digit",
-                      year: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      second: "2-digit",
-                      hour12: false,
-                    }).format(new Date(pedido.data_entrega))}
-                  </C.CardDetail>
+                  {pedido.data_entrega && (
+                    <C.CardDetail>
+                      <strong>Entrega em:</strong>{" "}
+                      {new Intl.DateTimeFormat("pt-BR", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                        hour12: false,
+                      }).format(new Date(pedido.data_entrega))}
+                    </C.CardDetail>
+                  )}
+
                   <C.CardDetail>
                     <strong>Total:</strong>{" "}
                     R${pedido.total_amount}
                   </C.CardDetail>
                   <C.CardDetail>
-                   
+
                     <C.ButtonGroup>
 
 
@@ -257,10 +261,10 @@ const Pedidos = () => {
                   </C.CardDetail>
                   {expandedPedidoId === pedido.id && (
                     <>
-                    {/*}  <C.CreateButton onClick={() => { openAdicionarItemPedidoModal(pedido); }}>
+                      {/*}  <C.CreateButton onClick={() => { openAdicionarItemPedidoModal(pedido); }}>
                         <FaPlusCircle /> Produto
                       </C.CreateButton>{*/}
-                     
+
 
                       {pedido.items.map((item, idx) => {
                         const produto = getProdutoDetalhes(item.product_id);
@@ -294,9 +298,9 @@ const Pedidos = () => {
                             ) : (
                               <p>Pedido sem produtos.</p>
                             )}
-                            
+
                           </C.Card>
-                          
+
                         );
                       })}
                       <Button size="medium" color="success" variant="contained" startIcon={<AddCircle />} onClick={() => openAdicionarItemPedidoModal(pedido)}>
@@ -304,7 +308,7 @@ const Pedidos = () => {
                       </Button>
                     </>
                   )}
-                   
+
                 </C.CardBody>
 
               </C.Card>
