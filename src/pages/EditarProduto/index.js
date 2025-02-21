@@ -20,7 +20,7 @@ const EditarProduto = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
  
-  if (loading) return <p>Carregando...</p>;
+  //if (loading) return <p>Carregando...</p>;
   if (!id) return <p>Produto não encontrado.</p>;
 
   return (
