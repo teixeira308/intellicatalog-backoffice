@@ -21,7 +21,7 @@ const EditarProduto = () => {
   const [loading, setLoading] = useState(true);
  
   if (loading) return <p>Carregando...</p>;
-  if (!store) return <p>Produto não encontrado.</p>;
+  if (!id) return <p>Produto não encontrado.</p>;
 
   return (
     <C.Container>
