@@ -28,6 +28,26 @@ const ProductApi = () => {
     return await response.json();
   }
 
+  const getProduct = async (id) => {
+    
+    const response = await fetch(`${api_url}/intellicatalog/v1/products/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?.token}`,
+      },
+    });
+    if (response.status === 401) {
+      // Redireciona para a tela de login
+      navigate('/login');
+    }
+    if (!response.ok) {
+      throw new Error("Erro ao buscar productos");
+    }
+
+    return await response.json();
+  }
+
   const deleteProduto = async (produto) => {
     const response = await fetch(`${api_url}/intellicatalog/v1/products/${produto.id}`, {
       method: "DELETE",
