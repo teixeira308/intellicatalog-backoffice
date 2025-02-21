@@ -32,7 +32,7 @@ const EditarProduto = () => {
             <ArrowBackIcon />
           </IconButton>
           <Typography variant="h6" gutterBottom sx={{ flexGrow: 1, textAlign: "center" }}>
-            Editar Produto
+            Editar Produto {id}
           </Typography>
         </Box>
       </Container>
