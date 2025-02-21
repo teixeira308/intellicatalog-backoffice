@@ -16,6 +16,7 @@ import Servicos from "../pages/Servicos";
 import Pedidos from "../pages/Pedidos";
 import ConfigLoja from "../pages/ConfigLoja";
 import EditarLoja from "../pages/EditarLoja";
+import EditarProduto from "../pages/EditarProduto";
 
 const Private = ({ Item }) => {
   const { signed } = useAuth();
@@ -43,6 +44,7 @@ const RoutesApp = () => {
           <Route path="/esquecisenha" element={<EsqueciSenha/>} />
           <Route path="/loja/:id/config" element={<Private Item={ConfigLoja} />} />
           <Route path="/loja/:identificadorexterno/edit" element={<Private Item={EditarLoja} />} />
+          <Route path="produto/:id/edit" element={<Private Item={EditarProduto} />} />
           <Route path="/" element={<Signin />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route path="*" element={<Signin />} />
