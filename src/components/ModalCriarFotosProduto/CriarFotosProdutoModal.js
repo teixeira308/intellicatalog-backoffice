@@ -38,6 +38,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
 
     try {
       await reorderProductImages(imagensReordenadas);
+      setIsReordering(!isReordering)
       window.addToast("Ordem das fotos atualizada!", "success");
     } catch (error) {
       console.error("Erro ao atualizar ordem:", error);
@@ -223,7 +224,7 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
         <C.ModalForm onSubmit={handleSubmit}>
           <C.FormRow>
             <C.FormColumn>
-              <Typography variant="subtitle1" mb={2}>Produto: {produto.titulo}</Typography>
+              <Typography variant="subtitle1" mb={2}><strong>Produto:</strong> {produto.titulo}</Typography>
             </C.FormColumn>
           </C.FormRow>
           <C.FormRow>
