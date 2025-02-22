@@ -13,6 +13,8 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
   });
   const [imageUrls, setImageUrls] = useState([]); // Estado para armazenar as URLs das imagens do produto
   const [loading, setLoading] = useState(false);
+  const [isReordering, setIsReordering] = useState(false); // Estado para ativar a reordenação
+
 
   // Função para reordenar a lista localmente
   const reorder = (list, startIndex, endIndex) => {
