@@ -28,8 +28,7 @@ const EditarProduto = () => {
     const fetchProduto = async () => {
       try {
         const data = await getProduct(id);
-        console.log(data)
-        setProduto(data.data);
+        setProduto(data);
       } catch (error) {
         console.error("Erro ao buscar produto:", error);
       } finally {
