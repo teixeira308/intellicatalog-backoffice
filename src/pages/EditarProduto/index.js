@@ -77,10 +77,11 @@ const EditarProduto = () => {
     const filteredData = filterFormData(produto);
     try {
       await updateProduto(id, filteredData);
-      alert("Produto atualizado com sucesso!");
+      window.addToast("Ação realizada com sucesso!", "success");
       navigate(-1);
     } catch (error) {
       console.error("Erro ao atualizar produto:", error);
+      window.addToast("Ocorreu um erro ao editar produto: " + error, "error");
     }
   };
 
