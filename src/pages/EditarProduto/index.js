@@ -50,6 +50,7 @@ const EditarProduto = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(produto)
     try {
       await updateProduto(id, produto);
       alert("Produto atualizado com sucesso!");
