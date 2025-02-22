@@ -14,7 +14,7 @@ import {
   Select,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ProductApi from "../../services/productApi";
+import productApi from "../../services/productApi";
 
 const EditarProduto = () => {
   const { id } = useParams();
