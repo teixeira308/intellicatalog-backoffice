@@ -214,6 +214,7 @@ const ProductApi = () => {
   }
 
   return {
+    getProduct,
     getProducts,
     deleteProduto,
     createProduto,
