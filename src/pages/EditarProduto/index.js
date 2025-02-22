@@ -24,6 +24,30 @@ const EditarProduto = () => {
 
   const { getProduct, updateProduto } = productApi();
 
+  const filterFormData = (data) => {
+    // Campos permitidos
+    const allowedFields = [
+      'titulo',
+      'brand',
+      'description',
+      'price',
+      'unit',
+      'unitquantity',
+      'promocional_price'
+    ];
+
+    // Filtra os dados mantendo apenas os campos permitidos
+    const filteredData = Object.fromEntries(
+      Object.entries(data).filter(([key]) => allowedFields.includes(key))
+    );
+
+    // Verifica se promocional_price é uma string vazia e a redefine para null
+    if (filteredData.promocional_price === '') {
+      filteredData.promocional_price = null;
+    }
+
+    return filteredData;
+  };
   useEffect(() => {
     const fetchProduto = async () => {
       try {
@@ -50,9 +74,9 @@ const EditarProduto = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(produto)
+    const filteredData = filterFormData(produto);
     try {
-      await updateProduto(id, produto);
+      await updateProduto(id, filteredData);
       alert("Produto atualizado com sucesso!");
       navigate(-1);
     } catch (error) {
