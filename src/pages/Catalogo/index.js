@@ -486,9 +486,9 @@ const Catalogo = () => {
                                 <MenuItem onClick={() => { console.log(produto); setSelectedProduto(produto); openEditarProdutoModal(produto, categoria); closeProductMenu(produto.id); }}>
                                   <FaEdit style={{ marginRight: 8 }} /> Editar
                                 </MenuItem>
-                                <MenuItem component={Link} to={`/produto/${produto.id}/edit`}>
+                                {/*}<MenuItem component={Link} to={`/produto/${produto.id}/edit`}>
                                   <FaEdit style={{ marginRight: 8 }} /> Editar v2
-                                </MenuItem>
+                                </MenuItem>{*/}
                                 <MenuItem onClick={() => { console.log(produto); setSelectedProduto(produto); openDeleteProdutoModal(produto); closeProductMenu(produto.id); }}>
                                   <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
                                 </MenuItem>
