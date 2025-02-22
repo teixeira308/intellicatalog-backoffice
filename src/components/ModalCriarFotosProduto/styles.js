@@ -125,7 +125,7 @@ export const DeleteButton = styled.button`
   top: 5px; /* Distância do topo */
   right: 5px; /* Distância da direita */
   background: none; /* Remove fundo */
-  border: none; /* Remove borda */
+  border: 2px; /* Remove borda */
   color: red; /* Cor do ícone */
   font-size: 1.5rem; /* Tamanho do ícone */
   cursor: pointer; /* Cursor de pointer para indicar que é clicável */

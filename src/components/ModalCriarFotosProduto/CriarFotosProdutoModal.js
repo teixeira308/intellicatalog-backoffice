@@ -3,15 +3,46 @@ import * as C from "./styles";
 import productImageApi from "../../services/productImageApi";
 import loadingGif from '../loading.gif';
 import { Modal, Box, Typography, TextField, Button } from "@mui/material";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
-  const { createFotoProduto, getFotoProdutoDownload, getFotoByProduto, deleteFotoByProduto } = productImageApi();
+  const { createFotoProduto, getFotoProdutoDownload, getFotoByProduto, deleteFotoByProduto, reorderProductImages } = productImageApi();
   const [fotos, setFotos] = useState([]);
   const [formData, setFormData] = useState({
     file: null,
   });
   const [imageUrls, setImageUrls] = useState([]); // Estado para armazenar as URLs das imagens do produto
   const [loading, setLoading] = useState(false);
+
+  // Função para reordenar a lista localmente
+  const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+    return result;
+  };
+
+  const handleDragEnd = async (result) => {
+    if (!result.destination) return;
+
+    const reorderedImages = reorder(imageUrls, result.source.index, result.destination.index);
+    setImageUrls(reorderedImages);
+
+    // Preparar os dados para o backend
+    const imagensReordenadas = reorderedImages.map((item, index) => ({
+      id: item.id,
+      image_product_order: index + 1, // Garantir que a ordem seja sequencial
+    }));
+
+    try {
+      await reorderProductImages(imagensReordenadas);
+      window.addToast("Ordem das fotos atualizada!", "success");
+    } catch (error) {
+      console.error("Erro ao atualizar ordem:", error);
+      window.addToast("Erro ao atualizar ordem das fotos", "error");
+    }
+  };
+
 
   // Função para carregar as imagens do produto
   const loadProductImages = async () => {
@@ -214,38 +245,69 @@ const CriarFotosProdutoModal = ({ isOpen, onClose, produto, onCreate }) => {
               />
             </C.FormColumn>
           </C.FormRow>
-          <C.FormRow> 
+          <C.FormRow>
             <C.FormColumn>
-            <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Fechar</Button>
+              <Button onClick={onClose} variant="outlined" color="error" sx={{ mr: 2 }}>Fechar</Button>
             </C.FormColumn>
             <C.FormColumn>
-               <Button type="submit" color="success" variant="contained">Adicionar</Button>
+              <Button type="submit" color="success" variant="contained">Adicionar</Button>
             </C.FormColumn>
           </C.FormRow>
           {/* Exibir todas as imagens do produto */}
           {loading ? (
-            <>
-              {/* Exibe o GIF de carregamento */}
-              <C.LoadingImage src={loadingGif} alt="Carregando..." />
-            </>
+            <C.LoadingImage src={loadingGif} alt="Carregando..." />
           ) : (
             <>
-              {imageUrls && (
+              {isReordering ? (
+                <DragDropContext onDragEnd={handleDragEnd}>
+                  <Droppable droppableId="image-gallery">
+                    {(provided) => (
+                      <C.ImageGallery ref={provided.innerRef} {...provided.droppableProps}>
+                        {imageUrls.map((item, index) => (
+                          <Draggable key={item.id} draggableId={String(item.id)} index={index}>
+                            {(provided) => (
+                              <C.ImagePreview
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <img src={item.url} alt={`Foto ${produto.titulo}`} />
+                              </C.ImagePreview>
+                            )}
+                          </Draggable>
+                        ))}
+                        {provided.placeholder}
+                      </C.ImageGallery>
+                    )}
+                  </Droppable>
+                </DragDropContext>
+              ) : (
                 <C.ImageGallery>
                   {imageUrls.map((item, index) => (
-                    <C.ImagePreview key={index}> {/* Use o id como chave */}
+                    <C.ImagePreview key={index}>
                       <img src={item.url} alt={`Foto do Produto ${produto.titulo}`} />
-                      <C.DeleteButton onClick={() => handleDeleteImage(item.id)}>✖</C.DeleteButton> {/* Passa o id para a função de deletar */}
-
+                      <C.DeleteButton onClick={() => handleDeleteImage(item.id)}>✖</C.DeleteButton>
                     </C.ImagePreview>
-
                   ))}
                 </C.ImageGallery>
-              )} </>)}
+              )}
+            </>
+          )}
         </C.ModalForm>
         <C.InfoText> {/* Estilize conforme necessário */}
           A primaira imagem será a capa que aparecerá na lista de produtos.
         </C.InfoText>
+        {/* Botão para ativar reordenação */}
+        {imageUrls.length > 1 && (
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => setIsReordering(!isReordering)}
+            sx={{ mt: 2 }}
+          >
+            {isReordering ? "Finalizar Reordenação" : "Reordenar Fotos"}
+          </Button>
+        )}
       </Box>
     </Modal>
   );

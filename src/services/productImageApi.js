@@ -152,7 +152,37 @@ const ProductImageApi = () => {
         return response.json(); // Opcional, pode ser ignorado se a resposta não contiver dados.
     
     }
+
+    const reorderProductImages = async (imagens) => {
+        console.log(imagens)
+        try {
+            const response = await fetch(`${api_url}/intellicatalog/v1/products/reorder-images`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${user?.token}`,
+                },
+                body: JSON.stringify({ imagens }),
+            });
+    
+            if (response.status === 401) {
+                navigate('/login'); // Redireciona para login se necessário
+            }
+    
+            if (!response.ok) {
+                throw new Error("Erro ao reordenar imagens do produto");
+            }
+    
+            return await response.json();
+        } catch (error) {
+            console.error("Erro ao reordenar imagens:", error);
+            throw error;
+        }
+    };
+
+    
     return {
+        reorderProductImages,
         createFotoProduto,
         getFotoProdutoDownload,
         getFotoByProduto,
