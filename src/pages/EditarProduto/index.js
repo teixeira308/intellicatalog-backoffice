@@ -101,6 +101,7 @@ const EditarProduto = () => {
               multiline
               rows={3}
             />
+            <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
             <TextField
               label="Preço"
               name="price"
@@ -116,39 +117,10 @@ const EditarProduto = () => {
               value={produto.promocional_price || ""}
               onChange={handleChange}
               fullWidth
-            />
-            <TextField
-              label="Unidade"
-              name="unit"
-              value={produto.unit || ""}
-              onChange={handleChange}
-              fullWidth
-            />
-            <TextField
-              label="Quantidade por Unidade"
-              name="unitquantity"
-              value={produto.unitquantity || ""}
-              onChange={handleChange}
-              fullWidth
-            />
-            <TextField
-              label="Estoque"
-              name="estoque"
-              type="number"
-              value={produto.estoque || ""}
-              onChange={handleChange}
-              fullWidth
-            />
-            <Select
-              label="Status"
-              name="status"
-              value={produto.status || ""}
-              onChange={handleChange}
-              fullWidth
-            >
-              <MenuItem value="ativo">Ativo</MenuItem>
-              <MenuItem value="inativo">Inativo</MenuItem>
-            </Select>
+            /></Box>
+           
+           
+           
             <Button type="submit" variant="contained" color="primary">
               Salvar Alterações
             </Button>

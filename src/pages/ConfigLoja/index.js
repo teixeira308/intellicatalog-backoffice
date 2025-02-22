@@ -260,8 +260,8 @@ const ConfigLoja = () => {
                 50% de desconto
               </span>
               <br />
-              <span style={{ color: formData.cor_preco, fontSize: '15px' }}>
-                Preço R$10.00
+              Preço<span style={{ color: formData.cor_preco, fontSize: '15px' }}>
+                 R$10.00
               </span>
             </div>
             </C.FormRow>

@@ -30,7 +30,7 @@ const ProductApi = () => {
 
   const getProduct = async (id) => {
     
-    const response = await fetch(`${api_url}/intellicatalog/v1/products/${id}`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/products/details/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
