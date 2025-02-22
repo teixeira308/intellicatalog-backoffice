@@ -154,7 +154,6 @@ const ProductImageApi = () => {
     }
 
     const reorderProductImages = async (imagens) => {
-        console.log(imagens)
         try {
             const response = await fetch(`${api_url}/intellicatalog/v1/products/reorder-images`, {
                 method: "PUT",
