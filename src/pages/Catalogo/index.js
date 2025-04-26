@@ -387,7 +387,7 @@ const Catalogo = () => {
               <Droppable droppableId="categorias">
                 {(provided) => (
                   <Box {...provided.droppableProps} ref={provided.innerRef}>
-                    {categorias
+                    {filteredCategorias
                       .sort((a, b) => (a.catalog_order || 0) - (b.catalog_order || 0))
                       .map((categoria, index) => (
                         <Draggable key={categoria.id} draggableId={String(categoria.catalog_order || index)} index={index}>
@@ -410,7 +410,7 @@ const Catalogo = () => {
               </Droppable>
             </DragDropContext>
           ) : (
-            categorias
+            filteredCategorias
               .sort((a, b) => a.catalog_order - b.catalog_order)
               .map((categoria) => (
                 <C.Card >
