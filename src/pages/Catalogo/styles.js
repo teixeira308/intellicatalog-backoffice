@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const Title = styled.h2``;
 
 export const SearchInput = styled.input`
-  width: 70%;
+  width: 100%;
   max-width: 500px;
   padding: 10px 14px;
   margin-bottom: 20px;
@@ -19,9 +19,9 @@ export const SearchInput = styled.input`
   border-radius: 8px;
   outline: none;
   transition: border-color 0.2s ease;
-display: flex;
-justify-content: center;
- align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:focus {
     border-color: #007bff;
