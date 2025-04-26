@@ -38,8 +38,8 @@ export const Card = styled.div`
   width: 97%;
   max-width: 800px;
   font-size: 17px;
-  padding: 10px;
-  margin: 5px 0;
+  padding: 20px;
+  margin: 10px 0;
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #fff;
@@ -153,13 +153,13 @@ export const ShowProductsButton = styled.button`
 export const ProdutoList = styled.ul`
   list-style: none;
   padding: 0;
-  margin: 20px auto; /* Centraliza horizontalmente */
+  margin: 10px auto; /* Centraliza horizontalmente */
   width: 100%;
   max-width: 800px; /* Limita a largura máxima */
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 15px;
+  padding: 10px;
 `;
 
 
