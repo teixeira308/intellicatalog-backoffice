@@ -10,18 +10,16 @@ export const Container = styled.div`
 export const Title = styled.h2``;
 
 export const SearchInput = styled.input`
-  width: 100%;
+  display: block;
+  width: 70%;
   max-width: 500px;
+  margin: 0 auto 20px auto; /* centraliza horizontalmente */
   padding: 10px 14px;
-  margin-bottom: 20px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 8px;
   outline: none;
   transition: border-color 0.2s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   &:focus {
     border-color: #007bff;
