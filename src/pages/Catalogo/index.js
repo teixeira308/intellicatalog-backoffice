@@ -415,7 +415,11 @@ const Catalogo = () => {
               .map((categoria) => (
                 <C.Card >
                   <C.StatusWrapper>
-                    <C.CategoriaLink key={categoria.catalog_order} onClick={() => toggleCategoriaExpansion(categoria.id)}>
+                    <C.CategoriaLink
+                      key={categoria.catalog_order}
+                      onClick={() => toggleCategoriaExpansion(categoria.id)}
+                      style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+                    >
                       {categoria.name}
                       {expandedCategorias.includes(categoria.id) ? <FaAngleDown /> : <FaAngleRight />}
                     </C.CategoriaLink>

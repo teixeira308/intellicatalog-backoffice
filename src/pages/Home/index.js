@@ -9,14 +9,14 @@ const Home = () => {
 
   const menus = [
     {
-      title: "Templates",
-      description: "Crie e configure modelos de documentos personalizados.",
-      path: "/templates",
+      title: "Catálogo",
+      description: "Crie e configure seu catálogo definindo categorias e produtos.",
+      path: "/catalogo",
     },
     {
-      title: "Pessoas",
-      description: "Cadastre pessoas e armazene seus dados.",
-      path: "/pessoas",
+      title: "Pedidos",
+      description: "Administre os pedidos recebidos via Whatsapp.",
+      path: "/pedidos",
     },
     {
       title: "Grupos",
@@ -24,14 +24,14 @@ const Home = () => {
       path: "/grupo",
     },
     {
-      title: "EPI",
-      description: "Gerencie Equipamentos de Proteção Individual de cada pessoa.",
-      path: "/epi",
+      title: "Minha Loja",
+      description: "Gerencie e configure sua loja.",
+      path: "/minhaloja",
     },
     {
-      title: "Geração",
-      description: "Gere documentos automaticamente a partir de templates.",
-      path: "/demonstracao",
+      title: "Suporte",
+      description: "Busque ajuda em caso de algum problema ou erro inesperado.",
+      path: "/suporte",
     },
   ];
 
@@ -40,9 +40,9 @@ const Home = () => {
     <C.Container>
       <Navbar />
       <C.Content>
-        <C.Title>Bem-vindo ao Doc Filler</C.Title>
+        <C.Title>Bem-vindo ao Vitrine web</C.Title>
         <C.Description>
-          Automatize a criação de documentos com dados personalizados. Selecione abaixo o que deseja fazer:
+          Crie e administre seu catálogo na web. Selecione abaixo o que deseja fazer:
         </C.Description>
         <C.Grid>
           {menus.map((menu) => (
