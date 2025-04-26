@@ -109,15 +109,11 @@ export const StatusText = styled.p`
 `;
 
 export const StatusWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+ 
 `;
 
 export const ActionsWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 40px; /* Espaçamento entre o botão de edição e o toggle */
+  
 `;
 
 export const EditButton = styled.button`
