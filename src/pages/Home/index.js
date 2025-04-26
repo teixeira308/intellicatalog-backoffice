@@ -19,11 +19,6 @@ const Home = () => {
       path: "/pedidos",
     },
     {
-      title: "Grupos",
-      description: "Organize pessoas em grupos para facilitar a geração de documentos.",
-      path: "/grupo",
-    },
-    {
       title: "Minha Loja",
       description: "Gerencie e configure sua loja.",
       path: "/minhaloja",
