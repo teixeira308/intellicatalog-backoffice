@@ -417,8 +417,7 @@ const Catalogo = () => {
                   <C.StatusWrapper>
                     <C.CategoriaLink
                       key={categoria.catalog_order}
-                      onClick={() => toggleCategoriaExpansion(categoria.id)}
-                      style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+                      onClick={() => toggleCategoriaExpansion(categoria.id)} 
                     >
                       {categoria.name}
                       {expandedCategorias.includes(categoria.id) ? <FaAngleDown /> : <FaAngleRight />}
