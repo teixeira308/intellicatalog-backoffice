@@ -12,7 +12,7 @@ import EditarProdutoModal from "../../components/ModalEditarProduto/EditarProdut
 import CriarFotosProdutoModal from "../../components/ModalCriarFotosProduto/CriarFotosProdutoModal";
 import EditarEstoqueProdutoModal from "../../components/ModalEditarEstoqueProduto/EditarEstoqueProduto";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaEllipsisV, FaBoxOpen, FaAngleLeft,FaAngleRight } from 'react-icons/fa'; // Ícone de lápis
+import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaEllipsisV, FaBoxOpen, FaAngleLeft, FaAngleRight } from 'react-icons/fa'; // Ícone de lápis
 import { Container, Button, Card, Typography, IconButton, Menu, MenuItem, Box } from "@mui/material";
 import { AddCircle, Shuffle } from "@mui/icons-material";
 
@@ -545,29 +545,30 @@ const Catalogo = () => {
                     </C.ProdutoList>
                   )}
 
-                  <C.PaginationContainer>
-                    <C.PageButton
-                      onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                      disabled={currentPage === 1}
-                    >
-                      <FaAngleLeft />
-                    </C.PageButton>
 
-                    <span>Página {currentPage} de {totalPages}</span>
-
-                    <C.PageButton
-                      onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                      disabled={currentPage === totalPages}
-                    >
-                      <FaAngleRight />
-                    </C.PageButton>
-                  </C.PaginationContainer>
 
                 </C.Card>
 
+
               ))
           )}
+        <C.PaginationContainer>
+          <C.PageButton
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            <FaAngleLeft />
+          </C.PageButton>
 
+          <span>Página {currentPage} de {totalPages}</span>
+
+          <C.PageButton
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
+            <FaAngleRight />
+          </C.PageButton>
+        </C.PaginationContainer>
 
         <EditCategoriaModal
           isOpen={isEditarCategoriaModalOpen}
