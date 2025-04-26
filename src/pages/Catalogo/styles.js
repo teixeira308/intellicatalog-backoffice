@@ -187,15 +187,13 @@ export const ToggleLink = styled.span`
 export const CategoriaLink = styled.span`
   cursor: pointer;
   color: #2196f3;
+  text-decoration: underline;
   font-size: 16px;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
+  width: 100%;
   &:hover {
     color: #1769aa;
   }
+    text-decoration: none;
 `;
 
 
