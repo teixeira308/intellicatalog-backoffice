@@ -21,6 +21,7 @@ export const SearchInput = styled.input`
   transition: border-color 0.2s ease;
 display: flex;
 justify-content: center;
+ align-items: center;
 
   &:focus {
     border-color: #007bff;
