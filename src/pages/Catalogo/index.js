@@ -414,19 +414,18 @@ const Catalogo = () => {
               .sort((a, b) => a.catalog_order - b.catalog_order)
               .map((categoria) => (
                 <C.Card >
-                  <C.StatusWrapper style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    {/* Nome da categoria + ícone */}
+                  <C.StatusWrapper>
                     <C.CategoriaLink
                       key={categoria.catalog_order}
                       onClick={() => toggleCategoriaExpansion(categoria.id)}
-                      style={{ display: 'flex', alignItems: 'center', gap: 8 }}
+                      style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
                     >
                       {categoria.name}
                       {expandedCategorias.includes(categoria.id) ? <FaAngleDown /> : <FaAngleRight />}
                     </C.CategoriaLink>
 
-                    {/* Ações do lado direito */}
-                    <C.ActionsWrapper style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <C.ActionsWrapper>
+
                       <IconButton onClick={(event) => handleMenuOpen(event, categoria)}>
                         <FaEllipsisV />
                       </IconButton>
@@ -443,7 +442,6 @@ const Catalogo = () => {
                           <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
                         </MenuItem>
                       </Menu>
-
                       <C.ToggleSwitch>
                         <input
                           type="checkbox"
@@ -454,7 +452,6 @@ const Catalogo = () => {
                       </C.ToggleSwitch>
                     </C.ActionsWrapper>
                   </C.StatusWrapper>
-
 
                   {expandedCategorias.includes(categoria.id) && (
                     <C.ProdutoList>

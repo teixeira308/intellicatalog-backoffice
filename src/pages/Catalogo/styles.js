@@ -109,11 +109,15 @@ export const StatusText = styled.p`
 `;
 
 export const StatusWrapper = styled.div`
- 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const ActionsWrapper = styled.div`
-  
+  display: flex;
+  align-items: center;
+  gap: 40px; /* Espaçamento entre o botão de edição e o toggle */
 `;
 
 export const EditButton = styled.button`
@@ -183,13 +187,15 @@ export const ToggleLink = styled.span`
 export const CategoriaLink = styled.span`
   cursor: pointer;
   color: #2196f3;
-  text-decoration: underline;
   font-size: 16px;
-  width: 100%;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
   &:hover {
     color: #1769aa;
   }
-    text-decoration: none;
 `;
 
 
