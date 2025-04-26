@@ -425,7 +425,6 @@ const Catalogo = () => {
                     </C.CategoriaLink>
 
                     <C.ActionsWrapper>
-
                       <IconButton onClick={(event) => handleMenuOpen(event, categoria)}>
                         <FaEllipsisV />
                       </IconButton>
