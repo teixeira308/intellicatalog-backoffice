@@ -38,7 +38,7 @@ export const Card = styled.div`
   width: 97%;
   max-width: 800px;
   font-size: 17px;
-  padding: 20px;
+  padding: 10px;
   margin: 10px 0;
   border: 1px solid #ddd;
   border-radius: 8px;
