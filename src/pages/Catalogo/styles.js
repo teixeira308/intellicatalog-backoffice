@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
- align-items: center;
+ 
   margin-top:70px;
 `;
 
@@ -12,12 +12,15 @@ export const Title = styled.h2``;
 export const SearchInput = styled.input`
   width: 70%;
   max-width: 500px;
+  padding: 10px 14px;
   margin-bottom: 20px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 8px;
   outline: none;
   transition: border-color 0.2s ease;
+display: flex;
+justify-content: center;
 
   &:focus {
     border-color: #007bff;
@@ -29,6 +32,7 @@ export const PaginationContainer = styled.div`
   align-items: center;
   gap: 12px;
   margin: 20px 0;
+justify-content: center;
 `;
 
 export const Card = styled.div`
