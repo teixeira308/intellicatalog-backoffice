@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
- 
+ align-items: center;
   margin-top:70px;
 `;
 
@@ -12,7 +12,6 @@ export const Title = styled.h2``;
 export const SearchInput = styled.input`
   width: 70%;
   max-width: 500px;
-  padding: 10px 14px;
   margin-bottom: 20px;
   font-size: 16px;
   border: 1px solid #ccc;
