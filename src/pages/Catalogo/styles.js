@@ -9,7 +9,28 @@ export const Container = styled.div`
 
 export const Title = styled.h2``;
 
+export const SearchInput = styled.input`
+  width: 70%;
+  max-width: 500px;
+  padding: 10px 14px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease;
 
+  &:focus {
+    border-color: #007bff;
+  }
+`;
+
+export const PaginationContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+`;
 
 export const Card = styled.div`
   width: 97%;
@@ -345,5 +366,25 @@ export const ReorderButtonProducts = styled(ActionButton)`
 
   &:hover {
     color: #1769aa;
+  }
+`;
+
+
+export const PageButton = styled.button`
+  padding: 6px 10px;
+  font-size: 16px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &:hover:not(:disabled) {
+    background-color: #e0e0e0;
   }
 `;

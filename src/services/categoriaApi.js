@@ -8,9 +8,9 @@ const CategoriaApi = () => {
   const api_url = process.env.REACT_APP_API;
   //const api_url = 'http://localhost/api'
 
-  const getCategorias = async () => {
+  const getCategorias = async (page = 1, pageSize = 10) => {
 
-    const response = await fetch(`${api_url}/intellicatalog/v1/categories/users/${user.userId}?mode=backoffice`, {
+    const response = await fetch(`${api_url}/intellicatalog/v1/categories/users/${user.userId}?mode=backoffice&page=${page}&pageSize=${pageSize}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
