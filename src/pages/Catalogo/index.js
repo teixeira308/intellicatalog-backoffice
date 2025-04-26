@@ -12,7 +12,7 @@ import EditarProdutoModal from "../../components/ModalEditarProduto/EditarProdut
 import CriarFotosProdutoModal from "../../components/ModalCriarFotosProduto/CriarFotosProdutoModal";
 import EditarEstoqueProdutoModal from "../../components/ModalEditarEstoqueProduto/EditarEstoqueProduto";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaEllipsisV, FaBoxOpen, FaAngleLeft, FaAngleRight } from 'react-icons/fa'; // Ícone de lápis
+import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaEllipsisV, FaBoxOpen, FaAngleLeft, FaAngleRight, FaAngleDown } from 'react-icons/fa'; // Ícone de lápis
 import { Container, Button, Card, Typography, IconButton, Menu, MenuItem, Box } from "@mui/material";
 import { AddCircle, Shuffle } from "@mui/icons-material";
 
@@ -415,8 +415,9 @@ const Catalogo = () => {
               .map((categoria) => (
                 <C.Card >
                   <C.StatusWrapper>
-                    <C.CategoriaLink key={categoria.catalog_order} onClick={() => toggleCategoriaExpansion(categoria.id)} >
+                    <C.CategoriaLink key={categoria.catalog_order} onClick={() => toggleCategoriaExpansion(categoria.id)}>
                       {categoria.name}
+                      {expandedCategorias.includes(categoria.id) ? <FaAngleDown /> : <FaAngleRight />}
                     </C.CategoriaLink>
 
                     <C.ActionsWrapper>
