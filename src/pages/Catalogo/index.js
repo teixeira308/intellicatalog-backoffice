@@ -417,7 +417,7 @@ const Catalogo = () => {
                   <C.StatusWrapper>
                     <C.CategoriaLink
                       key={categoria.catalog_order}
-                      onClick={() => toggleCategoriaExpansion(categoria.id)} 
+                      onClick={() => toggleCategoriaExpansion(categoria.id)}
                     >
                       {categoria.name}
                       {expandedCategorias.includes(categoria.id) ? <FaAngleDown /> : <FaAngleRight />}
@@ -494,41 +494,47 @@ const Catalogo = () => {
                           .map((produto) => (
                             <C.ProdutoActions key={produto.id}>
                               <C.ProdutoItem>
-                                <span>{produto.titulo}</span>
-                                <span><FaBoxOpen />: {produto.estoque || 0}</span>
-                                <IconButton onClick={(event) => openProductMenu(event, produto.id)}>
-                                  <FaEllipsisV />
-                                </IconButton>
-                                <Menu
-                                  anchorEl={menuProdAnchor[produto.id]}
-                                  open={Boolean(menuProdAnchor[produto.id])}
-                                  onClose={() => closeProductMenu(produto.id)}
-                                >
-                                  <MenuItem onClick={() => { setSelectedProduto(produto); openCriarFotosProdutoModal(produto); closeProductMenu(produto.id); }}>
-                                    <FaImages style={{ marginRight: 8 }} /> Imagens
-                                  </MenuItem>
-                                  <MenuItem onClick={() => { console.log(produto); setSelectedProduto(produto); openEditarEstoqueProdutoModal(produto); closeProductMenu(produto.id); }}>
-                                    <FaBoxOpen style={{ marginRight: 8 }} /> Estoque
-                                  </MenuItem>
-                                  <MenuItem onClick={() => { console.log(produto); setSelectedProduto(produto); openEditarProdutoModal(produto, categoria); closeProductMenu(produto.id); }}>
-                                    <FaEdit style={{ marginRight: 8 }} /> Editar
-                                  </MenuItem>
-                                  {/*}<MenuItem component={Link} to={`/produto/${produto.id}/edit`}>
-                                  <FaEdit style={{ marginRight: 8 }} /> Editar v2
-                                </MenuItem>{*/}
-                                  <MenuItem onClick={() => { console.log(produto); setSelectedProduto(produto); openDeleteProdutoModal(produto); closeProductMenu(produto.id); }}>
-                                    <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
-                                  </MenuItem>
-                                </Menu>
-                                <C.ToggleSwitch>
-                                  <input
-                                    type="checkbox"
-                                    checked={produto.status === "ativo"}
-                                    onChange={() => toggleProdutoStatus(produto.id)}
-                                  />
-                                  <C.Slider />
-                                </C.ToggleSwitch>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                  <span>{produto.titulo}</span>
+                                </div>
+
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+                                  <span><FaBoxOpen />: {produto.estoque || 0}</span>
+
+                                  <IconButton onClick={(event) => openProductMenu(event, produto.id)}>
+                                    <FaEllipsisV />
+                                  </IconButton>
+
+                                  <Menu
+                                    anchorEl={menuProdAnchor[produto.id]}
+                                    open={Boolean(menuProdAnchor[produto.id])}
+                                    onClose={() => closeProductMenu(produto.id)}
+                                  >
+                                    <MenuItem onClick={() => { setSelectedProduto(produto); openCriarFotosProdutoModal(produto); closeProductMenu(produto.id); }}>
+                                      <FaImages style={{ marginRight: 8 }} /> Imagens
+                                    </MenuItem>
+                                    <MenuItem onClick={() => { setSelectedProduto(produto); openEditarEstoqueProdutoModal(produto); closeProductMenu(produto.id); }}>
+                                      <FaBoxOpen style={{ marginRight: 8 }} /> Estoque
+                                    </MenuItem>
+                                    <MenuItem onClick={() => { setSelectedProduto(produto); openEditarProdutoModal(produto, categoria); closeProductMenu(produto.id); }}>
+                                      <FaEdit style={{ marginRight: 8 }} /> Editar
+                                    </MenuItem>
+                                    <MenuItem onClick={() => { setSelectedProduto(produto); openDeleteProdutoModal(produto); closeProductMenu(produto.id); }}>
+                                      <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
+                                    </MenuItem>
+                                  </Menu>
+
+                                  <C.ToggleSwitch>
+                                    <input
+                                      type="checkbox"
+                                      checked={produto.status === "ativo"}
+                                      onChange={() => toggleProdutoStatus(produto.id)}
+                                    />
+                                    <C.Slider />
+                                  </C.ToggleSwitch>
+                                </div>
                               </C.ProdutoItem>
+
                             </C.ProdutoActions>
                           ))
                       )}
