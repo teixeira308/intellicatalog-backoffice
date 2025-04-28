@@ -15,10 +15,11 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaEllipsisV, FaBoxOpen, FaAngleLeft, FaAngleRight, FaAngleDown } from 'react-icons/fa'; // Ícone de lápis
 import { Container, Button, Card, Typography, IconButton, Menu, MenuItem, Box } from "@mui/material";
 import { AddCircle, Shuffle } from "@mui/icons-material";
-
+import { useNavigate } from "react-router-dom";
 
 
 const Catalogo = () => {
+  const navigate = useNavigate();
   const [categorias, setCategorias] = useState([]);
   const [produtos, setProdutos] = useState([]);
   const { getCategorias, changeStatus, deleteCategoria, updateCategoriaOrder } = categoriaApi();
@@ -546,7 +547,10 @@ const Catalogo = () => {
                       </C.ReorderButton>
                       {*/}
                         {!isReorderProductMode &&
-                          <Button color="success" size="small" variant="contained" onClick={() => openCriarProdutoModal(categoria)} startIcon={<AddCircle />}> Novo Produto</Button>
+                          <>
+                            <Button color="success" size="small" variant="contained" onClick={() => openCriarProdutoModal(categoria)} startIcon={<AddCircle />}> Novo Produto</Button>
+                            <Button color="success" size="small" variant="contained" onClick={() => navigate(`produto/category/${categoria.id}`)} startIcon={<AddCircle />}> Novo Combo</Button>
+                          </>
                         }
                         <Button size="small" onClick={() => setIsReorderProductMode(!isReorderProductMode)} endIcon={<Shuffle />}>
                           {isReorderProductMode ? "Salvar Ordem" : "Reordenar"}

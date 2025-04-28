@@ -164,13 +164,35 @@ const CategoriaApi = () => {
    
   };
 
+  const getCategoria = async (categoria) => {
+    const response = await fetch(`${api_url}/intellicatalog/v1/categories/${categoria}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${user?.token}`,
+      },
+    });
+
+    if (response.status === 401) {
+      // Redireciona para a tela de login
+      navigate('/login');
+    }
+
+    if (!response.ok) {
+      throw new Error("Erro ao consultar categoria");
+    }
+
+    return response.json(); // Opcional, pode ser ignorado se a resposta não contiver dados.
+
+  }
+
   return {
     getCategorias,
     changeStatus,
     updateCategoria,
     createCategoria,
     deleteCategoria,
-    updateCategoriaOrder
+    updateCategoriaOrder,
+    getCategoria
   };
 }
 
