@@ -21,14 +21,14 @@ const ComboProdutoApi = () => {
     return await response.json();
   };
 
-  const addProdutoAoCombo = async (combo_id, product_id) => {
+  const addProdutoAoCombo = async (combo_id, product_id,tipo, min, max) => {
     const response = await fetch(`${api_url}/intellicatalog/v1/combo-produtos`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${user?.token}`,
       },
-      body: JSON.stringify({ combo_id, product_id }),
+      body: JSON.stringify({ combo_id, product_id,tipo, min, max }),
     });
 
     if (response.status === 401) navigate("/login");

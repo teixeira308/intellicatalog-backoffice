@@ -7,7 +7,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import categoriaApi from "../../services/categoriaApi";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import comboApi from "../../services/comboApi";
-import { List, ListItem, ListItemText } from "@mui/material";
+import { List, ListItem, ListItemText, MenuItem } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModalProdutos from "../../components/ModalProdutos/ProdutosModal";
 import comboProdutoApi from '../../services/comboProdutoApi';
@@ -119,11 +119,26 @@ const NovoCombo = () => {
   };
 
   const handleFinalizarCombo = async () => {
+    
     try {
       for (const produto of produtosDoCombo) {
-        console.log('combo:',comboId)
-        console.log('produto:',produto.id)
-        await addProdutoAoCombo(comboId, produto.id);
+        console.log({
+          combo_id: comboId,
+          product_id: produto.id,
+          tipo: produto.tipo,
+          min: produto.min,
+          max: produto.max
+        });
+        
+        if (produto.min > produto.max) {
+          window.addToast(`Erro: mínimo maior que o máximo para o produto ${produto.titulo}`, "error");
+          return;
+        }
+        console.log('combo:', comboId)
+        console.log('produto:', produto.id)
+        await addProdutoAoCombo(comboId, produto.id,produto.tipo || "obrigatorio", // padrão
+          produto.min ?? 0,
+          produto.max ?? 1);
       }
       window.addToast("Todos os produtos foram adicionados ao combo!", "success");
       navigate(-1); // ou redirecione para outro lugar
@@ -400,19 +415,70 @@ const NovoCombo = () => {
             </Button>
 
             <List>
-              {produtosDoCombo.map((produto) => (
-                <ListItem
-                  key={produto.id}
-                  secondaryAction={
-                    <IconButton edge="end" onClick={() => removerProdutoDoCombo(produto.id)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  }
-                >
-                  <ListItemText primary={produto.titulo} secondary={`R$ ${produto.price}`} />
-                </ListItem>
+              {produtosDoCombo.map((produto, index) => (
+                <C.Card key={produto.id}>
+                  <ListItem
+                    secondaryAction={
+                      <IconButton edge="end" onClick={() => removerProdutoDoCombo(produto.id)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    }
+                  >
+                    <ListItemText
+                      primary={produto.titulo}
+                      secondary={`R$ ${produto.price}`}
+                    />
+                  </ListItem>
+
+                  {/* Select tipo: obrigatório/opcional */}
+                  <Box sx={{ display: "flex", gap: 2, alignItems: "center", px: 2, pb: 2 }}>
+                    <TextField
+                      select
+                      label="Tipo"
+                      value={produto.tipo}
+                      onChange={(e) => {
+                        const updated = [...produtosDoCombo];
+                        updated[index].tipo = e.target.value;
+                        setProdutosDoCombo(updated);
+                      }}
+                      fullWidth
+                    >
+                      <MenuItem value="obrigatorio">Obrigatório</MenuItem>
+                      <MenuItem value="opcional">Opcional</MenuItem>
+                    </TextField>
+
+                    {/* Input mínimo */}
+                    <TextField
+                      label="Mínimo"
+                      type="number"
+                      value={produto.min}
+                      onChange={(e) => {
+                        const updated = [...produtosDoCombo];
+                        updated[index].min = Math.max(0, Number(e.target.value)); // impede valores negativos
+                        setProdutosDoCombo(updated);
+                      }}
+                    
+                      sx={{ width: 100 }}
+                    />
+
+                    <TextField
+                      label="Máximo"
+                      type="number"
+                      value={produto.max}
+                      onChange={(e) => {
+                        const updated = [...produtosDoCombo];
+                        updated[index].max = Math.max(0, Number(e.target.value)); // impede valores negativos
+                        setProdutosDoCombo(updated);
+                      }}
+                      
+                      sx={{ width: 100 }}
+                    />
+
+                  </Box>
+                </C.Card>
               ))}
             </List>
+
             <Button
               variant="contained"
               color="success"
