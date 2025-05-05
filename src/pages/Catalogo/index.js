@@ -16,43 +16,42 @@ import { FaTrashAlt, FaImages, FaArrowsAlt, FaEdit, FaEllipsisV, FaBoxOpen, FaAn
 import { Container, Button, Card, Typography, IconButton, Menu, MenuItem, Box } from "@mui/material";
 import { AddCircle, Shuffle } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import catalogOrderApi from '../../services/catalogoOrderApi';
+
 
 
 const Catalogo = () => {
   const navigate = useNavigate();
-  const [categorias, setCategorias] = useState([]);
-  const [produtos, setProdutos] = useState([]);
+  //services
+  const { getCatalogOrder } = catalogOrderApi();
   const { getCategorias, changeStatus, deleteCategoria, updateCategoriaOrder } = categoriaApi();
-  const { getProducts, deleteProduto, changeProductStatus, updateProductOrder } = productApi();
-  const [selectedCategoria, setSelectedCategoria] = useState(null);
-  const [expandedCategorias, setExpandedCategorias] = useState([]); // Para controlar categorias expandidas
-  const [isEditarCategoriaModalOpen, setIsEditarCategoriaModalOpen] = useState(false);
-  const [isCriarCategoriaModalOpen, setIsCriarCategoriaModalOpen] = useState(false);
-  const [isDeleteCategoriaModalOpen, setIsDeleteCategoriaModalOpen] = useState(false);
-  const [selectedCategoriaId, setSelectedCategoriaId] = useState(null);
-  const [isEditarProdutoModalOpen, setIsEditarProdutoModalOpen] = useState(false)
-  const [isEditarEstoqueProdutoModalOpen, setIsEditarEstoqueProdutoModalOpen] = useState(false)
 
-  const [isCriarFotosProdutoModalOpen, setIsCriarFotosProdutoModalOpen] = useState(false)
-  const [isCriarProdutoModalOpen, setIsCriarProdutoModalOpen] = useState(false);
-
-
-  const [isDeleteProdutoModalOpen, setIsDeleteProdutoModalOpen] = useState(false);
-  const [selectedProduto, setSelectedProduto] = useState(null);
-
+  //states
+  const [categorias, setCategorias] = useState([]);
+  const [catalogoOrdem, setCatalogoOrdem] = useState([]);
+  const [produtosPorCategoria, setProdutosPorCategoria] = useState({});
+  // Para controlar categorias expandidas
+  const [expandedCategorias, setExpandedCategorias] = useState([]);
+  //reordenar
   const [isReorderMode, setIsReorderMode] = useState(false); // Estado para o modo de reordenação
   const [isReorderProductMode, setIsReorderProductMode] = useState(false); // Estado para o modo de reordenação
-
-  const [menuAnchor, setMenuAnchor] = useState(null);
-
-  const [menuProdAnchor, setMenuProdAnchor] = useState({});
-
   //search
   const [filteredCategorias, setFilteredCategorias] = useState([]);
   const [searchQuery, setSearchQuery] = useState(""); // Estado para a consulta de busca
   //paginacao
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  //controlar modal
+  const [isCriarCategoriaModalOpen, setIsCriarCategoriaModalOpen] = useState(false);
+  const [isEditarCategoriaModalOpen, setIsEditarCategoriaModalOpen] = useState(false);
+  const [isDeleteCategoriaModalOpen, setIsDeleteCategoriaModalOpen] = useState(false);
+   const [isCriarProdutoModalOpen, setIsCriarProdutoModalOpen] = useState(false);
+  //ancora para o menu de categoria
+  const [menuAnchor, setMenuAnchor] = useState(null);
+  //controlar categoria selecionada para editar o deletar no modal
+  const [selectedCategoriaId, setSelectedCategoriaId] = useState(null);
+  const [selectedCategoria, setSelectedCategoria] = useState(null);
+
 
   useEffect(() => {
     const fetchCategorias = async () => {
@@ -65,17 +64,7 @@ const Catalogo = () => {
         console.error("Erro ao carregar categorias:", error);
       }
     };
-
-    const fetchProdutos = async () => {
-      try {
-        const data = await getProducts();
-        setProdutos(data.data);
-      } catch (error) {
-        console.error("Erro ao carregar produtos:", error);
-      }
-    };
     fetchCategorias();
-    fetchProdutos();
   }, [currentPage]);
 
   useEffect(() => {
@@ -105,172 +94,42 @@ const Catalogo = () => {
     }
   };
 
-  // Função para alternar o status de uma categoria específica
-  const toggleProdutoStatus = async (produtoId) => {
-    try {
-      const produtoToUpdate = produtos.find((produto) => produto.id === produtoId);
-      const newStatus = produtoToUpdate.status === "ativo" ? "inativo" : "ativo";
-
-      setProdutos((prevProdutos) =>
-        prevProdutos.map((produto) =>
-          produto.id === produtoId ? { ...produto, status: newStatus } : produto
-        )
-      );
-
-      await changeProductStatus(produtoId, newStatus === "ativo");
-    } catch (error) {
-      console.error("Erro ao atualizar status da categoria:", error);
-    }
-  };
 
   // Alternar visibilidade da lista de produtos por categoria
-  const toggleCategoriaExpansion = (categoriaId) => {
-    if (expandedCategorias.includes(categoriaId)) {
+  const toggleCategoriaExpansion = async (categoriaId) => {
+    const isExpanded = expandedCategorias.includes(categoriaId);
+
+    if (isExpanded) {
       setExpandedCategorias(expandedCategorias.filter((id) => id !== categoriaId));
     } else {
       setExpandedCategorias([...expandedCategorias, categoriaId]);
-    }
-  };
 
-  // Filtrar produtos pela categoria
-  const getProdutosByCategoria = (categoriaId) => {
-    return produtos.filter((produto) => produto.category_id === categoriaId); // Certifique-se que `categoriaId` seja a chave correta
-  };
+      // Só busca se ainda não estiver carregado
+      if (!produtosPorCategoria[categoriaId]) {
+        try {
+          const data = await getCatalogOrder();
+          console.log(data)
+          console.log(categoriaId)
+          // Filtra apenas os produtos da categoria específica
+          const produtosFiltrados = data
+            .filter((item) => String(item.category_id) === String(categoriaId))
+            .sort((a, b) => a.ordem - b.ordem);
 
-  const handleNewCategoriaCreated = async () => {
-    const data = await getCategorias();
-    setCategorias(data.data);
-  };
-
-  const handleCategoriaEdited = async () => {
-    const data = await getCategorias();
-    setCategorias(data.data);
-    setIsEditarCategoriaModalOpen(false)
-  };
-
-  const handleProdutoEdited = async () => {
-    const data = await getProducts();
-    setProdutos(data.data);
-    setIsEditarProdutoModalOpen(false)
-  };
-
-  const handleEstoqueProdutoEdited = async () => {
-    const data = await getProducts();
-    setProdutos(data.data);
-    setIsEditarEstoqueProdutoModalOpen(false)
-  };
-
-
-  const openProductMenu = (event, produtoId) => {
-    setMenuProdAnchor((prevState) => ({
-      ...prevState,
-      [produtoId]: event.currentTarget,
-    }));
-  };
-
-  const closeProductMenu = (produtoId) => {
-    setMenuProdAnchor((prevState) => ({
-      ...prevState,
-      [produtoId]: null,
-    }));
-  };
-
-
-  const handlCriarCategoriaModalClose = () => {
-    setIsCriarCategoriaModalOpen(false);
-  };
-
-  const handleDeleteCategoriaModalClose = () => {
-    setIsDeleteCategoriaModalOpen(false);
-    setSelectedCategoriaId(null);
-  };
-
-  const handleDeleteCategoria = async () => {
-    try {
-      if (selectedCategoria) {
-        await deleteCategoria(selectedCategoria);
-        setCategorias(categorias.filter((categoria) => categoria.id !== selectedCategoria.id));
+          console.log(produtosFiltrados)
+          setProdutosPorCategoria((prev) => ({
+            ...prev,
+            [categoriaId]: produtosFiltrados,
+          }));
+        } catch (error) {
+          console.error("Erro ao buscar produtos do catálogo:", error);
+        }
       }
-      handleDeleteCategoriaModalClose();
-    } catch (error) {
-      console.error("Erro ao deletar categoria:", error);
     }
   };
 
-  const openDeleteCategoriaModal = () => {
-
-    setIsDeleteCategoriaModalOpen(true);
-  };
-
-  /*
-  const openEditarCategoriaModal = (categoria) => {
-    setSelectedCategoria(categoria);
-    setIsEditarCategoriaModalOpen(true);
-  };
-  */
-
-  const openEditarProdutoModal = (produto, categoria) => {
-    setSelectedCategoria(categoria);
-    setSelectedProduto(produto);
-    setIsEditarProdutoModalOpen(true);
-  };
-
-  const openEditarEstoqueProdutoModal = (produto) => {
-    setSelectedProduto(produto);
-    setIsEditarEstoqueProdutoModalOpen(true);
-  };
-
-  const openDeleteProdutoModal = (produto) => {
-    setSelectedProduto(produto);
-    setIsDeleteProdutoModalOpen(true);
-  };
 
 
-  const handleDeleteProdutoModalClose = () => {
-    setIsDeleteProdutoModalOpen(false);
-    setSelectedProduto(null);
-  };
-
-  const handleDeleteProduto = async () => {
-    try {
-      if (selectedProduto) {
-        await deleteProduto(selectedProduto);
-        setProdutos(produtos.filter((produto) => produto.id !== selectedProduto.id));
-      }
-      handleDeleteProdutoModalClose();
-    } catch (error) {
-      console.error("Erro ao deletar categoria:", error);
-    }
-  };
-
-  const handlCriarProdutoModalClose = async () => {
-    setIsCriarProdutoModalOpen(false);
-    setSelectedCategoria(null);
-    const data = await getProducts();
-    setProdutos(data.data);
-  };
-
-  const handleNewProdutoCreated = async () => {
-    const data = await getProducts();
-    setProdutos(data.data);
-  };
-
-  const openCriarProdutoModal = (categoria) => {
-    setSelectedCategoria(categoria)
-    setIsCriarProdutoModalOpen(true)
-  }
-
-  const handleNewFotoProdutoCreated = async () => {
-    const data = await getProducts();
-    setProdutos(data.data);
-  };
-
-  const openCriarFotosProdutoModal = (produto) => {
-    setSelectedProduto(produto);
-    setIsCriarFotosProdutoModalOpen(true);
-  };
-
-  const handleOnDragEnd = async (result) => {
+  const handleCatalogOnDragEnd = async (result) => {
     if (!result.destination) return;
 
     // Índices de origem e destino vindos do drag-and-drop (começam de 0)
@@ -295,7 +154,7 @@ const Catalogo = () => {
       // Enviar nova ordem para o backend
       const response = await updateCategoriaOrder(reorderedCategorias);
       if (response.status === 200) {
-        const data = await getCategorias();
+        const data = await getCategorias(currentPage);
         setCategorias(data.data);
         //console.log("Categorias reatualizadas do backend:", data.data);
         setIsReorderMode(false)
@@ -307,43 +166,26 @@ const Catalogo = () => {
     }
   };
 
-
-  const handleProductOnDragEnd = async (result, categoriaId) => {
-    if (!result.destination) return;
-
-    const sourceIndex = result.source.index;
-    const destinationIndex = result.destination.index;
-
-    const produtosDaCategoria = getProdutosByCategoria(categoriaId);
-    const [reorderedItem] = produtosDaCategoria.splice(sourceIndex, 1);
-    produtosDaCategoria.splice(destinationIndex, 0, reorderedItem);
-
-    //console.log(produtosDaCategoria)
-    try {
-      const response = await updateProductOrder(produtosDaCategoria);
-
-      if (response.status === 200) {
-        const data = await getProducts();
-        setProdutos(data.data);
-        setIsReorderProductMode(false);
-      } else {
-        console.error("Erro inesperado ao atualizar a ordem dos produtos:", response.status);
-      }
-    } catch (error) {
-      console.error("Erro ao atualizar a ordem dos produtos:", error);
-    }
+  //search
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
   };
 
+  //Modal
+  const handlCriarCategoriaModalClose = () => {
+    setIsCriarCategoriaModalOpen(false);
+  };
+
+  //funcao para atualizar a lista de categorias depois de uma nova categoria criada
+  const handleNewCategoriaCreated = async () => {
+    const data = await getCategorias(currentPage);
+    setCategorias(data.data);
+  };
 
   // Função para abrir o menu específico de cada categoria
   const handleMenuOpen = (event, categoria) => {
     setSelectedCategoria(categoria);
     setMenuAnchor(event.currentTarget);
-  };
-
-  // Função para fechar o menu
-  const handleMenuClose = () => {
-    setMenuAnchor(null);
   };
 
   // Função para abrir o modal de edição com a categoria correta
@@ -352,9 +194,89 @@ const Catalogo = () => {
     handleMenuClose(); // Fecha o menu antes de abrir o modal
   };
 
-  //search
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
+  // Função para fechar o menu categoria
+  const handleMenuClose = () => {
+    setMenuAnchor(null);
+  };
+
+  //funcao para abrir o modal deletar categoria
+  const openDeleteCategoriaModal = () => {
+    setIsDeleteCategoriaModalOpen(true);
+  };
+
+  //funcao para atualizar a lista de categorias depois de editar categoria
+  const handleCategoriaEdited = async () => {
+    const data = await getCategorias(currentPage);
+    setCategorias(data.data);
+    setIsEditarCategoriaModalOpen(false)
+  };
+
+  //funcao para fechar o modal de deletar categoria
+  const handleDeleteCategoriaModalClose = () => {
+    setIsDeleteCategoriaModalOpen(false);
+    setSelectedCategoriaId(null);
+  };
+
+  //funcao para deletar categoria, unica que esta fora do modal, é uma boa depois colocar pra dentro do modal
+  const handleDeleteCategoria = async () => {
+    try {
+      if (selectedCategoria) {
+        await deleteCategoria(selectedCategoria);
+        setCategorias(categorias.filter((categoria) => categoria.id !== selectedCategoria.id));
+      }
+      handleDeleteCategoriaModalClose();
+    } catch (error) {
+      console.error("Erro ao deletar categoria:", error);
+    }
+  };
+
+  //abrir modal produto
+  const openCriarProdutoModal = (categoria) => {
+    setSelectedCategoria(categoria)
+    setIsCriarProdutoModalOpen(true)
+  }
+
+
+  //funcao para executar ao fechar o modal criar produto
+  const handlCriarProdutoModalClose = async () => {
+    setIsCriarProdutoModalOpen(false);
+   
+    try {
+      const data = await getCatalogOrder();
+      // Filtra apenas os produtos da categoria específica
+      const produtosFiltrados = data
+        .filter((item) => String(item.category_id) === String(selectedCategoria.id))
+        .sort((a, b) => a.ordem - b.ordem);
+
+      console.log(produtosFiltrados)
+      setProdutosPorCategoria((prev) => ({
+        ...prev,
+        [selectedCategoria.id]: produtosFiltrados,
+      }));
+    } catch (error) {
+      console.error("Erro ao buscar produtos do catálogo:", error);
+    }
+    setSelectedCategoria(null);
+
+  };
+
+
+  const handleNewProdutoCreated = async () => {
+    try {
+      const data = await getCatalogOrder();
+      // Filtra apenas os produtos da categoria específica
+      const produtosFiltrados = data
+        .filter((item) => String(item.category_id) === String(selectedCategoria.id))
+        .sort((a, b) => a.ordem - b.ordem);
+
+      console.log(produtosFiltrados)
+      setProdutosPorCategoria((prev) => ({
+        ...prev,
+        [selectedCategoria.id]: produtosFiltrados,
+      }));
+    } catch (error) {
+      console.error("Erro ao buscar produtos do catálogo:", error);
+    }
   };
 
   return (
@@ -381,10 +303,9 @@ const Catalogo = () => {
           </Button>
         </Box>
 
-
         {
           isReorderMode ? (
-            <DragDropContext onDragEnd={handleOnDragEnd}>
+            <DragDropContext onDragEnd={handleCatalogOnDragEnd}>
               <Droppable droppableId="categorias">
                 {(provided) => (
                   <Box {...provided.droppableProps} ref={provided.innerRef}>
@@ -398,6 +319,7 @@ const Catalogo = () => {
                               <Typography variant="h6">{categoria.name}</Typography>
                               <C.ActionsWrapper>
                                 <FaArrowsAlt style={{ color: "blue" }} />
+
                               </C.ActionsWrapper>
                             </Card>
 
@@ -414,7 +336,7 @@ const Catalogo = () => {
             filteredCategorias
               .sort((a, b) => a.catalog_order - b.catalog_order)
               .map((categoria) => (
-                <C.Card >
+                <C.Card key={categoria.id}>
                   <C.StatusWrapper>
                     <C.CategoriaLink
                       key={categoria.catalog_order}
@@ -424,7 +346,6 @@ const Catalogo = () => {
                       {categoria.name}
                       {expandedCategorias.includes(categoria.id) ? <FaAngleDown /> : <FaAngleRight />}
                     </C.CategoriaLink>
-
                     <C.ActionsWrapper>
                       <IconButton onClick={(event) => handleMenuOpen(event, categoria)}>
                         <FaEllipsisV />
@@ -452,118 +373,43 @@ const Catalogo = () => {
                       </C.ToggleSwitch>
                     </C.ActionsWrapper>
                   </C.StatusWrapper>
-
                   {expandedCategorias.includes(categoria.id) && (
                     <C.ProdutoList>
-                      {isReorderProductMode ? (
-                        <DragDropContext onDragEnd={(result) => handleProductOnDragEnd(result, categoria.id)}>
-                          <Droppable droppableId={`produtos-${categoria.id}`}>
-                            {(provided) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.droppableProps}
-                                className="product-list"
-                              >
-                                {getProdutosByCategoria(categoria.id)
-                                  .sort((a, b) => (a.product_order || 0) - (b.product_order || 0))
-                                  .map((produto, index) => (
-                                    <Draggable
-                                      key={produto.id}
-                                      draggableId={`produto-${produto.id}`}
-                                      index={index}
-                                    >
-                                      {(provided) => (
-                                        <C.ProdutoActions
-                                          ref={provided.innerRef}
-                                          {...provided.draggableProps}
-                                          {...provided.dragHandleProps}
-                                        >
-                                          <C.ProdutoItemOrderChange>
-                                            {produto.titulo}
-                                            <FaArrowsAlt style={{ color: "blue" }} />
-                                          </C.ProdutoItemOrderChange>
-                                        </C.ProdutoActions>
-                                      )}
-                                    </Draggable>
-                                  ))}
-                                {provided.placeholder}
-                              </div>
-                            )}
-                          </Droppable>
-                        </DragDropContext>
-                      ) : (
-                        getProdutosByCategoria(categoria.id)
-                          .map((produto) => (
-                            <C.ProdutoActions key={produto.id}>
-                              <C.ProdutoItem>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                                  <span>{produto.titulo}</span>
-                                </div>
-
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-                                  <span><FaBoxOpen />: {produto.estoque || 0}</span>
-
-                                  <IconButton onClick={(event) => openProductMenu(event, produto.id)}>
-                                    <FaEllipsisV />
-                                  </IconButton>
-
-                                  <Menu
-                                    anchorEl={menuProdAnchor[produto.id]}
-                                    open={Boolean(menuProdAnchor[produto.id])}
-                                    onClose={() => closeProductMenu(produto.id)}
-                                  >
-                                    <MenuItem onClick={() => { setSelectedProduto(produto); openCriarFotosProdutoModal(produto); closeProductMenu(produto.id); }}>
-                                      <FaImages style={{ marginRight: 8 }} /> Imagens
-                                    </MenuItem>
-                                    <MenuItem onClick={() => { setSelectedProduto(produto); openEditarEstoqueProdutoModal(produto); closeProductMenu(produto.id); }}>
-                                      <FaBoxOpen style={{ marginRight: 8 }} /> Estoque
-                                    </MenuItem>
-                                    <MenuItem onClick={() => { setSelectedProduto(produto); openEditarProdutoModal(produto, categoria); closeProductMenu(produto.id); }}>
-                                      <FaEdit style={{ marginRight: 8 }} /> Editar
-                                    </MenuItem>
-                                    <MenuItem onClick={() => { setSelectedProduto(produto); openDeleteProdutoModal(produto); closeProductMenu(produto.id); }}>
-                                      <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
-                                    </MenuItem>
-                                  </Menu>
-
-                                  <C.ToggleSwitch>
-                                    <input
-                                      type="checkbox"
-                                      checked={produto.status === "ativo"}
-                                      onChange={() => toggleProdutoStatus(produto.id)}
-                                    />
-                                    <C.Slider />
-                                  </C.ToggleSwitch>
-                                </div>
-                              </C.ProdutoItem>
-
-                            </C.ProdutoActions>
-                          ))
+                      {isReorderProductMode ? (<>teste</>) : (
+                        <>
+                          {expandedCategorias.includes(categoria.id) && (
+                            <Box sx={{ pl: 2, py: 1 }}>
+                              {produtosPorCategoria[categoria.id] ? (
+                                produtosPorCategoria[categoria.id].length > 0 ? (
+                                  produtosPorCategoria[categoria.id].map((produto) => (
+                                    <Card key={produto.id} sx={{ my: 1, p: 2 }}>
+                                      <Typography variant="subtitle1">
+                                        {produto.titulo || "Produto sem título"}
+                                      </Typography>
+                                    </Card>
+                                  ))
+                                ) : (
+                                  <Typography variant="body2">Nenhum produto nesta categoria.</Typography>
+                                )
+                              ) : (
+                                <Typography variant="body2" color="text.secondary">Carregando produtos...</Typography>
+                              )}
+                            </Box>
+                          )}
+                        </>
                       )}
-                      <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        {/*} <C.CreateButton onClick={() => openCriarProdutoModal(categoria)}> <FaPlusCircle /> &nbsp;Novo Produto</C.CreateButton> <br />
-                      <C.ReorderButton onClick={() => setIsReorderProductMode(!isReorderProductMode)}>
-                        {isReorderProductMode ? "Salvar Ordem" : <><FaRandom /> Reordenar produtos</>}
-                      </C.ReorderButton>
-                      {*/}
-                        {!isReorderProductMode &&
-                          <>
-                            <Button color="success" size="small" variant="contained" onClick={() => openCriarProdutoModal(categoria)} startIcon={<AddCircle />}> Novo Produto</Button>
-                            <Button color="success" size="small" variant="contained" onClick={() => navigate(`produto/category/${categoria.id}`)} startIcon={<AddCircle />}> Novo Combo</Button>
-                          </>
-                        }
-                        <Button size="small" onClick={() => setIsReorderProductMode(!isReorderProductMode)} endIcon={<Shuffle />}>
-                          {isReorderProductMode ? "Salvar Ordem" : "Reordenar"}
-                        </Button>
-                      </div>
+                      {!isReorderProductMode &&
+                        <>
+                          <Button color="success" size="small" variant="contained" onClick={() => openCriarProdutoModal(categoria)} startIcon={<AddCircle />}> Novo Produto</Button>
+                          <Button color="success" size="small" variant="contained" onClick={() => navigate(`produto/category/${categoria.id}`)} startIcon={<AddCircle />}> Novo Combo</Button>
+                        </>
+                      }
+                      <Button size="small" onClick={() => setIsReorderProductMode(!isReorderProductMode)} endIcon={<Shuffle />}>
+                        {isReorderProductMode ? "Salvar Ordem" : "Reordenar"}
+                      </Button>
                     </C.ProdutoList>
                   )}
-
-
-
                 </C.Card>
-
-
               ))
           )}
         <C.PaginationContainer>
@@ -584,63 +430,34 @@ const Catalogo = () => {
           </C.PageButton>
         </C.PaginationContainer>
 
+        {/*modais*/}
+        {/*Nova categoria*/}
+        <CriarCategoriaModal
+          isOpen={isCriarCategoriaModalOpen}
+          onClose={handlCriarCategoriaModalClose}
+          onCreate={handleNewCategoriaCreated}
+        />
+        {/*Editar Categoria*/}
         <EditCategoriaModal
           isOpen={isEditarCategoriaModalOpen}
           onClose={() => setIsEditarCategoriaModalOpen(false)}
           categoria={selectedCategoria}
           onEdit={handleCategoriaEdited}
         />
-
-        <CriarCategoriaModal
-          isOpen={isCriarCategoriaModalOpen}
-          onClose={handlCriarCategoriaModalClose}
-          onCreate={handleNewCategoriaCreated}
-        />
-
+        {/*Deletar Categoria*/}
         <DeleteCategoriaModal
           isOpen={isDeleteCategoriaModalOpen}
           onClose={handleDeleteCategoriaModalClose}
           onDelete={handleDeleteCategoria}
           categoria={selectedCategoria}
         />
-
-        <DeleteProdutoModal
-          isOpen={isDeleteProdutoModalOpen}
-          onClose={handleDeleteProdutoModalClose}
-          onDelete={handleDeleteProduto}
-          produto={selectedProduto}
-        />
-
-        <CriarProdutoModal
-          isOpen={isCriarProdutoModalOpen}
-          onClose={handlCriarProdutoModalClose}
-          onCreate={handleNewProdutoCreated}
-          categoria={selectedCategoria}
-        />
-
-        <EditarProdutoModal
-          isOpen={isEditarProdutoModalOpen}
-          onClose={() => setIsEditarProdutoModalOpen(false)}
-          categoria={selectedCategoria}
-          produto={selectedProduto}
-          onEdit={handleProdutoEdited}
-        />
-
-        <EditarEstoqueProdutoModal
-          isOpen={isEditarEstoqueProdutoModalOpen}
-          onClose={() => setIsEditarEstoqueProdutoModalOpen(false)}
-          produto={selectedProduto}
-          onEdit={handleEstoqueProdutoEdited}
-        />
-
-        <CriarFotosProdutoModal
-          isOpen={isCriarFotosProdutoModalOpen}
-          onClose={() => setIsCriarFotosProdutoModalOpen(false)}
-          categoria={selectedCategoria}
-          produto={selectedProduto}
-          onCreate={handleNewFotoProdutoCreated}
-        />
-
+        {/*Criar produto*/}
+         <CriarProdutoModal
+                  isOpen={isCriarProdutoModalOpen}
+                  onClose={handlCriarProdutoModalClose}
+                  onCreate={handleNewProdutoCreated}
+                  categoria={selectedCategoria}
+                />
       </Container>
     </C.Container>
   );
