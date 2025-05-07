@@ -89,14 +89,19 @@ const CatalogoApi = () => {
     return await response.json();
   };
 
-  const reordenar = async (itens) => {
+  const reordenarAllCategory = async (itens) => {
+    const payload = itens.map(item => ({
+      id: item.id,        // tem que ser o id de catalogo_ordem
+      ordem: item.ordem
+    }));
+    console.log('envia para a api:', payload)
     const response = await fetch(`${api_url}/intellicatalog/v1/catalogo/reorder`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${user?.token}`,
       },
-      body: JSON.stringify(itens), // Ex: [{ id: 1, ordem: 1 }, { id: 2, ordem: 2 }]
+      body: JSON.stringify(payload), // Ex: [{ id: 1, ordem: 1 }, { id: 2, ordem: 2 }]
     });
 
     checkAuth(response);
@@ -113,7 +118,7 @@ const CatalogoApi = () => {
     criar,
     updateCatagoriaOrder,
     deletar,
-    reordenar,
+    reordenarAllCategory,
   };
 };
 
