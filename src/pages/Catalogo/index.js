@@ -589,9 +589,16 @@ const Catalogo = () => {
                                         <MenuItem onClick={() => { setSelectedProduto(produto); openEditarEstoqueProdutoModal(produto); closeProductMenu(produto.id); }}>
                                           <FaBoxOpen style={{ marginRight: 8 }} /> Estoque
                                         </MenuItem>
-                                        <MenuItem onClick={() => { setSelectedProduto(produto); navigate(`/produto/${produto.id}/edit`) }}>
-                                         <FaEdit style={{ marginRight: 8 }} />Editar
+                                        { produto.tipo ==='produto' ? (
+                                        <MenuItem onClick={() => { setSelectedProduto(produto); navigate(`/produto/${produto.referencia_id}/edit`) }}>
+                                         <FaEdit style={{ marginRight: 8 }} />Editar Produto
                                         </MenuItem>
+                                        ):(
+                                        <MenuItem onClick={() => { setSelectedProduto(produto); navigate(`/combo/${produto.referencia_id}/edit`) }}>
+                                         <FaEdit style={{ marginRight: 8 }} />Editar combo
+                                        </MenuItem>
+
+                                        )}
                                         <MenuItem onClick={() => { setSelectedProduto(produto); openDeleteProdutoModal(produto); closeProductMenu(produto.id); }}>
                                           <FaTrashAlt style={{ marginRight: 8 }} /> Excluir
                                         </MenuItem>
