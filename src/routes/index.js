@@ -17,7 +17,7 @@ import Pedidos from "../pages/Pedidos";
 import ConfigLoja from "../pages/ConfigLoja";
 import EditarLoja from "../pages/EditarLoja";
 import EditarProduto from "../pages/EditarProduto";
-import NovoCombo from "../pages/NovoCombo";
+
 
 const Private = ({ Item }) => {
   const { signed } = useAuth();
@@ -46,7 +46,6 @@ const RoutesApp = () => {
           <Route path="/loja/:id/config" element={<Private Item={ConfigLoja} />} />
           <Route path="/loja/:identificadorexterno/edit" element={<Private Item={EditarLoja} />} />
           <Route path="produto/:id/edit" element={<Private Item={EditarProduto} />} />
-          <Route path="catalogo/produto/category/:IdCategoria" element={<Private Item={NovoCombo} />} />
           <Route path="/" element={<Signin />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route path="*" element={<Signin />} />
