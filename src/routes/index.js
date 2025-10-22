@@ -17,6 +17,7 @@ import Pedidos from "../pages/Pedidos";
 import ConfigLoja from "../pages/ConfigLoja";
 import EditarLoja from "../pages/EditarLoja";
 import EditarProduto from "../pages/EditarProduto";
+import NovoProduto from "../pages/NovoProduto";
 
 
 const Private = ({ Item }) => {
@@ -46,6 +47,7 @@ const RoutesApp = () => {
           <Route path="/loja/:id/config" element={<Private Item={ConfigLoja} />} />
           <Route path="/loja/:identificadorexterno/edit" element={<Private Item={EditarLoja} />} />
           <Route path="produto/:id/edit" element={<Private Item={EditarProduto} />} />
+          <Route path="produto/novo/categoria/:categoria" element={<Private Item={NovoProduto} />} />
           <Route path="/" element={<Signin />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route path="*" element={<Signin />} />

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import * as C from "./styles";
 import Navbar from "../../components/Navbar/Navbar";
 import categoriaApi from "../../services/categoriaApi";
@@ -20,6 +21,7 @@ import { AddCircle, MoreVert, Edit, Delete, Image, Inventory, Shuffle } from "@m
 
 
 const Catalogo = () => {
+  const navigate = useNavigate();
   const [categorias, setCategorias] = useState([]);
   const [produtos, setProdutos] = useState([]);
   const { getCategorias, changeStatus, deleteCategoria, updateCategoriaOrder } = categoriaApi();
@@ -512,8 +514,8 @@ const Catalogo = () => {
                       </C.ReorderButton>
                       {*/}
                       {!isReorderProductMode && 
-                        <Button color="success" size="small" variant="contained" onClick={() => openCriarProdutoModal(categoria)} startIcon={<AddCircle />}> Novo Produto</Button>
-                      }
+                        <Button color="success" size="small" variant="contained" onClick={() => navigate(`/produto/novo/categoria/${categoria.id}`)} startIcon={<AddCircle />}> Novo Produto</Button>
+                       }
                       <Button size="small" onClick={() => setIsReorderProductMode(!isReorderProductMode)} endIcon={<Shuffle />}>
                         {isReorderProductMode ? "Salvar Ordem" : "Reordenar"}
                       </Button>
